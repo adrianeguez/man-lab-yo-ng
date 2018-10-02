@@ -24,43 +24,58 @@ const ARGUMENTOS = {
 
 const OPCIONES = {
     TIPO: {
-        type: String
+        type: String,
+        desc: 'Tipo de campo Ej: Date/boolean/string/number'
     },
     TOOLTIP: {
-        type: String
+        type: String,
+        desc: 'Tooltip del campo Ej: "Llenar solo con letras"'
     },
     EJEMPLO: {
-        type: String
+        type: String,
+        desc: 'Tooltip del campo Ej: "Ej: Adrian Eguez"'
     },
     MASCARA: {
-        type: String
+        type: String,
+        desc: 'Nombre de la mascara para el campo Ej: SOLO_LETRAS'
     },
     MASCARA_FUNCION: {
-        type: String
+        type: String,
+        desc: 'Nombre de la funcion para eliminar la mascara del campo Ej: eliminarNumeros'
     },
     MIN_LENGTH: {
-        type: String
+        type: String,
+        desc: 'Minlength del campo Ej: 3'
     },
     MAX_LENGTH: {
-        type: String
+        type: String,
+        desc: 'Maxlength del campo Ej: 10'
     },
     MIN: {
-        type: String
+        type: String,
+        desc: 'Min del campo Ej: 3'
     },
     MAX: {
-        type: String
+        type: String,
+        desc: 'Max del campo Ej: 10'
     },
     PATTERN: {
-        type: String
+        type: String,
+        desc: 'Patron del campo Ej: /[a-z]/g'
     },
     PATTERN_MENSAJE: {
-        type: String
+        type: String,
+        desc: 'Patron del campo Ej: "Solo se aceptan letras minusculas"'
     },
     ES_REQUIRED: {
-        type: Boolean
+        type: Boolean,
+        desc: 'Si el campo es requerido o no. Por defecto es false. Ej: --required',
+        default: false
     },
     ES_EMAIL: {
-        type: Boolean
+        type: Boolean,
+        desc: 'Si el campo es email o no. Por defecto es false. Ej: --email',
+        default: false
     }
 };
 
