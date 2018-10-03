@@ -27,6 +27,10 @@ const OPCIONES = {
         type: String,
         desc: 'Tipo de campo Ej: Date/boolean/string/number'
     },
+    NOMBRE_A_PRESENTARSE: {
+        type: String,
+        desc: 'Como mostrar el campo Ej: "Nombres y apellidos"'
+    },
     TOOLTIP: {
         type: String,
         desc: 'Tooltip del campo Ej: "Llenar solo con letras"'
@@ -69,12 +73,12 @@ const OPCIONES = {
     },
     ES_REQUIRED: {
         type: Boolean,
-        desc: 'Si el campo es requerido o no. Por defecto es false. Ej: --required',
+        desc: 'Si el campo es requerido o no. Por defecto es false. Ej: --required (para true)',
         default: false
     },
     ES_EMAIL: {
         type: Boolean,
-        desc: 'Si el campo es email o no. Por defecto es false. Ej: --email',
+        desc: 'Si el campo es email o no. Por defecto es false. Ej: --email (para true)',
         default: false
     }
 };
@@ -90,6 +94,7 @@ module.exports = class extends Generator {
         this.argument(ARGUMENTOS.NOMBRE_CLASE.nombre, ARGUMENTOS.NOMBRE_CLASE.configuracion);
         this.argument(ARGUMENTOS.NOMBRE_CAMPO.nombre, ARGUMENTOS.NOMBRE_CAMPO.configuracion);
         this.option('tipo', OPCIONES.TIPO);
+        this.option('nombreAPresentarse', OPCIONES.NOMBRE_A_PRESENTARSE);
         this.option('tooltip', OPCIONES.TOOLTIP);
         this.option('ejemplo', OPCIONES.EJEMPLO);
         this.option('mascara', OPCIONES.MASCARA);
@@ -152,6 +157,7 @@ module.exports = class extends Generator {
 
         const opciones = {
             tipo: this.options.tipo,
+            nombreAPresentarse: this.options.nombreAPresentarse,
             tooltip: this.options.tooltip,
             ejemplo: this.options.ejemplo,
             mascara: this.options.mascara,
@@ -207,42 +213,65 @@ module.exports = class extends Generator {
                 const nombreSeparadoPorEspacios = separateUpperCaseBySpace(nombreCampo);
                 return `
     private encerarConfiguracionFormBuilder${nombreCampo}() {
+
+        // empiezaArgumentos${nombreCampo} - NO BORRAR ESTA LINEA
+        let argumentos:any = {
+            "required": ${opciones.required ? 'true' : 'false'},
+            "email": ${opciones.email ? 'true' : 'false'},
+            "nombre": "${nombreCampoCamel}",
+            "nombreAPresentarse": "${opciones.nombreAPresentarse ? opciones.nombreAPresentarse : nombreSeparadoPorEspacios}",
+            "ejemplo": "EJ: ${opciones.ejemplo ? opciones.ejemplo : nombreSeparadoPorEspacios}",
+            "tooltip": "${opciones.tooltip ? opciones.tooltip : 'Ingrese ' + nombreSeparadoPorEspacios}",
+            "minLength": ${opciones.minLength ? opciones.minLength : 'false'},
+            "maxLength": ${opciones.maxLength ? opciones.maxLength : 'false'},
+            "min": ${opciones.min ? opciones.min : 'false'},
+            "max": ${opciones.max ? opciones.max : 'false'},
+            "patternMensaje": ${opciones.patternMensaje ? '"' + opciones.patternMensaje + '"' : '"Error en ' + nombreSeparadoPorEspacios + '"'}
+        };
+        // terminaArgumentos${nombreCampo} - NO BORRAR ESTA LINEA
+
+        argumentos.mascara = ${opciones.mascara ? opciones.mascara : 'false'};
+        argumentos.funcionMascara = ${opciones.mascaraFuncion ? opciones.mascaraFuncion : 'false'};
+        argumentos.pattern = ${opciones.pattern ? opciones.pattern : 'false'};
+
         this.mensajesValidacion${nombreCampo} = establecerMensajesDeValidacionComunes(
-            '${nombreCampoCamel}', // Nombre del campo
-            '${nombreSeparadoPorEspacios}', // Nombre a presentarse
-            'EJ: ${opciones.ejemplo ? opciones.ejemplo : nombreSeparadoPorEspacios}', // Ejemplo
-            '${opciones.tooltip ? opciones.tooltip : 'Ingrese ' + nombreSeparadoPorEspacios}', // Tooltip
-            ${opciones.mascara ? opciones.mascara : 'undefined'}, // Mascara
-            ${opciones.mascaraFuncion ? opciones.mascaraFuncion : 'undefined'}, // Funcion para eliminar la mascara
-            ${opciones.minLength ? opciones.minLength : 'undefined'}, // minLength
-            ${opciones.maxLength ? opciones.maxLength : 'undefined'}, // maxLength
-            ${opciones.min ? opciones.min : 'undefined'}, // min
-            ${opciones.max ? opciones.max : 'undefined'}, // max
-            ${opciones.pattern ? opciones.pattern : 'undefined'}, // pattern
-            ${opciones.patternMensaje ? "'" + opciones.patternMensaje + "'" : 'undefined'}); // patternMensaje
+            argumentos.nombre, // Nombre del campo
+            argumentos.nombreAPresentarse, // Nombre a presentarse
+            argumentos.ejemplo, // Ejemplo
+            argumentos.tooltip, // Tooltip
+            argumentos.mascara, // Mascara
+            argumentos.funcionMascara, // Funcion para eliminar la mascara
+            argumentos.minLength, // minLength
+            argumentos.maxLength, // maxLength
+            argumentos.min, // min
+            argumentos.max, // max
+            argumentos.pattern, // pattern
+            argumentos.patternMensaje); // patternMensaje
+
         this.mensajesValidacion${nombreCampo}.configuracionFormBuilder = {
             required: {
-                activado: ${opciones.required ? 'true' : 'false'}
+                activado: argumentos.required
             },
             email: {
-                activado: ${opciones.email ? 'true' : 'false'}
+                activado: argumentos.email
             },
             min: {
-                activado: ${opciones.min ? 'true' : 'false'}
+                activado: argumentos.min ? true : false
             },
             max: {
-                activado: ${opciones.max ? 'true' : 'false'}
+                activado: argumentos.max ? true : false
             },
             minlength: {
-                activado: ${opciones.minLength ? 'true' : 'false'}
+                activado: argumentos.minLength ? true : false
             },
             maxlength: {
-                activado: ${opciones.maxLength ? 'true' : 'false'}
+                activado: argumentos.maxLength ? true : false
             },
             pattern: {
-                activado: ${opciones.pattern ? 'true' : 'false'}
+                activado: argumentos.pattern ? true : false
             }
         };
+
         this.configuracionFormBuilder = encerarConfiguracionFormBuilder(this.mensajesValidacion${nombreCampo}.configuracionFormBuilder);
     }
                 \n`
