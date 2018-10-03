@@ -24,7 +24,12 @@
   ],
   "dependencies": {
     "inquirer": "^6.2.0",
+    "require-from-string": "^2.0.2",
     "typescript-parser": "^2.6.1",
     "yeoman-generator": "^1.0.0"
+  },
+  "devDependencies": {
+    "ts-node": "^7.0.1",
+    "typescript": "^3.1.1"
   }
 }
