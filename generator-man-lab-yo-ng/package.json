@@ -24,6 +24,7 @@
   ],
   "dependencies": {
     "inquirer": "^6.2.0",
+    "typescript-parser": "^2.6.1",
     "yeoman-generator": "^1.0.0"
   }
 }
