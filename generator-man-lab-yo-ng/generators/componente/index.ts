@@ -44,6 +44,16 @@ const OPCIONES = {
         type: String,
         desc: 'Prefijo de la aplicacion de angular. Ej: --prefix man-lab',
         default: 'app'
+    },
+    CLASE_CONTENEDOR_HTML: {
+        type: String,
+        desc: 'Clases a aplicar en el contenedor html. Ej: --claseContenedor "form-group clase-personalizada"',
+        default: 'form-group'
+    },
+    CLASE_LABEL_HTML: {
+        type: String,
+        desc: 'Clases a aplicar en el label html. Ej: --claseLabel "control-label clase-personalizada"',
+        default: 'control-label'
     }
 };
 
@@ -58,8 +68,8 @@ module.exports = class extends Generator {
         this.argument(ARGUMENTOS.NOMBRE_CLASE.nombre, ARGUMENTOS.NOMBRE_CLASE.configuracion);
         this.option('toaster', OPCIONES.TOASTER);
         this.option('prefix', OPCIONES.PREFIX);
-
-
+        this.option('claseContenedor', OPCIONES.CLASE_CONTENEDOR_HTML);
+        this.option('claseLabel', OPCIONES.CLASE_LABEL_HTML);
     }
 
     async initializing() {
@@ -103,6 +113,8 @@ module.exports = class extends Generator {
         const opciones = {
             toaster: this.options.toaster,
             prefix: this.options.prefix,
+            claseContenedor: this.options.claseContenedor,
+            claseLabel: this.options.claseLabel
         }
 
 
@@ -241,10 +253,21 @@ export const CONFIGURACION_${nombreClase.toUpperCase()} = (): ConfiguracionForml
         },`;
 
 
+        let htmlInicio = `
+<form novalidate [formGroup]="funda.formGroup">
+    <fieldset class="col-md-12">
+        <div class="row">`;
+
+        let campos = '';
+
+        let htmlFin = `
+        </div>
+    </fieldset>
+</form>
+`;
 
 
 
-        
 
 
         propiedadesACrearse
@@ -255,6 +278,38 @@ export const CONFIGURACION_${nombreClase.toUpperCase()} = (): ConfiguracionForml
                     const tipo = propiedad.tipo;
                     const nombreCampo = capitalizeFirstLetter(nombre);
                     const nombreCampoDash = camelToDash(nombreCampo);
+
+                    campos = campos + `
+            <!--${nombre}-->
+            <div class="col-sm-6 ${opciones.claseContenedor}" *ngIf="!configuracionDisabled.${nombreCampo}.hidden">
+                <div class="row">
+                <label class="col-sm-4 ${opciones.claseLabel}" [for]="${nombreClase}.mensajesValidacionIdentificador.nombreInput">{{
+                    funda.mensajesValidacionIdentificador.nombreAPresentarse }}</label>
+                <div class="col-sm-8">
+                    <input type="text"
+                            class="form-control form-control-sm"
+                            [id]="funda.mensajesValidacionIdentificador.nombreInput"
+                            required
+                            [name]="funda.mensajesValidacionIdentificador.nombreInput"
+                            [formControlName]="funda.mensajesValidacionIdentificador.nombreInput"
+                            [minlength]="funda.mensajesValidacionIdentificador.minlength.valor"
+                            [maxlength]="funda.mensajesValidacionIdentificador.maxlength.valor"
+                            [placeholder]="funda.mensajesValidacionIdentificador.tooltip"
+                            [title]="funda.mensajesValidacionIdentificador.title"
+                    >
+                </div>
+                <div class="col-sm-12">
+
+                    <div class="animated fadeInUp alert alert-warning" role="alert"
+                        *ngIf="funda.mensajesValidacionIdentificador.mensajes.length>0">
+                    <div *ngFor="let mensaje of funda.mensajesValidacionIdentificador.mensajes">{{ mensaje }}</div>
+                    </div>
+                </div>
+                </div>
+
+
+            </div>                    
+`;
 
                     constructorFormulario = constructorFormulario + `             this.configuracionDisabled.${nombreCampo}.valor,\n`;
                     interfaceConfiguracion = interfaceConfiguracion + `  ${nombreCampo}?: ConfiguracionDisabledInterfaz;\n`;
