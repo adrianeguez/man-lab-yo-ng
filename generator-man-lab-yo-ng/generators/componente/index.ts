@@ -230,7 +230,7 @@ export interface ConfiguracionFormluario${nombreClase} {
   Id?: ConfiguracionDisabledInterfaz;\n`;
 
         let interfaceConfiguracionFuncion = `
-        
+
 export const CONFIGURACION_${nombreClase.toUpperCase()} = (): ConfiguracionFormluario${nombreClase} => {
     return {
         Id: {
@@ -239,6 +239,12 @@ export const CONFIGURACION_${nombreClase.toUpperCase()} = (): ConfiguracionForml
             hidden: false,
             calculoFormulario: undefined
         },`;
+
+
+
+
+
+        
 
 
         propiedadesACrearse

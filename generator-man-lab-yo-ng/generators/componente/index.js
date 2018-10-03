@@ -185,7 +185,7 @@ interface ObjetoVariablesGlobalesFunda {
 export interface ConfiguracionFormluario${nombreClase} {
   Id?: ConfiguracionDisabledInterfaz;\n`;
         let interfaceConfiguracionFuncion = `
-        
+
 export const CONFIGURACION_${nombreClase.toUpperCase()} = (): ConfiguracionFormluario${nombreClase} => {
     return {
         Id: {

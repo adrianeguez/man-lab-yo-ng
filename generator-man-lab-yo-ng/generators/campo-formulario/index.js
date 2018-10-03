@@ -25,7 +25,7 @@ const ARGUMENTOS = {
 const OPCIONES = {
     TIPO: {
         type: String,
-        desc: 'Tipo de campo Ej: Date/boolean/string/number'
+        desc: 'Tipo de campo Ej: Date / boolean / string / number'
     },
     NOMBRE_A_PRESENTARSE: {
         type: String,
@@ -80,6 +80,11 @@ const OPCIONES = {
         type: Boolean,
         desc: 'Si el campo es email o no. Por defecto es false. Ej: --email (para true)',
         default: false
+    },
+    TIPO_CONTROL: {
+        type: String,
+        desc: 'Definir que tipo de control html va a ser usado para crear este formulario. Ej: input-text / select-many / select-boolean',
+        default: 'input-text'
     }
 };
 
@@ -107,6 +112,7 @@ module.exports = class extends Generator {
         this.option('patternMensaje', OPCIONES.PATTERN_MENSAJE);
         this.option('required', OPCIONES.ES_REQUIRED);
         this.option('email', OPCIONES.ES_EMAIL);
+        this.option('tipoControl', OPCIONES.TIPO_CONTROL);
     }
 
     initializing() {
@@ -169,7 +175,8 @@ module.exports = class extends Generator {
             pattern: this.options.pattern,
             patternMensaje: this.options.patternMensaje,
             required: this.options.required,
-            email: this.options.email
+            email: this.options.email,
+            tipoControl: this.options.tipoControl
         }
         const archivo = {
             nombre: `/${nombreClaseDash}-formulario.ts`,
@@ -226,7 +233,8 @@ module.exports = class extends Generator {
             "maxLength": ${opciones.maxLength ? opciones.maxLength : 'false'},
             "min": ${opciones.min ? opciones.min : 'false'},
             "max": ${opciones.max ? opciones.max : 'false'},
-            "patternMensaje": ${opciones.patternMensaje ? '"' + opciones.patternMensaje + '"' : '"Error en ' + nombreSeparadoPorEspacios + '"'}
+            "patternMensaje": ${opciones.patternMensaje ? '"' + opciones.patternMensaje + '"' : '"Error en ' + nombreSeparadoPorEspacios + '"'},
+            "tipoControl": "${opciones.tipoControl}"
         };
         // terminaArgumentos${nombreCampo} - NO BORRAR ESTA LINEA
 
