@@ -95,9 +95,11 @@ module.exports = class extends Generator {
         const archivo = {
             nombre: `/${nombreClaseDash}-formulario.ts`,
             nombreNuevoArchivo: `/${nombreClaseDash}-formulario.component.ts`,
+            nombreNuevoArchivoHTML: `/${nombreClaseDash}-formulario.component.html`,
             directorio: this.destinationRoot(),
             pathArchivo: function () { return this.directorio + this.nombre; },
             pathNuevoArchivo: function () { return this.directorio + this.nombreNuevoArchivo; },
+            pathNuevoArchivoHTML: function () { return this.directorio + this.nombreNuevoArchivoHTML; },
         };
         // opciones
         const opciones = {
@@ -314,23 +316,22 @@ export const CONFIGURACION_${nombreClase.toUpperCase()} = (): ConfiguracionForml
             + htmlFin;
         console.log('contenidoCompleto', contenidoCompleto);
         console.log('contenidoCompletoHtml', contenidoCompletoHtml);
-        /*
-            const respuesta = await inquirer
-                .prompt([
-                    {
-                        type: 'confirm',
-                        name: 'confirmacion',
-                        message: '¿Están correctos los cambios?'
-                    }
-                ])
-            if (respuesta.confirmacion) {
-                fs.writeFileSync(archivo.pathNuevoArchivo(), contenidoCompleto, 'utf-8');
-                this.log(`Archivo ${archivo.nombreNuevoArchivo} creado :)`);
-    
-            } else {
-    
+        const respuesta = await inquirer
+            .prompt([
+            {
+                type: 'confirm',
+                name: 'confirmacion',
+                message: '¿Están correctos los cambios?'
             }
-    */
+        ]);
+        if (respuesta.confirmacion) {
+            fs.writeFileSync(archivo.pathNuevoArchivo(), contenidoCompleto, 'utf-8');
+            this.log(`Archivo ${archivo.nombreNuevoArchivo} creado :)`);
+            fs.writeFileSync(archivo.pathNuevoArchivoHTML(), contenidoCompletoHtml, 'utf-8');
+            this.log(`Archivo ${archivo.nombreNuevoArchivoHTML} creado :)`);
+        }
+        else {
+        }
         /*
 
         const source = "class Usuario{nombre:string='Adrian' constructor(){} pene(){ return hola()} } function hola(){return 'culebreo'}";

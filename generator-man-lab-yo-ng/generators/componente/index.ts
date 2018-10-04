@@ -123,9 +123,11 @@ module.exports = class extends Generator {
         const archivo = {
             nombre: `/${nombreClaseDash}-formulario.ts`,
             nombreNuevoArchivo: `/${nombreClaseDash}-formulario.component.ts`,
+            nombreNuevoArchivoHTML: `/${nombreClaseDash}-formulario.component.html`,
             directorio: this.destinationRoot(),
             pathArchivo: function () { return this.directorio + this.nombre },
             pathNuevoArchivo: function () { return this.directorio + this.nombreNuevoArchivo },
+            pathNuevoArchivoHTML: function () { return this.directorio + this.nombreNuevoArchivoHTML },
         };
 
         // opciones
@@ -417,23 +419,26 @@ export const CONFIGURACION_${nombreClase.toUpperCase()} = (): ConfiguracionForml
         console.log('contenidoCompleto', contenidoCompleto);
 
         console.log('contenidoCompletoHtml', contenidoCompletoHtml);
-        /*
-            const respuesta = await inquirer
-                .prompt([
-                    {
-                        type: 'confirm',
-                        name: 'confirmacion',
-                        message: '¿Están correctos los cambios?'
-                    }
-                ])
-            if (respuesta.confirmacion) {
-                fs.writeFileSync(archivo.pathNuevoArchivo(), contenidoCompleto, 'utf-8');
-                this.log(`Archivo ${archivo.nombreNuevoArchivo} creado :)`);
-    
-            } else {
-    
-            }
-    */
+
+        const respuesta = await inquirer
+            .prompt([
+                {
+                    type: 'confirm',
+                    name: 'confirmacion',
+                    message: '¿Están correctos los cambios?'
+                }
+            ])
+        if (respuesta.confirmacion) {
+            fs.writeFileSync(archivo.pathNuevoArchivo(), contenidoCompleto, 'utf-8');
+            this.log(`Archivo ${archivo.nombreNuevoArchivo} creado :)`);
+
+            fs.writeFileSync(archivo.pathNuevoArchivoHTML(), contenidoCompletoHtml, 'utf-8');
+            this.log(`Archivo ${archivo.nombreNuevoArchivoHTML} creado :)`);
+
+        } else {
+
+        }
+
         /*
 
         const source = "class Usuario{nombre:string='Adrian' constructor(){} pene(){ return hola()} } function hola(){return 'culebreo'}";
@@ -584,10 +589,10 @@ function encontrarContenidoJSONPorNombre(nombreEnMayuscula, archivo) {
 // [textMask]="agenciaGrupoFunda.mensajesValidacionEmpiezaNumeracion.mask" 
 
 function generarInputTexto(nombre, nombreCampo, nombreClase, claseContenedor, claseLabel, claseInput, claseMensajes, opcionesCampo: ArgumentosCampoInteraface) {
-    console.log('**************************** opcionesCampo.mascara',opcionesCampo.mascara)
-    console.log('**************************** opcionesCampo.mascaraCurrency',opcionesCampo.mascaraCurrency)
-    console.log('**************************** opcionesCampo.mascaraCurrency true',opcionesCampo.mascaraCurrency  === 'true')
-    console.log('**************************** opcionesCampo.mascaraCurrency false',opcionesCampo.mascaraCurrency  === 'false')
+    console.log('**************************** opcionesCampo.mascara', opcionesCampo.mascara)
+    console.log('**************************** opcionesCampo.mascaraCurrency', opcionesCampo.mascaraCurrency)
+    console.log('**************************** opcionesCampo.mascaraCurrency true', opcionesCampo.mascaraCurrency === 'true')
+    console.log('**************************** opcionesCampo.mascaraCurrency false', opcionesCampo.mascaraCurrency === 'false')
 
     return `
             <!--${nombre}-->
