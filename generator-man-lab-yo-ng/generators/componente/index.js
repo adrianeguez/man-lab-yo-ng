@@ -33,6 +33,30 @@ const OPCIONES = {
         type: String,
         desc: 'Prefijo de la aplicacion de angular. Ej: --prefix man-lab',
         default: 'app'
+    },
+    CLASE_CONTENEDOR_HTML: {
+        type: String,
+        desc: 'Clases a aplicar en el contenedor html. Ej: --claseContenedor "form-group clase-personalizada"',
+        default: 'form-group'
+    },
+    CLASE_LABEL_HTML: {
+        type: String,
+        desc: 'Clases a aplicar en el label html. Ej: --claseLabel "control-label clase-personalizada"',
+        default: 'control-label'
+    },
+    CLASE_INPUT_HTML: {
+        type: String,
+        desc: 'Clases a aplicar en el input html. Ej: --claseInput "form-control form-control-sm clase-personalizada"',
+        default: 'form-control form-control-sm'
+    },
+    CLASE_MENSAJES_HTML: {
+        type: String,
+        desc: 'Clases a aplicar en el contenedor de mensajes html. Ej: --claseMensajes "animated fadeInUp alert alert-warning clase-personalizada"',
+        default: 'animated fadeInUp alert alert-warning'
+    },
+    CLASE_AUTOCOMPLETE_HTML: {
+        type: String,
+        desc: 'Clases a aplicar en el campo de autocomplete de primefaces. Ej: --claseAutocomplete "mi-clase personalizada"'
     }
 };
 const camelToDash = str => str
@@ -44,6 +68,11 @@ module.exports = class extends Generator {
         this.argument(ARGUMENTOS.NOMBRE_CLASE.nombre, ARGUMENTOS.NOMBRE_CLASE.configuracion);
         this.option('toaster', OPCIONES.TOASTER);
         this.option('prefix', OPCIONES.PREFIX);
+        this.option('claseContenedor', OPCIONES.CLASE_CONTENEDOR_HTML);
+        this.option('claseLabel', OPCIONES.CLASE_LABEL_HTML);
+        this.option('claseInput', OPCIONES.CLASE_INPUT_HTML);
+        this.option('claseMensajes', OPCIONES.CLASE_MENSAJES_HTML);
+        this.option('claseAutocomplete', OPCIONES.CLASE_AUTOCOMPLETE_HTML);
     }
     async initializing() {
     }
@@ -74,6 +103,11 @@ module.exports = class extends Generator {
         const opciones = {
             toaster: this.options.toaster,
             prefix: this.options.prefix,
+            claseContenedor: this.options.claseContenedor,
+            claseLabel: this.options.claseLabel,
+            claseInput: this.options.claseInput,
+            claseMensajes: this.options.claseMensajes,
+            claseAutocomplete: this.options.claseAutocomplete
         };
         // Parseador
         const parser = {
@@ -93,7 +127,7 @@ module.exports = class extends Generator {
         let contenidoCabeceraArchivo = `
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder} from '@angular/forms';
-import {ConfiguracionDisabledInterfaz, encerarFormBuilder, generarCampos, generarEmiteEmpezoTipear, generarMensajesFormGroup, establecerCamposDisabled} from 'man-lab-ng';${opciones.toaster ? "\nimport {ToasterService} from 'angular2-toaster';" : ""}
+import {ConfiguracionDisabledInterfaz, encerarFormBuilder, generarCampos, generarEmiteEmpezoTipear, generarMensajesFormGroup, establecerCamposDisabled, NO_EXISTEN_REGISTROS} from 'man-lab-ng';${opciones.toaster ? "\nimport {ToasterService} from 'angular2-toaster';" : ""}
 import {${nombreClase}} from './${nombreClaseCamel}';
 import {${nombreClase}Formulario} from './${nombreClaseCamel}-formulario';
 import {debounceTime} from 'rxjs/operators';
@@ -114,6 +148,8 @@ export class ${nombreClase}FormularioComponent implements OnInit {
 
     ${nombreClaseCamel}: ${nombreClase}Formulario;
 
+    NO_EXISTEN_REGISTROS = NO_EXISTEN_REGISTROS;
+    
     mensajeToaster = '';
 
     objetoVariablesGlobales: ObjetoVariablesGlobales${nombreClase} = {
@@ -194,6 +230,16 @@ export const CONFIGURACION_${nombreClase.toUpperCase()} = (): ConfiguracionForml
             hidden: false,
             calculoFormulario: undefined
         },`;
+        let htmlInicio = `
+<form novalidate [formGroup]="funda.formGroup">
+    <fieldset class="col-md-12">
+        <div class="row">`;
+        let campos = '';
+        let htmlFin = `
+        </div>
+    </fieldset>
+</form>
+`;
         propiedadesACrearse
             .forEach((propiedad) => {
             const objeto = encontrarContenidoJSONPorNombre(capitalizeFirstLetter(propiedad.nombre), parser.texto);
@@ -201,6 +247,22 @@ export const CONFIGURACION_${nombreClase.toUpperCase()} = (): ConfiguracionForml
             const tipo = propiedad.tipo;
             const nombreCampo = capitalizeFirstLetter(nombre);
             const nombreCampoDash = camelToDash(nombreCampo);
+            const tipoControl = objeto.tipoControl.tipo;
+            let contenidoHtml;
+            switch (tipoControl) {
+                case 'input-text':
+                    contenidoHtml = generarInputTexto(nombre, nombreCampo, nombreClaseCamel, opciones.claseContenedor, opciones.claseLabel, opciones.claseInput, opciones.claseMensajes);
+                    break;
+                case 'select-many':
+                    contenidoHtml = generarInputBooleano(nombre, nombreCampo, nombreClaseCamel, opciones.claseContenedor, opciones.claseLabel, opciones.claseInput, opciones.claseMensajes, objeto.tipoControl.opcionesSelect);
+                    break;
+                case 'autocomplete':
+                    contenidoHtml = generarAutoComplete(nombre, nombreCampo, nombreClaseCamel, opciones.claseContenedor, opciones.claseLabel, opciones.claseAutocomplete, opciones.claseMensajes, objeto.tipoControl.autocompleteBusqueda);
+                    break;
+                default:
+                    break;
+            }
+            campos = campos + contenidoHtml;
             constructorFormulario = constructorFormulario + `             this.configuracionDisabled.${nombreCampo}.valor,\n`;
             interfaceConfiguracion = interfaceConfiguracion + `  ${nombreCampo}?: ConfiguracionDisabledInterfaz;\n`;
             interfaceConfiguracionFuncion = interfaceConfiguracionFuncion + `
@@ -222,21 +284,28 @@ export const CONFIGURACION_${nombreClase.toUpperCase()} = (): ConfiguracionForml
             + contenidoArchivoOnInitFin
             + interfaceConfiguracion
             + interfaceConfiguracionFuncion;
+        const contenidoCompletoHtml = htmlInicio
+            + campos
+            + htmlFin;
         console.log('contenidoCompleto', contenidoCompleto);
-        const respuesta = await inquirer
-            .prompt([
-            {
-                type: 'confirm',
-                name: 'confirmacion',
-                message: '¿Están correctos los cambios?'
+        console.log('contenidoCompletoHtml', contenidoCompletoHtml);
+        /*
+            const respuesta = await inquirer
+                .prompt([
+                    {
+                        type: 'confirm',
+                        name: 'confirmacion',
+                        message: '¿Están correctos los cambios?'
+                    }
+                ])
+            if (respuesta.confirmacion) {
+                fs.writeFileSync(archivo.pathNuevoArchivo(), contenidoCompleto, 'utf-8');
+                this.log(`Archivo ${archivo.nombreNuevoArchivo} creado :)`);
+    
+            } else {
+    
             }
-        ]);
-        if (respuesta.confirmacion) {
-            fs.writeFileSync(archivo.pathNuevoArchivo(), contenidoCompleto, 'utf-8');
-            this.log(`Archivo ${archivo.nombreNuevoArchivo} creado :)`);
-        }
-        else {
-        }
+    */
         /*
 
         const source = "class Usuario{nombre:string='Adrian' constructor(){} pene(){ return hola()} } function hola(){return 'culebreo'}";
@@ -351,4 +420,104 @@ function encontrarContenidoJSONPorNombre(nombreEnMayuscula, archivo) {
         }
     };
     return JSON.parse(parseo.contenido());
+}
+function generarInputTexto(nombre, nombreCampo, nombreClase, claseContenedor, claseLabel, claseInput, claseMensajes) {
+    return `
+            <!--${nombre}-->
+            <div class="col-sm-6 ${claseContenedor}" *ngIf="!configuracionDisabled.${nombreCampo}.hidden">
+                <div class="row">
+                    <label class="col-sm-4 ${claseLabel}" [for]="${nombreClase}.mensajesValidacion${nombreCampo}.nombreInput">{{
+                        ${nombreClase}.mensajesValidacion${nombreCampo}.nombreAPresentarse }}</label>
+                    <div class="col-sm-8">
+                        <input type="text"
+                                class="${claseInput}"
+                                [id]="${nombreClase}.mensajesValidacion${nombreCampo}.nombreInput"
+                                required
+                                [name]="${nombreClase}.mensajesValidacion${nombreCampo}.nombreInput"
+                                [formControlName]="${nombreClase}.mensajesValidacion${nombreCampo}.nombreInput"
+                                [placeholder]="${nombreClase}.mensajesValidacion${nombreCampo}.tooltip"
+                                [title]="${nombreClase}.mensajesValidacion${nombreCampo}.title"
+                        >
+                    </div>
+                    <div class="col-sm-12">
+
+                        <div class="${claseMensajes}" role="alert"
+                            *ngIf="${nombreClase}.mensajesValidacion${nombreCampo}.mensajes.length>0">
+                            <div *ngFor="let mensaje of ${nombreClase}.mensajesValidacion${nombreCampo}.mensajes">{{ mensaje }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>                    
+`;
+}
+function generarInputBooleano(nombre, nombreCampo, nombreClase, claseContenedor, claseLabel, claseInput, claseMensajes, opciones) {
+    const arregloDeOpciones = opciones.split(',');
+    let contenidoSelect = '';
+    arregloDeOpciones
+        .forEach((opcion) => {
+        contenidoSelect = contenidoSelect + `                            <option value="${opcion}">${opcion}</option>\n`;
+    });
+    return `
+            <!--${nombre}-->
+            <div class="col-sm-6 ${claseContenedor}" *ngIf="!configuracionDisabled.${nombreCampo}.hidden">
+                <div class="row">
+                    <label class="col-sm-4 ${claseLabel}" [for]="${nombreClase}.mensajesValidacion${nombreCampo}.nombreInput">{{
+                    ${nombreClase}.mensajesValidacion${nombreCampo}.nombreAPresentarse }}</label>
+                    <div class="col-sm-8">
+                        <select class="${claseInput}" [name]="${nombreClase}.mensajesValidacion${nombreCampo}.nombreInput"
+                                [id]="${nombreClase}.mensajesValidacion${nombreCampo}.nombreInput"
+                                required
+                                [formControlName]="${nombreClase}.mensajesValidacion${nombreCampo}.nombreInput"
+                        >
+
+${contenidoSelect}
+                        </select>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="${claseMensajes}" role="alert"
+                            *ngIf="${nombreClase}.mensajesValidacion${nombreCampo}.mensajes.length>0">
+                            <div *ngFor="let mensaje of ${nombreClase}.mensajesValidacion${nombreCampo}.mensajes">{{ mensaje }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>                   
+`;
+}
+function generarAutoComplete(nombre, nombreCampo, nombreClase, claseContenedor, claseLabel, claseAutoComplete, claseMensajes, opcionesAutocomplete) {
+    const arregloDeOpciones = opcionesAutocomplete.split(',');
+    const nombreEntidad = arregloDeOpciones[0];
+    const nombreAtributo = arregloDeOpciones[1];
+    return `
+            <!--${nombre}-->
+            <div class="col-sm-6 ${claseContenedor}" *ngIf="!configuracionDisabled.${nombreCampo}.hidden">
+                <div class="row">
+                    <label class="col-sm-4 ${claseLabel}" [for]="${nombreClase}.mensajesValidacion${nombreCampo}.nombreInput">{{
+                        ${nombreClase}.mensajesValidacion${nombreCampo}.nombreAPresentarse }}</label>
+                    <div class="col-sm-8">
+                        <p-autoComplete
+                            [inputId]="${nombreClase}.mensajesValidacion${nombreCampo}.nombreInput"
+                            inputStyleClass="${claseAutoComplete}"
+                            autoHighlight="true"
+                            [dropdown]="true"
+                            [emptyMessage]="NO_EXISTEN_REGISTROS"
+                            [formControlName]="${nombreClase}.mensajesValidacion${nombreCampo}.nombreInput"
+                            [suggestions]="objetoVariablesGlobales.usuarios"
+                            (completeMethod)="buscar${nombreEntidad}($event)"
+                            [placeholder]="${nombreClase}.mensajesValidacion${nombreCampo}.tooltip"
+                            delay="1000"
+                            field="${nombreAtributo}">
+                                <ng-template let-${nombre} pTemplate="item">
+                                    {{ ${nombre} | json }}
+                                </ng-template>
+                        </p-autoComplete>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="${claseMensajes}" role="alert"
+                            *ngIf="${nombreClase}.mensajesValidacion${nombreCampo}.mensajes.length>0">
+                            <div *ngFor="let mensaje of ${nombreClase}.mensajesValidacion${nombreCampo}.mensajes">{{ mensaje }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>               
+`;
 }

@@ -83,8 +83,17 @@ const OPCIONES = {
     },
     TIPO_CONTROL: {
         type: String,
-        desc: 'Definir que tipo de control html va a ser usado para crear este formulario. Ej: input-text / select-many / select-boolean',
+        desc: 'Definir que tipo de control html va a ser usado para crear este formulario. Ej: --tipoControl input-text / select-many / autocomplete',
         default: 'input-text'
+    },
+    OPCIONES_SELECT_CONTROL: {
+        type: String,
+        desc: 'Definir opciones en el control de tipo select. Las opciones estan separadas por comas. Ej: --opcionesSelect "Perros,Gatos,Aves,Conejos"',
+        default: 'Activo,Inactivo'
+    },
+    AUTOCOMPLETE_BUSQUEDA_NOMBRE: {
+        type: String,
+        desc: 'Definir el nombre de la entidad a consultarse en el autocomplete y el campo a mostrarse separado por una coma. Ej: --autocompleteBusqueda  "Usuario,apellido"'
     }
 };
 
@@ -113,6 +122,8 @@ module.exports = class extends Generator {
         this.option('required', OPCIONES.ES_REQUIRED);
         this.option('email', OPCIONES.ES_EMAIL);
         this.option('tipoControl', OPCIONES.TIPO_CONTROL);
+        this.option('opcionesSelect', OPCIONES.OPCIONES_SELECT_CONTROL);
+        this.option('autocompleteBusqueda', OPCIONES.AUTOCOMPLETE_BUSQUEDA_NOMBRE);
     }
 
     initializing() {
@@ -176,7 +187,12 @@ module.exports = class extends Generator {
             patternMensaje: this.options.patternMensaje,
             required: this.options.required,
             email: this.options.email,
-            tipoControl: this.options.tipoControl
+            tipoControl: this.options.tipoControl,
+            opcionesSelect: this.options.opcionesSelect,
+            autocompleteBusqueda: this.options.autocompleteBusqueda
+        }
+        if (opciones.tipoControl === 'autocomplete' && !opciones.autocompleteBusqueda) {
+            throw new Error('Debe de anadir la opcion --autocompleteBusqueda "Entidad,campo", para documentacion escribir yo nombre-gerenador:metodo --help');
         }
         const archivo = {
             nombre: `/${nombreClaseDash}-formulario.ts`,
@@ -234,7 +250,12 @@ module.exports = class extends Generator {
             "min": ${opciones.min ? opciones.min : 'false'},
             "max": ${opciones.max ? opciones.max : 'false'},
             "patternMensaje": ${opciones.patternMensaje ? '"' + opciones.patternMensaje + '"' : '"Error en ' + nombreSeparadoPorEspacios + '"'},
-            "tipoControl": "${opciones.tipoControl}"
+            "tipoControl": {
+                "tipo": "${opciones.tipoControl}"${opciones.tipoControl === 'select-boolean' ? `,\n                "opcionesSelect": "${opciones.opcionesSelect}"` : ''}${opciones.tipoControl === 'autocomplete' ? `,\n                "autocompleteBusqueda": "${opciones.autocompleteBusqueda}"` : ''}
+            },
+            "mascara": "${opciones.mascara ? opciones.mascara : 'false'}",
+            "funcionMascara": "${opciones.mascaraFuncion ? opciones.mascaraFuncion : 'false'}",
+            "pattern": "${opciones.pattern ? opciones.pattern : 'false'}"
         };
         // terminaArgumentos${nombreCampo} - NO BORRAR ESTA LINEA
 
