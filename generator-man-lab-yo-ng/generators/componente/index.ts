@@ -165,6 +165,9 @@ module.exports = class extends Generator {
         console.log('propiedadesACrearse', propiedadesACrearse)
 
 
+        let importsDeClases = ``;
+
+
         let contenidoCabeceraArchivo = `
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder} from '@angular/forms';
@@ -172,7 +175,18 @@ import {ConfiguracionDisabledInterfaz, encerarFormBuilder, generarCampos, genera
 import {${nombreClase}} from './${nombreClaseCamel}';
 import {${nombreClase}Formulario} from './${nombreClaseCamel}-formulario';
 import {debounceTime} from 'rxjs/operators';
+// llenar con imports de clases
 `;
+        let variablesGlobales = ``;
+
+        let interfazVariablesGlobales = ``;
+
+        let serviciosRest = ``;
+
+        let validaciones = ``;
+
+        let busquedaYValidacion = ``;
+
 
         let contenidoArchivo = `
 @Component({
@@ -199,7 +213,10 @@ export class ${nombreClase}FormularioComponent implements OnInit {
     };
 
     constructor(private _formBuilder: FormBuilder,
-        ${opciones.toaster ? 'private _toasterService: ToasterService,' : ''}) {
+        private _cargandoService: CargandoService,
+        ${opciones.toaster ? 'private _toasterService: ToasterService,' : ''}
+        // Reemplazar con servicios rest
+        ) {
 
     }
 
@@ -247,15 +264,18 @@ export class ${nombreClase}FormularioComponent implements OnInit {
     }
 
     validacionesCampos() {
-        return this.validarEjemplo(); // Aqui use para otras validaciones
+        return this.validarEjemplo() // Aqui use para otras validaciones
     }
 
     validarEjemplo() {
         return true; // Implementacion de validacion ejemplo
     }
+
+// Reemplazar con validaciones y busqueda de variables globales
+
 }
 
-interface ObjetoVariablesGlobalesFunda {
+interface ObjetoVariablesGlobales${nombreClase} {
     // llenar con objetos de validacion globales
 }
 `
@@ -325,6 +345,21 @@ export const CONFIGURACION_${nombreClase.toUpperCase()} = (): ConfiguracionForml
                                 objeto.tipoControl.opcionesSelect);
                             break;
                         case 'autocomplete':
+
+                            variablesGlobales = variablesGlobales + generarVariablesGlobales(objeto.tipoControl.autocompleteBusqueda);
+
+                            serviciosRest = serviciosRest + generarServiciosRest(objeto.tipoControl.autocompleteBusqueda);
+
+                            interfazVariablesGlobales = interfazVariablesGlobales + generarInterfazVariablesGlobales(objeto.tipoControl.autocompleteBusqueda);
+
+                            busquedaYValidacion = busquedaYValidacion + generarBusquedaYValidacion(objeto.tipoControl.autocompleteBusqueda,
+                                nombre,
+                                nombreClaseCamel);
+
+                            validaciones = validaciones + generarValidaciones(objeto.tipoControl.autocompleteBusqueda);
+
+                            importsDeClases = importsDeClases + generarImportsDeClases(objeto.tipoControl.autocompleteBusqueda);
+
                             contenidoHtml = generarAutoComplete(nombre,
                                 nombreCampo,
                                 nombreClaseCamel,
@@ -357,6 +392,15 @@ export const CONFIGURACION_${nombreClase.toUpperCase()} = (): ConfiguracionForml
         interfaceConfiguracionFuncion = interfaceConfiguracionFuncion + `
     };
 };`
+
+        contenidoCabeceraArchivo = contenidoCabeceraArchivo.replace('// llenar con imports de clases', importsDeClases);
+        contenidoArchivo = contenidoArchivo.replace('// llenar con objetos variables globales', variablesGlobales);
+        contenidoArchivo = contenidoArchivo.replace('// Reemplazar con servicios rest', serviciosRest);
+        contenidoArchivoOnInitFin = contenidoArchivoOnInitFin.replace('// Reemplazar con validaciones y busqueda de variables globales', busquedaYValidacion);
+        contenidoArchivoOnInitFin = contenidoArchivoOnInitFin.replace('// llenar con objetos de validacion globales', interfazVariablesGlobales);
+        contenidoArchivoOnInitFin = contenidoArchivoOnInitFin.replace('// Aqui use para otras validaciones', validaciones);
+
+
 
         const contenidoCompleto = contenidoCabeceraArchivo
             + contenidoArchivo
@@ -532,6 +576,12 @@ function encontrarContenidoJSONPorNombre(nombreEnMayuscula, archivo) {
     return JSON.parse(parseo.contenido());
 }
 
+
+// currencyMask
+// [options]="cuadreCaja.mensajesValidacionValor.mask"
+
+// [textMask]="agenciaGrupoFunda.mensajesValidacionEmpiezaNumeracion.mask" 
+
 function generarInputTexto(nombre, nombreCampo, nombreClase, claseContenedor, claseLabel, claseInput, claseMensajes) {
     return `
             <!--${nombre}-->
@@ -596,6 +646,81 @@ ${contenidoSelect}
                 </div>
             </div>                   
 `
+}
+
+function generarVariablesGlobales(opcionesAutocomplete) {
+    const arregloDeOpciones = opcionesAutocomplete.split(',');
+    const nombreEntidadEnCamel = lowerFirstLetter(arregloDeOpciones[0]);
+    return `\n        ${nombreEntidadEnCamel}s: [],`;
+}
+
+function generarInterfazVariablesGlobales(opcionesAutocomplete) {
+    const arregloDeOpciones = opcionesAutocomplete.split(',');
+    const nombreEnMayusculas = arregloDeOpciones[0];
+    const nombreEntidadEnCamel = lowerFirstLetter(arregloDeOpciones[0]);
+
+    return `    ${nombreEntidadEnCamel}s: ${nombreEnMayusculas}[],\n`;
+}
+
+function generarImportsDeClases(opcionesAutocomplete) {
+    const arregloDeOpciones = opcionesAutocomplete.split(',');
+    const nombreEnMayusculas = arregloDeOpciones[0];
+    const nombreEntidadEnCamel = lowerFirstLetter(arregloDeOpciones[0]);
+
+    return `import {${nombreEnMayusculas}} from './${nombreEntidadEnCamel}';\n`;
+}
+
+function generarServiciosRest(opcionesAutocomplete) {
+    const arregloDeOpciones = opcionesAutocomplete.split(',');
+    const nombreEnMayusculas = arregloDeOpciones[0];
+    const nombreEntidadEnCamel = lowerFirstLetter(nombreEnMayusculas);
+    return `private _${nombreEntidadEnCamel}RestService: ${nombreEnMayusculas}RestService,\n         `;
+}
+
+function generarValidaciones(opcionesAutocomplete) {
+    const arregloDeOpciones = opcionesAutocomplete.split(',');
+    const nombreEnMayusculas = arregloDeOpciones[0];
+    return `&& this.validar${nombreEnMayusculas}() `;
+}
+
+
+function generarBusquedaYValidacion(opcionesAutocomplete, nombreCampoCamelCase, nombreClaseCamel) {
+    const arregloDeOpciones = opcionesAutocomplete.split(',');
+    const nombreEnMayusculas = arregloDeOpciones[0];
+    const nombreEntidadEnCamel = lowerFirstLetter(nombreEnMayusculas);
+
+    return `
+    validar${nombreEnMayusculas}() {
+        const ${nombreCampoCamelCase}ValorActual = this.${nombreClaseCamel}.formGroup.get('${nombreCampoCamelCase}').value.id;
+        let ${nombreEntidadEnCamel}Encontrado = this.objetoVariablesGlobales.${nombreEntidadEnCamel}s.find((registro) => registro.id === ${nombreCampoCamelCase}ValorActual);
+        if (typeof this.${nombreClaseCamel}.id !== 'object') {
+          usuarioEncontrado = {};
+        }
+        if (usuarioEncontrado) {
+          return true;
+        } else {
+          this.mensajeToaster = 'Seleccione un ${nombreCampoCamelCase} válido';
+          return false;
+        }
+      }
+    
+      buscar${nombreEnMayusculas}s(evento) {
+        const consulta = ''; // lenar la consulta
+        this._cargandoService.habilitarCargando();
+        this._${nombreEntidadEnCamel}RestService
+          .find(undefined, consulta)
+          .subscribe(
+            (${nombreEntidadEnCamel}s: ${nombreEnMayusculas}[]) => {
+              this.objetoVariablesGlobales.${nombreEntidadEnCamel}s = ${nombreEntidadEnCamel}s;
+              this._cargandoService.deshabilitarCargando();
+            },
+            error => {
+              this._cargandoService.deshabilitarCargando();
+              // Manejar errores
+            }
+          );
+      }
+\n\n`
 }
 
 
