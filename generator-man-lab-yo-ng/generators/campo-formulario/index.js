@@ -47,6 +47,10 @@ const OPCIONES = {
         type: String,
         desc: 'Nombre de la funcion para eliminar la mascara del campo Ej: eliminarNumeros'
     },
+    MASCARA_CURRENCY: {
+        type: Boolean,
+        desc: 'Si la mascara que se va a utilizar es de currency Ej: --mascaraCurrency (para true)'
+    },
     MIN_LENGTH: {
         type: String,
         desc: 'Minlength del campo Ej: 3'
@@ -124,6 +128,7 @@ module.exports = class extends Generator {
         this.option('tipoControl', OPCIONES.TIPO_CONTROL);
         this.option('opcionesSelect', OPCIONES.OPCIONES_SELECT_CONTROL);
         this.option('autocompleteBusqueda', OPCIONES.AUTOCOMPLETE_BUSQUEDA_NOMBRE);
+        this.option('mascaraCurrency', OPCIONES.MASCARA_CURRENCY);
     }
 
     initializing() {
@@ -189,7 +194,8 @@ module.exports = class extends Generator {
             email: this.options.email,
             tipoControl: this.options.tipoControl,
             opcionesSelect: this.options.opcionesSelect,
-            autocompleteBusqueda: this.options.autocompleteBusqueda
+            autocompleteBusqueda: this.options.autocompleteBusqueda,
+            mascaraCurrency: this.options.mascaraCurrency
         }
         if (opciones.tipoControl === 'autocomplete' && !opciones.autocompleteBusqueda) {
             throw new Error('Debe de anadir la opcion --autocompleteBusqueda "Entidad,campo", para documentacion escribir yo nombre-gerenador:metodo --help');
@@ -254,13 +260,14 @@ module.exports = class extends Generator {
                 "tipo": "${opciones.tipoControl}"${opciones.tipoControl === 'select-boolean' ? `,\n                "opcionesSelect": "${opciones.opcionesSelect}"` : ''}${opciones.tipoControl === 'autocomplete' ? `,\n                "autocompleteBusqueda": "${opciones.autocompleteBusqueda}"` : ''}
             },
             "mascara": "${opciones.mascara ? opciones.mascara : 'false'}",
-            "funcionMascara": "${opciones.mascaraFuncion ? opciones.mascaraFuncion : 'false'}",
+            "mascaraCurrency": "${opciones.mascaraCurrency ? 'true' : 'false'}",
+            "mascaraFuncion": "${opciones.mascaraFuncion ? opciones.mascaraFuncion : 'false'}",
             "pattern": "${opciones.pattern ? opciones.pattern : 'false'}"
         };
         // terminaArgumentos${nombreCampo} - NO BORRAR ESTA LINEA
 
         argumentos.mascara = ${opciones.mascara ? opciones.mascara : 'false'};
-        argumentos.funcionMascara = ${opciones.mascaraFuncion ? opciones.mascaraFuncion : 'false'};
+        argumentos.mascaraFuncion = ${opciones.mascaraFuncion ? opciones.mascaraFuncion : 'false'};
         argumentos.pattern = ${opciones.pattern ? opciones.pattern : 'false'};
 
         this.mensajesValidacion${nombreCampo} = establecerMensajesDeValidacionComunes(
@@ -269,7 +276,7 @@ module.exports = class extends Generator {
             argumentos.ejemplo, // Ejemplo
             argumentos.tooltip, // Tooltip
             argumentos.mascara, // Mascara
-            argumentos.funcionMascara, // Funcion para eliminar la mascara
+            argumentos.mascaraFuncion, // Funcion para eliminar la mascara
             argumentos.minLength, // minLength
             argumentos.maxLength, // maxLength
             argumentos.min, // min

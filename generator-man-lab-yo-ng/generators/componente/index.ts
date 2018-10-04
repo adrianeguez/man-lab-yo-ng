@@ -332,7 +332,8 @@ export const CONFIGURACION_${nombreClase.toUpperCase()} = (): ConfiguracionForml
                                 opciones.claseContenedor,
                                 opciones.claseLabel,
                                 opciones.claseInput,
-                                opciones.claseMensajes);
+                                opciones.claseMensajes,
+                                objeto);
                             break;
                         case 'select-many':
                             contenidoHtml = generarInputBooleano(nombre,
@@ -582,7 +583,12 @@ function encontrarContenidoJSONPorNombre(nombreEnMayuscula, archivo) {
 
 // [textMask]="agenciaGrupoFunda.mensajesValidacionEmpiezaNumeracion.mask" 
 
-function generarInputTexto(nombre, nombreCampo, nombreClase, claseContenedor, claseLabel, claseInput, claseMensajes) {
+function generarInputTexto(nombre, nombreCampo, nombreClase, claseContenedor, claseLabel, claseInput, claseMensajes, opcionesCampo: ArgumentosCampoInteraface) {
+    console.log('**************************** opcionesCampo.mascara',opcionesCampo.mascara)
+    console.log('**************************** opcionesCampo.mascaraCurrency',opcionesCampo.mascaraCurrency)
+    console.log('**************************** opcionesCampo.mascaraCurrency true',opcionesCampo.mascaraCurrency  === 'true')
+    console.log('**************************** opcionesCampo.mascaraCurrency false',opcionesCampo.mascaraCurrency  === 'false')
+
     return `
             <!--${nombre}-->
             <div class="col-sm-6 ${claseContenedor}" *ngIf="!configuracionDisabled.${nombreCampo}.hidden">
@@ -598,6 +604,8 @@ function generarInputTexto(nombre, nombreCampo, nombreClase, claseContenedor, cl
                                 [formControlName]="${nombreClase}.mensajesValidacion${nombreCampo}.nombreInput"
                                 [placeholder]="${nombreClase}.mensajesValidacion${nombreCampo}.tooltip"
                                 [title]="${nombreClase}.mensajesValidacion${nombreCampo}.title"
+                                ${opcionesCampo.mascara && opcionesCampo.mascaraCurrency === 'false' ? `[textMask]="${nombreClase}.mensajesValidacion${nombreCampo}.mask"` : ''}
+                                ${opcionesCampo.mascaraCurrency === 'true' ? `currencyMask\n                                [options]="${nombreClase}.mensajesValidacion${nombreCampo}.mask"` : ''}
                         >
                     </div>
                     <div class="col-sm-12">
@@ -782,6 +790,7 @@ interface ArgumentosCampoInteraface {
         autocompleteBusqueda?: string;
     },
     mascara: string | boolean;
-    funcionMascara: string | boolean;
+    mascaraCurrency: string;
+    mascaraFuncion: string | boolean;
     pattern: string | boolean;
 }
