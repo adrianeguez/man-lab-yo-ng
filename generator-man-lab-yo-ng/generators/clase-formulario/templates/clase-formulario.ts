@@ -1,5 +1,6 @@
 import { FormGroup } from '@angular/forms';
-import { ConfiguracionFormBuilder, ObjetoMensajeValidacionInterfaz, encerarConfiguracionFormBuilder, establecerMensajesDeValidacionComunes } from 'man-lab-ng-bootstrap';
+// tslint:disable-next-line:max-line-length
+import { ConfiguracionFormBuilder, ObjetoMensajeValidacionInterfaz, encerarConfiguracionFormBuilder, establecerMensajesDeValidacionComunes } from 'man-lab-ng';
 
 export class <%= nombre %>Formulario {
     formGroup: FormGroup;

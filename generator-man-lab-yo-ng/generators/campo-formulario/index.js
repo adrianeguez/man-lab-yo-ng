@@ -244,7 +244,7 @@ module.exports = class extends Generator {
     private encerarConfiguracionFormBuilder${nombreCampo}() {
 
         // empiezaArgumentos${nombreCampo} - NO BORRAR ESTA LINEA
-        let argumentos:any = {
+        const argumentos: any = {
             "required": ${opciones.required ? 'true' : 'false'},
             "email": ${opciones.email ? 'true' : 'false'},
             "nombre": "${nombreCampoCamel}",

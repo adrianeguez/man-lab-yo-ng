@@ -12,8 +12,6 @@ const ts = require('typescript');
 const Generator = require('yeoman-generator');
 const inquirer = require('inquirer');
 const TypescriptParser = require('typescript-parser').TypescriptParser;
-const transpiladorTs = require('ts-node')
-const vm = require('vm');
 
 const ARGUMENTOS = {
     NOMBRE_CLASE: {
@@ -439,64 +437,6 @@ export const CONFIGURACION_${nombreClase.toUpperCase()} = (): ConfiguracionForml
 
         }
 
-        /*
-
-        const source = "class Usuario{nombre:string='Adrian' constructor(){} pene(){ return hola()} } function hola(){return 'culebreo'}";
-
-        let result = ts.transpileModule(source, {
-            compilerOptions: { module: ts.ModuleKind.CommonJS }
-        });
-        var usuario;
-
-        */
-
-        // const resultado = JSON.stringify();
-        // console.log(resultado);
-        // console.log('result.outputText', result.outputText)
-        // const vmResult = vm.runInThisContext(result.outputText + ' usuario = Usuario;');
-        // console.log('vmResult:', vmResult);
-
-
-        // console.log(new global.usuario().pene());
-        // console.log(usuario);
-
-        // console.log(new pene());
-
-        // const adrian = new global["Usuario"]();
-        // console.log(global.Usuario);
-
-
-        /*
-        // Obteniendo parametros
-        const constructor = archivoParseado.declarations[0].ctor;
-        const propiedadesACrearse: PropiedadesConstructor[] = [];
-        constructor
-            .parameters
-            .forEach(
-                (propiedad) => {
-                    propiedadesACrearse.push({ nombre: propiedad.name, tipo: propiedad.type })
-                }
-            );
-
-        // Crear clase
-        const espaciadoConstructor = '        ';
-        let textoClase = ''
-        const nuevasPropiedades = propiedadesACrearse.forEach(
-            (propiedad) => {
-                textoClase = textoClase + `public ${propiedad.nombre}?: ${propiedad.tipo},\n` + espaciadoConstructor
-            }
-        )
-        const nuevaClase = `
-export class ${nombreClase}{
-    constructor(
-        ${textoClase}
-    ){
-    }
-}`
-        // escribir archivo
-
-        fs.writeFileSync(archivo.directorio + `/${nombreClaseDash}.ts`, nuevaClase, 'utf-8');
-        */
     }
 
     conflicts() {
@@ -568,7 +508,7 @@ function encontrarContenidoJSONPorNombre(nombreEnMayuscula, archivo) {
     }
 
     const parseo = {
-        eliminarInicio: 'let argumentos:any = ',
+        eliminarInicio: 'const argumentos: any = ',
         eliminarFin: ';',
         contenido: function () {
             return archivo.slice(
