@@ -171,6 +171,7 @@ module.exports = class extends Generator {
         let contenidoCabeceraArchivo = `
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder} from '@angular/forms';
+// tslint:disable-next-line:max-line-length
 import {ConfiguracionDisabledInterfaz, encerarFormBuilder, generarCampos, generarEmiteEmpezoTipear, generarMensajesFormGroup, establecerCamposDisabled, NO_EXISTEN_REGISTROS} from 'man-lab-ng';${opciones.toaster ? "\nimport {ToasterService} from 'angular2-toaster';" : ""}
 import {${nombreClase}} from './${nombreClaseCamel}';
 import {${nombreClase}Formulario} from './${nombreClaseCamel}-formulario';
@@ -392,7 +393,8 @@ export const CONFIGURACION_${nombreClase.toUpperCase()} = (): ConfiguracionForml
         interfaceConfiguracion = interfaceConfiguracion + '}';
         interfaceConfiguracionFuncion = interfaceConfiguracionFuncion + `
     };
-};`
+};
+`
 
         contenidoCabeceraArchivo = contenidoCabeceraArchivo.replace('// llenar con imports de clases', importsDeClases);
         contenidoArchivo = contenidoArchivo.replace('// llenar con objetos variables globales', variablesGlobales);
