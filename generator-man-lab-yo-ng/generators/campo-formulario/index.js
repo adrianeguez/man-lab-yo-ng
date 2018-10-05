@@ -257,7 +257,7 @@ module.exports = class extends Generator {
             "max": ${opciones.max ? opciones.max : 'false'},
             "patternMensaje": ${opciones.patternMensaje ? '"' + opciones.patternMensaje + '"' : '"Error en ' + nombreSeparadoPorEspacios + '"'},
             "tipoControl": {
-                "tipo": "${opciones.tipoControl}"${opciones.tipoControl === 'select-boolean' ? `,\n                "opcionesSelect": "${opciones.opcionesSelect}"` : ''}${opciones.tipoControl === 'autocomplete' ? `,\n                "autocompleteBusqueda": "${opciones.autocompleteBusqueda}"` : ''}
+                "tipo": "${opciones.tipoControl}"${opciones.tipoControl === 'select-many' ? `,\n                "opcionesSelect": "${opciones.opcionesSelect}"` : ''}${opciones.tipoControl === 'autocomplete' ? `,\n                "autocompleteBusqueda": "${opciones.autocompleteBusqueda}"` : ''}
             },
             "mascara": "${opciones.mascara ? opciones.mascara : 'false'}",
             "mascaraCurrency": "${opciones.mascaraCurrency ? 'true' : 'false'}",

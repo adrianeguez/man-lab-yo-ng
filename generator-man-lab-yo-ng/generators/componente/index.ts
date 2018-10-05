@@ -172,7 +172,7 @@ module.exports = class extends Generator {
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder} from '@angular/forms';
 // tslint:disable-next-line:max-line-length
-import {ConfiguracionDisabledInterfaz, encerarFormBuilder, generarCampos, generarEmiteEmpezoTipear, generarMensajesFormGroup, establecerCamposDisabled, NO_EXISTEN_REGISTROS} from 'man-lab-ng';${opciones.toaster ? "\nimport {ToasterService} from 'angular2-toaster';" : ""}
+import {ConfiguracionDisabledInterfaz, encerarFormBuilder, generarCampos, generarEmiteEmpezoTipear, generarMensajesFormGroup, establecerCamposDisabled, NO_EXISTEN_REGISTROS} from '@manticore-labs/ng-api';${opciones.toaster ? "\nimport {ToasterService} from 'angular2-toaster';" : ""}
 import {${nombreClase}} from './${nombreClaseCamel}';
 import {${nombreClase}Formulario} from './${nombreClaseCamel}-formulario';
 import {debounceTime} from 'rxjs/operators';
