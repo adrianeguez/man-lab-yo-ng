@@ -244,7 +244,7 @@ export class ${nombreClase}FormularioComponent implements OnInit {
             .subscribe(
                 camposValidados => {
 
-                    console.info(this.${nombreClaseCamel}.formGroup);
+                    console.log(this.${nombreClaseCamel}.formGroup);
 
                     this.mensajeToaster = '';
                     
@@ -276,6 +276,7 @@ export class ${nombreClase}FormularioComponent implements OnInit {
 
 }
 
+// tslint:disable-next-line:no-empty-interface
 interface ObjetoVariablesGlobales${nombreClase} {
     // llenar con objetos de validacion globales
 }
@@ -299,7 +300,7 @@ export const CONFIGURACION_${nombreClase.toUpperCase()} = (): ConfiguracionForml
 
 
         let htmlInicio = `
-<form novalidate [formGroup]="funda.formGroup">
+<form novalidate [formGroup]="${nombreClaseCamel}.formGroup">
     <fieldset class="col-md-12">
         <div class="row">`;
 
@@ -531,10 +532,6 @@ function encontrarContenidoJSONPorNombre(nombreEnMayuscula, archivo) {
 // [textMask]="agenciaGrupoFunda.mensajesValidacionEmpiezaNumeracion.mask" 
 
 function generarInputTexto(nombre, nombreCampo, nombreClase, claseContenedor, claseLabel, claseInput, claseMensajes, opcionesCampo: ArgumentosCampoInteraface) {
-    console.log('**************************** opcionesCampo.mascara', opcionesCampo.mascara)
-    console.log('**************************** opcionesCampo.mascaraCurrency', opcionesCampo.mascaraCurrency)
-    console.log('**************************** opcionesCampo.mascaraCurrency true', opcionesCampo.mascaraCurrency === 'true')
-    console.log('**************************** opcionesCampo.mascaraCurrency false', opcionesCampo.mascaraCurrency === 'false')
 
     return `
             <!--${nombre}-->
