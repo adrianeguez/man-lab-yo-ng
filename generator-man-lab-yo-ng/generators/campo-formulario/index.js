@@ -214,7 +214,7 @@ module.exports = class extends Generator {
             espacioDeIndentacionConstructor: '        ',
             reemplazableConstructor: '// contenidoConstructor - NO BORRAR ESTA LINEA',
             propiedadConstructor: function () {
-                return nombreCampoCamel
+                return `public ` +nombreCampoCamel
                     + `: ${opciones.tipo ? opciones.tipo : 'any'},\n`
                     + this.espacioDeIndentacionConstructor + this.reemplazableConstructor;
             },

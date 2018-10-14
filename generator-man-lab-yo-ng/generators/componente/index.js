@@ -411,14 +411,15 @@ function generarInputTexto(nombre, nombreCampo, nombreClase, claseContenedor, cl
                         <input type="text"
                                 class="${claseInput}"
                                 [id]="${nombreClase}.mensajesValidacion${nombreCampo}.nombreInput"
-                                required
                                 [name]="${nombreClase}.mensajesValidacion${nombreCampo}.nombreInput"
                                 [formControlName]="${nombreClase}.mensajesValidacion${nombreCampo}.nombreInput"
                                 [placeholder]="${nombreClase}.mensajesValidacion${nombreCampo}.tooltip"
                                 [title]="${nombreClase}.mensajesValidacion${nombreCampo}.title"
-                                ${opcionesCampo.mascara && opcionesCampo.mascaraCurrency === 'false' ? `[textMask]="${nombreClase}.mensajesValidacion${nombreCampo}.mask"` : ''}
+                                aria-describedby="${nombreClase}${nombreCampo}Ayuda"
+                                ${opcionesCampo.mascara && opcionesCampo.mascaraCurrency === 'false' ? '' : `[textMask]="${nombreClase}.mensajesValidacion${nombreCampo}.mask"`}
                                 ${opcionesCampo.mascaraCurrency === 'true' ? `currencyMask\n                                [options]="${nombreClase}.mensajesValidacion${nombreCampo}.mask"` : ''}
                         >
+                        <small id="${nombreClase}${nombreCampo}Ayuda" class="form-text text-muted">{{${nombreClase}.mensajesValidacion${nombreCampo}.title}}.</small>
                     </div>
                     <div class="col-sm-12">
 
@@ -440,7 +441,7 @@ function generarInputBooleano(nombre, nombreCampo, nombreClase, claseContenedor,
     });
     return `
             <!--${nombre}-->
-            <div class="col-sm-6 ${claseContenedor}" *ngIf="!configuracionDisabled.${nombreCampo}.hidden">
+            <div class="col-sm-12 ${claseContenedor}" *ngIf="!configuracionDisabled.${nombreCampo}.hidden">
                 <div class="row">
                     <label class="col-sm-4 ${claseLabel}" [for]="${nombreClase}.mensajesValidacion${nombreCampo}.nombreInput">{{
                     ${nombreClase}.mensajesValidacion${nombreCampo}.nombreAPresentarse }}</label>
