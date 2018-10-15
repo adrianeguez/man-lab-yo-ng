@@ -441,14 +441,13 @@ function generarInputBooleano(nombre, nombreCampo, nombreClase, claseContenedor,
     });
     return `
             <!--${nombre}-->
-            <div class="col-sm-12 ${claseContenedor}" *ngIf="!configuracionDisabled.${nombreCampo}.hidden">
+            <div class="col-sm-6 ${claseContenedor}" *ngIf="!configuracionDisabled.${nombreCampo}.hidden">
                 <div class="row">
                     <label class="col-sm-4 ${claseLabel}" [for]="${nombreClase}.mensajesValidacion${nombreCampo}.nombreInput">{{
                     ${nombreClase}.mensajesValidacion${nombreCampo}.nombreAPresentarse }}</label>
                     <div class="col-sm-8">
                         <select class="${claseInput}" [name]="${nombreClase}.mensajesValidacion${nombreCampo}.nombreInput"
                                 [id]="${nombreClase}.mensajesValidacion${nombreCampo}.nombreInput"
-                                required
                                 [formControlName]="${nombreClase}.mensajesValidacion${nombreCampo}.nombreInput"
                         >
 
