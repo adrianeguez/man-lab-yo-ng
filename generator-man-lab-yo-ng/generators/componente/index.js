@@ -501,9 +501,9 @@ function generarBusquedaYValidacion(opcionesAutocomplete, nombreCampoCamelCase, 
         const ${nombreCampoCamelCase}ValorActual = this.${nombreClaseCamel}.formGroup.get('${nombreCampoCamelCase}').value.id;
         let ${nombreEntidadEnCamel}Encontrado = this.objetoVariablesGlobales.${nombreEntidadEnCamel}s.find((registro) => registro.id === ${nombreCampoCamelCase}ValorActual);
         if (typeof this.${nombreClaseCamel}.id !== 'object') {
-          usuarioEncontrado = {};
+            ${nombreEntidadEnCamel}Encontrado = {};
         }
-        if (usuarioEncontrado) {
+        if (${nombreEntidadEnCamel}Encontrado) {
           return true;
         } else {
           this.mensajeToaster = 'Seleccione un ${nombreCampoCamelCase} válido';
@@ -512,10 +512,21 @@ function generarBusquedaYValidacion(opcionesAutocomplete, nombreCampoCamelCase, 
       }
     
       buscar${nombreEnMayusculas}s(evento) {
-        const consulta = ''; // lenar la consulta
         this._cargandoService.habilitarCargando();
-        this._${nombreEntidadEnCamel}RestService
-          .find(undefined, consulta)
+        let ${nombreCampoCamelCase}s$;
+        if (evento.query === '') {
+            ${nombreCampoCamelCase}s$ = this._${nombreCampoCamelCase}RestService
+                .findAll();
+        } else {
+            const consulta = { // lenar la consulta
+                camposABuscar: [
+                    { campo: 'ejemplo', valor: \`%25\${evento.query}%25\` }
+                ]
+            }; 
+            ${nombreCampoCamelCase}s$ = this._${nombreCampoCamelCase}RestService
+                .findWhereOr('criterioBusqueda=' + JSON.stringify(consulta));
+        }
+        ${nombreCampoCamelCase}s$
           .subscribe(
             (${nombreEntidadEnCamel}s: ${nombreEnMayusculas}[]) => {
               this.objetoVariablesGlobales.${nombreEntidadEnCamel}s = ${nombreEntidadEnCamel}s;
@@ -523,6 +534,8 @@ function generarBusquedaYValidacion(opcionesAutocomplete, nombreCampoCamelCase, 
             },
             error => {
               this._cargandoService.deshabilitarCargando();
+              console.error(error);
+              this._toasterService.pop('error', 'ERROR', 'Revisa tu conexion o intentalo mas tarde');
               // Manejar errores
             }
           );
@@ -547,7 +560,7 @@ function generarAutoComplete(nombre, nombreCampo, nombreClase, claseContenedor, 
                             [dropdown]="true"
                             [emptyMessage]="NO_EXISTEN_REGISTROS"
                             [formControlName]="${nombreClase}.mensajesValidacion${nombreCampo}.nombreInput"
-                            [suggestions]="objetoVariablesGlobales.usuarios"
+                            [suggestions]="objetoVariablesGlobales.${nombre}s"
                             (completeMethod)="buscar${nombreEntidad}($event)"
                             [placeholder]="${nombreClase}.mensajesValidacion${nombreCampo}.tooltip"
                             delay="1000"
