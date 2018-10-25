@@ -27,6 +27,11 @@ const OPCIONES = {
         type: String,
         desc: 'Tipo de campo Ej: Date / boolean / string / number'
     },
+    TIPO_CAMPO_HTML: {
+        type: String,
+        desc: 'Tipo de campo html. Por defecto text. Ej: text / password / email / etc',
+        default: 'text'
+    },
     NOMBRE_A_PRESENTARSE: {
         type: String,
         desc: 'Como mostrar el campo Ej: "Nombres y apellidos"'
@@ -101,9 +106,15 @@ const OPCIONES = {
     }
 };
 
-const camelToDash = str => str
-    .replace(/(^[A-Z])/, ([first]) => first.toLowerCase())
-    .replace(/([A-Z])/g, ([letter]) => `-${letter.toLowerCase()}`);
+const camelToDash = str =
+>
+str
+    .replace(/(^[A-Z])/, ([first]) = > first.toLowerCase()
+)
+.
+replace(/([A-Z])/g, ([letter]) = > `-${letter.toLowerCase()}`
+)
+;
 
 
 module.exports = class extends Generator {
@@ -112,6 +123,7 @@ module.exports = class extends Generator {
         this.argument(ARGUMENTOS.NOMBRE_CLASE.nombre, ARGUMENTOS.NOMBRE_CLASE.configuracion);
         this.argument(ARGUMENTOS.NOMBRE_CAMPO.nombre, ARGUMENTOS.NOMBRE_CAMPO.configuracion);
         this.option('tipo', OPCIONES.TIPO);
+        this.option('tipoCampoHtml', OPCIONES.TIPO_CAMPO_HTML);
         this.option('nombreAPresentarse', OPCIONES.NOMBRE_A_PRESENTARSE);
         this.option('tooltip', OPCIONES.TOOLTIP);
         this.option('ejemplo', OPCIONES.EJEMPLO);
@@ -135,7 +147,9 @@ module.exports = class extends Generator {
         // this.log('initializing')
     }
 
-    async prompting() {
+    async
+
+    prompting() {
         // this.log('prompting')
         /*
                 const respuestas = await this.prompt([{
@@ -147,6 +161,7 @@ module.exports = class extends Generator {
         // this.log('Nombre del servicio', this.option(ARGUMENTOS.NOMBRE.nombre));
 
     }
+
     configuring() {
         // this.log('configuring ')
     }
@@ -164,7 +179,9 @@ module.exports = class extends Generator {
     }
 
 
-    async writing() {
+    async
+
+    writing() {
 
         // Variables Clase
         const nombreClase = this.options[ARGUMENTOS.NOMBRE_CLASE.nombre];
@@ -179,6 +196,7 @@ module.exports = class extends Generator {
 
         const opciones = {
             tipo: this.options.tipo,
+            tipoCampoHtml: this.options.tipoCampoHtml,
             nombreAPresentarse: this.options.nombreAPresentarse,
             tooltip: this.options.tooltip,
             ejemplo: this.options.ejemplo,
@@ -203,7 +221,9 @@ module.exports = class extends Generator {
         const archivo = {
             nombre: `/${nombreClaseDash}-formulario.ts`,
             directorio: this.destinationRoot(),
-            pathArchivo: function () { return this.directorio + this.nombre },
+            pathArchivo: function () {
+                return this.directorio + this.nombre
+            },
 
         };
         const contenido = {
@@ -214,7 +234,7 @@ module.exports = class extends Generator {
             espacioDeIndentacionConstructor: '        ',
             reemplazableConstructor: '// contenidoConstructor - NO BORRAR ESTA LINEA',
             propiedadConstructor: function () {
-                return `public ` +nombreCampoCamel
+                return `public ` + nombreCampoCamel
                     + `: ${opciones.tipo ? opciones.tipo : 'any'},\n`
                     + this.espacioDeIndentacionConstructor + this.reemplazableConstructor;
             },
@@ -233,7 +253,6 @@ module.exports = class extends Generator {
                 return `this.encerarConfiguracionFormBuilder${nombreCampo}();\n`
                     + this.espacioDeIndentacionEjecucionConstructor + this.reemplazableEjecucionConstructor;
             },
-
 
 
             espacioDeIndentacionContenidoFuncion: '    ',
@@ -257,6 +276,7 @@ module.exports = class extends Generator {
             "max": ${opciones.max ? opciones.max : 'false'},
             "patternMensaje": ${opciones.patternMensaje ? '"' + opciones.patternMensaje + '"' : '"Error en ' + nombreSeparadoPorEspacios + '"'},
             "tipoControl": {
+                "tipoCampoHtml": "${opciones.tipoCampoHtml}",
                 "tipo": "${opciones.tipoControl}"${opciones.tipoControl === 'select-many' ? `,\n                "opcionesSelect": "${opciones.opcionesSelect}"` : ''}${opciones.tipoControl === 'autocomplete' ? `,\n                "autocompleteBusqueda": "${opciones.autocompleteBusqueda}"` : ''}
             },
             "mascara": "${opciones.mascara ? opciones.mascara : 'false'}",
@@ -315,7 +335,6 @@ module.exports = class extends Generator {
             }
 
 
-
         }
 
         // generando contenido de constructor
@@ -350,7 +369,8 @@ module.exports = class extends Generator {
         this.log('Propiedad\n', contenido.propiedadConstructor())
         this.log('Funcion\n', contenido.contenidoFuncion())
 
-        const respuesta = await inquirer
+        const respuesta = await
+        inquirer
             .prompt([
                 {
                     type: 'confirm',
@@ -365,7 +385,6 @@ module.exports = class extends Generator {
         } else {
 
         }
-
 
 
         // inquirer
@@ -428,21 +447,25 @@ function separateUpperCaseBySpace(string) {
     }
     let contador = 0;
     indices.forEach(
-        (indice) => {
-            if (indice === 0) {
+        (indice) = > {
+        if(indice === 0
+)
+    {
 
-            } else {
-                const posicionInicial = indice + contador;
-                const posicionFinal = posicionInicial + 1;
-                let contenidoAReemplazar = string.slice(posicionInicial, posicionFinal);
-                contenidoAReemplazar = ' ' + contenidoAReemplazar;
-                let contenidoInicial = string.slice(0, posicionFinal - 1);
-                contenidoInicial = contenidoInicial + contenidoAReemplazar;
-                const contenidoFinal = string.slice(posicionFinal, string.length)
-                string = contenidoInicial + contenidoFinal;
-                contador++;
-            }
-        }
-    )
+    }
+else
+    {
+        const posicionInicial = indice + contador;
+        const posicionFinal = posicionInicial + 1;
+        let contenidoAReemplazar = string.slice(posicionInicial, posicionFinal);
+        contenidoAReemplazar = ' ' + contenidoAReemplazar;
+        let contenidoInicial = string.slice(0, posicionFinal - 1);
+        contenidoInicial = contenidoInicial + contenidoAReemplazar;
+        const contenidoFinal = string.slice(posicionFinal, string.length)
+        string = contenidoInicial + contenidoFinal;
+        contador++;
+    }
+}
+)
     return string;
 }

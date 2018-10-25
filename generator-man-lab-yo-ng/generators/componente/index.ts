@@ -173,8 +173,8 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder} from '@angular/forms';
 // tslint:disable-next-line:max-line-length
 import {ConfiguracionDisabledInterfaz, encerarFormBuilder, generarCampos, generarEmiteEmpezoTipear, generarMensajesFormGroup, establecerCamposDisabled, NO_EXISTEN_REGISTROS} from '@manticore-labs/ng-api';${opciones.toaster ? "\nimport {ToasterService} from 'angular2-toaster';" : ""}
-import {${nombreClase}} from './${nombreClaseCamel}';
-import {${nombreClase}Formulario} from './${nombreClaseCamel}-formulario';
+import {${nombreClase}} from './${nombreClaseDash}';
+import {${nombreClase}Formulario} from './${nombreClaseDash}-formulario';
 import {debounceTime} from 'rxjs/operators';
 // llenar con imports de clases
 `;
@@ -540,7 +540,7 @@ function generarInputTexto(nombre, nombreCampo, nombreClase, claseContenedor, cl
                     <label class="col-sm-4 ${claseLabel}" [for]="${nombreClase}.mensajesValidacion${nombreCampo}.nombreInput">{{
                         ${nombreClase}.mensajesValidacion${nombreCampo}.nombreAPresentarse }}</label>
                     <div class="col-sm-8">
-                        <input type="text"
+                        <input type="${opcionesCampo.tipoControl.tipoCampoHtml}"
                                 class="${claseInput}"
                                 [id]="${nombreClase}.mensajesValidacion${nombreCampo}.nombreInput"
                                 [name]="${nombreClase}.mensajesValidacion${nombreCampo}.nombreInput"
@@ -742,6 +742,7 @@ interface ArgumentosCampoInteraface {
     max: string | boolean;
     patternMensaje: string | boolean;
     tipoControl: {
+        tipoCampoHtml: string;
         tipo: string | boolean;
         opcionesSelect?: string;
         autocompleteBusqueda?: string;
