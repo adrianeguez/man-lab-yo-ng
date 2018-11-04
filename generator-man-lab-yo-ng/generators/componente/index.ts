@@ -30,7 +30,7 @@ const ARGUMENTOS = {
             desc: 'Nombre del campo formulario EJ: telefonoTrabajo'
         }
     },
-}
+};
 
 const OPCIONES = {
     TOASTER: {
@@ -137,7 +137,7 @@ module.exports = class extends Generator {
             claseInput: this.options.claseInput,
             claseMensajes: this.options.claseMensajes,
             claseAutocomplete: this.options.claseAutocomplete
-        }
+        };
 
 
 
@@ -162,7 +162,7 @@ module.exports = class extends Generator {
                     propiedadesACrearse.push({ nombre: propiedad.name, tipo: propiedad.type })
                 }
             );
-        console.log('propiedadesACrearse', propiedadesACrearse)
+        console.log('propiedadesACrearse', propiedadesACrearse);
 
 
         let importsDeClases = ``;
@@ -280,7 +280,7 @@ export class ${nombreClase}FormularioComponent implements OnInit {
 interface ObjetoVariablesGlobales${nombreClase} {
     // llenar con objetos de validacion globales
 }
-`
+`;
         let constructorFormulario = `\n        this.${nombreClaseCamel} = new ${nombreClase}Formulario(\n`;
 
         let interfaceConfiguracion = `
@@ -319,7 +319,7 @@ export const CONFIGURACION_${nombreClase.toUpperCase()} = (): ConfiguracionForml
         propiedadesACrearse
             .forEach(
                 (propiedad: PropiedadesConstructor) => {
-                    const objeto: ArgumentosCampoInteraface = encontrarContenidoJSONPorNombre(capitalizeFirstLetter(propiedad.nombre), parser.texto)
+                    const objeto: ArgumentosCampoInteraface = encontrarContenidoJSONPorNombre(capitalizeFirstLetter(propiedad.nombre), parser.texto);
                     const nombre = propiedad.nombre;
                     const tipo = propiedad.tipo;
                     const nombreCampo = capitalizeFirstLetter(nombre);
@@ -389,13 +389,13 @@ export const CONFIGURACION_${nombreClase.toUpperCase()} = (): ConfiguracionForml
         },\n`;
 
                 }
-            )
+            );
         constructorFormulario = constructorFormulario + '        );';
         interfaceConfiguracion = interfaceConfiguracion + '}';
         interfaceConfiguracionFuncion = interfaceConfiguracionFuncion + `
     };
 };
-`
+`;
 
         contenidoCabeceraArchivo = contenidoCabeceraArchivo.replace('// llenar con imports de clases', importsDeClases);
         contenidoArchivo = contenidoArchivo.replace('// llenar con objetos variables globales', variablesGlobales);
@@ -428,7 +428,7 @@ export const CONFIGURACION_${nombreClase.toUpperCase()} = (): ConfiguracionForml
                     name: 'confirmacion',
                     message: '¿Están correctos los cambios?'
                 }
-            ])
+            ]);
         if (respuesta.confirmacion) {
             fs.writeFileSync(archivo.pathNuevoArchivo(), contenidoCompleto, 'utf-8');
             this.log(`Archivo ${archivo.nombreNuevoArchivo} creado :)`);
@@ -482,12 +482,12 @@ function separateUpperCaseBySpace(string) {
                 contenidoAReemplazar = ' ' + contenidoAReemplazar;
                 let contenidoInicial = string.slice(0, posicionFinal - 1);
                 contenidoInicial = contenidoInicial + contenidoAReemplazar;
-                const contenidoFinal = string.slice(posicionFinal, string.length)
+                const contenidoFinal = string.slice(posicionFinal, string.length);
                 string = contenidoInicial + contenidoFinal;
                 contador++;
             }
         }
-    )
+    );
     return string;
 }
 
@@ -499,16 +499,16 @@ function encontrarContenidoJSONPorNombre(nombreEnMayuscula, archivo) {
     const contenidoInicial = {
         contenido: `// empiezaArgumentos${nombreEnMayuscula} - NO BORRAR ESTA LINEA`,
         tamano: function () { return this.contenido.length - 1 }
-    }
+    };
     const contenidoFinal = {
         contenido: `// terminaArgumentos${nombreEnMayuscula} - NO BORRAR ESTA LINEA`,
         tamano: function () { return this.contenido.length - 1 }
-    }
+    };
 
     const archivoObjeto = {
         indiceInicial: archivo.indexOf(contenidoInicial.contenido),
         indiceFinal: archivo.indexOf(contenidoFinal.contenido),
-    }
+    };
 
     const parseo = {
         eliminarInicio: 'const argumentos: any = ',
@@ -521,7 +521,7 @@ function encontrarContenidoJSONPorNombre(nombreEnMayuscula, archivo) {
                 .replace(this.eliminarInicio, '')
                 .replace(this.eliminarFin, '')
         }
-    }
+    };
     return JSON.parse(parseo.contenido());
 }
 
@@ -573,7 +573,7 @@ function generarInputBooleano(nombre, nombreCampo, nombreClase, claseContenedor,
             (opcion) => {
                 contenidoSelect = contenidoSelect + `                            <option value="${opcion}">${opcion}</option>\n`
             }
-        )
+        );
     return `
             <!--${nombre}-->
             <div class="col-sm-6 ${claseContenedor}" *ngIf="!configuracionDisabled.${nombreCampo}.hidden">
