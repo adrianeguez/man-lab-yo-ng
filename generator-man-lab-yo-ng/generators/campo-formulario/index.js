@@ -106,15 +106,9 @@ const OPCIONES = {
     }
 };
 
-const camelToDash = str =
->
-str
-    .replace(/(^[A-Z])/, ([first]) = > first.toLowerCase()
-)
-.
-replace(/([A-Z])/g, ([letter]) = > `-${letter.toLowerCase()}`
-)
-;
+const camelToDash = str => str
+    .replace(/(^[A-Z])/, ([first]) => first.toLowerCase())
+    .replace(/([A-Z])/g, ([letter]) => `-${letter.toLowerCase()}`);
 
 
 module.exports = class extends Generator {
@@ -147,9 +141,7 @@ module.exports = class extends Generator {
         // this.log('initializing')
     }
 
-    async
-
-    prompting() {
+    async prompting() {
         // this.log('prompting')
         /*
                 const respuestas = await this.prompt([{
@@ -179,9 +171,7 @@ module.exports = class extends Generator {
     }
 
 
-    async
-
-    writing() {
+    async writing() {
 
         // Variables Clase
         const nombreClase = this.options[ARGUMENTOS.NOMBRE_CLASE.nombre];
@@ -370,14 +360,14 @@ module.exports = class extends Generator {
         this.log('Funcion\n', contenido.contenidoFuncion())
 
         const respuesta = await
-        inquirer
-            .prompt([
-                {
-                    type: 'confirm',
-                    name: 'confirmacion',
-                    message: '¿Están correctos los cambios?'
-                }
-            ])
+            inquirer
+                .prompt([
+                    {
+                        type: 'confirm',
+                        name: 'confirmacion',
+                        message: '¿Están correctos los cambios?'
+                    }
+                ])
         if (respuesta.confirmacion) {
             fs.writeFileSync(archivo.pathArchivo(), nuevoContenido, 'utf-8');
             this.log(`Archivo ${archivo.nombre} actualizado :)`);
@@ -447,25 +437,21 @@ function separateUpperCaseBySpace(string) {
     }
     let contador = 0;
     indices.forEach(
-        (indice) = > {
-        if(indice === 0
-)
-    {
-
-    }
-else
-    {
-        const posicionInicial = indice + contador;
-        const posicionFinal = posicionInicial + 1;
-        let contenidoAReemplazar = string.slice(posicionInicial, posicionFinal);
-        contenidoAReemplazar = ' ' + contenidoAReemplazar;
-        let contenidoInicial = string.slice(0, posicionFinal - 1);
-        contenidoInicial = contenidoInicial + contenidoAReemplazar;
-        const contenidoFinal = string.slice(posicionFinal, string.length)
-        string = contenidoInicial + contenidoFinal;
-        contador++;
-    }
-}
-)
+        (indice) => {
+            if (indice === 0) {
+            }
+            else {
+                const posicionInicial = indice + contador;
+                const posicionFinal = posicionInicial + 1;
+                let contenidoAReemplazar = string.slice(posicionInicial, posicionFinal);
+                contenidoAReemplazar = ' ' + contenidoAReemplazar;
+                let contenidoInicial = string.slice(0, posicionFinal - 1);
+                contenidoInicial = contenidoInicial + contenidoAReemplazar;
+                const contenidoFinal = string.slice(posicionFinal, string.length)
+                string = contenidoInicial + contenidoFinal;
+                contador++;
+            }
+        }
+    );
     return string;
 }
