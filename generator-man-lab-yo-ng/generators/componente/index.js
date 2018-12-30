@@ -95,9 +95,15 @@ module.exports = class extends Generator {
             nombreNuevoArchivo: `/${nombreClaseDash}-formulario.component.ts`,
             nombreNuevoArchivoHTML: `/${nombreClaseDash}-formulario.component.html`,
             directorio: this.destinationRoot(),
-            pathArchivo: function () { return this.directorio + this.nombre; },
-            pathNuevoArchivo: function () { return this.directorio + this.nombreNuevoArchivo; },
-            pathNuevoArchivoHTML: function () { return this.directorio + this.nombreNuevoArchivoHTML; },
+            pathArchivo: function () {
+                return this.directorio + this.nombre;
+            },
+            pathNuevoArchivo: function () {
+                return this.directorio + this.nombreNuevoArchivo;
+            },
+            pathNuevoArchivoHTML: function () {
+                return this.directorio + this.nombreNuevoArchivoHTML;
+            },
         };
         // opciones
         const opciones = {
@@ -121,7 +127,10 @@ module.exports = class extends Generator {
         constructor
             .parameters
             .forEach((propiedad) => {
-            propiedadesACrearse.push({ nombre: propiedad.name, tipo: propiedad.type });
+            if (propiedad.name !== 'id') {
+                propiedadesACrearse
+                    .push({ nombre: propiedad.name, tipo: propiedad.type });
+            }
         });
         console.log('propiedadesACrearse', propiedadesACrearse);
         let importsDeClases = ``;
@@ -129,7 +138,15 @@ module.exports = class extends Generator {
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder} from '@angular/forms';
 // tslint:disable-next-line:max-line-length
-import {ConfiguracionDisabledInterfaz, encerarFormBuilder, generarCampos, generarEmiteEmpezoTipear, generarMensajesFormGroup, establecerCamposDisabled, NO_EXISTEN_REGISTROS} from '@manticore-labs/ng-api';${opciones.toaster ? "\nimport {ToasterService} from 'angular2-toaster';" : ""}
+import {
+    ConfiguracionDisabledInterfaz, 
+    encerarFormBuilder, 
+    generarCampos, 
+    generarEmiteEmpezoTipear, 
+    generarMensajesFormGroup, 
+    establecerCamposDisabled, 
+    NO_EXISTEN_REGISTROS
+} from '@manticore-labs/ng-api';${opciones.toaster ? "\nimport {ToasterService} from 'angular2-toaster';" : ""}
 import {${nombreClase}} from './${nombreClaseDash}';
 import {${nombreClase}Formulario} from './${nombreClaseDash}-formulario';
 import {debounceTime} from 'rxjs/operators';
@@ -376,11 +393,15 @@ function separateUpperCaseBySpace(string) {
 function encontrarContenidoJSONPorNombre(nombreEnMayuscula, archivo) {
     const contenidoInicial = {
         contenido: `// empiezaArgumentos${nombreEnMayuscula} - NO BORRAR ESTA LINEA`,
-        tamano: function () { return this.contenido.length - 1; }
+        tamano: function () {
+            return this.contenido.length - 1;
+        }
     };
     const contenidoFinal = {
         contenido: `// terminaArgumentos${nombreEnMayuscula} - NO BORRAR ESTA LINEA`,
-        tamano: function () { return this.contenido.length - 1; }
+        tamano: function () {
+            return this.contenido.length - 1;
+        }
     };
     const archivoObjeto = {
         indiceInicial: archivo.indexOf(contenidoInicial.contenido),
@@ -529,7 +550,7 @@ function generarBusquedaYValidacion(opcionesAutocomplete, nombreCampoCamelCase, 
         ${nombreCampoCamelCase}s$
           .subscribe(
             (${nombreEntidadEnCamel}s: ${nombreEnMayusculas}[]) => {
-              this.objetoVariablesGlobales.${nombreEntidadEnCamel}s = ${nombreEntidadEnCamel}s;
+              this.objetoVariablesGlobales.${nombreEntidadEnCamel}s = ${nombreEntidadEnCamel}s[0];
               this._cargandoService.deshabilitarCargando();
             },
             error => {
@@ -561,7 +582,7 @@ function generarAutoComplete(nombre, nombreCampo, nombreClase, claseContenedor, 
                             [emptyMessage]="NO_EXISTEN_REGISTROS"
                             [formControlName]="${nombreClase}.mensajesValidacion${nombreCampo}.nombreInput"
                             [suggestions]="objetoVariablesGlobales.${nombre}s"
-                            (completeMethod)="buscar${nombreEntidad}($event)"
+                            (completeMethod)="buscar${nombreEntidad}s($event)"
                             [placeholder]="${nombreClase}.mensajesValidacion${nombreCampo}.tooltip"
                             delay="1000"
                             field="${nombreAtributo}">
