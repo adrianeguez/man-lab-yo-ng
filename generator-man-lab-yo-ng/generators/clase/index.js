@@ -121,17 +121,16 @@ module.exports = class extends Generator {
             propiedadesACrearse.push({ nombre: propiedad.name, tipo: propiedad.type });
         });
         // Crear clase
-        const espaciadoConstructor = '        ';
+        const espaciadoConstructor = '    ';
         let textoClase = '';
         const nuevasPropiedades = propiedadesACrearse.forEach((propiedad) => {
             textoClase = textoClase + `public ${propiedad.nombre}?: ${propiedad.tipo},\n` + espaciadoConstructor;
         });
-        const nuevaClase = `
-export class ${nombreClase}{
-    constructor(
-        ${textoClase}
-    ){
-    }
+        const nuevaClase = `export class ${nombreClase} {
+  constructor(
+    ${textoClase}
+  ) {
+  }
 }`;
         // escribir archivo
         fs.writeFileSync(archivo.directorio + `/${nombreClaseDash}.ts`, nuevaClase, 'utf-8');

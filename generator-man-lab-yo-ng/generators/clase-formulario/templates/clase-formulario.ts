@@ -1,6 +1,11 @@
-import { FormGroup } from '@angular/forms';
-// tslint:disable-next-line:max-line-length
-import { ConfiguracionFormBuilder, ObjetoMensajeValidacionInterfaz, encerarConfiguracionFormBuilder, establecerMensajesDeValidacionComunes } from '@manticore-labs/ng-api';
+import {FormGroup} from '@angular/forms';
+/* tslint:disable:quotemark*/
+import {
+    ConfiguracionFormBuilder,
+    ObjetoMensajeValidacionInterfaz,
+    encerarConfiguracionFormBuilder,
+    establecerMensajesDeValidacionComunes
+} from '@manticore-labs/ng-api';
 
 export class <%= nombre %>Formulario {
     formGroup: FormGroup;
@@ -12,7 +17,7 @@ export class <%= nombre %>Formulario {
     ) {
         // contenidoEjecucionConstructor - NO BORRAR ESTA LINEA
     }
-    
+
 
     // contenidoFuncion - NO BORRAR ESTA LINEA
 }

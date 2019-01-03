@@ -219,7 +219,7 @@ export class ${nombreClase}FormularioComponent implements OnInit {
     ${nombreClaseCamel}: ${nombreClase}Formulario;
 
     NO_EXISTEN_REGISTROS = NO_EXISTEN_REGISTROS;
-    
+
     mensajeToaster = '';
 
     objetoVariablesGlobales: ObjetoVariablesGlobales${nombreClase} = {
@@ -228,7 +228,7 @@ export class ${nombreClase}FormularioComponent implements OnInit {
 
     constructor(private _formBuilder: FormBuilder,
         private _cargandoService: CargandoService,
-        ${opciones.toaster ? 'private _toasterService: ToasterService,' : ''}
+${opciones.toaster ? '        private _toasterService: ToasterService,' : ''}
         // Reemplazar con servicios rest
         ) {
 
@@ -260,7 +260,7 @@ export class ${nombreClase}FormularioComponent implements OnInit {
                     console.log(this.${nombreClaseCamel}.formGroup);
 
                     this.mensajeToaster = '';
-                    
+
                     if (this.${nombreClaseCamel}.formGroup.valid && this.validacionesCampos()) {
 
                         this.${nombreClaseCamel}Valido.emit(generarCampos(this.${nombreClaseCamel}));
@@ -278,7 +278,7 @@ export class ${nombreClase}FormularioComponent implements OnInit {
     }
 
     validacionesCampos() {
-        return this.validarEjemplo() // Aqui use para otras validaciones
+        return this.validarEjemplo(); // Aqui use para otras validaciones
     }
 
     validarEjemplo() {
@@ -291,7 +291,7 @@ export class ${nombreClase}FormularioComponent implements OnInit {
 
 // tslint:disable-next-line:no-empty-interface
 interface ObjetoVariablesGlobales${nombreClase} {
-    // llenar con objetos de validacion globales
+// llenar con objetos de validacion globales
 }
 `;
         let constructorFormulario = `\n        this.${nombreClaseCamel} = new ${nombreClase}Formulario(\n`;

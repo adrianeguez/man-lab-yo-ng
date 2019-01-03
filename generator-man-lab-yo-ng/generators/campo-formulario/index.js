@@ -204,7 +204,7 @@ module.exports = class extends Generator {
             opcionesSelect: this.options.opcionesSelect,
             autocompleteBusqueda: this.options.autocompleteBusqueda,
             mascaraCurrency: this.options.mascaraCurrency
-        }
+        };
         if (opciones.tipoControl === 'autocomplete' && !opciones.autocompleteBusqueda) {
             throw new Error('Debe de anadir la opcion --autocompleteBusqueda "Entidad,campo", para documentacion escribir yo nombre-gerenador:metodo --help');
         }
@@ -237,7 +237,7 @@ module.exports = class extends Generator {
             },
 
 
-            espacioDeIndentacionEjecucionConstructor: '        ',
+            espacioDeIndentacionEjecucionConstructor: '\n',
             reemplazableEjecucionConstructor: '// contenidoEjecucionConstructor - NO BORRAR ESTA LINEA',
             ejecucionConstructor: function () {
                 return `this.encerarConfiguracionFormBuilder${nombreCampo}();\n`
@@ -249,8 +249,7 @@ module.exports = class extends Generator {
             reemplazableContenidoFuncion: '// contenidoFuncion - NO BORRAR ESTA LINEA',
             contenidoFuncion: function () {
                 const nombreSeparadoPorEspacios = separateUpperCaseBySpace(nombreCampo);
-                return `
-    private encerarConfiguracionFormBuilder${nombreCampo}() {
+                return `   private encerarConfiguracionFormBuilder${nombreCampo}() {
 
         // empiezaArgumentos${nombreCampo} - NO BORRAR ESTA LINEA
         const argumentos: any = {
@@ -320,8 +319,7 @@ module.exports = class extends Generator {
 
         this.configuracionFormBuilder = encerarConfiguracionFormBuilder(this.mensajesValidacion${nombreCampo}.configuracionFormBuilder);
     }
-                \n`
-                    + this.espacioDeIndentacionContenidoFuncion + this.reemplazableContenidoFuncion;
+\n` + this.espacioDeIndentacionContenidoFuncion + this.reemplazableContenidoFuncion;
             }
 
 
