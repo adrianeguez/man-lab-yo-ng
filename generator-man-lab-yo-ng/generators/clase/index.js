@@ -124,14 +124,16 @@ module.exports = class extends Generator {
         const espaciadoConstructor = '    ';
         let textoClase = '';
         const nuevasPropiedades = propiedadesACrearse.forEach((propiedad) => {
-            textoClase = textoClase + `public ${propiedad.nombre}?: ${propiedad.tipo},\n` + espaciadoConstructor;
+            textoClase = textoClase + espaciadoConstructor + `public ${propiedad.nombre}?: ${propiedad.tipo},\n`;
         });
         const nuevaClase = `export class ${nombreClase} {
   constructor(
-    ${textoClase}
-  ) {
-  }
-}`;
+${textoClase}
+) {
+}
+}
+
+`;
         // escribir archivo
         fs.writeFileSync(archivo.directorio + `/${nombreClaseDash}.ts`, nuevaClase, 'utf-8');
     }

@@ -178,12 +178,12 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder} from '@angular/forms';
 // tslint:disable-next-line:max-line-length
 import {
-    ConfiguracionDisabledInterfaz, 
-    encerarFormBuilder, 
-    generarCampos, 
-    generarEmiteEmpezoTipear, 
-    generarMensajesFormGroup, 
-    establecerCamposDisabled, 
+    ConfiguracionDisabledInterfaz,
+    encerarFormBuilder,
+    generarCampos,
+    generarEmiteEmpezoTipear,
+    generarMensajesFormGroup,
+    establecerCamposDisabled,
     NO_EXISTEN_REGISTROS
 } from '@manticore-labs/ng-api';${opciones.toaster ? "\nimport {ToasterService} from 'angular2-toaster';" : ""}
 import {${nombreClase}} from './${nombreClaseDash}';
@@ -223,7 +223,7 @@ export class ${nombreClase}FormularioComponent implements OnInit {
     mensajeToaster = '';
 
     objetoVariablesGlobales: ObjetoVariablesGlobales${nombreClase} = {
-        // llenar con objetos variables globales
+// llenar con objetos variables globales
     };
 
     constructor(private _formBuilder: FormBuilder,
