@@ -40,8 +40,8 @@ const OPCIONES = {
     },
     PREFIX: {
         type: String,
-        desc: 'Prefijo de la aplicacion de angular. Ej: --prefix man-lab',
-        default: 'app'
+        desc: 'Prefijo de la aplicacion de angular. Ej: --prefix ml',
+        default: 'ml'
     },
     CLASE_CONTENEDOR_HTML: {
         type: String,
