@@ -12,6 +12,7 @@ export class <%= nombre %>Formulario {
     // contenidoPropiedad - NO BORRAR ESTA LINEA
     configuracionFormBuilder: ConfiguracionFormBuilder;
 
+    // prettier-ignore
     constructor(
         // contenidoConstructor - NO BORRAR ESTA LINEA
     ) {
