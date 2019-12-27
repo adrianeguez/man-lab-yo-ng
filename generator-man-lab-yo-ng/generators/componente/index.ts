@@ -329,16 +329,18 @@ export const CONFIGURACION_${nombreClase.toUpperCase()} = (): ConfiguracionForml
 
         let htmlInicio = `
 <ng-container *transloco="let t; read: '${opciones.nombreModuloInternacionalizacion}'">
-<form novalidate [formGroup]="${nombreClaseCamel}.formGroup">
-    <fieldset class="col-md-12">
-        <div class="row">`;
+    <ng-container *transloco="let m; read: 'formularios.comunes'">
+        <form novalidate [formGroup]="${nombreClaseCamel}.formGroup">
+            <fieldset class="col-md-12">
+                <div class="row">`;
 
-        let campos = '';
+                let campos = '';
 
-        let htmlFin = `
-        </div>
-    </fieldset>
-</form>
+                let htmlFin = `
+                </div>
+            </fieldset>
+        </form>
+    </ng-container>
 </ng-container>`;
 
 
@@ -602,12 +604,12 @@ function generarInputTexto(nombre, nombreCampo, nombreClase, claseContenedor, cl
                                       m(
                                         mensaje,
                                         {
-                                          nombre: t('${nombreClase}.nombre'),
+                                          nombre: t('${nombreCampo}.nombre'),
                                           minLength: ${nombreClase}.mensajesValidacion${nombreCampo}.minlength.valor,
                                           maxLength: ${nombreClase}.mensajesValidacion${nombreCampo}.maxlength.valor,
                                           min: ${nombreClase}.mensajesValidacion${nombreCampo}.min.valor,
                                           max: ${nombreClase}.mensajesValidacion${nombreCampo}.max.valor,
-                                          pattern: ${nombreClase}.mensajesValidacion${nombreCampo}.pattern.pattternMensaje
+                                          patternMensaje: t('${nombreCampo}.patternMensaje')
                                         }
                                       )
                                   }}
@@ -662,12 +664,12 @@ ${contenidoSelect}
                                       m(
                                         mensaje,
                                         {
-                                          nombre: t('${nombreClase}.nombre'),
+                                          nombre: t('${nombreCampo}.nombre'),
                                           minLength: ${nombreClase}.mensajesValidacion${nombreCampo}.minlength.valor,
                                           maxLength: ${nombreClase}.mensajesValidacion${nombreCampo}.maxlength.valor,
                                           min: ${nombreClase}.mensajesValidacion${nombreCampo}.min.valor,
                                           max: ${nombreClase}.mensajesValidacion${nombreCampo}.max.valor,
-                                          pattern: ${nombreClase}.mensajesValidacion${nombreCampo}.pattern.pattternMensaje
+                                          patternMensaje: t('${nombreCampo}.patternMensaje')
                                         }
                                       )
                                   }}
@@ -824,12 +826,12 @@ function generarAutoComplete(nombre, nombreCampo, nombreClase, claseContenedor, 
                                       m(
                                             mensaje,
                                             {
-                                              nombre: t('${nombreClase}.nombre'),
+                                              nombre: t('${nombreCampo}.nombre'),
                                               minLength: ${nombreClase}.mensajesValidacion${nombreCampo}.minlength.valor,
                                               maxLength: ${nombreClase}.mensajesValidacion${nombreCampo}.maxlength.valor,
                                               min: ${nombreClase}.mensajesValidacion${nombreCampo}.min.valor,
                                               max: ${nombreClase}.mensajesValidacion${nombreCampo}.max.valor,
-                                              pattern: ${nombreClase}.mensajesValidacion${nombreCampo}.pattern.pattternMensaje
+                                              patternMensaje: t('${nombreCampo}.patternMensaje')
                                             }
                                       )
                                 }}
