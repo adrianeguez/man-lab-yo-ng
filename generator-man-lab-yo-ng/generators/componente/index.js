@@ -29,8 +29,8 @@ const OPCIONES = {
     },
     PREFIX: {
         type: String,
-        desc: 'Prefijo de la aplicacion de angular. Ej: --prefix man-lab',
-        default: 'app'
+        desc: 'Prefijo de la aplicacion de angular. Ej: --prefix ml',
+        default: 'ml'
     },
     CLASE_CONTENEDOR_HTML: {
         type: String,
@@ -55,6 +55,10 @@ const OPCIONES = {
     CLASE_AUTOCOMPLETE_HTML: {
         type: String,
         desc: 'Clases a aplicar en el campo de autocomplete de primefaces. Ej: --claseAutocomplete "mi-clase personalizada"'
+    },
+    NOMBRE_MODULO_INTERNACIONALIZACION: {
+        type: String,
+        desc: 'El nombre del submodulo en el archivo en.json o es.json. Ej: --nombreModuloInternacionalizacion "submoduloArticulos.moduloGrupo.grupoFormulario"'
     }
 };
 const camelToDash = str => str
@@ -71,6 +75,7 @@ module.exports = class extends Generator {
         this.option('claseInput', OPCIONES.CLASE_INPUT_HTML);
         this.option('claseMensajes', OPCIONES.CLASE_MENSAJES_HTML);
         this.option('claseAutocomplete', OPCIONES.CLASE_AUTOCOMPLETE_HTML);
+        this.option('nombreModuloInternacionalizacion', OPCIONES.NOMBRE_MODULO_INTERNACIONALIZACION);
     }
     async initializing() {
     }
@@ -113,7 +118,8 @@ module.exports = class extends Generator {
             claseLabel: this.options.claseLabel,
             claseInput: this.options.claseInput,
             claseMensajes: this.options.claseMensajes,
-            claseAutocomplete: this.options.claseAutocomplete
+            claseAutocomplete: this.options.claseAutocomplete,
+            nombreModuloInternacionalizacion: this.options.nombreModuloInternacionalizacion,
         };
         // Parseador
         const parser = {
@@ -137,7 +143,6 @@ module.exports = class extends Generator {
         let contenidoCabeceraArchivo = `
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder} from '@angular/forms';
-// tslint:disable-next-line:max-line-length
 import {
     ConfiguracionDisabledInterfaz,
     encerarFormBuilder,
@@ -150,6 +155,8 @@ import {
 import {${nombreClase}} from './${nombreClaseDash}';
 import {${nombreClase}Formulario} from './${nombreClaseDash}-formulario';
 import {debounceTime} from 'rxjs/operators';
+import {CargandoService} from 'man-lab-ng';
+import {TranslocoService} from '@ngneat/transloco';
 // llenar con imports de clases
 `;
         let variablesGlobales = ``;
@@ -181,8 +188,10 @@ export class ${nombreClase}FormularioComponent implements OnInit {
 // llenar con objetos variables globales
     };
 
-    constructor(private _formBuilder: FormBuilder,
-        private _cargandoService: CargandoService,
+    constructor(
+        private readonly _formBuilder: FormBuilder,
+        private readonly _cargandoService: CargandoService,
+        private readonly _translocoService: TranslocoService,
 ${opciones.toaster ? '        private _toasterService: ToasterService,' : ''}
         // Reemplazar con servicios rest
         ) {
@@ -218,12 +227,18 @@ ${opciones.toaster ? '        private _toasterService: ToasterService,' : ''}
                     if (this.${nombreClaseCamel}.formGroup.valid && this.validacionesCampos()) {
 
                         this.${nombreClaseCamel}Valido.emit(generarCampos(this.${nombreClaseCamel}));
-                        ${opciones.toaster ? `this._toasterService.pop('info', 'Valido', '${nombreClase} válida ');` : ""}
+                        ${opciones.toaster ? `this
+                            ._toasterService
+                            .pop(
+                                'info', 
+                                this._translocoService.translate('formularios.comunes.valido'), 
+                                this._translocoService.translate('${opciones.nombreModuloInternacionalizacion}.toasterGeneral')
+                            );` : ""}
 
                     } else {
 
                         if (this.mensajeToaster !== '') {
-                            ${opciones.toaster ? "this._toasterService.pop('warning', 'Cuidado', this.mensajeToaster);" : "console.error('Validacion incorrecta');"}
+                            ${opciones.toaster ? "this._toasterService.pop('warning', this._translocoService.translate('formularios.comunes.cuidado'), this.mensajeToaster);" : "console.error('Validacion incorrecta');"}
                         }
                         this.${nombreClaseCamel}Valido.emit(false);
                     }
@@ -263,6 +278,7 @@ export const CONFIGURACION_${nombreClase.toUpperCase()} = (): ConfiguracionForml
             calculoFormulario: undefined
         },`;
         let htmlInicio = `
+<ng-container *transloco="let t; read: '${opciones.nombreModuloInternacionalizacion}'">
 <form novalidate [formGroup]="${nombreClaseCamel}.formGroup">
     <fieldset class="col-md-12">
         <div class="row">`;
@@ -271,7 +287,7 @@ export const CONFIGURACION_${nombreClase.toUpperCase()} = (): ConfiguracionForml
         </div>
     </fieldset>
 </form>
-`;
+</ng-container>`;
         propiedadesACrearse
             .forEach((propiedad) => {
             const objeto = encontrarContenidoJSONPorNombre(capitalizeFirstLetter(propiedad.nombre), parser.texto);
@@ -292,7 +308,7 @@ export const CONFIGURACION_${nombreClase.toUpperCase()} = (): ConfiguracionForml
                     variablesGlobales = variablesGlobales + generarVariablesGlobales(objeto.tipoControl.autocompleteBusqueda);
                     serviciosRest = serviciosRest + generarServiciosRest(objeto.tipoControl.autocompleteBusqueda);
                     interfazVariablesGlobales = interfazVariablesGlobales + generarInterfazVariablesGlobales(objeto.tipoControl.autocompleteBusqueda);
-                    busquedaYValidacion = busquedaYValidacion + generarBusquedaYValidacion(objeto.tipoControl.autocompleteBusqueda, nombre, nombreClaseCamel);
+                    busquedaYValidacion = busquedaYValidacion + generarBusquedaYValidacion(objeto.tipoControl.autocompleteBusqueda, nombre, nombreClaseCamel, opciones.nombreModuloInternacionalizacion);
                     validaciones = validaciones + generarValidaciones(objeto.tipoControl.autocompleteBusqueda);
                     importsDeClases = importsDeClases + generarImportsDeClases(objeto.tipoControl.autocompleteBusqueda);
                     contenidoHtml = generarAutoComplete(nombre, nombreCampo, nombreClaseCamel, opciones.claseContenedor, opciones.claseLabel, opciones.claseAutocomplete, opciones.claseMensajes, objeto.tipoControl.autocompleteBusqueda);
@@ -322,7 +338,7 @@ export const CONFIGURACION_${nombreClase.toUpperCase()} = (): ConfiguracionForml
         contenidoArchivo = contenidoArchivo.replace('// Reemplazar con servicios rest', serviciosRest);
         contenidoArchivoOnInitFin = contenidoArchivoOnInitFin.replace('// Reemplazar con validaciones y busqueda de variables globales', busquedaYValidacion);
         contenidoArchivoOnInitFin = contenidoArchivoOnInitFin.replace('// llenar con objetos de validacion globales', interfazVariablesGlobales);
-        contenidoArchivoOnInitFin = contenidoArchivoOnInitFin.replace('// Aqui use para otras validaciones', validaciones);
+        contenidoArchivoOnInitFin = contenidoArchivoOnInitFin.replace('; // Aqui use para otras validaciones', validaciones + ';');
         const contenidoCompleto = contenidoCabeceraArchivo
             + contenidoArchivo
             + constructorFormulario
@@ -426,27 +442,48 @@ function generarInputTexto(nombre, nombreCampo, nombreClase, claseContenedor, cl
             <!--${nombre}-->
             <div class="col-sm-6 ${claseContenedor}" *ngIf="!configuracionDisabled.${nombreCampo}.hidden">
                 <div class="row">
-                    <label class="col-sm-4 ${claseLabel}" [for]="${nombreClase}.mensajesValidacion${nombreCampo}.nombreInput">{{
-                        ${nombreClase}.mensajesValidacion${nombreCampo}.nombreAPresentarse }}</label>
+                    <label class="col-sm-4 ${claseLabel}" [for]="${nombreClase}.mensajesValidacion${nombreCampo}.nombreInput">
+                        {{
+                            t('${nombre}.' + ${nombreClase}.mensajesValidacion${nombreCampo}.nombreInput)
+                        }}
+                        </label>
                     <div class="col-sm-8">
                         <input type="${opcionesCampo.tipoControl.tipoCampoHtml}"
                                 class="${claseInput}"
                                 [id]="${nombreClase}.mensajesValidacion${nombreCampo}.nombreInput"
                                 [name]="${nombreClase}.mensajesValidacion${nombreCampo}.nombreInput"
                                 [formControlName]="${nombreClase}.mensajesValidacion${nombreCampo}.nombreInput"
-                                [placeholder]="${nombreClase}.mensajesValidacion${nombreCampo}.tooltip"
-                                [title]="${nombreClase}.mensajesValidacion${nombreCampo}.title"
+                                [placeholder]="t('${nombre}.' + ${nombreClase}.mensajesValidacion${nombreCampo}.tooltip)"
+                                [title]="t('${nombre}.' + ${nombreClase}.mensajesValidacion${nombreCampo}.title)"
                                 aria-describedby="${nombreClase}${nombreCampo}Ayuda"
                                 ${opcionesCampo.mascara && opcionesCampo.mascaraCurrency === 'false' ? '' : `[textMask]="${nombreClase}.mensajesValidacion${nombreCampo}.mask"`}
                                 ${opcionesCampo.mascaraCurrency === 'true' ? `currencyMask\n                                [options]="${nombreClase}.mensajesValidacion${nombreCampo}.mask"` : ''}
                         >
-                        <small id="${nombreClase}${nombreCampo}Ayuda" class="form-text text-muted">{{${nombreClase}.mensajesValidacion${nombreCampo}.title}}.</small>
+                        <small id="${nombreClase}${nombreCampo}Ayuda" class="form-text text-muted">
+                        {{
+                            t('${nombre}.' + ${nombreClase}.mensajesValidacion${nombreCampo}.title)
+                        }}
+                        .</small>
                     </div>
                     <div class="col-sm-12">
 
                         <div class="${claseMensajes}" role="alert"
                             *ngIf="${nombreClase}.mensajesValidacion${nombreCampo}.mensajes.length>0">
-                            <div *ngFor="let mensaje of ${nombreClase}.mensajesValidacion${nombreCampo}.mensajes">{{ mensaje }}</div>
+                            <div *ngFor="let mensaje of ${nombreClase}.mensajesValidacion${nombreCampo}.mensajes">
+                                  {{
+                                      m(
+                                        mensaje,
+                                        {
+                                          nombre: t('${nombreClase}.nombre'),
+                                          minLength: ${nombreClase}.mensajesValidacion${nombreCampo}.minlength.valor,
+                                          maxLength: ${nombreClase}.mensajesValidacion${nombreCampo}.maxlength.valor,
+                                          min: ${nombreClase}.mensajesValidacion${nombreCampo}.min.valor,
+                                          max: ${nombreClase}.mensajesValidacion${nombreCampo}.max.valor,
+                                          pattern: ${nombreClase}.mensajesValidacion${nombreCampo}.pattern.pattternMensaje
+                                        }
+                                      )
+                                  }}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -458,27 +495,52 @@ function generarInputBooleano(nombre, nombreCampo, nombreClase, claseContenedor,
     let contenidoSelect = '';
     arregloDeOpciones
         .forEach((opcion) => {
-        contenidoSelect = contenidoSelect + `                            <option value="${opcion}">${opcion}</option>\n`;
+        contenidoSelect = contenidoSelect + `                            <option value="${opcion}"> {{ t('${nombre}.opciones.' + ${opcion}) }}</option>\n`;
     });
     return `
             <!--${nombre}-->
             <div class="col-sm-6 ${claseContenedor}" *ngIf="!configuracionDisabled.${nombreCampo}.hidden">
                 <div class="row">
-                    <label class="col-sm-4 ${claseLabel}" [for]="${nombreClase}.mensajesValidacion${nombreCampo}.nombreInput">{{
-                    ${nombreClase}.mensajesValidacion${nombreCampo}.nombreAPresentarse }}</label>
+                    <label class="col-sm-4 ${claseLabel}" [for]="${nombreClase}.mensajesValidacion${nombreCampo}.nombreInput">
+                        {{
+                            t('${nombre}.' + ${nombreClase}.mensajesValidacion${nombreCampo}.nombreInput) 
+                        }}
+                    </label>
                     <div class="col-sm-8">
-                        <select class="${claseInput}" [name]="${nombreClase}.mensajesValidacion${nombreCampo}.nombreInput"
+                        <select class="${claseInput}" 
+                                [name]="${nombreClase}.mensajesValidacion${nombreCampo}.nombreInput"
                                 [id]="${nombreClase}.mensajesValidacion${nombreCampo}.nombreInput"
+                                [placeholder]="t('${nombre}.' + ${nombreClase}.mensajesValidacion${nombreCampo}.tooltip)"
+                                [title]="t('${nombre}.' + ${nombreClase}.mensajesValidacion${nombreCampo}.title)"
                                 [formControlName]="${nombreClase}.mensajesValidacion${nombreCampo}.nombreInput"
                         >
 
 ${contenidoSelect}
                         </select>
+                        <small id="${nombreClase}${nombreCampo}Ayuda" class="form-text text-muted">
+                            {{
+                                t('${nombre}.' + ${nombreClase}.mensajesValidacion${nombreCampo}.title)
+                            }}
+                        .</small>
                     </div>
                     <div class="col-sm-12">
                         <div class="${claseMensajes}" role="alert"
                             *ngIf="${nombreClase}.mensajesValidacion${nombreCampo}.mensajes.length>0">
-                            <div *ngFor="let mensaje of ${nombreClase}.mensajesValidacion${nombreCampo}.mensajes">{{ mensaje }}</div>
+                            <div *ngFor="let mensaje of ${nombreClase}.mensajesValidacion${nombreCampo}.mensajes">
+                                {{
+                                      m(
+                                        mensaje,
+                                        {
+                                          nombre: t('${nombreClase}.nombre'),
+                                          minLength: ${nombreClase}.mensajesValidacion${nombreCampo}.minlength.valor,
+                                          maxLength: ${nombreClase}.mensajesValidacion${nombreCampo}.maxlength.valor,
+                                          min: ${nombreClase}.mensajesValidacion${nombreCampo}.min.valor,
+                                          max: ${nombreClase}.mensajesValidacion${nombreCampo}.max.valor,
+                                          pattern: ${nombreClase}.mensajesValidacion${nombreCampo}.pattern.pattternMensaje
+                                        }
+                                      )
+                                  }}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -513,22 +575,24 @@ function generarValidaciones(opcionesAutocomplete) {
     const nombreEnMayusculas = arregloDeOpciones[0];
     return `&& this.validar${nombreEnMayusculas}() `;
 }
-function generarBusquedaYValidacion(opcionesAutocomplete, nombreCampoCamelCase, nombreClaseCamel) {
+function generarBusquedaYValidacion(opcionesAutocomplete, nombreCampoCamelCase, nombreClaseCamel, nombreModuloInternacionalizacion) {
     const arregloDeOpciones = opcionesAutocomplete.split(',');
     const nombreEnMayusculas = arregloDeOpciones[0];
     const nombreEntidadEnCamel = lowerFirstLetter(nombreEnMayusculas);
     return `
     validar${nombreEnMayusculas}() {
-        const ${nombreCampoCamelCase}ValorActual = this.${nombreClaseCamel}.formGroup.get('${nombreCampoCamelCase}').value.id;
-        let ${nombreEntidadEnCamel}Encontrado = this.objetoVariablesGlobales.${nombreEntidadEnCamel}s.find((registro) => registro.id === ${nombreCampoCamelCase}ValorActual);
-        if (typeof this.${nombreClaseCamel}.id !== 'object') {
-            ${nombreEntidadEnCamel}Encontrado = {};
-        }
-        if (${nombreEntidadEnCamel}Encontrado) {
-          return true;
-        } else {
-          this.mensajeToaster = 'Seleccione un ${nombreCampoCamelCase} válido';
-          return false;
+        const valorCampo = this.${nombreClaseCamel}.formGroup.get('${nombreCampoCamelCase}').value;
+        if (valorCampo !== null || valorCampo !== undefined) {
+            const ${nombreCampoCamelCase}ValorActual = valorCampo.id;
+            let ${nombreEntidadEnCamel}Encontrado = this.objetoVariablesGlobales.${nombreEntidadEnCamel}s.find((registro) => registro.id === ${nombreCampoCamelCase}ValorActual);
+            if (${nombreEntidadEnCamel}Encontrado || typeof ${nombreCampoCamelCase}ValorActual === 'number' || typeof valorCampo === 'object') {
+              return true;
+            } else {
+              this.mensajeToaster = this
+                    ._translocoService
+                    .translate('${nombreModuloInternacionalizacion}.${nombreCampoCamelCase}.toaster');
+              return false;
+            }
         }
       }
     
@@ -556,7 +620,13 @@ function generarBusquedaYValidacion(opcionesAutocomplete, nombreCampoCamelCase, 
             error => {
               this._cargandoService.deshabilitarCargando();
               console.error(error);
-              this._toasterService.pop('error', 'ERROR', 'Revisa tu conexion o intentalo mas tarde');
+              this._toasterService.pop(
+                    'error', 
+                    this._translocoService
+                        .translate('errores.errorTitulo'), 
+                    this._translocoService
+                        .translate('errores.errorServidor'), 
+              );
               // Manejar errores
             }
           );
@@ -571,30 +641,52 @@ function generarAutoComplete(nombre, nombreCampo, nombreClase, claseContenedor, 
             <!--${nombre}-->
             <div class="col-sm-6 ${claseContenedor}" *ngIf="!configuracionDisabled.${nombreCampo}.hidden">
                 <div class="row">
-                    <label class="col-sm-4 ${claseLabel}" [for]="${nombreClase}.mensajesValidacion${nombreCampo}.nombreInput">{{
-                        ${nombreClase}.mensajesValidacion${nombreCampo}.nombreAPresentarse }}</label>
+                    <label class="col-sm-4 ${claseLabel}" [for]="${nombreClase}.mensajesValidacion${nombreCampo}.nombreInput">
+                    {{      
+                            t('${nombre}.' + ${nombreClase}.mensajesValidacion${nombreCampo}.nombreInput)
+                    }}
+                    </label>
                     <div class="col-sm-8">
                         <p-autoComplete
                             [inputId]="${nombreClase}.mensajesValidacion${nombreCampo}.nombreInput"
                             inputStyleClass="${claseAutoComplete}"
                             autoHighlight="true"
                             [dropdown]="true"
-                            [emptyMessage]="NO_EXISTEN_REGISTROS"
+                            [emptyMessage]="t('formularios.comunes.autocompleteSinRegistros')"
                             [formControlName]="${nombreClase}.mensajesValidacion${nombreCampo}.nombreInput"
                             [suggestions]="objetoVariablesGlobales.${nombre}s"
                             (completeMethod)="buscar${nombreEntidad}s($event)"
-                            [placeholder]="${nombreClase}.mensajesValidacion${nombreCampo}.tooltip"
+                            [placeholder]="t('${nombre}.' + ${nombreClase}.mensajesValidacion${nombreCampo}.tooltip)"
                             delay="1000"
                             field="${nombreAtributo}">
                                 <ng-template let-${nombre} pTemplate="item">
                                     {{ ${nombre} | json }}
                                 </ng-template>
                         </p-autoComplete>
+                        <small id="${nombreClase}${nombreCampo}Ayuda" class="form-text text-muted">
+                        {{
+                            t('${nombre}.' + ${nombreClase}.mensajesValidacion${nombreCampo}.title)
+                        }}
+                        .</small>
                     </div>
                     <div class="col-sm-12">
                         <div class="${claseMensajes}" role="alert"
                             *ngIf="${nombreClase}.mensajesValidacion${nombreCampo}.mensajes.length>0">
-                            <div *ngFor="let mensaje of ${nombreClase}.mensajesValidacion${nombreCampo}.mensajes">{{ mensaje }}</div>
+                            <div *ngFor="let mensaje of ${nombreClase}.mensajesValidacion${nombreCampo}.mensajes">
+                                {{
+                                      m(
+                                            mensaje,
+                                            {
+                                              nombre: t('${nombreClase}.nombre'),
+                                              minLength: ${nombreClase}.mensajesValidacion${nombreCampo}.minlength.valor,
+                                              maxLength: ${nombreClase}.mensajesValidacion${nombreCampo}.maxlength.valor,
+                                              min: ${nombreClase}.mensajesValidacion${nombreCampo}.min.valor,
+                                              max: ${nombreClase}.mensajesValidacion${nombreCampo}.max.valor,
+                                              pattern: ${nombreClase}.mensajesValidacion${nombreCampo}.pattern.pattternMensaje
+                                            }
+                                      )
+                                }}
+                            </div>
                         </div>
                     </div>
                 </div>
