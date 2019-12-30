@@ -643,7 +643,6 @@ function generarInputBooleano(nombre, nombreCampo, nombreClase, claseContenedor,
                         <select class="${claseInput}" 
                                 [name]="${nombreClase}.mensajesValidacion${nombreCampo}.nombreInput"
                                 [id]="${nombreClase}.mensajesValidacion${nombreCampo}.nombreInput"
-                                [placeholder]="t('${nombre}.' + ${nombreClase}.mensajesValidacion${nombreCampo}.tooltip)"
                                 [title]="t('${nombre}.' + ${nombreClase}.mensajesValidacion${nombreCampo}.title)"
                                 [formControlName]="${nombreClase}.mensajesValidacion${nombreCampo}.nombreInput"
                         >

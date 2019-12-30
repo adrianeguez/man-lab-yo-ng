@@ -59,7 +59,6 @@ export class OperarioFormularioComponent implements OnInit {
         this.operario = new OperarioFormulario(
              this.configuracionDisabled.ContactoEmpresa.valor,
              this.configuracionDisabled.Nombres.valor,
-             this.configuracionDisabled.Apellidos.valor,
         );
 
         // Empieza la construccion del formulario - No tocar estas lineas
@@ -182,7 +181,6 @@ export interface ConfiguracionFormluarioOperario {
   Id?: ConfiguracionDisabledInterfaz;
   ContactoEmpresa?: ConfiguracionDisabledInterfaz;
   Nombres?: ConfiguracionDisabledInterfaz;
-  Apellidos?: ConfiguracionDisabledInterfaz;
 }
 
 export const CONFIGURACION_OPERARIO = (): ConfiguracionFormluarioOperario => {
@@ -201,13 +199,6 @@ export const CONFIGURACION_OPERARIO = (): ConfiguracionFormluarioOperario => {
         },
 
         Nombres: {
-            valor: null,
-            disabled: false,
-            hidden: false,
-            calculoFormulario: undefined
-        },
-
-        Apellidos: {
             valor: null,
             disabled: false,
             hidden: false,
