@@ -103,6 +103,11 @@ const OPCIONES = {
     AUTOCOMPLETE_BUSQUEDA_NOMBRE: {
         type: String,
         desc: 'Definir el nombre de la entidad a consultarse en el autocomplete y el campo a mostrarse separado por una coma. Ej: --autocompleteBusqueda  "Usuario,apellido"'
+    },
+    NO_ES_INTERNACIONALIZADO: {
+        type: Boolean,
+        default: false,
+        desc: 'Si este formulario no es internacionalizado entonces cambiar a falso. Por defecto es internacionalizado. Ej: --noEsInternacionalizado (para true).'
     }
 };
 
@@ -135,6 +140,7 @@ module.exports = class extends Generator {
         this.option('opcionesSelect', OPCIONES.OPCIONES_SELECT_CONTROL);
         this.option('autocompleteBusqueda', OPCIONES.AUTOCOMPLETE_BUSQUEDA_NOMBRE);
         this.option('mascaraCurrency', OPCIONES.MASCARA_CURRENCY);
+        this.option('noEsInternacionalizado', OPCIONES.NO_ES_INTERNACIONALIZADO);
     }
 
     initializing() {
@@ -203,7 +209,8 @@ module.exports = class extends Generator {
             tipoControl: this.options.tipoControl,
             opcionesSelect: this.options.opcionesSelect,
             autocompleteBusqueda: this.options.autocompleteBusqueda,
-            mascaraCurrency: this.options.mascaraCurrency
+            mascaraCurrency: this.options.mascaraCurrency,
+            noEsInternacionalizado: this.options.noEsInternacionalizado,
         };
         if (opciones.tipoControl === 'autocomplete' && !opciones.autocompleteBusqueda) {
             throw new Error('Debe de anadir la opcion --autocompleteBusqueda "Entidad,campo", para documentacion escribir yo nombre-gerenador:metodo --help');
@@ -249,21 +256,23 @@ module.exports = class extends Generator {
             reemplazableContenidoFuncion: '// contenidoFuncion - NO BORRAR ESTA LINEA',
             contenidoFuncion: function () {
                 const nombreSeparadoPorEspacios = separateUpperCaseBySpace(nombreCampo);
+
+
                 return `   private encerarConfiguracionFormBuilder${nombreCampo}() {
 
         // empiezaArgumentos${nombreCampo} - NO BORRAR ESTA LINEA
         const argumentos: any = {
             "required": ${opciones.required ? 'true' : 'false'},
             "email": ${opciones.email ? 'true' : 'false'},
-            "nombre": "nombre",
-            "nombreAPresentarse": "nombre",
-            "ejemplo": "ejemplo",
-            "tooltip": "ayuda",
+            "nombre": "${opciones.noEsInternacionalizado ? nombreCampoCamel : "nombre"}",
+            "nombreAPresentarse": "${opciones.noEsInternacionalizado ? (opciones.nombreAPresentarse ? opciones.nombreAPresentarse : nombreSeparadoPorEspacios) : "nombre"}",
+            "ejemplo": "${opciones.noEsInternacionalizado ? ('EJ: ' + opciones.ejemplo ? opciones.ejemplo : nombreSeparadoPorEspacios) : "ejemplo"}",
+            "tooltip":  "${opciones.noEsInternacionalizado ? (opciones.tooltip ? opciones.tooltip : 'Ingrese ' + nombreSeparadoPorEspacios) : "ayuda"}",
             "minLength": ${opciones.minLength ? opciones.minLength : 'false'},
             "maxLength": ${opciones.maxLength ? opciones.maxLength : 'false'},
             "min": ${opciones.min ? opciones.min : 'false'},
             "max": ${opciones.max ? opciones.max : 'false'},
-            "patternMensaje": "patternMensaje" ,
+            "patternMensaje": ${opciones.noEsInternacionalizado ? (opciones.patternMensaje ? '"' + opciones.patternMensaje + '"' : '"Error en ' + nombreSeparadoPorEspacios + '"') : '"patternMensaje"'},
             "tipoControl": {
                 "tipoCampoHtml": "${opciones.tipoCampoHtml}",
                 "tipo": "${opciones.tipoControl}"${opciones.tipoControl === 'select-many' ? `,\n                "opcionesSelect": "${opciones.opcionesSelect}"` : ''}${opciones.tipoControl === 'autocomplete' ? `,\n                "autocompleteBusqueda": "${opciones.autocompleteBusqueda}"` : ''}
@@ -437,8 +446,7 @@ function separateUpperCaseBySpace(string) {
     indices.forEach(
         (indice) => {
             if (indice === 0) {
-            }
-            else {
+            } else {
                 const posicionInicial = indice + contador;
                 const posicionFinal = posicionInicial + 1;
                 let contenidoAReemplazar = string.slice(posicionInicial, posicionFinal);
@@ -453,3 +461,5 @@ function separateUpperCaseBySpace(string) {
     );
     return string;
 }
+
+
