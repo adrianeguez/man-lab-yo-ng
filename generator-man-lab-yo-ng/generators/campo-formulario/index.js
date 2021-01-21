@@ -255,15 +255,15 @@ module.exports = class extends Generator {
         const argumentos: any = {
             "required": ${opciones.required ? 'true' : 'false'},
             "email": ${opciones.email ? 'true' : 'false'},
-            "nombre": "${nombreCampoCamel}",
-            "nombreAPresentarse": "${opciones.nombreAPresentarse ? opciones.nombreAPresentarse : nombreSeparadoPorEspacios}",
-            "ejemplo": "EJ: ${opciones.ejemplo ? opciones.ejemplo : nombreSeparadoPorEspacios}",
-            "tooltip": "${opciones.tooltip ? opciones.tooltip : 'Ingrese ' + nombreSeparadoPorEspacios}",
+            "nombre": "nombre",
+            "nombreAPresentarse": "nombre",
+            "ejemplo": "ejemplo",
+            "tooltip": "ayuda",
             "minLength": ${opciones.minLength ? opciones.minLength : 'false'},
             "maxLength": ${opciones.maxLength ? opciones.maxLength : 'false'},
             "min": ${opciones.min ? opciones.min : 'false'},
             "max": ${opciones.max ? opciones.max : 'false'},
-            "patternMensaje": ${opciones.patternMensaje ? '"' + opciones.patternMensaje + '"' : '"Error en ' + nombreSeparadoPorEspacios + '"'},
+            "patternMensaje": "patternMensaje" ,
             "tipoControl": {
                 "tipoCampoHtml": "${opciones.tipoCampoHtml}",
                 "tipo": "${opciones.tipoControl}"${opciones.tipoControl === 'select-many' ? `,\n                "opcionesSelect": "${opciones.opcionesSelect}"` : ''}${opciones.tipoControl === 'autocomplete' ? `,\n                "autocompleteBusqueda": "${opciones.autocompleteBusqueda}"` : ''}
