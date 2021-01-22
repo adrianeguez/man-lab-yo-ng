@@ -8,9 +8,9 @@ import {
 } from '@manticore-labs/ng-api';
 
 export class <%= nombre %>Formulario {
-    formGroup: FormGroup;
+    formGroup: FormGroup = new FormGroup({});
     // contenidoPropiedad - NO BORRAR ESTA LINEA
-    configuracionFormBuilder: ConfiguracionFormBuilder;
+    configuracionFormBuilder: ConfiguracionFormBuilder | any = {};
 
     // prettier-ignore
     constructor(

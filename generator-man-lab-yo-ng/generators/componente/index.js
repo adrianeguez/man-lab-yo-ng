@@ -179,9 +179,9 @@ export class ${nombreClase}FormularioComponent implements OnInit {
 
     @Output() empezoATipear: EventEmitter<boolean> = new EventEmitter();
 
-    @Input() configuracionDisabled: ConfiguracionFormluario${nombreClase};
+    @Input() configuracionDisabled: ConfiguracionFormluario${nombreClase} | any = {};
 
-    ${nombreClaseCamel}: ${nombreClase}Formulario;
+    ${nombreClaseCamel}?: ${nombreClase}Formulario | any = undefined;
 
     NO_EXISTEN_REGISTROS = NO_EXISTEN_REGISTROS;
 
@@ -204,7 +204,7 @@ ${opciones.toaster ? '        private _toasterService: ToasterService,' : ''}
     ngOnInit() {
 `;
         let contenidoArchivoOnInitFin = `
-
+        if(this.${nombreClaseCamel}) {
         // Empieza la construccion del formulario - No tocar estas lineas
 
         establecerCamposDisabled(this.configuracionDisabled, this.${nombreClaseCamel});
@@ -221,34 +221,36 @@ ${opciones.toaster ? '        private _toasterService: ToasterService,' : ''}
                 debounceTime(1000)
             )
             .subscribe(
-                camposValidados => {
-
-                    console.log(this.${nombreClaseCamel}.formGroup);
-
-                    this.mensajeToaster = '';
-
-                    if (this.${nombreClaseCamel}.formGroup.valid && this.validacionesCampos()) {
-
-                        this.${nombreClaseCamel}Valido.emit(generarCampos(this.${nombreClaseCamel}));
-                        ${(opciones.toaster && opciones.nombreModuloInternacionalizacion) ? `this
-                                ._toasterService
-                                .pop(
-                                    'info', 
-                                    this._translocoService.translate('formularios.comunes.valido'), 
-                                    this._translocoService.translate('${opciones.nombreModuloInternacionalizacion}.toasterGeneral')
-                                    );` : opciones.toaster ? (` this._toasterService.pop('info', 'Valido', '${nombreClase} válida');`) : ''}
-        
-                            } else {
-        
-                                if (this.mensajeToaster !== '') {
-                                
-                                ${(opciones.toaster && opciones.nombreModuloInternacionalizacion) ? ('this._toasterService.pop(\'warning\', this._translocoService.translate(\'formularios.comunes.cuidado\'), this.mensajeToaster);') : opciones.toaster ? ('this._toasterService.pop(\'warning\', \'Cuidado\', this.mensajeToaster);') : ('console.error(\'Validacion incorrecta\');')}
-                                
-                                }
-                                this.${nombreClaseCamel}Valido.emit(false);
+                (camposValidados:any) => {
+                    if(this.${nombreClaseCamel}) {
+                        console.log(this.${nombreClaseCamel}.formGroup);
+    
+                        this.mensajeToaster = '';
+    
+                        if (this.${nombreClaseCamel}.formGroup.valid && this.validacionesCampos()) {
+    
+                            this.${nombreClaseCamel}Valido.emit(generarCampos(this.${nombreClaseCamel}));
+                            ${(opciones.toaster && opciones.nombreModuloInternacionalizacion) ? `this
+                                    ._toasterService
+                                    .pop(
+                                        'info', 
+                                        this._translocoService.translate('formularios.comunes.valido'), 
+                                        this._translocoService.translate('${opciones.nombreModuloInternacionalizacion}.toasterGeneral')
+                                        );` : opciones.toaster ? (` this._toasterService.pop('info', 'Valido', '${nombreClase} válida');`) : ''}
+            
+                                } else {
+            
+                                    if (this.mensajeToaster !== '') {
+                                    
+                                    ${(opciones.toaster && opciones.nombreModuloInternacionalizacion) ? ('this._toasterService.pop(\'warning\', this._translocoService.translate(\'formularios.comunes.cuidado\'), this.mensajeToaster);') : opciones.toaster ? ('this._toasterService.pop(\'warning\', \'Cuidado\', this.mensajeToaster);') : ('console.error(\'Validacion incorrecta\');')}
+                                    
+                                    }
+                                    this.${nombreClaseCamel}Valido.emit(false);
+                        }
                     }
                 }
             );
+        }
     }
 
     validacionesCampos() {
@@ -268,7 +270,7 @@ interface ObjetoVariablesGlobales${nombreClase} {
 // llenar con objetos de validacion globales
 }
 `;
-        let constructorFormulario = `\n        this.${nombreClaseCamel} = new ${nombreClase}Formulario(\n`;
+        let constructorFormulario = `\nif(this.configuracionDisabled){ \n        this.${nombreClaseCamel} = new ${nombreClase}Formulario(\n`;
         let interfaceConfiguracion = `
 export interface ConfiguracionFormluario${nombreClase} {
   Id?: ConfiguracionDisabledInterfaz;\n`;
@@ -283,6 +285,8 @@ export const CONFIGURACION_${nombreClase.toUpperCase()} = (): ConfiguracionForml
             calculoFormulario: undefined
         },`;
         let htmlInicio = `
+
+<div *ngIf="${nombreClaseCamel} && configuracionDisabled">
 ${opciones.nombreModuloInternacionalizacion ? (`<ng-container *transloco="let t; read: '${opciones.nombreModuloInternacionalizacion}'">
     <ng-container *transloco="let m; read: 'formularios.comunes'">`) : ('')}
         <form novalidate [formGroup]="${nombreClaseCamel}.formGroup">
@@ -294,7 +298,10 @@ ${opciones.nombreModuloInternacionalizacion ? (`<ng-container *transloco="let t;
             </fieldset>
         </form>
         ${opciones.nombreModuloInternacionalizacion ? (`    </ng-container>
-</ng-container>`) : ('')}`;
+</ng-container>`) : ('')} 
+
+</div>
+`;
         propiedadesACrearse
             .forEach((propiedad) => {
             const objeto = encontrarContenidoJSONPorNombre(capitalizeFirstLetter(propiedad.nombre), parser.texto);
@@ -334,7 +341,7 @@ ${opciones.nombreModuloInternacionalizacion ? (`<ng-container *transloco="let t;
             calculoFormulario: undefined
         },\n`;
         });
-        constructorFormulario = constructorFormulario + '        );';
+        constructorFormulario = constructorFormulario + '        );\n}';
         interfaceConfiguracion = interfaceConfiguracion + '}';
         interfaceConfiguracionFuncion = interfaceConfiguracionFuncion + `
     };

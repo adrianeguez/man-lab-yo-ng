@@ -239,7 +239,7 @@ module.exports = class extends Generator {
             espacioDeIndentacionPropiedad: '    ',
             reemplazablePropiedad: '// contenidoPropiedad - NO BORRAR ESTA LINEA',
             propiedadMensajeValidacion: function () {
-                return `mensajesValidacion${nombreCampo}: MensajesValidacion${nombreClase};\n`
+                return `mensajesValidacion${nombreCampo}: MensajesValidacion${nombreClase} | any = {};\n`
                     + this.espacioDeIndentacionPropiedad + this.reemplazablePropiedad;
             },
 
