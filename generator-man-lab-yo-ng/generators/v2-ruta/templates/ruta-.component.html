@@ -171,19 +171,19 @@
                 <%= nombreCamel %>
                 )"
                   ></p-button>
-                  <div *ngFor="let opcion of opciones">
-                    <br>
-                    <p-button
-                      [label]="opcion.nombre"
-                      [disabled]="!<%= nombreCamel %>.habilitado"
-                      icon="pi pi-angle-double-right"
-                      styleClass="p-button-help"
-                      (click)="_sRuta<%= nombreMayuscula %>Service.navegar(
-                  _router,
-                  opcion.ruta(<%= nombreCamel %>.<%= id %>)
-                )"
-                    ></p-button>
-                  </div>
+<!--                  <div *ngFor="let opcion of opciones">-->
+<!--                    <br>-->
+<!--                    <p-button-->
+<!--                      [label]="opcion.nombre"-->
+<!--                      [disabled]="!<%= nombreCamel %>.habilitado"-->
+<!--                      icon="pi pi-angle-double-right"-->
+<!--                      styleClass="p-button-help"-->
+<!--                      (click)="_sRuta<%= nombreMayuscula %>Service.navegar(-->
+<!--                  _router,-->
+<!--                  opcion.ruta(<%= nombreCamel %>.<%= id %>)-->
+<!--                )"-->
+<!--                    ></p-button>-->
+<!--                  </div>-->
                 </div>
               </div>
             </td>
@@ -205,18 +205,18 @@
 <!--                    *ngFor="let valor of _sRuta<%= nombreMayuscula %>Service.generarObjeto(%= nombreCamel %>)">-->
 <!--                  <td><strong>{{valor.llave}}</strong></td>-->
 <!--                  <td>-->
-<!--                     <!--  CAMPOS QUE USEN PIPES      -->    -->
+<!--                    &lt;!&ndash;  CAMPOS QUE USEN PIPES      &ndash;&gt   -->
 <!--                <span *ngIf="valor.nombreCampo === 'algunCampoQueQuireaUsarUnPipe'">-->
 <!--                {{valor.valor | currency}}-->
 <!--                </span>-->
-<!--                     <!-- TODOS LOS DEMAS CAMPOS       -->    -->
+<!--                     &lt;!&ndash; TODOS LOS DEMAS CAMPOS       &ndash;&gt   -->
 <!--                    <span *ngIf="valor.nombreCampo !== 'algunCampoQueQuireaUsarUnPipe'">-->
 <!--                  {{valor.valor}}-->
 <!--                </span>-->
 
 <!--                  </td>-->
 <!--                </tr>-->
-<!--                     <!-- CAMPOS RELACIONADOS      -->    -->
+<!--                     &lt;!&ndash; CAMPOS RELACIONADOS      &ndash;&gt   -->
 <!--                <tr class="p-selectable-row detalle">-->
 <!--                  <td><strong>Campo Relacionado</strong></td>-->
 <!--                  <td>{{<%= nombreCamel %>.campoRelacion.campoNombre}}</td>-->

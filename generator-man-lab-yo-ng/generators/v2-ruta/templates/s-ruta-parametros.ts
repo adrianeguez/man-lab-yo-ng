@@ -1,4 +1,5 @@
 
 export interface SRuta<%= nombreMayuscula %>Parametros extends RutaParametrosComun {
-  // nombreCampo?: string;
+    <%= id %>?: string;
+    // nombreCampo?: string; // Todos los campos deben ser STRING!
 }

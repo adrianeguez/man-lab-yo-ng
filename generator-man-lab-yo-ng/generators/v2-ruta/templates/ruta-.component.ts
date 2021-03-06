@@ -129,10 +129,14 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
       // Transforma objetos a valores, si no hay objetos en la busqueda
       // como un autocomplete o select por ejemplo, entonces dejar vacío.
       const arregloCamposBusquedaConObjeto: ObjetoBusquedaADto[] = [
+        {
+          nombreCampoEnBusqueda: '<%= nombreHabilitado %>',
+          nombreCampoEnDto: '<%= nombreHabilitado %>'
+        },
         // {
-        //   nombreCampoEnBusqueda: 'sisHabilitado',
-        //   nombreCampoEnDto: 'sisHabilitado'
-        // }
+        //   nombreCampoEnBusqueda: 'campoSelectOAutocomplete',
+        //   nombreCampoEnDto: 'nombreCampoSelectOAutocomplete'
+        // },
       ];
       this._sRuta<%= nombreMayuscula %>Service.transformarObjetosBusquedaABusquedaDto(
         arregloCamposBusquedaConObjeto
