@@ -145,7 +145,7 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
     if (campoBusquedaActualizado) {
       this._sRuta<%= nombreMayuscula %>Service
         .setearCamposBusquedaAUndefined(
-          campoVigencia,
+            campoBusquedaActualizado,
           <%= nombreMayuscula %>BusquedaDto
         );
     }

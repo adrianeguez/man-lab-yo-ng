@@ -7,7 +7,7 @@
       <div class="row animate__animated animate__fadeInUp animate__delay-1s">
         <div class="col-md-12">
           <app-ml-contenedor-campos-formulario (todosCamposValidos)="formularioValidoBusqueda($event)"
-                                               (cambioCampo)="cambioCampoBusquda($event)"
+                                               (cambioCampo)="cambioCampoBusqueda($event)"
                                                [vertical]="false"
                                                class="campo-formulario"
                                                tituloFormulario=""
@@ -88,6 +88,8 @@
                           icon="pi pi-plus"
                           class="p-button-success p-mr-2"
                           (click)="botonAceptarModalDisabled = true;"
+                          (click)="_sRuta<%= nombreMayuscula %>Service.formularioEnModalActual = undefined;"
+                          (click)="_sRuta<%= nombreMayuscula %>Service.camposSeleccionadosFormulario = undefined;"
                           (click)="_sRuta<%= nombreMayuscula %>Service.abrirModal(this,undefined)"
                   ></button>
                 </div>
@@ -161,8 +163,10 @@
                     [disabled]="!<%= nombreCamel %>.habilitado"
                     icon="pi pi-pencil"
                     styleClass="p-button-warning"
-                    (onClick)="botonAceptarModalDisabled = true;"
-                    (onClick)="_sRuta<%= nombreMayuscula %>Service.abrirModal(
+                    (click)="botonAceptarModalDisabled = true;"
+                    (click)="_sRuta<%= nombreMayuscula %>Service.formularioEnModalActual = undefined;"
+                    (click)="_sRuta<%= nombreMayuscula %>Service.camposSeleccionadosFormulario = undefined;"
+                    (click)="_sRuta<%= nombreMayuscula %>Service.abrirModal(
                 this,
                 <%= nombreCamel %>
                 )"
@@ -174,7 +178,7 @@
                       [disabled]="!<%= nombreCamel %>.habilitado"
                       icon="pi pi-angle-double-right"
                       styleClass="p-button-help"
-                      (onClick)="_sRuta<%= nombreMayuscula %>Service.navegar(
+                      (click)="_sRuta<%= nombreMayuscula %>Service.navegar(
                   _router,
                   opcion.ruta(<%= nombreCamel %>.<%= id %>)
                 )"

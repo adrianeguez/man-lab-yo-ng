@@ -323,14 +323,14 @@ module.exports = class extends Generator {
             variables
         );
 
-        const templateCN = this.templatePath(TEMPLATES.CAMPO_NOMBRE);
-        const destinoCN = this.destinationPath(`../../formularios/${nombreGuiones}/${nombreGuiones}-campo-texto-nombre.ts`);
-
-        this.fs.copyTpl(
-            templateCN,
-            destinoCN,
-            variables
-        );
+        // const templateCN = this.templatePath(TEMPLATES.CAMPO_NOMBRE);
+        // const destinoCN = this.destinationPath(`../../formularios/${nombreGuiones}/${nombreGuiones}-campo-texto-nombre.ts`);
+        //
+        // this.fs.copyTpl(
+        //     templateCN,
+        //     destinoCN,
+        //     variables
+        // );
 
         const templateFCE = this.templatePath(TEMPLATES.FORMULARIO_CREAR_EDITAR);
         const destinoFCE = this.destinationPath(`../../formularios/${nombreGuiones}/${nombreGuiones}-formulario.ts`);

@@ -23,10 +23,10 @@ export const <%= nombreSoloMayusculas %>_CAMPO_SELECT_HABILITADO: (claseComponen
     select: {
       valoresSelect: [
         {
-        <%= nombreHabilitado %>: 1
+        <%= nombreHabilitado %>: ActivoInactivo.ACTIVO
         },
         {
-        <%= nombreHabilitado %>: 0
+        <%= nombreHabilitado %>: ActivoInactivo.INACTIVO
         },
         {
         <%= nombreHabilitado %>: undefined
@@ -35,15 +35,15 @@ export const <%= nombreSoloMayusculas %>_CAMPO_SELECT_HABILITADO: (claseComponen
       placeholderFiltro: 'Filtre por Activo Ej: A o I',
       mensajeFiltroVacio: 'No se encontró',
       campoFiltrado: '<%= nombreHabilitado %>',
-      fnMostrarEnSelect: (campo: { <%= nombreHabilitado %>: 0 | 1 | undefined }) => {
+      fnMostrarEnSelect: (campo: { <%= nombreHabilitado %>: ActivoInactivo | undefined }) => {
         if (campo.<%= nombreHabilitado %> === undefined) {
           return 'Todos';
         }
-        if (campo.<%= nombreHabilitado %> === 1) {
+        if (campo.<%= nombreHabilitado %> === ActivoInactivo.ACTIVO) {
 
           return 'Activo';
         }
-        if (campo.<%= nombreHabilitado %> === 0) {
+        if (campo.<%= nombreHabilitado %> === ActivoInactivo.INACTIVO) {
 
           return 'Inactivo';
         }

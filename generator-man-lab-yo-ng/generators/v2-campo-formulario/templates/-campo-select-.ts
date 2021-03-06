@@ -1,20 +1,30 @@
+<% if(esFormulario) { %>
+import {Ruta<%= nombreMayuscula %>Component} from '../../ruta/ruta-<%= nombreGuiones %>/ruta-<%= nombreGuiones %>.component';
+import {<%= nombreMayuscula %>Interface} from '../../interfaces/<%= nombreGuiones %>.interface';
+import {<%= nombreMayuscula %>BusquedaDto} from '../../dto/<%= nombreGuiones %>-busqueda.dto';
+<% } else{ %>
+<% } %>
 
 export const <%= nombreSoloMayusculas %>_CAMPO_SELECT_<%= nombreCampoSoloMayusculas %>: (
-    // SOLO USO SI ES FORMULARIO
-    // claseComponente: ModalComponente) => CampoFormulario =
-    // (claseComponente: ModalComponente<Ruta<%= nombreSoloMayusculas %>Component, <%= nombreSoloMayusculas %>Interface, <%= nombreSoloMayusculas %>BusquedaDto>) => {
+    <% if(esFormulario) { %>
+    claseComponente: ModalComponente) => CampoFormulario =
+    (claseComponente: ModalComponente<Ruta<%= nombreMayuscula %>Component, <%= nombreMayuscula %>Interface, <%= nombreMayuscula %>BusquedaDto>) => {
+    <% } else{ %>
     claseComponente: any) => CampoFormulario = (claseComponente: any) => {
+    <% } %>
 
-    // SOLO USO SI ES FORMULARIO
-    // let valorCampo = claseComponente
-    //     .data
-    //     .componente
-    //     ._sRuta<%= nombreSoloMayusculas %>Service
-    //     .setearCampoEnFormulario(
-    //         claseComponente,
-    //         '_sRuta<%= nombreSoloMayusculas %>Service',
-    //         '<%= nombrePrefijo ? nombrePrefijo + nombreCampoMayuscula : nombreCampoCamel %>'
-    //     );
+<% if(esFormulario) { %>
+    const valorCampo = claseComponente
+        .data
+        .componente
+        ._sRuta<%= nombreMayuscula %>Service
+        .setearCampoEnFormulario(
+            claseComponente,
+            '_sRuta<%= nombreMayuscula %>Service',
+            '<%= nombrePrefijo ? nombrePrefijo + nombreCampoMayuscula : nombreCampoCamel %>'
+        );
+    <% } else{ %>
+    <% } %>
 
     // SOLO USO SI ES FORMULARIO && Es campo del que dependen
     // const camposDependienteNoExisten = !claseComponente.data.componente.camposRequeridos.nombreCampo;
@@ -31,9 +41,11 @@ export const <%= nombreSoloMayusculas %>_CAMPO_SELECT_<%= nombreCampoSoloMayuscu
 
   return {
     tipoCampoHtml: 'select',
+      <% if(esFormulario) { %>
+    valorInicial: valorCampo,
+    <% } else{ %>
     valorInicial: '',
-    // SOLO USO SI ES FORMULARIO
-    // valorInicial: valorCampo,
+    <% } %>
     valorActual: '',
     hidden: false,
     // SOLO USO SI ES FORMULARIO && Es campo dependiente
@@ -52,9 +64,11 @@ export const <%= nombreSoloMayusculas %>_CAMPO_SELECT_<%= nombreCampoSoloMayuscu
     ],
     // SOLO USO SI ES FORMULARIO && Es campo dependiente
     // validators,
-    estaValido: false,
-    // SOLO USO SI ES FORMULARIO
-    // estaValido: valorCampo ? true : false,
+<% if(esFormulario) { %>
+    estaValido: valorCampo ? true : false,
+    <% } else{ %>
+    estaValido: true,
+    <% } %>
     disabled: false,
     asyncValidators: null,
     hidden: false,

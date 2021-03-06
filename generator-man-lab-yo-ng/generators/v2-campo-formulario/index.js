@@ -78,6 +78,14 @@ const OPCIONES = {
             desc: 'Nombre de la propiedad para autocomplete. EJ:  NombreRuta NombreCampo autocomplete --nombrePropiedad=campoDeOtraEntidad'
         }
     },
+    ES_FORMULARIO: {
+        nombre: 'esFormulario',
+        configuracion: {
+            type: String,
+            default: undefined,
+            desc: 'Modificar el template si es formulario. EJ:  NombreRuta NombreCampo texto --esFormulario=true'
+        }
+    },
 }
 const TEMPLATES = {
     CAMPO_BUSQUEDA: '-campo--busqueda.ts',
@@ -150,6 +158,7 @@ module.exports = class extends Generator {
         // opciones
         this.option(OPCIONES.NOMBRE_PREFIJO.nombre, OPCIONES.NOMBRE_PREFIJO.configuracion);
         this.option(OPCIONES.NOMBRE_PROPIEDAD.nombre, OPCIONES.NOMBRE_PROPIEDAD.configuracion);
+        this.option(OPCIONES.ES_FORMULARIO.nombre, OPCIONES.ES_FORMULARIO.configuracion);
 
     }
 
@@ -208,6 +217,7 @@ module.exports = class extends Generator {
         // opciones
         const nombrePrefijo = this.options[OPCIONES.NOMBRE_PREFIJO.nombre];
         const nombrePropiedad = this.options[OPCIONES.NOMBRE_PROPIEDAD.nombre];
+        const esFormulario = this.options[OPCIONES.ES_FORMULARIO.nombre];
 
         const variables = {
             nombreMayuscula,
@@ -224,6 +234,7 @@ module.exports = class extends Generator {
             undefinedValor,
             nombrePropiedad,
             nombrePrefijo,
+            esFormulario,
         };
 
 

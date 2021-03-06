@@ -12,7 +12,7 @@ export const <%= nombreSoloMayusculas %>_CAMPO_TEXTO_BUSQUEDA: (claseComponente:
     formulario: {},
     mensajes: MENSAJES_ERROR(claseComponente),
     parametros: {
-      nombreCampo: 'busqueda',
+      nombreCampo: 'Búsqueda',
     },
     estaValido: true,
     hidden: false,
