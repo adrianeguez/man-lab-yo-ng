@@ -57,6 +57,14 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
 
   nombreServicio = '_sRuta<%= nombreMayuscula %>Service';
 
+  // Usar cuando se necesite ocultar campos que dependan de otros:
+
+  // ocultarFormulario = false;
+  // camposRequeridos = {
+  //   nombreCampoDependiendeUno: false,
+  //   nombreCampoDependiendeDos: false,
+  // };
+
   constructor(
     public readonly _sRuta<%= nombreMayuscula %>Service: SRuta<%= nombreMayuscula %>Service,
     private readonly _activatedRoute: ActivatedRoute,

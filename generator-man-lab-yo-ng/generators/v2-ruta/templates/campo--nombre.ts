@@ -3,7 +3,7 @@ import {Ruta<%= nombreMayuscula %>Component} from '../../ruta/ruta-<%= nombreGui
 import {<%= nombreMayuscula %>Interface} from '../../interfaces/<%= nombreGuiones %>.interface';
 import {<%= nombreMayuscula %>BusquedaDto} from '../../dto/<%= nombreGuiones %>-busqueda.dto';
 
-export const CAMPO_NOMBRE: (
+export const <%= nombreSoloMayusculas %>_CAMPO_TEXTO_NOMBRE: (
   claseComponente: ModalComponente) => CampoFormulario =
   (claseComponente: ModalComponente<Ruta<%= nombreMayuscula %>Component, <%= nombreMayuscula %>Interface, <%= nombreMayuscula %>BusquedaDto>) => {
     const valorCampo = claseComponente
@@ -30,30 +30,42 @@ export const CAMPO_NOMBRE: (
     // }
 
     return {
-      componente: claseComponente,
+      tipoCampoHtml: 'text',
+      valorInicial: '',
+      // SOLO USO SI ES FORMULARIO
+      // valorInicial: valorCampo,
+      valorActual: '',
+      hidden: false,
+      // SOLO USO SI ES FORMULARIO && Es campo dependiente
+      // hidden: !claseComponente.data.componente.camposRequeridos.nombreCampo,
+      tamanioColumna: 6,
+      // SOLO USO SI ES FORMULARIO && Es campo del que dependen
+      // tamanioColumna: claseComponente.data.componente.camposRequeridos.nombreCampo ? 6 : 12,
       validators: [
         Validators.required,
         Validators.minLength(10),
         Validators.maxLength(60)
+        // Validators.min(0),
+        // Validators.max(100),
+        // Validators.email,
+        // Validators.pattern()
       ],
+      // SOLO USO SI ES FORMULARIO && Es campo dependiente
+      // validators,
+      estaValido: valorCampo ? true : false,
+      disabled: false,
       asyncValidators: null,
-      valorInicial: valorCampo,
       nombreCampo: 'nombre',
       nombreMostrar: 'Nombre',
       textoAyuda: 'Escriba un nombre.',
       placeholderEjemplo: 'Ej: Nombre ...',
-      formulario: {},
       mensajes: MENSAJES_ERROR(claseComponente),
       parametros: {
         nombreCampo: 'Nombre',
         minlength: 10,
         maxlength: 60,
       },
-      estaValido: valorCampo ? true : false,
-      hidden: false,
-      tipoCampoHtml: 'text',
-      valorActual: '',
-      tamanioColumna: 6,
-      disabled: false
+      formulario: {},
+      componente: claseComponente,
     };
   };

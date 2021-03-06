@@ -1,19 +1,19 @@
 
-export const SERVICIO_LOGISTICO_CAMPO_HABILITADO: (claseComponente: any) => CampoFormulario = (claseComponente: any) => {
+export const SERVICIO_LOGISTICO_CAMPO_SELECT_HABILITADO: (claseComponente: any) => CampoFormulario = (claseComponente: any) => {
   return {
     hidden: false,
     componente: claseComponente,
     validators: [],
     asyncValidators: null,
     valorInicial: '',
-    nombreCampo: 'sisHabilitado',
+    nombreCampo: 'habilitado',
     nombreMostrar: 'Habilitado',
     textoAyuda: 'Filtra por habilitado.',
     placeholderEjemplo: 'Ej: Activo / Inactivo',
     formulario: {},
     mensajes: MENSAJES_ERROR(claseComponente),
     parametros: {
-      nombreCampo: 'sisHabilitado',
+      nombreCampo: 'habilitado',
     },
     estaValido: true,
     tipoCampoHtml: 'select',
@@ -23,33 +23,33 @@ export const SERVICIO_LOGISTICO_CAMPO_HABILITADO: (claseComponente: any) => Camp
     select: {
       valoresSelect: [
         {
-        sisHabilitado: 1
+        habilitado: 1
         },
         {
-        sisHabilitado: 0
+        habilitado: 0
         },
         {
-        sisHabilitado: undefined
+        habilitado: undefined
         },
       ],
       placeholderFiltro: 'Filtre por Activo Ej: A o I',
       mensajeFiltroVacio: 'No se encontró',
-      campoFiltrado: 'sisHabilitado',
-      fnMostrarEnSelect: (campo: { sisHabilitado: 0 | 1 | undefined }) => {
-        if (campo.sisHabilitado === undefined) {
+      campoFiltrado: 'habilitado',
+      fnMostrarEnSelect: (campo: { habilitado: 0 | 1 | undefined }) => {
+        if (campo.habilitado === undefined) {
           return 'Todos';
         }
-        if (campo.sisHabilitado === 1) {
+        if (campo.habilitado === 1) {
 
           return 'Activo';
         }
-        if (campo.sisHabilitado === 0) {
+        if (campo.habilitado === 0) {
 
           return 'Inactivo';
         }
         return '';
       },
-      campoSeleccionado: 'sisHabilitado'
+      campoSeleccionado: 'habilitado'
     }
   };
 };

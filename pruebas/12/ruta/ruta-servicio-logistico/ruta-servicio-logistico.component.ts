@@ -23,13 +23,13 @@ export class RutaServicioLogisticoComponent implements OnInit {
     //   tamanio: '60%' // tamaño en porcentaje de la columna
     // },
     {
-      field: 'sisHabilitado',
+      field: 'habilitado',
       header: 'Habilitado',
       posicion: 'text-left',
       tamanio: '20%'
     },
     {
-      field: 'idSLogisticos',
+      field: 'id',
       header: 'Acciones',
       posicion: 'text-right',
       tamanio: '20%'
@@ -281,7 +281,7 @@ export class RutaServicioLogisticoComponent implements OnInit {
             camposCrear.objetoCrear
           )
           .pipe(
-            this._sRutaServicioLogisticoService.buscarDeNuevo('idSLogisticos')
+            this._sRutaServicioLogisticoService.buscarDeNuevo('id')
           )
           .subscribe(
             (nuevoRegistro) => {
@@ -326,28 +326,28 @@ export class RutaServicioLogisticoComponent implements OnInit {
         camposCrear.objetoCrear,
         arregloPropiedades
       );
-      if (registro.idSLogisticos) {
+      if (registro.id) {
         this._sRutaServicioLogisticoService._cargandoService.habilitarCargando();
         this._sRutaServicioLogisticoService
           ._servicioLogisticoService
           .actualizar(
             camposCrear.objetoCrear,
-            registro.idSLogisticos
+            registro.id
           )
           .pipe(
-            this._sRutaServicioLogisticoService.buscarDeNuevo('idSLogisticos', registro.idSLogisticos)
+            this._sRutaServicioLogisticoService.buscarDeNuevo('id', registro.id)
           )
           .subscribe(
             (registroEditado) => {
               registroEditado.habilitado = registro.habilitado;
               const indice = this._sRutaServicioLogisticoService.arregloDatos
                 .findIndex(
-                  (a: ServicioLogisticoInterface) => a.idSLogisticos === registro.idSLogisticos
+                  (a: ServicioLogisticoInterface) => a.id === registro.id
                 );
               this._sRutaServicioLogisticoService.arregloDatos[indice] = registroEditado;
               const indiceArregloFiltrado = this._sRutaServicioLogisticoService.arregloDatosFiltrado
                 .findIndex(
-                  (a: ServicioLogisticoInterface) => a.idSLogisticos === registro.idSLogisticos
+                  (a: ServicioLogisticoInterface) => a.id === registro.id
                 );
               this._sRutaServicioLogisticoService.arregloDatosFiltrado[indiceArregloFiltrado] = registroEditado;
               this._sRutaServicioLogisticoService.matDialog.closeAll();

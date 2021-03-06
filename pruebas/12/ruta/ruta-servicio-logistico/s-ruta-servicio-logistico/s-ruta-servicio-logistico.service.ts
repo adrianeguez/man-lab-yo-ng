@@ -5,7 +5,7 @@ import {ServicioLogisticoBusquedaDto} from '../../../dto/servicio-logistico-busq
 import {ServicioLogisticoInterface} from '../../../interfaces/servicio-logistico.interface';
 import {ServicioLogisticoService} from '../../../servicios/servicio-logistico/servicio-logistico.service';
 import {MatDialog} from '@angular/material/dialog';
-import {FORMULARIO_SERVICIO_LOGISTICO} from '../../../formularios/servicio-logistico/formulario-servicio-logistico';
+import {SERVICIO_LOGISTICO_FORMULARIO} from '../../../formularios/servicio-logistico/servicio-logistico-formulario';
 import {GRUPOS_FORMULARIO_BUSQUEDA} from './grupos-formulario-busqueda';
 import {GRUPOS_FORMULARIO_CREAR_EDITAR} from './grupos-formulario-crear-editar';
 
@@ -29,7 +29,7 @@ export class SRutaServicioLogisticoService extends RutaComun<SRutaServicioLogist
       _cargandoService,
       _notificacionService,
       matDialog,
-      FORMULARIO_SERVICIO_LOGISTICO,
+      SERVICIO_LOGISTICO_FORMULARIO,
     'Creando ' + nombre,
       'Llene el formulario con los datos de '+ nombre,
       'Actualizando '+ nombre,

@@ -1,8 +1,8 @@
-import {CAMPO_NOMBRE} from './campo-<%= nombreGuiones %>-nombre';
+import {<%= nombreSoloMayusculas %>_CAMPO_TEXTO_NOMBRE} from './<%= nombreGuiones %>-campo-texto-nombre';
 
-export const FORMULARIO_<%= nombreSoloMayusculas %>: (claseComponente: ModalComponente) => CampoFormulario[] =
+export const <%= nombreSoloMayusculas %>_FORMULARIO: (claseComponente: ModalComponente) => CampoFormulario[] =
   (claseComponente: ModalComponente) => {
     return [
-        CAMPO_NOMBRE(claseComponente),
+        <%= nombreSoloMayusculas %>_CAMPO_TEXTO_NOMBRE(claseComponente),
     ];
   };

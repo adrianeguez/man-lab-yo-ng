@@ -261,7 +261,7 @@ module.exports = class extends Generator {
         );
 
         const templateCB = this.templatePath(TEMPLATES.CAMPO_BUSQUEDA);
-        const destinoCB = this.destinationPath(`./busqueda-filtros/busqueda/${nombreGuiones}-campo-busqueda.ts`);
+        const destinoCB = this.destinationPath(`./busqueda-filtros/busqueda/${nombreGuiones}-campo-texto-busqueda.ts`);
 
         this.fs.copyTpl(
             templateCB,
@@ -270,7 +270,7 @@ module.exports = class extends Generator {
         );
 
         const templateCH = this.templatePath(TEMPLATES.CAMPO_HABILITADO);
-        const destinoCH = this.destinationPath(`./busqueda-filtros/busqueda/${nombreGuiones}-campo-habilitado.ts`);
+        const destinoCH = this.destinationPath(`./busqueda-filtros/busqueda/${nombreGuiones}-campo-select-habilitado.ts`);
 
         this.fs.copyTpl(
             templateCH,
@@ -324,7 +324,7 @@ module.exports = class extends Generator {
         );
 
         const templateCN = this.templatePath(TEMPLATES.CAMPO_NOMBRE);
-        const destinoCN = this.destinationPath(`../../formularios/${nombreGuiones}/campo-${nombreGuiones}-nombre.ts`);
+        const destinoCN = this.destinationPath(`../../formularios/${nombreGuiones}/${nombreGuiones}-campo-texto-nombre.ts`);
 
         this.fs.copyTpl(
             templateCN,
@@ -333,7 +333,7 @@ module.exports = class extends Generator {
         );
 
         const templateFCE = this.templatePath(TEMPLATES.FORMULARIO_CREAR_EDITAR);
-        const destinoFCE = this.destinationPath(`../../formularios/${nombreGuiones}/formulario-${nombreGuiones}.ts`);
+        const destinoFCE = this.destinationPath(`../../formularios/${nombreGuiones}/${nombreGuiones}-formulario.ts`);
 
         this.fs.copyTpl(
             templateFCE,

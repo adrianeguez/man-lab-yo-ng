@@ -1,5 +1,5 @@
 
-export const SERVICIO_LOGISTICO_CAMPO_BUSQUEDA: (claseComponente: any) => CampoFormulario = (claseComponente: any) => {
+export const SERVICIO_LOGISTICO_CAMPO_TEXTO_BUSQUEDA: (claseComponente: any) => CampoFormulario = (claseComponente: any) => {
   return {
     componente: claseComponente,
     validators: [],

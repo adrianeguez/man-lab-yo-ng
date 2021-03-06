@@ -5,7 +5,7 @@ import {<%= nombreMayuscula %>BusquedaDto} from '../../../dto/<%= nombreGuiones 
 import {<%= nombreMayuscula %>Interface} from '../../../interfaces/<%= nombreGuiones %>.interface';
 import {<%= nombreMayuscula %>Service} from '../../../servicios/<%= nombreGuiones %>/<%= nombreGuiones %>.service';
 import {MatDialog} from '@angular/material/dialog';
-import {FORMULARIO_<%= nombreSoloMayusculas %>} from '../../../formularios/<%= nombreGuiones %>/formulario-<%= nombreGuiones %>';
+import {<%= nombreSoloMayusculas %>_FORMULARIO} from '../../../formularios/<%= nombreGuiones %>/<%= nombreGuiones %>-formulario';
 import {GRUPOS_FORMULARIO_BUSQUEDA} from './grupos-formulario-busqueda';
 import {GRUPOS_FORMULARIO_CREAR_EDITAR} from './grupos-formulario-crear-editar';
 
@@ -29,7 +29,7 @@ export class SRuta<%= nombreMayuscula %>Service extends RutaComun<SRuta<%= nombr
       _cargandoService,
       _notificacionService,
       matDialog,
-      FORMULARIO_<%= nombreSoloMayusculas %>,
+      <%= nombreSoloMayusculas %>_FORMULARIO,
     'Creando ' + nombre,
       'Llene el formulario con los datos de '+ nombre,
       'Actualizando '+ nombre,

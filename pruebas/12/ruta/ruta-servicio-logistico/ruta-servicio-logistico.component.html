@@ -52,7 +52,7 @@
                [totalRecords]="_sRutaServicioLogisticoService.totalRecords"
                [rowsPerPageOptions]="_sRutaServicioLogisticoService.registrosPorPagina"
                [(first)]="_sRutaServicioLogisticoService.first"
-               dataKey="idSLogisticos"
+               dataKey="id"
                [customSort]="true"
       >
 
@@ -121,7 +121,7 @@
             <td *ngFor="let col of columns"  [ngClass]="{
            'valido-carta':servicioLogistico.habilitado,
            'invalido-carta':!servicioLogistico.habilitado }">
-              <div *ngIf="col.field !== 'idSLogisticos' && col.field !== 'sisHabilitado'">
+              <div *ngIf="col.field !== 'id' && col.field !== 'habilitado'">
                 <div [ngClass]="{
           'text-center':col.posicion === 'text-center',
           'text-left':col.posicion === 'text-left',
@@ -130,21 +130,21 @@
                   {{servicioLogistico[col.field]}}
                 </div>
               </div>
-              <div *ngIf="col.field === 'sisHabilitado'">
+              <div *ngIf="col.field === 'habilitado'">
                 <div class="text-center">
                   <br>
                   <p-inputSwitch [(ngModel)]="servicioLogistico.habilitado"
                                  (onChange)="_sRutaServicioLogisticoService
                              .activarDesactivar(
                              $event,
-                             servicioLogistico.idSLogisticos,
+                             servicioLogistico.id,
                              servicioLogistico.habilitado,
-                             'sisHabilitado'
+                             'habilitado'
                              )"
                   ></p-inputSwitch>
                 </div>
               </div>
-              <div *ngIf="col.field === 'idSLogisticos'">
+              <div *ngIf="col.field === 'id'">
                 <div class="text-center">
                   <br>
                   <p-button
@@ -167,7 +167,7 @@
                       styleClass="p-button-help"
                       (onClick)="_sRutaServicioLogisticoService.navegar(
                   _router,
-                  opcion.ruta(servicioLogistico.idSLogisticos)
+                  opcion.ruta(servicioLogistico.id)
                 )"
                     ></p-button>
                   </div>

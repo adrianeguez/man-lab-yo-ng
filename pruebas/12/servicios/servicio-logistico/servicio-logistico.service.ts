@@ -17,8 +17,8 @@ export class ServicioLogisticoService
       'servicio-logistico',
       _httpClient,
         ServicioLogisticoBusquedaDto,
-      'sisHabilitado',
-      'idSLogisticos'
+      'habilitado',
+      'id'
     );
   }
 }

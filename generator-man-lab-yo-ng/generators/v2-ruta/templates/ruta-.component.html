@@ -117,6 +117,15 @@
 
         <ng-template pTemplate="body" let-<%= nombreCamel %> let-columns="columns" let-indice="rowIndex" let-expandido="expanded">
 
+<!--        <tr-->
+<!--                *ngIf="_sRuta<%= nombreMayuscula %>Service.rowGroupMetadata[<%= nombreCamel %>.campoRelacion.campoNombre].index === indice && _sRuta<%= nombreMayuscula %>Service.nombreAtributoAAgrupar.length > 0"-->
+<!--                class="p-selectable-row"-->
+<!--        >-->
+<!--          <td [colSpan]="columns.length">-->
+<!--            <span class="p-text-bold p-ml-2"> <strong class="color-grupo">CAMPO NOMBRE: </strong> <strong>{{<%= nombreCamel %>.campoRelacion.campoNombre}}</strong></span>-->
+<!--          </td>-->
+<!--        </tr>-->
+
           <tr class="p-selectable-row">
             <td *ngFor="let col of columns"  [ngClass]="{
            'valido-carta':<%= nombreCamel %>.habilitado,
@@ -176,6 +185,44 @@
             </td>
           </tr>
         </ng-template>
+
+
+<!--        <ng-template pTemplate="rowexpansion" let-<%= nombreCamel %> let-columns="columns">-->
+<!--          <tr class="detalle-tr p-selectable-row animate__animated animate__fadeIn">-->
+<!--            <td [colSpan]="columns.length" [ngClass]="{-->
+<!--           'valido-carta':<%= nombreCamel %>.habilitado,-->
+<!--           'invalido-carta':!<%= nombreCamel %>.habilitado }">-->
+<!--              <table class="detalle">-->
+<!--                <tr class="p-selectable-row detalle">-->
+<!--                  <th><strong>ATRIBUTO</strong></th>-->
+<!--                  <th><strong>VALOR</strong></th>-->
+<!--                </tr>-->
+<!--                <tr class="p-selectable-row detalle"-->
+<!--                    *ngFor="let valor of _sRuta<%= nombreMayuscula %>Service.generarObjeto(%= nombreCamel %>)">-->
+<!--                  <td><strong>{{valor.llave}}</strong></td>-->
+<!--                  <td>-->
+<!--                     <!--  CAMPOS QUE USEN PIPES      -->    -->
+<!--                <span *ngIf="valor.nombreCampo === 'algunCampoQueQuireaUsarUnPipe'">-->
+<!--                {{valor.valor | currency}}-->
+<!--                </span>-->
+<!--                     <!-- TODOS LOS DEMAS CAMPOS       -->    -->
+<!--                    <span *ngIf="valor.nombreCampo !== 'algunCampoQueQuireaUsarUnPipe'">-->
+<!--                  {{valor.valor}}-->
+<!--                </span>-->
+
+<!--                  </td>-->
+<!--                </tr>-->
+<!--                     <!-- CAMPOS RELACIONADOS      -->    -->
+<!--                <tr class="p-selectable-row detalle">-->
+<!--                  <td><strong>Campo Relacionado</strong></td>-->
+<!--                  <td>{{<%= nombreCamel %>.campoRelacion.campoNombre}}</td>-->
+<!--                </tr>-->
+<!--              </table>-->
+<!--            </td>-->
+<!--          </tr>-->
+
+<!--        </ng-template>-->
+<!--        -->
 
         <ng-template pTemplate="summary">
           <div class="row">
