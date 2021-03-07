@@ -246,11 +246,19 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
 //       },
 //       {
 //         nombrePropiedad: 'nombreOtro',
-//         nombresCamposRequeridosQueAfecta: ['campoTres', 'campoCuatro']
+//         nombresCamposRequeridosQueAfecta: ['campoTres', 'campoCuatro'],
+//         nombresCamposRequeridosAOcultar: ['campoCinco', 'campoSeis'],
+//         valorPropiedad: 'valorTresCuatro',
+//       },
+//       {
+//         nombrePropiedad: 'nombreOtro',
+//         nombresCamposRequeridosQueAfecta: ['campoCinco', 'campoSeis'],
+//         nombresCamposRequeridosAOcultar: ['campoTres', 'campoCuatro'],
+//         valorPropiedad: 'valorCincoSeis',
 //       },
 //     ];
 //
-//     this._sRuta<%= nombreMayuscula %>Service.establecerValidezDeFormulario<RutaArticuloComponent>(
+//     this._sRuta<%= nombreMayuscula %>Service.establecerValidezDeFormulario<Ruta<%= nombreMayuscula %>Component>(
 //         this,
 //         camposAEstablecerValidezArreglo,
 //         valorCampoValidez,
@@ -271,11 +279,17 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
   crear(): void {
     if (this.formularioCrearEditar) {
       const camposCrear = this._sRuta<%= nombreMayuscula %>Service.obtenerCampos<Crear<%= nombreMayuscula %>>(
-        Crear<%= nombreMayuscula %>, this.formularioCrearEditar
+        Crear<%= nombreMayuscula %>,
+        this.formularioCrearEditar
       );
       // Transforma objetos a valores, si no hay objetos en el formulario
       // como un autocomplete por ejemplo, se debe dejar vacío.
-      const arregloPropiedades: SetearObjeto[] = [];
+      const arregloPropiedades: SetearObjeto[] = [
+        // {
+        //   nombreCampo: 'sisHabilitado',
+        //   nombrePropiedadObjeto: 'sisHabilitado'
+        // }
+      ];
       camposCrear.objetoCrear = this._sRuta<%= nombreMayuscula %>Service.setearValoresDeObjetos(
         camposCrear.objetoCrear,
         arregloPropiedades
@@ -331,7 +345,9 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
   ): void {
     if (this.formularioCrearEditar) {
       const camposCrear = this._sRuta<%= nombreMayuscula %>Service.obtenerCampos<Actualizar<%= nombreMayuscula %>>(
-        Actualizar<%= nombreMayuscula %>, this.formularioCrearEditar
+        Actualizar<%= nombreMayuscula %>,
+        this.formularioCrearEditar,
+        true
       );
       const arregloPropiedades: SetearObjeto[] = [];
       camposCrear.objetoCrear = this._sRuta<%= nombreMayuscula %>Service.setearValoresDeObjetos(

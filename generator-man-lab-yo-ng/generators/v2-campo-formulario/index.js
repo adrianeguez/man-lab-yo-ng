@@ -86,6 +86,14 @@ const OPCIONES = {
             desc: 'Modificar el template si es formulario. EJ:  NombreRuta NombreCampo texto --esFormulario=true'
         }
     },
+    ES_DEPENDIENTE: {
+        nombre: 'esDependiente',
+        configuracion: {
+            type: String,
+            default: undefined,
+            desc: 'Modificar el template si es dependiente. EJ:  NombreRuta NombreCampo texto --esDependiente=true'
+        }
+    },
 }
 const TEMPLATES = {
     CAMPO_BUSQUEDA: '-campo--busqueda.ts',
@@ -159,6 +167,7 @@ module.exports = class extends Generator {
         this.option(OPCIONES.NOMBRE_PREFIJO.nombre, OPCIONES.NOMBRE_PREFIJO.configuracion);
         this.option(OPCIONES.NOMBRE_PROPIEDAD.nombre, OPCIONES.NOMBRE_PROPIEDAD.configuracion);
         this.option(OPCIONES.ES_FORMULARIO.nombre, OPCIONES.ES_FORMULARIO.configuracion);
+        this.option(OPCIONES.ES_DEPENDIENTE.nombre, OPCIONES.ES_DEPENDIENTE.configuracion);
 
     }
 
@@ -218,6 +227,7 @@ module.exports = class extends Generator {
         const nombrePrefijo = this.options[OPCIONES.NOMBRE_PREFIJO.nombre];
         const nombrePropiedad = this.options[OPCIONES.NOMBRE_PROPIEDAD.nombre];
         const esFormulario = this.options[OPCIONES.ES_FORMULARIO.nombre];
+        const esDependiente = this.options[OPCIONES.ES_DEPENDIENTE.nombre];
 
         const variables = {
             nombreMayuscula,
@@ -235,6 +245,7 @@ module.exports = class extends Generator {
             nombrePropiedad,
             nombrePrefijo,
             esFormulario,
+            esDependiente,
         };
 
 

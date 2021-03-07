@@ -89,7 +89,8 @@
                           class="p-button-success p-mr-2"
                           (click)="botonAceptarModalDisabled = true;"
                           (click)="_sRuta<%= nombreMayuscula %>Service.formularioEnModalActual = undefined;"
-                          (click)="_sRuta<%= nombreMayuscula %>Service.camposSeleccionadosFormulario = undefined;"
+                          (click)="_sRuta<%= nombreMayuscula %>Service.camposSeleccionadosFormulario = {};"
+                          (click)="_sRuta<%= nombreMayuscula %>Service.setearCamposRequeridosAFalso(this);"
                           (click)="_sRuta<%= nombreMayuscula %>Service.abrirModal(this,undefined)"
                   ></button>
                 </div>
@@ -166,6 +167,7 @@
                     (click)="botonAceptarModalDisabled = true;"
                     (click)="_sRuta<%= nombreMayuscula %>Service.formularioEnModalActual = undefined;"
                     (click)="_sRuta<%= nombreMayuscula %>Service.camposSeleccionadosFormulario = undefined;"
+                    (click)="_sRuta<%= nombreMayuscula %>Service.setearCamposRequeridosAFalso(this);"
                     (click)="_sRuta<%= nombreMayuscula %>Service.abrirModal(
                 this,
                 <%= nombreCamel %>

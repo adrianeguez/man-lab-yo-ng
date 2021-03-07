@@ -27,16 +27,24 @@ export const <%= nombreSoloMayusculas %>_CAMPO_AUTOCOMPLETE_<%= nombreCampoSoloM
     <% } %>
 
   // SOLO USO SI ES FORMULARIO && Es campo del que dependen
-  // const camposDependienteNoExisten = !claseComponente.data.componente.camposRequeridos.nombreCampo;
+  // const camposDependienteNoExisten = !claseComponente.data.componente.camposRequeridos.<%= nombrePrefijo ? nombrePrefijo + nombreCampoMayuscula : nombreCampoCamel %>;
   // if (camposDependienteNoExisten) {
   //   valorCampo = undefined;
   // }
 
-  // SOLO USO SI ES FORMULARIO && Es campo dependiente
-  // const validators = [];
-  // if (claseComponente.data.componente.camposRequeridos.nombreCampo) {
-  //   validators.push(Validators.required);
-  // }
+<% if(esDependiente) { %>
+    //SOLO USO SI ES FORMULARIO && Es campo dependiente
+    const validators = [];
+    if (claseComponente.data.componente.camposRequeridos.<%= nombrePrefijo ? nombrePrefijo + nombreCampoMayuscula : nombreCampoCamel %>) {
+        validators.push(Validators.required);
+    }
+    <% } else{ %>
+    // SOLO USO SI ES FORMULARIO && Es campo dependiente
+    // const validators = [];
+    // if (claseComponente.data.componente.camposRequeridos.<%= nombrePrefijo ? nombrePrefijo + nombreCampoMayuscula : nombreCampoCamel %>) {
+    //   validators.push(Validators.required);
+    // }
+    <% } %>
 
   return {
       tipoCampoHtml: 'autocomplete',
@@ -46,13 +54,33 @@ export const <%= nombreSoloMayusculas %>_CAMPO_AUTOCOMPLETE_<%= nombreCampoSoloM
       valorInicial: '',
       <% } %>
       valorActual: '',
-      hidden: false,
-      // SOLO USO SI ES FORMULARIO && Es campo dependiente
-      // hidden: !claseComponente.data.componente.camposRequeridos.nombreCampo,
+      <% if(esDependiente) { %>
+    // hidden: false,
+    // SOLO USO SI ES FORMULARIO && Es campo dependiente
+    hidden: !claseComponente.data.componente.camposRequeridos.<%= nombrePrefijo ? nombrePrefijo + nombreCampoMayuscula : nombreCampoCamel %>,
+    <% } else{ %>
+    hidden: false,
+        // SOLO USO SI ES FORMULARIO && Es campo dependiente
+        // hidden: !claseComponente.data.componente.camposRequeridos.<%= nombrePrefijo ? nombrePrefijo + nombreCampoMayuscula : nombreCampoCamel %>,
+    <% } %>
       tamanioColumna: 6,
       // SOLO USO SI ES FORMULARIO && Es campo del que dependen
-      // tamanioColumna: claseComponente.data.componente.camposRequeridos.nombreCampo ? 6 : 12,
-      validators: [
+      // tamanioColumna: claseComponente.data.componente.camposRequeridos.<%= nombrePrefijo ? nombrePrefijo + nombreCampoMayuscula : nombreCampoCamel %> ? 6 : 12,
+      <% if(esDependiente) { %>
+    // validators: [
+    //   // Validators.required,
+    //   // Validators.minLength(2),
+    //   // Validators.maxLength(10),
+    //   // Validators.min(0),
+    //   // Validators.max(100),
+    //   // Validators.email,
+    //   // Validators.pattern()
+    // ],
+    // SOLO USO SI ES FORMULARIO && Es campo dependiente
+    validators,
+    <% } else{ %>
+
+    validators: [
         // Validators.required,
         // Validators.minLength(2),
         // Validators.maxLength(10),
@@ -60,9 +88,10 @@ export const <%= nombreSoloMayusculas %>_CAMPO_AUTOCOMPLETE_<%= nombreCampoSoloM
         // Validators.max(100),
         // Validators.email,
         // Validators.pattern()
-      ],
-      // SOLO USO SI ES FORMULARIO && Es campo dependiente
-      // validators,
+    ],
+        // SOLO USO SI ES FORMULARIO && Es campo dependiente
+        // validators,
+    <% } %>
       <% if(esFormulario) { %>
       estaValido: valorCampo ? true : false,
       <% } else{ %>
