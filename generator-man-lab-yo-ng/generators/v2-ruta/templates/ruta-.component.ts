@@ -318,7 +318,7 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
 
       // Setear campos extra
       // Ej:
-      // camposCrear.objetoCrea r.habilitado = 1;
+      // camposCrear.objetoCrear.habilitado = 1;
       // Ej: Relación
       // if (this._sRuta<%= nombreMayuscula %>Service.busquedaDto) {
       //   camposCrear.objetoCrear.nombreCampoRelacion = this._sRuta<%= nombreMayuscula %>Service.busquedaDto.nombreCampoRelacion as number;
