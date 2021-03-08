@@ -93,6 +93,9 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
         (parametros: SRuta<%= nombreMayuscula %>Parametros) => {
           const busqueda = this._sRuta<%= nombreMayuscula %>Service
             .setearParametrosDeBusqueda(parametros, <%= nombreMayuscula %>BusquedaDto);
+            // if (parametros.nombreCampoRelacion && busqueda) {
+            //   busqueda.nombreCampoRelacion = +parametros.nombreCampoRelacion;
+            // }
           this._sRuta<%= nombreMayuscula %>Service
             .busquedaDto = busqueda;
           this.buscarConFiltros();
@@ -166,16 +169,24 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
 
   }
 
+  formularioBusquedacambioCampoAutocomplete(evento: EventoCambioAutocomplete){
+    // this.seleccionarBusquedaAutocompletePorEvento(evento);
+  }
+
   formularioCrearEditarCambioAutocomplete(evento: EventoCambioAutocomplete,
                                           registro?: <%= nombreMayuscula %>Interface): void {
-    if (evento.campoFormulario) {
+    // this.seleccionarBusquedaAutocompletePorEvento(evento);
+  }
+
+  // seleccionarBusquedaAutocompletePorEvento(evento: EventoCambioAutocomplete){
+  //   if(evento.campoFormulario){
       // switch (evento.campoFormulario.nombreCampo) {
       //   case 'nombreCampo': // nombres de cada uno de los campos autocomplete
-      //     // this.buscarAutocompleteNombreCampo(evento); ejecutar una búsqueda con los servicios pertinentes
+      //     // this.buscarAutocompleteNombreCampo(evento); // ejecutar una búsqueda con los servicios pertinentes
       //     break;
       // }
-    }
-  }
+    // }
+  // }
 
   // buscarAutocompleteNombreCampo(evento: EventoCambioAutocomplete) {
   //   const busqueda: NombreCampoBusquedaDto = {
@@ -308,6 +319,10 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
       // Setear campos extra
       // Ej:
       // camposCrear.objetoCrear.habilitado = 1;
+      // Ej: Relación
+      // if (this._sRuta<%= nombreMayuscula %>Service.busquedaDto) {
+      //   camposCrear.objetoCrear.nombreCampoRelacion = this._sRutaAtributoService.busquedaDto.nombreCampoRelacion as number;
+      // }
 
       if (this._sRuta<%= nombreMayuscula %>Service.busquedaDto) {
         this._sRuta<%= nombreMayuscula %>Service._cargandoService.habilitarCargando();

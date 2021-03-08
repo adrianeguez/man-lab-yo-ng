@@ -7,5 +7,7 @@ export class <%= nombreMayuscula %>BusquedaDto extends BusquedaComunDto {
     // a los campos que son seteados en los parametros de ruta
     // NO SE DEBE DE AGREGAR TODOS LOS CAMPOS, SOLO LOS QUE SE VAN TENER EN EL FORMULARIO DE BUSQUEDA
     // @Expose()
-    // nombreCampo?: string = undefined;
+    // nombreCampo?: string = undefined; // Si esta en formulario SE iguala a undefined
+    // @Expose()
+    // nombreCampoRelacion?: number; // Si no esta en formulario NO se iguala a undefined
 }

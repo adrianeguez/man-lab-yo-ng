@@ -135,9 +135,9 @@ export const <%= nombreSoloMayusculas %>_CAMPO_SELECT_<%= nombreCampoSoloMayuscu
       fnMostrarEnSelect: (campo: { <%= nombrePrefijo ? nombrePrefijo + nombreCampoMayuscula : nombreCampoCamel %>: any <%= undefinedValor ? '| undefined' : '' %> }) => {
         <% if(undefinedValor) {%>
           if (campo.<%= nombrePrefijo ? nombrePrefijo + nombreCampoMayuscula : nombreCampoCamel %> === undefined) {
-            return undefinedValor;
+            return '<%= undefinedValor %>';
           }
-        <% } %>
+        <% } %>º
        <% for (let campo of arregloOpciones) {%>
         if (campo.<%= nombrePrefijo ? nombrePrefijo + nombreCampoMayuscula : nombreCampoCamel %> === <%- campo.valor %>) {
           return '<%= campo.nombre %>';

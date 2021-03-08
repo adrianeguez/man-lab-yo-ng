@@ -337,8 +337,8 @@ module.exports = class extends Generator {
                         break;
                     } else {
                         if (variables.undefinedValor) {
-                            const templateCS = this.templatePath(TEMPLATES.CAMPO_AUTOCOMPLETE);
-                            const destinoCS = this.destinationPath(`${nombreGuiones}-campo-autocomplete-${nombreCampoGuiones}.ts`);
+                            const templateCS = this.templatePath(TEMPLATES.CAMPO_SELECT);
+                            const destinoCS = this.destinationPath(`${nombreGuiones}-campo-select-${nombreCampoGuiones}.ts`);
                             this.fs.copyTpl(
                                 templateCS,
                                 destinoCS,
