@@ -9,6 +9,7 @@ export const <%= nombreSoloMayusculas %>_FORMULARIO_BUSQUEDA: (claseComponente: 
     <%= nombreSoloMayusculas %>_CAMPO_SELECT_HABILITADO(claseComponente)
   ];
 };
+// yo man-lab-yo-ng:v2-campo-formulario
 // Texto:
 // NombreRuta NombreCampo texto
 // NombreRuta NombreCampo texto --esFormulario true

@@ -5,6 +5,7 @@ export const <%= nombreSoloMayusculas %>_FORMULARIO: (claseComponente: ModalComp
         // EJEMPLO_CAMPO_TIPO_NOMBRE(claseComponente)
     ];
   };
+// yo man-lab-yo-ng:v2-campo-formulario
 // Texto:
 // NombreRuta NombreCampo texto
 // NombreRuta NombreCampo texto --esFormulario true
