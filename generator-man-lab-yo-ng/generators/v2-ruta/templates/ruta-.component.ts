@@ -198,6 +198,8 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
   //       .then(res => res as [NombreCampoInterface[], number])
   //       .then(data => {
   //         const arregloDatos = data[0];
+  //         // SI ES NECSARIO HACER UN MAP PARA VISUALIZAR OTROS CAMPOS UTILIZAR LA SIGUIENTE LÍNEA
+  //         const arregloDatos = data[0].map((a:any)=>{ a.nombreCompeto = a.nombre + ' ' + a.apellido; return a;});
   //         if (evento.campoFormulario.autocomplete) {
   //           if (Array.isArray(arregloDatos)) {
   //             evento.campoFormulario.autocomplete.suggestions = [...arregloDatos];

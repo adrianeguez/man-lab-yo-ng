@@ -109,12 +109,13 @@ export const <%= nombreSoloMayusculas %>_CAMPO_AUTOCOMPLETE_<%= nombreCampoSoloM
       },
       autocomplete: {
         suggestions: [],
-        field: '<%= nombrePropiedad %>',
+        field: '<%= nombrePropiedad %>', // Nombre de la propiedad del objeto a visualizarse
         delay: 2000,
-        inputId: '<%= nombrePropiedad %>',
+        inputId: '<%= nombrePropiedad %>', // Id a ser seleccionado
         emptyMessage: 'No hay registros',
-        fnMostrarEnAutoComplete: (campo) => {
-          return campo.<%= nombrePropiedad %>;
+        fnMostrarEnAutoComplete: (campo:any) => {
+         // Se puede concatenar los campos EJ: campo.nombreCampoRelacionUno + ' ' + campo.nombreCampoRelacionDos
+         return campo.<%= nombrePropiedad %>; // Nombre de la propiedad del objeto a visualizarse
         }
       },
       formulario: {},

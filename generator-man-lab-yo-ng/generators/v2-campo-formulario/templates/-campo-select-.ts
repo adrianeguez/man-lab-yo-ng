@@ -105,7 +105,7 @@ export const <%= nombreSoloMayusculas %>_CAMPO_SELECT_<%= nombreCampoSoloMayuscu
     textoAyuda: 'Seleccione <%= nombreCampoEspacioMayuscula %>.',
     placeholderEjemplo: 'Ej: ' +
       <% for (let campo of arregloOpciones) {%>
-        '<%= campo.nombre %> ' +
+        '<%= campo.nombre %> / ' +
         <% } %>
       '',
     mensajes: MENSAJES_ERROR(claseComponente),
@@ -137,7 +137,7 @@ export const <%= nombreSoloMayusculas %>_CAMPO_SELECT_<%= nombreCampoSoloMayuscu
           if (campo.<%= nombrePrefijo ? nombrePrefijo + nombreCampoMayuscula : nombreCampoCamel %> === undefined) {
             return '<%= undefinedValor %>';
           }
-        <% } %>º
+        <% } %>
        <% for (let campo of arregloOpciones) {%>
         if (campo.<%= nombrePrefijo ? nombrePrefijo + nombreCampoMayuscula : nombreCampoCamel %> === <%- campo.valor %>) {
           return '<%= campo.nombre %>';
