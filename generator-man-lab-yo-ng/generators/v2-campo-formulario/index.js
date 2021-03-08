@@ -313,27 +313,42 @@ module.exports = class extends Generator {
                     const transformarArregloOpciones = (opciones) => {
                         return opciones.split(",")
                             .map((a) => {
-                            const valores = a.split("=");
-                            if (valores.length !== 3) {
-                                throw new Error("No envíaste bien las opciones. EJ: NombreRuta NombreCampo select Activo=ActivoInactivo.ACTIVO=A,Inactivo=ActivoInactivo.ACTIVO=L")
-                            } else {
-                                return {
-                                    nombre: valores[0],
-                                    valor: valores[1],
-                                    filtro: valores[2],
+                                const valores = a.split("=");
+                                if (valores.length !== 3) {
+                                    throw new Error("No envíaste bien las opciones. EJ: NombreRuta NombreCampo select Activo=ActivoInactivo.ACTIVO=A,Inactivo=ActivoInactivo.ACTIVO=L")
+                                } else {
+                                    return {
+                                        nombre: valores[0],
+                                        valor: valores[1],
+                                        filtro: valores[2],
+                                    }
                                 }
-                            }
-                        })
+                            })
                     }
                     variables.arregloOpciones = transformarArregloOpciones(variables.arregloOpciones);
-                    const templateCS = this.templatePath(TEMPLATES.CAMPO_SELECT);
-                    const destinoCS = this.destinationPath(`${nombreGuiones}-campo-select-${nombreCampoGuiones}.ts`);
-                    this.fs.copyTpl(
-                        templateCS,
-                        destinoCS,
-                        variables
-                    );
-                    break;
+                    if (variables.esFormulario) {
+                        const templateCS = this.templatePath(TEMPLATES.CAMPO_SELECT);
+                        const destinoCS = this.destinationPath(`${nombreGuiones}-campo-select-${nombreCampoGuiones}.ts`);
+                        this.fs.copyTpl(
+                            templateCS,
+                            destinoCS,
+                            variables
+                        );
+                        break;
+                    } else {
+                        if (variables.undefinedValor) {
+                            const templateCS = this.templatePath(TEMPLATES.CAMPO_AUTOCOMPLETE);
+                            const destinoCS = this.destinationPath(`${nombreGuiones}-campo-autocomplete-${nombreCampoGuiones}.ts`);
+                            this.fs.copyTpl(
+                                templateCS,
+                                destinoCS,
+                                variables
+                            );
+                            break;
+                        }else{
+                            throw new Error('Debe enviar undefinedValor Ej: NombreRuta NombreCampo select .... "Nombre de undefined"');
+                        }
+                    }
                 }
                 break;
             case 'texto':

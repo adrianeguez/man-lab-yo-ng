@@ -139,7 +139,7 @@
           'text-left':col.posicion === 'text-left',
           'text-right':col.posicion === 'text-right'
           }">
-                  {{<%= nombreCamel %>[col.field]}}
+                  {{col.fnMostrar ? col.fnMostrar(<%= nombreCamel %>[col.field]) : <%= nombreCamel %>[col.field]}}
                 </div>
               </div>
               <div *ngIf="col.field === '<%= nombreHabilitado %>'">
@@ -166,7 +166,7 @@
                     styleClass="p-button-warning"
                     (click)="botonAceptarModalDisabled = true;"
                     (click)="_sRuta<%= nombreMayuscula %>Service.formularioEnModalActual = undefined;"
-                    (click)="_sRuta<%= nombreMayuscula %>Service.camposSeleccionadosFormulario = undefined;"
+                    (click)="_sRuta<%= nombreMayuscula %>Service.camposSeleccionadosFormulario = {}};"
                     (click)="_sRuta<%= nombreMayuscula %>Service.setearCamposRequeridosAFalso(this);"
                     (click)="_sRuta<%= nombreMayuscula %>Service.abrirModal(
                 this,

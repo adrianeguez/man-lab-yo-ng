@@ -20,7 +20,17 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
     //   field: 'nombreCampo',
     //   header: 'Nombre a mostrarse',
     //   posicion: 'text-center',
-    //   tamanio: '60%' // tamaño en porcentaje de la columna
+    //   tamanio: '60%', // tamaño en porcentaje de la columna
+    //     fnMostrar: (valor:TipoValor)=>{
+    //       switch (valor) {
+    //         case TipoValor.ValorUno:
+    //           return 'Valor de uno';
+    //         case TipoValor.ValorDos:
+    //           return 'Valor de dos';
+    //         default:
+    //           return valor;
+    //       }
+    //     }
     // },
     {
       field: '<%= nombreHabilitado %>',
