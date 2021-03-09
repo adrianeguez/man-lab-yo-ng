@@ -157,7 +157,7 @@ module.exports = class extends Generator {
             id = 'id';
         }
         if (!nombreHabilitado) {
-            nombreHabilitado = 'habilitado';
+            nombreHabilitado = 'sisHabilitado';
         }
 
         const variables = {
