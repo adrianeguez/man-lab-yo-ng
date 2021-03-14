@@ -23,6 +23,11 @@ export const <%= nombreSoloMayusculas %>_CAMPO_AUTOCOMPLETE_<%= nombreCampoSoloM
             '_sRuta<%= nombreMayuscula %>Service',
             '<%= nombrePrefijo ? nombrePrefijo + nombreCampoMayuscula : nombreCampoCamel %>'
         );
+    if (valorCampo) {
+        if (!valorCampo.<%= nombrePropiedad %>) {
+            valorCampo = {<%= nombrePropiedad %>: valorCampo};
+        }
+    }
     <% } else{ %>
     <% } %>
 

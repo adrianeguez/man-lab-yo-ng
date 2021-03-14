@@ -23,6 +23,11 @@ export const <%= nombreSoloMayusculas %>_CAMPO_SELECT_<%= nombreCampoSoloMayuscu
             '_sRuta<%= nombreMayuscula %>Service',
             '<%= nombrePrefijo ? nombrePrefijo + nombreCampoMayuscula : nombreCampoCamel %>'
         );
+    if (valorCampo) {
+        if (!valorCampo.<%= nombrePrefijo ? nombrePrefijo + nombreCampoMayuscula : nombreCampoCamel %>) {
+            valorCampo = {<%= nombrePrefijo ? nombrePrefijo + nombreCampoMayuscula : nombreCampoCamel %>: valorCampo};
+        }
+    }
     <% } else{ %>
     <% } %>
 

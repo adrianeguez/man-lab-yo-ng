@@ -75,7 +75,15 @@ const OPCIONES = {
         configuracion: {
             type: String,
             default: undefined,
-            desc: 'Nombre de la propiedad para autocomplete. EJ:  NombreRuta NombreCampo autocomplete --nombrePropiedad=campoDeOtraEntidad'
+            desc: 'Nombre de la propiedad a mostrarse del objeto autocomplete. EJ:  NombreRuta NombreCampo autocomplete --nombrePropiedad=campoDeOtraEntidadAmostrar'
+        }
+    },
+    NOMBRE_PROPIEDAD_ID: {
+        nombre: 'nombrePropiedadId',
+        configuracion: {
+            type: String,
+            default: undefined,
+            desc: 'Nombre de la propiedad identificador del autocomplete. EJ: NombreRuta NombreCampo autocomplete --nombrePropiedadId=idEntidad'
         }
     },
     ES_FORMULARIO: {
@@ -166,6 +174,7 @@ module.exports = class extends Generator {
         // opciones
         this.option(OPCIONES.NOMBRE_PREFIJO.nombre, OPCIONES.NOMBRE_PREFIJO.configuracion);
         this.option(OPCIONES.NOMBRE_PROPIEDAD.nombre, OPCIONES.NOMBRE_PROPIEDAD.configuracion);
+        this.option(OPCIONES.NOMBRE_PROPIEDAD_ID.nombre, OPCIONES.NOMBRE_PROPIEDAD_ID.configuracion);
         this.option(OPCIONES.ES_FORMULARIO.nombre, OPCIONES.ES_FORMULARIO.configuracion);
         this.option(OPCIONES.ES_DEPENDIENTE.nombre, OPCIONES.ES_DEPENDIENTE.configuracion);
 
@@ -226,6 +235,7 @@ module.exports = class extends Generator {
         // opciones
         const nombrePrefijo = this.options[OPCIONES.NOMBRE_PREFIJO.nombre];
         const nombrePropiedad = this.options[OPCIONES.NOMBRE_PROPIEDAD.nombre];
+        const nombrePropiedadId = this.options[OPCIONES.NOMBRE_PROPIEDAD_ID.nombre];
         const esFormulario = this.options[OPCIONES.ES_FORMULARIO.nombre];
         const esDependiente = this.options[OPCIONES.ES_DEPENDIENTE.nombre];
 
@@ -246,6 +256,7 @@ module.exports = class extends Generator {
             nombrePrefijo,
             esFormulario,
             esDependiente,
+            nombrePropiedadId,
         };
 
 

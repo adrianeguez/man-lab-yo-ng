@@ -169,10 +169,7 @@
                     (click)="_sRuta<%= nombreMayuscula %>Service.formularioEnModalActual = undefined;"
                     (click)="_sRuta<%= nombreMayuscula %>Service.camposSeleccionadosFormulario = {};"
                     (click)="_sRuta<%= nombreMayuscula %>Service.setearCamposRequeridosAFalso(this);"
-                    (click)="_sRuta<%= nombreMayuscula %>Service.abrirModal(
-                this,
-                <%= nombreCamel %>
-                )"
+                    (click)="abrirModal(<%= nombreCamel %>)"
                   ></p-button>
 <!--                  <div *ngFor="let opcion of opciones">-->
 <!--                    <br>-->
