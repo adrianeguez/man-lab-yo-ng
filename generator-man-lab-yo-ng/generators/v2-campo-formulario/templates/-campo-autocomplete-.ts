@@ -14,7 +14,7 @@ export const <%= nombreSoloMayusculas %>_CAMPO_AUTOCOMPLETE_<%= nombreCampoSoloM
     <% } %>
 
     <% if(esFormulario) { %>
-    const valorCampo = claseComponente
+    let valorCampo = claseComponente
         .data
         .componente
         ._sRuta<%= nombreMayuscula %>Service

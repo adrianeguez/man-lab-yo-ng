@@ -14,7 +14,7 @@ export const <%= nombreSoloMayusculas %>_CAMPO_SELECT_<%= nombreCampoSoloMayuscu
     <% } %>
 
 <% if(esFormulario) { %>
-    const valorCampo = claseComponente
+    let valorCampo = claseComponente
         .data
         .componente
         ._sRuta<%= nombreMayuscula %>Service
