@@ -286,6 +286,8 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
 //         camposAEstablecerValidezArreglo,
 //         valorCampoValidez,
 //         nombrePropiedadValidez,
+//         undefined,
+//         registro,
 //     );
 //   }
 
