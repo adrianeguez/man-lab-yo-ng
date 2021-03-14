@@ -292,6 +292,22 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
 //     );
 //   }
 
+
+  abrirModal(
+      registro: <%= nombreMayuscula %>Interface
+  ){
+    // Si se tienen campos dependientes se deben de
+    // activarlos antes de editarlos
+    // if(camposRequeridos.campoDependeUno){
+    //   camposRequeridos.nombreCampoDependienteUno
+    // }
+    // if(camposRequeridos.campoDependeDos){
+    //   camposRequeridos.nombreCampoDependienteDos
+    // }
+    this._sRuta<%= nombreMayuscula %>Service.abrirModal(this, registro);
+  }
+
+
   crearEditar(
     registro?: <%= nombreMayuscula %>Interface,
   ): void {

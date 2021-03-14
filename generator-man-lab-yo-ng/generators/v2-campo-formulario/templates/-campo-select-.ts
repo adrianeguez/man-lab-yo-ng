@@ -14,7 +14,7 @@ export const <%= nombreSoloMayusculas %><%= esFormulario ? '' : '_BUSQUEDA' %>_C
     <% } %>
 
 <% if(esFormulario) { %>
-    const valorCampo = claseComponente
+    let valorCampo = claseComponente
         .data
         .componente
         ._sRuta<%= nombreMayuscula %>Service
@@ -23,6 +23,11 @@ export const <%= nombreSoloMayusculas %><%= esFormulario ? '' : '_BUSQUEDA' %>_C
             '_sRuta<%= nombreMayuscula %>Service',
             '<%= nombrePrefijo ? nombrePrefijo + nombreCampoMayuscula : nombreCampoCamel %>'
         );
+    if (valorCampo) {
+        if (!valorCampo.<%= nombrePrefijo ? nombrePrefijo + nombreCampoMayuscula : nombreCampoCamel %>) {
+            valorCampo = {<%= nombrePrefijo ? nombrePrefijo + nombreCampoMayuscula : nombreCampoCamel %>: valorCampo};
+        }
+    }
     <% } else{ %>
     <% } %>
 

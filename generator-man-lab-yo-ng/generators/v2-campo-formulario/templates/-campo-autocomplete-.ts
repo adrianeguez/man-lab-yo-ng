@@ -14,7 +14,7 @@ export const <%= nombreSoloMayusculas %><%= esFormulario ? '' : '_BUSQUEDA' %>_C
     <% } %>
 
     <% if(esFormulario) { %>
-    const valorCampo = claseComponente
+    let valorCampo = claseComponente
         .data
         .componente
         ._sRuta<%= nombreMayuscula %>Service
@@ -23,6 +23,11 @@ export const <%= nombreSoloMayusculas %><%= esFormulario ? '' : '_BUSQUEDA' %>_C
             '_sRuta<%= nombreMayuscula %>Service',
             '<%= nombrePrefijo ? nombrePrefijo + nombreCampoMayuscula : nombreCampoCamel %>'
         );
+    if (valorCampo) {
+        if (!valorCampo.<%= nombrePropiedad %>) {
+            valorCampo = {<%= nombrePropiedad %>: valorCampo};
+        }
+    }
     <% } else{ %>
     <% } %>
 
@@ -111,7 +116,7 @@ export const <%= nombreSoloMayusculas %><%= esFormulario ? '' : '_BUSQUEDA' %>_C
         suggestions: [],
         field: '<%= nombrePropiedad %>', // Nombre de la propiedad del objeto a visualizarse
         delay: 2000,
-        inputId: '<%= nombrePropiedad %>', // Id a ser seleccionado
+        inputId: '<%= nombrePropiedadId %>', // Id a ser seleccionado
         emptyMessage: 'No hay registros',
         fnMostrarEnAutoComplete: (campo:any) => {
          // Se puede concatenar los campos EJ: campo.nombreCampoRelacionUno + ' ' + campo.nombreCampoRelacionDos
