@@ -331,14 +331,15 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
 
       if (this._sRuta<%= nombreMayuscula %>Service.busquedaDto) {
         this._sRuta<%= nombreMayuscula %>Service._cargandoService.habilitarCargando();
-        this._sRuta<%= nombreMayuscula %>Service
+        const crear$ = this._sRuta<%= nombreMayuscula %>Service
           ._<%= nombreCamel %>Service
           .crear(
             camposCrear.objetoCrear
           )
           .pipe(
             this._sRuta<%= nombreMayuscula %>Service.buscarDeNuevo('<%= id %>')
-          )
+          ) as Observable<<%= nombreMayuscula %>Interface>;
+        crear$
           .subscribe(
             (nuevoRegistro) => {
               nuevoRegistro.habilitado = true;
@@ -386,7 +387,7 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
       );
       if (registro.<%= id %>) {
         this._sRuta<%= nombreMayuscula %>Service._cargandoService.habilitarCargando();
-        this._sRuta<%= nombreMayuscula %>Service
+        const actualizar$ = this._sRuta<%= nombreMayuscula %>Service
           ._<%= nombreCamel %>Service
           .actualizar(
             camposCrear.objetoCrear,
@@ -394,7 +395,9 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
           )
           .pipe(
             this._sRuta<%= nombreMayuscula %>Service.buscarDeNuevo('<%= id %>', registro.<%= id %>)
-          )
+          ) as any as Observable<<%= nombreMayuscula %>Interface>
+
+        actualizar$.
           .subscribe(
             (registroEditado) => {
               registroEditado.habilitado = registro.habilitado;

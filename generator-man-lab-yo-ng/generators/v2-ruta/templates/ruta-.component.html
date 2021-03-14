@@ -152,7 +152,8 @@
                              $event,
                              <%= nombreCamel %>.<%= id %>,
                              <%= nombreCamel %>.habilitado,
-                             '<%= nombreHabilitado %>'
+                             '<%= nombreHabilitado %>',
+                             <%= nombreCamel %>
                              )"
                   ></p-inputSwitch>
                 </div>
@@ -205,7 +206,7 @@
 <!--                  <th><strong>VALOR</strong></th>-->
 <!--                </tr>-->
 <!--                <tr class="p-selectable-row detalle"-->
-<!--                    *ngFor="let valor of _sRuta<%= nombreMayuscula %>Service.generarObjeto(%= nombreCamel %>)">-->
+<!--                    *ngFor="let valor of _sRuta<%= nombreMayuscula %>Service.generarObjeto(<%= nombreCamel %>)">-->
 <!--                  <td><strong>{{valor.llave}}</strong></td>-->
 <!--                  <td>-->
 <!--                    &lt;!&ndash;  CAMPOS QUE USEN PIPES      &ndash;&gt   -->

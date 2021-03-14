@@ -252,7 +252,7 @@ module.exports = class extends Generator {
         switch (this.options[ARGUMENTOS.TIPO_CAMPO.nombre]) {
             case 'busqueda':
                 const templateCB = this.templatePath(TEMPLATES.CAMPO_BUSQUEDA);
-                const destinoCB = this.destinationPath(`${nombreGuiones}-campo-${nombreCampoGuiones}-busqueda.ts`);
+                const destinoCB = this.destinationPath(`${nombreGuiones}${variables.esFormulario ? '' : '-busqueda'}-campo-${nombreCampoGuiones}-busqueda.ts`);
                 this.fs.copyTpl(
                     templateCB,
                     destinoCB,
@@ -262,7 +262,7 @@ module.exports = class extends Generator {
             case 'autocomplete':
                 if (variables.nombrePropiedad) {
                     const templateCA = this.templatePath(TEMPLATES.CAMPO_AUTOCOMPLETE);
-                    const destinoCA = this.destinationPath(`${nombreGuiones}-campo-autocomplete-${nombreCampoGuiones}.ts`);
+                    const destinoCA = this.destinationPath(`${nombreGuiones}${variables.esFormulario ? '' : '-busqueda'}-campo-autocomplete-${nombreCampoGuiones}.ts`);
                     this.fs.copyTpl(
                         templateCA,
                         destinoCA,
@@ -274,7 +274,7 @@ module.exports = class extends Generator {
                 }
             case 'inputMask':
                 const templateCIM = this.templatePath(TEMPLATES.CAMPO_INPUT_MASK);
-                const destinoCIM = this.destinationPath(`${nombreGuiones}-campo-input-mask-${nombreCampoGuiones}.ts`);
+                const destinoCIM = this.destinationPath(`${nombreGuiones}${variables.esFormulario ? '' : '-busqueda'}-campo-input-mask-${nombreCampoGuiones}.ts`);
                 this.fs.copyTpl(
                     templateCIM,
                     destinoCIM,
@@ -283,7 +283,7 @@ module.exports = class extends Generator {
                 break;
             case 'inputNumber':
                 const templateCIN = this.templatePath(TEMPLATES.CAMPO_INPUT_NUMBER);
-                const destinoCIN = this.destinationPath(`${nombreGuiones}-campo-input-number-${nombreCampoGuiones}.ts`);
+                const destinoCIN = this.destinationPath(`${nombreGuiones}${variables.esFormulario ? '' : '-busqueda'}-campo-input-number-${nombreCampoGuiones}.ts`);
                 this.fs.copyTpl(
                     templateCIN,
                     destinoCIN,
@@ -292,7 +292,7 @@ module.exports = class extends Generator {
                 break;
             case 'inputSwitch':
                 const templateCIS = this.templatePath(TEMPLATES.CAMPO_INPUT_SWITCH);
-                const destinoCIS = this.destinationPath(`${nombreGuiones}-campo-input-switch-${nombreCampoGuiones}.ts`);
+                const destinoCIS = this.destinationPath(`${nombreGuiones}${variables.esFormulario ? '' : '-busqueda'}-campo-input-switch-${nombreCampoGuiones}.ts`);
                 this.fs.copyTpl(
                     templateCIS,
                     destinoCIS,
@@ -301,7 +301,7 @@ module.exports = class extends Generator {
                 break;
             case 'password':
                 const templateCP = this.templatePath(TEMPLATES.CAMPO_PASSWORD);
-                const destinoCP = this.destinationPath(`${nombreGuiones}-campo-password-${nombreCampoGuiones}.ts`);
+                const destinoCP = this.destinationPath(`${nombreGuiones}${variables.esFormulario ? '' : '-busqueda'}-campo-password-${nombreCampoGuiones}.ts`);
                 this.fs.copyTpl(
                     templateCP,
                     destinoCP,
@@ -328,7 +328,7 @@ module.exports = class extends Generator {
                     variables.arregloOpciones = transformarArregloOpciones(variables.arregloOpciones);
                     if (variables.esFormulario) {
                         const templateCS = this.templatePath(TEMPLATES.CAMPO_SELECT);
-                        const destinoCS = this.destinationPath(`${nombreGuiones}-campo-select-${nombreCampoGuiones}.ts`);
+                        const destinoCS = this.destinationPath(`${nombreGuiones}${variables.esFormulario ? '' : '-busqueda'}-campo-select-${nombreCampoGuiones}.ts`);
                         this.fs.copyTpl(
                             templateCS,
                             destinoCS,
@@ -338,14 +338,14 @@ module.exports = class extends Generator {
                     } else {
                         if (variables.undefinedValor) {
                             const templateCS = this.templatePath(TEMPLATES.CAMPO_SELECT);
-                            const destinoCS = this.destinationPath(`${nombreGuiones}-campo-select-${nombreCampoGuiones}.ts`);
+                            const destinoCS = this.destinationPath(`${nombreGuiones}${variables.esFormulario ? '' : '-busqueda'}-campo-select-${nombreCampoGuiones}.ts`);
                             this.fs.copyTpl(
                                 templateCS,
                                 destinoCS,
                                 variables
                             );
                             break;
-                        }else{
+                        } else {
                             throw new Error('Debe enviar undefinedValor Ej: NombreRuta NombreCampo select .... "Nombre de undefined"');
                         }
                     }
@@ -353,7 +353,7 @@ module.exports = class extends Generator {
                 break;
             case 'texto':
                 const templateCT = this.templatePath(TEMPLATES.CAMPO_TEXTO);
-                const destinoCT = this.destinationPath(`${nombreGuiones}-campo-texto-${nombreCampoGuiones}.ts`);
+                const destinoCT = this.destinationPath(`${nombreGuiones}${variables.esFormulario ? '' : '-busqueda'}-campo-texto-${nombreCampoGuiones}.ts`);
                 this.fs.copyTpl(
                     templateCT,
                     destinoCT,

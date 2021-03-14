@@ -261,7 +261,7 @@ module.exports = class extends Generator {
         );
 
         const templateCB = this.templatePath(TEMPLATES.CAMPO_BUSQUEDA);
-        const destinoCB = this.destinationPath(`./busqueda-filtros/busqueda/${nombreGuiones}-campo-texto-busqueda.ts`);
+        const destinoCB = this.destinationPath(`./busqueda-filtros/busqueda/${nombreGuiones}-busqueda-campo-texto-busqueda.ts`);
 
         this.fs.copyTpl(
             templateCB,
@@ -270,7 +270,7 @@ module.exports = class extends Generator {
         );
 
         const templateCH = this.templatePath(TEMPLATES.CAMPO_HABILITADO);
-        const destinoCH = this.destinationPath(`./busqueda-filtros/busqueda/${nombreGuiones}-campo-select-habilitado.ts`);
+        const destinoCH = this.destinationPath(`./busqueda-filtros/busqueda/${nombreGuiones}-busqueda-campo-select-habilitado.ts`);
 
         this.fs.copyTpl(
             templateCH,

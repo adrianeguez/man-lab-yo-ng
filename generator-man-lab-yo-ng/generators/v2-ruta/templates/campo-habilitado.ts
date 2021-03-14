@@ -23,10 +23,10 @@ export const <%= nombreSoloMayusculas %>_BUSQUEDA_CAMPO_SELECT_HABILITADO: (clas
     select: {
       valoresSelect: [
         {
-        <%= nombreHabilitado %>: ActivoInactivo.ACTIVO
+        <%= nombreHabilitado %>: ActivoInactivo.Activo
         },
         {
-        <%= nombreHabilitado %>: ActivoInactivo.INACTIVO
+        <%= nombreHabilitado %>: ActivoInactivo.Inactivo
         },
         {
         <%= nombreHabilitado %>: undefined
@@ -39,11 +39,11 @@ export const <%= nombreSoloMayusculas %>_BUSQUEDA_CAMPO_SELECT_HABILITADO: (clas
         if (campo.<%= nombreHabilitado %> === undefined) {
           return 'Todos';
         }
-        if (campo.<%= nombreHabilitado %> === ActivoInactivo.ACTIVO) {
+        if (campo.<%= nombreHabilitado %> === ActivoInactivo.Activo) {
 
           return 'Activo';
         }
-        if (campo.<%= nombreHabilitado %> === ActivoInactivo.INACTIVO) {
+        if (campo.<%= nombreHabilitado %> === ActivoInactivo.Inactivo) {
 
           return 'Inactivo';
         }

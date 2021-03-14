@@ -8,7 +8,7 @@ import {HttpClient} from '@angular/common/http';
   providedIn: <%= nombreMayuscula %>Module
 })
 export class <%= nombreMayuscula %>Service
-  extends ServicioComun<<%= nombreMayuscula %>Interface, <%= nombreMayuscula %>BusquedaDto> {
+  extends ServicioComunMlabs<<%= nombreMayuscula %>Interface, <%= nombreMayuscula %>BusquedaDto> {
 
   constructor(
     private readonly _httpClient: HttpClient,
