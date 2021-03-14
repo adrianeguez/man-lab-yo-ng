@@ -63,6 +63,22 @@ export class SRuta<%= nombreMayuscula %>Service extends RutaComun<SRuta<%= nombr
           // },
         ]
       },
+        ModalCrearEditarComunComponent,
+        TAKE,
+        REGISTROS_POR_PAGINA,
+        ActivoInactivo as {Activo:any, Inactivo:any}
     );
+    // Si se quiere que el stepper sea horizontal
+    // this.vertical = false;
+
+    // Path de propiedades para poder agrupar en la tabla
+
+    // Ej1: {nombre:'Adrian', apellido:'Eguez', clase:'Clase uno'}
+    // this.nombreAtributoAAgrupar = ['clase'];
+    // En este caso solo se accede a -> registro.clase
+
+    // Ej2: {nombre:'Adrian', apellido:'Eguez', campoRelacion:{campoNombre:'Clase'}}
+    // this.nombreAtributoAAgrupar = ['campoRelacion', 'campoNombre'];
+    // En este caso solo se accede a -> registro.campoRelacion.campoNombre
   }
 }

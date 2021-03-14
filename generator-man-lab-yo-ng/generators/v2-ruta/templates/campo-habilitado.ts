@@ -1,5 +1,5 @@
 
-export const <%= nombreSoloMayusculas %>_CAMPO_SELECT_HABILITADO: (claseComponente: any) => CampoFormulario = (claseComponente: any) => {
+export const <%= nombreSoloMayusculas %>_BUSQUEDA_CAMPO_SELECT_HABILITADO: (claseComponente: any) => CampoFormulario = (claseComponente: any) => {
   return {
     hidden: false,
     componente: claseComponente,

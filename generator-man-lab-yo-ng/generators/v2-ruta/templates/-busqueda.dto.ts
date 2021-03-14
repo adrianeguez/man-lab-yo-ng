@@ -1,6 +1,6 @@
 import {Expose} from 'class-transformer';
 
-export class <%= nombreMayuscula %>BusquedaDto extends BusquedaComunDto {
+export class <%= nombreMayuscula %>BusquedaDto extends BusquedaComunProyectoDto {
     @Expose()
     <%= id %>?: number; // no es necesario igualar a undefined
     // A los campos de busqueda se los iguala a undefined EXCEPTO

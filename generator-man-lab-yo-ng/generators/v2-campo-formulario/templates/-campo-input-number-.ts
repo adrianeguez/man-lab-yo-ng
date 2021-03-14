@@ -4,7 +4,7 @@ import {<%= nombreMayuscula %>Interface} from '../../interfaces/<%= nombreGuione
 import {<%= nombreMayuscula %>BusquedaDto} from '../../dto/<%= nombreGuiones %>-busqueda.dto';
 <% } else{ %>
 <% } %>
-export const <%= nombreSoloMayusculas %>_CAMPO_INPUT_NUMBER_<%= nombreCampoSoloMayusculas %>: (
+export const <%= nombreSoloMayusculas %><%= esFormulario ? '' : '_BUSQUEDA' %>_CAMPO_INPUT_NUMBER_<%= nombreCampoSoloMayusculas %>: (
     <% if(esFormulario) { %>
   claseComponente: ModalComponente) => CampoFormulario =
     (claseComponente: ModalComponente<Ruta<%= nombreMayuscula %>Component, <%= nombreMayuscula %>Interface, <%= nombreMayuscula %>BusquedaDto>) => {
@@ -92,7 +92,7 @@ export const <%= nombreSoloMayusculas %>_CAMPO_INPUT_NUMBER_<%= nombreCampoSoloM
       // validators,
   <% } %>
 <% if(esFormulario) { %>
-  estaValido: valorCampo ? true : false,
+  estaValido: valorCampo ? true : false, // Si es un campo opcional debe ser siempre 'true'
   <% } else{ %>
   estaValido: true,
   <% } %>

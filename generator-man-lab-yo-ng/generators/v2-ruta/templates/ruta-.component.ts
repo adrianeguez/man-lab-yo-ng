@@ -267,6 +267,7 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
 //         nombrePropiedad: 'nombreCampo',
 //         nombresCamposRequeridosQueAfecta: ['campoUno', 'campoDos']
 //       },
+//     // También hay el caso en donde al mostrar unos campos se oculten otros:
 //       {
 //         nombrePropiedad: 'nombreOtro',
 //         nombresCamposRequeridosQueAfecta: ['campoTres', 'campoCuatro'],
@@ -286,6 +287,8 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
 //         camposAEstablecerValidezArreglo,
 //         valorCampoValidez,
 //         nombrePropiedadValidez,
+//         undefined,
+//         registro,
 //     );
 //   }
 

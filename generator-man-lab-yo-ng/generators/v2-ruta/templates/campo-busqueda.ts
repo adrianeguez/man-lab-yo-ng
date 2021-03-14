@@ -1,5 +1,5 @@
 
-export const <%= nombreSoloMayusculas %>_CAMPO_TEXTO_BUSQUEDA: (claseComponente: any) => CampoFormulario = (claseComponente: any) => {
+export const <%= nombreSoloMayusculas %>_BUSQUEDA_CAMPO_TEXTO_BUSQUEDA: (claseComponente: any) => CampoFormulario = (claseComponente: any) => {
   return {
     componente: claseComponente,
     validators: [],
