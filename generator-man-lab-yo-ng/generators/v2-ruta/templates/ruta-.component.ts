@@ -132,6 +132,27 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
       );
   }
 
+  // Usar para generar campos de formulario dinamicos
+
+  // generarFormulario() {
+  //   this.mostrarFormularioDePrueba = false;
+  //   const arregloDatos: CampoAutogenerado[] = [];
+  //   const grupoFormulario: GrupoFormulario[] = [];
+  //   // crear los campos autogenerados "arregloDatos" y
+  //   // AL MENOS debe existir un "grupoFormulario" que contenga a todos los campos para una visualización sencilla
+  //   const respuestaAutogenerado = this._sRutaArticuloAtributoService
+  //       .generarFormularioAutogenerado(
+  //           arregloDatos,
+  //           MENSAJES_ERROR,
+  //           this,
+  //           grupoFormulario
+  //       )
+  //   this.arregloFormulario.arregloValores = respuestaAutogenerado.arregloValores;
+  //   this.arregloFormulario.grupo = respuestaAutogenerado.grupo;
+  //   this.arregloFormulario.campos = respuestaAutogenerado.campos;
+  //   this.mostrarFormularioDePrueba = true;
+  // }
+
   formularioValidoBusqueda(formularioBusquedaValido: TodosCamposValidados): void {
     this.formularioBusqueda = formularioBusquedaValido;
     if (formularioBusquedaValido.valido) {
