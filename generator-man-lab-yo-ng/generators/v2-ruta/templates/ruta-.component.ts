@@ -318,10 +318,10 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
       // Si se tienen campos dependientes se deben de
       // activarlos antes de editarlos
       // if(camposRequeridos.campoDependeUno){
-      //   camposRequeridos.nombreCampoDependienteUno
+      //   camposRequeridos.nombreCampoDependienteUno = true
       // }
       // if(camposRequeridos.campoDependeDos){
-      //   camposRequeridos.nombreCampoDependienteDos
+      //   camposRequeridos.nombreCampoDependienteDos = true
       // }
       this._sRuta<%= nombreMayuscula %>Service.abrirModal(this, registro);
     }
