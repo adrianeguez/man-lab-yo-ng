@@ -53,6 +53,7 @@ const TEMPLATES = {
     BUSQUEDA_DTO: '-busqueda.dto.ts',
     CAMPO_NOMBRE: 'campo--nombre.ts',
     FORMULARIO_CREAR_EDITAR: 'formulario-.ts',
+    MIGAS_PAN: '-migas-pan.ts',
 }
 
 const aCamel = (cadena) => {
@@ -338,6 +339,15 @@ module.exports = class extends Generator {
         this.fs.copyTpl(
             templateFCE,
             destinoFCE,
+            variables
+        );
+
+        const templateMP = this.templatePath(TEMPLATES.MIGAS_PAN);
+        const destinoMP = this.destinationPath(`./migas-pan/${nombreGuiones}-migas-pan.ts`);
+
+        this.fs.copyTpl(
+            templateMP,
+            destinoMP,
             variables
         );
     }
