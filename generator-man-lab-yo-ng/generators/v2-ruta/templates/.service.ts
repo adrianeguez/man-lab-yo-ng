@@ -12,13 +12,18 @@ export class <%= nombreMayuscula %>Service
 
   constructor(
     private readonly _httpClient: HttpClient,
+    private readonly _notificacionService: NotificacionService,
+    private readonly _confirmationService: ConfirmationService,
   ) {
     super(
       '<%= nombreGuiones %>',
       _httpClient,
         <%= nombreMayuscula %>BusquedaDto,
       '<%= nombreHabilitado %>',
-      '<%= id %>'
+      '<%= id %>',
+        _notificacionService,
+        _confirmationService,
+
     );
   }
 }

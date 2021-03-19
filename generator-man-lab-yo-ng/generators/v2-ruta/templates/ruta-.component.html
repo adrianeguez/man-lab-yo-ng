@@ -1,5 +1,6 @@
 
 <mat-card class="filtros">
+  <p-breadcrumb [model]="migasPan"></p-breadcrumb>
   <div class="mat-elevation-z8">
     <div class="padding20px">
       <h1><%= nombreMayuscula %></h1>
@@ -70,6 +71,30 @@
                   >
                 </div>
               </div>
+<!--              Seccion para campos autogenerados para mostrar table y formulario-->
+
+<!--              <div class="col-sm-2">-->
+<!--                <div class="float-end margen-boton-crear-tabla">-->
+<!--                  <button pButton-->
+<!--                          pRipple-->
+<!--                          label="Previsualizar tabla"-->
+<!--                          icon="pi pi-plus"-->
+<!--                          class="p-button-primary p-mr-2"-->
+<!--                          (click)="abrirModalAutogenerados(true)"-->
+<!--                  ></button>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="col-sm-2">-->
+<!--                <div class="float-end margen-boton-crear-tabla">-->
+<!--                  <button pButton-->
+<!--                          pRipple-->
+<!--                          label="Actualizar Nuevos Campos"-->
+<!--                          icon="pi pi-plus"-->
+<!--                          class="p-button-primary p-mr-2"-->
+<!--                          (click)="abrirModalAutogenerados()"-->
+<!--                  ></button>-->
+<!--                </div>-->
+<!--              </div>-->
               <div class="col-sm-2">
                 <div class="paddingTop36px text-center">
                   <button (click)="_sRuta<%= nombreMayuscula %>Service.limpiarFiltroGeneral()"
