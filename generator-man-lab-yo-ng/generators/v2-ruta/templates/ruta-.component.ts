@@ -7,6 +7,8 @@ import {<%= nombreMayuscula %>Interface} from '../../interfaces/<%= nombreGuione
 import {Crear<%= nombreMayuscula %>} from './clases/crear-<%= nombreGuiones %>';
 import {Actualizar<%= nombreMayuscula %>} from './clases/actualizar-<%= nombreGuiones %>';
 import {<%= nombreSoloMayusculas%>_FORMULARIO_BUSQUEDA} from './busqueda-filtros/busqueda/<%= nombreGuiones %>-formulario-busqueda';
+import {MenuItem} from 'primeng/api';
+import {<%= nombreSoloMayusculas%>_MIGAS_PAN} from './migas-pan/<%= nombreGuiones %>-migas-pan';
 
 @Component({
   selector: 'app-ruta-<%= nombreGuiones %>',
@@ -49,7 +51,11 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
   opciones = [
     // {
     //   ruta: (id: string) => { // parametros de la ruta
-    //     return ['/empieza', id, 'termina-ruta']; // ruta en arreglo
+    //     return [
+    //     ...<%= nombreSoloMayusculas %>_MIGAS_PAN(this).routerLink, // RUTA ACTUAL
+    //     id,  // ids necesarios
+    //     'termina-ruta' // opcional path final
+    //     ]; // ruta en arreglo
     //   },
     //   nombre: 'Otra acción de ...'
     // }
@@ -75,6 +81,19 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
   //   nombreCampoDependiendeDos: false,
   // };
 
+  // Si existen campos AUTOGENERADOS en estas tablase se necesitarian estas variables
+
+  // botonAceptarModalAutogeneradoDisabled = false;
+  //
+  // camposAutogeneradosAGuardar: CampoFormulario[] = [];
+  //
+  // arregloAutogenerado: { arregloDatos: CampoAutogenerado[]; grupoFormulario: GrupoFormulario[] } = {
+  //   arregloDatos: [],
+  //   grupoFormulario: [],
+  // };
+
+  migasPan: MenuItem[] = [];
+
   constructor(
     public readonly _sRuta<%= nombreMayuscula %>Service: SRuta<%= nombreMayuscula %>Service,
     private readonly _activatedRoute: ActivatedRoute,
@@ -98,6 +117,16 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
             // }
           this._sRuta<%= nombreMayuscula %>Service
             .busquedaDto = busqueda;
+          this._sRuta<%= nombreMayuscula %>Service
+              .construirMigasPan(
+                  this,
+                  NombreOpcionesMenu.NombreContenedorObjetoMenu,
+                  [
+                    // ABASTECIMIENTO_2_MIGAS_PAN, // Migas de pan anteriores "padres"
+                    <%= nombreSoloMayusculas %>_MIGAS_PAN,
+                  ],
+                  PosicionesOpcionesMenu.PosicionContenedorObjetoMenu,
+              );
           this.buscarConFiltros();
         }
       );
@@ -318,13 +347,103 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
       // Si se tienen campos dependientes se deben de
       // activarlos antes de editarlos
       // if(camposRequeridos.campoDependeUno){
-      //   camposRequeridos.nombreCampoDependienteUno = true
+      //   camposRequeridos.nombreCampoDependienteUno = true;
       // }
       // if(camposRequeridos.campoDependeDos){
-      //   camposRequeridos.nombreCampoDependienteDos = true
+      //   camposRequeridos.nombreCampoDependienteDos = true;
       // }
       this._sRuta<%= nombreMayuscula %>Service.abrirModal(this, registro);
-    }
+    // En el caso de cammpos AUTOGERENADOS se habilita esta parte del codigo
+
+    // const respuesta = this._sRuta<%= nombreMayuscula %>Service._<%= nombreCamel %>Service.generarFormulario(registro);
+    // respuesta.arregloDatos = respuesta
+    //     .arregloDatos
+    // .map( // EJEMPLO DE IMPLEMENTACION:
+    //     (aD) => {
+    //       aD.valorInicial = registro.catValor;
+    //       aD.required = true;
+    //       aD.estaValido = false;
+    //       aD.fnValidarInputMask = (campo, componente) => {
+    //         if (campo) {
+    //           return campo.length > 0
+    //         } else {
+    //           return true;
+    //         }
+    //       };
+    //       return aD;
+    //     }
+    // );
+    // const respuestaGrupoCampo = this._sRuta<%= nombreMayuscula %>Service
+    //     .generarFormularioAutogenerado(
+    //         respuesta.arregloDatos,
+    //         MENSAJES_ERROR,
+    //         this,
+    //         respuesta.grupoFormulario
+    //     );
+    // this.abrirModalPrevisualizarTablaAutogenerado(respuestaGrupoCampo, false, registro);
+
+  }
+
+  // abrirModalPrevisualizarTablaAutogenerado(
+  //     arregloDeDatos: {
+  //   campos: (claseComponente: any) => CampoFormulario[],
+  //       grupo: () => GrupoFormulario[],
+  //       arregloValores: { nombre: string, campos: string[] }[]
+  // },
+  // mostrarTabla = false,
+  //     registro?: <%= nombreMayuscula %>Interface) {
+  //   this.botonAceptarModalAutogeneradoDisabled = true;
+  //   const dialogRef = this.matDialog.open(
+  //       ModalFormularioAutogeneradoComponent, // Modal de autogenerado
+  //       {
+  //         data: {
+  //           arregloFormulario: arregloDeDatos,
+  //           componente: this,
+  //           mostrarTabla: mostrarTabla,
+  //           registro,
+  //         }
+  //       }
+  //   );
+  // }
+
+  // cambioCampoAutogenerado(eventoCambioCampo: EventoCambioFormulario) {
+  //
+  // }
+
+  // formularioValidoAutogenerado(estaValido: TodosCamposValidados, registro?: <%= nombreMayuscula %>Interface) {
+  //   if (estaValido.valido) {
+  //     this.camposAutogeneradosAGuardar = estaValido
+  //         .camposFormulario
+  //         .filter((cF) => cF.estaValido && cF.valorActual)
+  //     this.botonAceptarModalAutogeneradoDisabled = false;
+  //   } else {
+  //     this.botonAceptarModalAutogeneradoDisabled = true;
+  //   }
+  // }
+
+  // aceptoFormularioAutogenerado(registro?: ArticuloCatalogoInterface) {
+  //   if (registro) {
+  //     this.editarRegistro(registro);
+  //   } else {
+  //     this.guardarNuevosCampos()
+  //   }
+  // }
+
+  // Implementacion de guardado de campos auto generados
+
+  // guardarNuevosCampos() {
+  //
+  // }
+
+  // Implementacion de ediciion de campo autogenerado
+
+  // editarRegistro(registro: ArticuloCatalogoInterface) {
+  //
+  // }
+
+  // cambioStepperEnAutogenerado(indice: number) {
+  //
+  // }
 
 
   crearEditar(

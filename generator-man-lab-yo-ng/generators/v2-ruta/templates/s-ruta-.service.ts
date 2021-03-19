@@ -23,6 +23,7 @@ export class SRuta<%= nombreMayuscula %>Service extends RutaComun<SRuta<%= nombr
     public readonly _cargandoService: CargandoService,
     public readonly _notificacionService: NotificacionService,
     public matDialog: MatDialog,
+    public readonly _menuGeneralService: MenuGeneralService,
   ) {
     super(
       _<%= nombreCamel %>Service,
@@ -63,19 +64,19 @@ export class SRuta<%= nombreMayuscula %>Service extends RutaComun<SRuta<%= nombr
           // },
         ]
       },
-
-        // Si se quiere que el stepper sea horizontal
-        // this.vertical = false;
-
-        // Path de propiedades para poder agrupar en la tabla
-
-        // Ej1: {nombre:'Adrian', apellido:'Eguez', clase:'Clase uno'}
-        // this.nombreAtributoAAgrupar = ['clase'];
-        // En este caso solo se accede a -> registro.clase
-
-        // Ej2: {nombre:'Adrian', apellido:'Eguez', campoRelacion:{campoNombre:'Clase'}}
-        // this.nombreAtributoAAgrupar = ['campoRelacion', 'campoNombre'];
-        // En este caso solo se accede a -> registro.campoRelacion.campoNombre
+        _menuGeneralService,
     );
+    // Si se quiere que el stepper sea horizontal
+    // this.vertical = false;
+
+    // Path de propiedades para poder agrupar en la tabla
+
+    // Ej1: {nombre:'Adrian', apellido:'Eguez', clase:'Clase uno'}
+    // this.nombreAtributoAAgrupar = ['clase'];
+    // En este caso solo se accede a -> registro.clase
+
+    // Ej2: {nombre:'Adrian', apellido:'Eguez', campoRelacion:{campoNombre:'Clase'}}
+    // this.nombreAtributoAAgrupar = ['campoRelacion', 'campoNombre'];
+    // En este caso solo se accede a -> registro.campoRelacion.campoNombre
   }
 }
