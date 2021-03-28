@@ -45,6 +45,7 @@
     <h1>Registros</h1>
     <p>DESCRIPCION.</p>
     <div class="mat-elevation-z8">
+      <% if(!esFirebase){ %>
       <p-table [columns]="columnasPrimeTable"
                [value]="_sRuta<%= nombreMayuscula %>Service.arregloDatosFiltrado"
                [lazy]="true"
@@ -57,6 +58,18 @@
                dataKey="<%= id %>"
                [customSort]="true"
       >
+      <% } %>
+
+      <% if(esFirebase){ %>
+      <p-table [columns]="columnasPrimeTable"
+               [value]="_sRuta<%= nombreMayuscula %>Service.arregloDatosFiltrado"
+               [rows]="_sRuta<%= nombreMayuscula %>Service.take"
+               [(first)]="_sRuta<%= nombreMayuscula %>Service.first"
+               dataKey="<%= id %>"
+               [customSort]="true"
+               (sortFunction)="_sRuta<%= nombreMayuscula %>Service.sortFirebase($event, this)"
+      >
+      <% }%>
 
         <ng-template pTemplate="caption">
           <div class="p-d-flex table-header">
@@ -195,9 +208,7 @@
                     (click)="_sRuta<%= nombreMayuscula %>Service.formularioEnModalActual = undefined;"
                     (click)="_sRuta<%= nombreMayuscula %>Service.camposSeleccionadosFormulario = {};"
                     (click)="_sRuta<%= nombreMayuscula %>Service.setearCamposRequeridosAFalso(this);"
-                    (click)="abrirModal(
-                <%= nombreCamel %>
-                )"
+                    (click)="abrirModal(<%= nombreCamel %>)"
                   ></p-button>
 <!--                  <div *ngFor="let opcion of opciones">-->
 <!--                    <br>-->
@@ -208,7 +219,7 @@
 <!--                      styleClass="p-button-help"-->
 <!--                      (click)="_sRuta<%= nombreMayuscula %>Service.navegar(-->
 <!--                  _router,-->
-<!--                  opcion.ruta(<%= nombreCamel %>.<%= id %>)-->
+<!--                  opcion.ruta(<%= nombreCamel %>.<%= !esFirebase ? id : 'uid' %>)-->
 <!--                )"-->
 <!--                    ></p-button>-->
 <!--                  </div>-->
@@ -260,8 +271,25 @@
           <div class="row">
             <div class="col-sm-4"></div>
             <div class="col-sm-4 text-center">
-
+              <% if(!esFirebase){ %>
               {{_sRuta<%= nombreMayuscula %>Service.registrosPagina}} registros de un total de {{_sRuta<%= nombreMayuscula %>Service.totalRecords}} registros.
+              <% } %>
+              <% if(esFirebase){ %>
+                <div *ngIf="_sRuta<%= nombreMayuscula %>Service.yaNoHayMasRegistros">
+                  <p class="text-center bold">No hay mas registros.</p>
+                </div>
+                <div *ngIf="!_sRuta<%= nombreMayuscula %>Service.yaNoHayMasRegistros">
+                  <button pButton
+                          pRipple
+                          label="Cargar más"
+                          icon="pi pi-download"
+                          class="p-button-help p-mr-2"
+                          (click)="_sRuta<%= nombreMayuscula %>Service.limpiarFiltroGeneral()"
+                          (click)="buscarSuscrito()"
+                  >
+                  </button>
+                </div>
+              <% } %>
 
             </div>
             <div class="col-sm-4"></div>

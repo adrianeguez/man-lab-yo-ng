@@ -23,7 +23,7 @@ export class SRuta<%= nombreMayuscula %>Service extends RutaComun<SRuta<%= nombr
     public readonly _cargandoService: CargandoService,
     public readonly _notificacionService: NotificacionService,
     public matDialog: MatDialog,
-    public readonly _menuGeneralModulService: MenuGeneralService,
+    public readonly _menuGeneralService: MenuGeneralService,
   ) {
     super(
       _<%= nombreCamel %>Service,
@@ -68,7 +68,7 @@ export class SRuta<%= nombreMayuscula %>Service extends RutaComun<SRuta<%= nombr
         TAKE,
         REGISTROS_POR_PAGINA,
         ActivoInactivo as {Activo:any, Inactivo:any},
-        _menuGeneralModulService,
+        _menuGeneralService,
     );
     // Si se quiere que el stepper sea horizontal
     // this.vertical = false;

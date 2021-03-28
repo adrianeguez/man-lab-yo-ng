@@ -1,6 +1,6 @@
 
-import {<%= nombreSoloMayusculas %>_BUSQUEDA_CAMPO_TEXTO_BUSQUEDA} from './<%= nombreGuiones %>-campo-texto-busqueda';
-import {<%= nombreSoloMayusculas %>_BUSQUEDA_CAMPO_SELECT_HABILITADO} from './<%= nombreGuiones %>-campo-select-habilitado';
+import {<%= nombreSoloMayusculas %>_BUSQUEDA_CAMPO_TEXTO_BUSQUEDA} from './<%= nombreGuiones %>-busqueda-campo-texto-busqueda';
+import {<%= nombreSoloMayusculas %>_BUSQUEDA_CAMPO_SELECT_HABILITADO} from './<%= nombreGuiones %>-busqueda-campo-select-habilitado';
 
 
 export const <%= nombreSoloMayusculas %>_FORMULARIO_BUSQUEDA: (claseComponente: any) => CampoFormulario[] = (claseComponente: any) => {

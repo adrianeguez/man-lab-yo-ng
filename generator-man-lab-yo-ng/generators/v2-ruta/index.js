@@ -55,7 +55,16 @@ const TEMPLATES = {
     FORMULARIO_CREAR_EDITAR: 'formulario-.ts',
     MIGAS_PAN: '-migas-pan.ts',
 }
-
+const OPCIONES = {
+    ES_FIREBASE: {
+        nombre: 'esFirebase',
+        configuracion: {
+            type: String,
+            default: undefined,
+            desc: 'Si debe de crearse con los servicios de Firebase EJ: NombreRuta idRuta nombreHabilitado --esFirebase true'
+        }
+    },
+}
 const aCamel = (cadena) => {
     return cadena.charAt(0).toLowerCase() + cadena.slice(1);
 }
@@ -109,6 +118,9 @@ module.exports = class extends Generator {
         this.argument(ARGUMENTOS.NOMBRE.nombre, ARGUMENTOS.NOMBRE.configuracion);
         this.argument(ARGUMENTOS.ID.nombre, ARGUMENTOS.ID.configuracion);
         this.argument(ARGUMENTOS.HABILITADO.nombre, ARGUMENTOS.HABILITADO.configuracion);
+
+        // opciones
+        this.option(OPCIONES.ES_FIREBASE.nombre, OPCIONES.ES_FIREBASE.configuracion);
     }
 
     initializing() {
@@ -154,6 +166,10 @@ module.exports = class extends Generator {
         const nombreEspacioMayuscula = aNombreEspacioMayuscula(nombreMayuscula);
         let id = this.options[ARGUMENTOS.ID.nombre];
         let nombreHabilitado = this.options[ARGUMENTOS.HABILITADO.nombre];
+
+        // opciones
+        const esFirebase = this.options[OPCIONES.ES_FIREBASE.nombre];
+
         if (!id) {
             id = 'id';
         }
@@ -168,7 +184,8 @@ module.exports = class extends Generator {
             nombreSoloMayusculas,
             nombreEspacioMayuscula,
             id,
-            nombreHabilitado
+            nombreHabilitado,
+            esFirebase,
         };
 
         const templateActualizar = this.templatePath(TEMPLATES.ACTUALIZAR);

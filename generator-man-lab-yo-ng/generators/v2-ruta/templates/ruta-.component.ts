@@ -112,9 +112,21 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
         (parametros: SRuta<%= nombreMayuscula %>Parametros) => {
           const busqueda = this._sRuta<%= nombreMayuscula %>Service
             .setearParametrosDeBusqueda(parametros, <%= nombreMayuscula %>BusquedaDto);
+            <% if(!esFirebase){ %>
             // if (parametros.nombreCampoRelacion && busqueda) {
             //   busqueda.nombreCampoRelacion = +parametros.nombreCampoRelacion;
             // }
+            <% } %>
+            <% if(esFirebase){ %>
+              // Setear los valores de las colecciones superiores
+              // Ej:
+              // if(parametros.nombreParametroPrimerNivel && parametros.nombreParametroSegundoNivel){
+              //   this._sRuta<%= nombreMayuscula %>Service.arregloIdColeccionesSuperiores = [
+              //     parametros.nombreParametroPrimerNivel,
+              //     parametros.nombreParametroSegundoNivel,
+              //   ];
+              // }
+            <% } %>
           this._sRuta<%= nombreMayuscula %>Service
             .busquedaDto = busqueda;
           this._sRuta<%= nombreMayuscula %>Service
@@ -122,10 +134,11 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
                   this,
                   NombreOpcionesMenu.NombreContenedorObjetoMenu,
                   [
-                    // ABASTECIMIENTO_2_MIGAS_PAN, // Migas de pan anteriores "padres"
+                    // MODULO_PAPA_MIGAS_PAN, // Migas de pan anteriores "padres"
                     <%= nombreSoloMayusculas %>_MIGAS_PAN,
                   ],
-                  PosicionesOpcionesMenu.PosicionContenedorObjetoMenu,
+                  PosicionOpcionesMenu.PosicionContenedorObjetoMenu,
+                  0
               );
           this.buscarConFiltros();
         }
@@ -133,32 +146,71 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
   }
 
   buscarConFiltros(): void {
-    this._sRuta<%= nombreMayuscula %>Service._cargandoService.habilitarCargando();
+    <% if(!esFirebase){ %>
     if (this._sRuta<%= nombreMayuscula %>Service.busquedaDto) {
       this._sRuta<%= nombreMayuscula %>Service.busquedaDto.skip = 0;
       this._sRuta<%= nombreMayuscula %>Service.first = 0;
     }
-    this._sRuta<%= nombreMayuscula %>Service
-      .buscar()
-      .subscribe(
-        (data) => {
-          this._sRuta<%= nombreMayuscula %>Service.registrosPagina = data[0].length;
-          this._sRuta<%= nombreMayuscula %>Service._cargandoService.deshabilitarCargando();
+    this.buscarSuscrito();
+    <% } %>
+    <% if(esFirebase){ %>
+    if (this._sRuta<%= nombreMayuscula %>Service.busquedaDto) {
+      this._sRuta<%= nombreMayuscula %>Service.first = 0;
+      // Setear whereFirestore al valor inicial
+      this._sRuta<%= nombreMayuscula %>Service.whereFirestore = [];
+      this._sRuta<%= nombreMayuscula %>Service.lastDocumentFirestore = undefined;
+      this._sRuta<%= nombreMayuscula %>Service.yaNoHayMasRegistros = false;
+      // Dependiendo de los filtros de búsqueda setear las búsquedas
+      // const arregloFiltroBusquedaFirestore: ArregloFiltroBusquedaFirestore[] = [
+      //   {
+      //     fieldPath: 'nombrePropiedadBusquedaDto',
+      //     opStr: '=='
+      //   }
+      // ];
+      const arregloFiltroBusquedaFirestore: ArregloFiltroBusquedaFirestore[] = [
+        {
+          fieldPath: '__busquedaGlobal',
+          opStr: 'array-contains'
         },
-        (error) => {
-          console.error({
-            mensaje: 'Error cargando registros',
-            data: this._sRuta<%= nombreMayuscula %>Service.busquedaDto,
-            error
-          });
-          this._sRuta<%= nombreMayuscula %>Service._notificacionService.anadir({
-            titulo: 'Error',
-            detalle: 'Error del servidor',
-            severidad: 'error'
-          });
-          this._sRuta<%= nombreMayuscula %>Service._cargandoService.deshabilitarCargando();
-        }
-      );
+        {
+          fieldPath: 'sisHabilitado',
+          opStr: '=='
+        },
+        // Anadir todos las busquedas que falten
+        // {
+        //   fieldPath: 'campo', // nombre de campo Firestore
+        //   opStr: '==' // cualquier opStr de Firestore
+        // },
+      ];
+      this._sRuta<%= nombreMayuscula %>Service.establecerWhereFirestore(arregloFiltroBusquedaFirestore);
+    }
+    this.buscarSuscrito();
+    <% } %>
+  }
+
+  buscarSuscrito(){
+    this._sRuta<%= nombreMayuscula %>Service._cargandoService.habilitarCargando();
+    this._sRuta<%= nombreMayuscula %>Service
+        .buscar()
+        .subscribe(
+            (data) => {
+              this._sRuta<%= nombreMayuscula %>Service.registrosPagina = data[0].length;
+              this._sRuta<%= nombreMayuscula %>Service._cargandoService.deshabilitarCargando();
+            },
+            (error) => {
+              console.error({
+                mensaje: 'Error cargando registros',
+                data: this._sRuta<%= nombreMayuscula %>Service.busquedaDto,
+                error
+              });
+              this._sRuta<%= nombreMayuscula %>Service._notificacionService.anadir({
+                titulo: 'Error',
+                detalle: 'Error del servidor',
+                severidad: 'error'
+              });
+              this._sRuta<%= nombreMayuscula %>Service._cargandoService.deshabilitarCargando();
+            }
+        );
   }
 
   // Usar para generar campos de formulario dinamicos
@@ -358,9 +410,9 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
 
     // En el caso de cammpos AUTOGERENADOS se habilita esta parte del codigo
 
-    const respuesta = this._sRuta<%= nombreMayuscula %>Service._<%= nombreCamel %>Service.generarFormulario(registro);
-    respuesta.arregloDatos = respuesta
-        .arregloDatos
+    // const respuesta = this._sRuta<%= nombreMayuscula %>Service._<%= nombreCamel %>Service.generarFormulario(registro);
+    // respuesta.arregloDatos = respuesta
+    //     .arregloDatos
         // .map( // EJEMPLO DE IMPLEMENTACION:
         //     (aD) => {
         //       aD.valorInicial = registro.catValor;
@@ -477,6 +529,7 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
         arregloPropiedades
       );
 
+
       // Setear campos extra
       // Ej:
       // camposCrear.objetoCrear.habilitado = 1;
@@ -484,17 +537,48 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
       // if (this._sRuta<%= nombreMayuscula %>Service.busquedaDto) {
       //   camposCrear.objetoCrear.nombreCampoRelacion = this._sRuta<%= nombreMayuscula %>Service.busquedaDto.nombreCampoRelacion as number;
       // }
+      <% if(esFirebase){%>
+      // Si se necesita setear el CODIGO IDENTIFICADOR dentro del objeto se puede utilizar estas lineas
+
+      // const campos = camposCrear.objetoCrear as Crear<%= nombreMayuscula %>;
+      // camposCrear.objetoCrear.sisHabilitado = ActivoInactivo.Activo;
+      // const codigo = campos.codigo;
+
+      // Si esta dentro de una COLECCION se puede usar lo siguiente para setear al padre coleccion:
+
+      // let nombreColeccionSuperior = '';
+      // if (this._sRuta<%= nombreMayuscula %>Service.parametros) {
+      //   if (this._sRuta<%= nombreMayuscula %>Service.parametros.nombreColeccionSuperior) {
+      //     nombreColeccionSuperior = nombreColeccionSuperior;
+      //   }
+      // }
+
+      <% }%>
+
 
       if (this._sRuta<%= nombreMayuscula %>Service.busquedaDto) {
         this._sRuta<%= nombreMayuscula %>Service._cargandoService.habilitarCargando();
         const crear$ = this._sRuta<%= nombreMayuscula %>Service
           ._<%= nombreCamel %>Service
+          <% if(!esFirebase){ %>
           .crear(
-            camposCrear.objetoCrear
+              camposCrear.objetoCrear
           )
+          <% } %>
+          <% if(esFirebase){ %>
+          .crear(
+                camposCrear.objetoCrear,
+                // codigo, // Solo si es necesario, también puede ser "undefined"
+               // false,
+              // this._sRuta<%= nombreMayuscula %>Service._<%= nombreCamel %>Service.arregloCamposBusqueda,
+              // this._sRuta<%= nombreMayuscula %>Service._<%= nombreCamel %>Service.arregloIdColeccionesSuperiores,
+            ) as Observable<<%= nombreMayuscula %>Interface>;
+          <% } %>
+          <% if(!esFirebase){ %>
           .pipe(
-            this._sRuta<%= nombreMayuscula %>Service.buscarDeNuevo('<%= id %>')
+              this._sRuta<%= nombreMayuscula %>Service.buscarDeNuevo('<%= id %>')
           ) as Observable<<%= nombreMayuscula %>Interface>;
+          <% } %>
         crear$
           .subscribe(
             (nuevoRegistro) => {
@@ -541,19 +625,28 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
         camposCrear.objetoCrear,
         arregloPropiedades
       );
-      if (registro.<%= id %>) {
+      if (registro.<%= !esFirebase ? id : 'uid' %>) {
         this._sRuta<%= nombreMayuscula %>Service._cargandoService.habilitarCargando();
         const actualizar$ = this._sRuta<%= nombreMayuscula %>Service
           ._<%= nombreCamel %>Service
-          .actualizar(
-            camposCrear.objetoCrear,
-            registro.<%= id %>
-          )
-          .pipe(
-            this._sRuta<%= nombreMayuscula %>Service.buscarDeNuevo('<%= id %>', registro.<%= id %>)
-          ) as any as Observable<<%= nombreMayuscula %>Interface>
+          <% if(!esFirebase){ %>
+              .actualizar(
+                  camposCrear.objetoCrear,
+                  registro.<%= id %>
+              )
+              .pipe(
+                  this._sRuta<%= nombreMayuscula %>Service.buscarDeNuevo('<%= id %>', registro.<%= id %>)
+              ) as any as Observable<<%= nombreMayuscula %>Interface>
+          <% } %>
+          <% if(esFirebase){ %>
+              .actualizar(
+                  registro,
+                  camposCrear.objetoCrear,
+                  this._sRuta<%= nombreMayuscula %>Service.arregloIdColeccionesSuperiores
+              ) as Observable<<%= nombreMayuscula %>Interface>;
+          <% }%>
 
-        actualizar$.
+        actualizar$
           .subscribe(
             (registroEditado) => {
               registroEditado.habilitado = registro.habilitado;

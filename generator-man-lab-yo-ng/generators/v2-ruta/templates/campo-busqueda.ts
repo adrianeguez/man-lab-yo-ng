@@ -5,7 +5,7 @@ export const <%= nombreSoloMayusculas %>_BUSQUEDA_CAMPO_TEXTO_BUSQUEDA: (claseCo
     validators: [],
     asyncValidators: null,
     valorInicial: undefined,
-    nombreCampo: 'busqueda',
+    nombreCampo: '<%= !esFirebase ? "busqueda" : "__busquedaGlobal" %>',
     nombreMostrar: 'Búsqueda',
     textoAyuda: 'Busca por nombre.',
     placeholderEjemplo: 'Ej: Servi...',
