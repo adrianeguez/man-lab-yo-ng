@@ -1,0 +1,77 @@
+{
+  "nombreRuta": "<%= nombreMayusculaIngles %>",
+  "descripcionRuta": "<%= nombreMayusculaIngles %> management",
+  "ayudaRuta": "Help ...",
+  "tituloTabla": "Records",
+  "descripcionTabla": "Manage <%= nombreMayusculaIngles %>",
+  "filtroTabla": "Filter by ...... Ex: .....",
+  "cabeceraTabla": {
+    "nombre": "Name",
+    "habilitado": "Enabled",
+    "acciones": "Options"
+  },
+  "opcionesIrRuta": {
+    "ejemplo": "Manag. Example"
+  },
+  "formularios": {
+    "comunes": {
+      "requerido": "The field \"{{nombre}}\" is required.",
+      "minLength": "The field \"{{nombre}}\" must have more than {{minlength}} characters.",
+      "maxLength": "The field \"{{nombre}}\" must have less than {{maxlength}} characters.",
+      "min": "The field \"{{nombre}}\" must have a minimum value of {{min}}.",
+      "max": "The field \"{{nombre}}\" must have a maximum value of {{max}}.",
+      "ngbDate": "The field \"{{nombre}}\" is not valid. Date format incorrect. Format: YYYY-MM-DD",
+      "pattern": "The field \"{{nombre}}\" is not valid. {{mensajePattern}}",
+      "correo": "The field \"{{nombre}}\" does not look like an email.",
+      "valido": "Valid",
+      "cuidado": "Warning",
+      "autocompleteSinRegistros": "There are no records"
+    },
+    "busqueda": {
+      "formularioBusqueda": {
+        "tituloFormulario": "Filters",
+        "descripcionFormulario": "Use filters to search <%= nombreMayusculaIngles %>",
+        "tituloFormularioConGrupo": " ",
+        "descripcionFormularioConGrupo": " "
+      },
+      "campoBusqueda": {
+        "nombreMostrar": "Search",
+        "textoAyuda": "Search by ......",
+        "placeholderEjemplo": "Ex: ........"
+      },
+      "campoHabilitado": {
+        "nombreMostrar": "Enable",
+        "textoAyuda": "Select enabled or disabled or all.",
+        "placeholderEjemplo": "Ex: Enabled / Disabled / All",
+        "placeholderFiltro": "Filter A = Enabled I = Disabled",
+        "mensajeFiltroVacio": "Not found",
+        "opcionActivo": "Enabled",
+        "opcionInactivo": "Disabled",
+        "opcionTodos": "All"
+      }
+    },
+    "crearEditar": {
+      "formularioCrearEditar": {
+        "tituloCrear": "Create <%= nombreMayusculaIngles %>",
+        "descripcionCrear": "Fill the form to create a new <%= nombreMayusculaIngles %>",
+        "tituloActualizar": "Edit <%= nombreMayusculaIngles %>",
+        "descripcionActualizar": "Fill the form to edit the <%= nombreMayusculaIngles %>",
+        "tituloFormulario": " ",
+        "descripcionFormulario": " ",
+        "tituloFormularioConGrupo": " ",
+        "descripcionFormularioConGrupo": " "
+      },
+      "campoNombre": {
+        "nombreMostrar": "Name",
+        "textoAyuda": "Fill the <%= nombreMayusculaIngles %> name.",
+        "placeholderEjemplo": "Ex: .......",
+        "placeholderFiltro": " ",
+        "mensajeFiltroVacio": " ",
+        "opcionUno": " ",
+        "opcionDos": " ",
+        "opcionTodos": " "
+      }
+    }
+  }
+}
+

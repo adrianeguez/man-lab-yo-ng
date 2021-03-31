@@ -26,6 +26,7 @@ export class <%= nombreMayuscula %>Service
         <%= nombreMayuscula %>BusquedaDto,
         '<%= nombreHabilitado %>',
         '<%= id %>',
+        environment.url,
         _notificacionService,
         _confirmationService,
 

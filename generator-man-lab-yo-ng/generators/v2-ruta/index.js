@@ -29,7 +29,7 @@ const ARGUMENTOS = {
         configuracion: {
             type: String,
             required: false,
-            desc: 'Nombre del campo habilitado. por defecto es "habilitado". EJ: empresaHabilitado'
+            desc: 'Nombre del campo habilitado. por defecto es "sisHabilitado". EJ: empresaHabilitado'
         }
     }
 }

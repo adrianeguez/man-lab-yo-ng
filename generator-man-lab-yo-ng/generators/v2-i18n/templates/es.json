@@ -1,0 +1,76 @@
+{
+  "nombreRuta": "<%= nombreMayusculaEspanol %>",
+  "descripcionRuta": "Gestión de <%= nombreMayusculaEspanol %>",
+  "ayudaRuta": "Ayuda ...",
+  "tituloTabla": "Registros",
+  "descripcionTabla": "Gestione <%= nombreMayusculaEspanol %>",
+  "filtroTabla": "Filtre por ............ Ej: .............",
+  "cabeceraTabla": {
+    "nombre": "Nombre",
+    "habilitado": "Habilitado",
+    "acciones": "Acciones"
+  },
+  "opcionesIrRuta": {
+    "ejemplo": "Gest. Ejemplo"
+  },
+  "formularios": {
+    "comunes": {
+      "requerido": "El campo \"{{nombre}}\" es requerido.",
+      "minLength": "El campo \"{{nombre}}\" debe tener más de {{minlength}} caracteres.",
+      "maxLength": "El campo \"{{nombre}}\" debe tener menos de {{maxlength}} caracteres.",
+      "min": "El campo \"{{nombre}}\" debe tener un minimo valor de {{min}}.",
+      "max": "El campo \"{{nombre}}\" debe tener un máximo valor de  {{max}}.",
+      "ngbDate": "El campo \"{{nombre}}\" no está valido. Formato Incorrecto. Format: YYYY-MM-DD",
+      "pattern": "El campo \"{{nombre}}\" no está valido. {{mensajePattern}}",
+      "correo": "El campo \"{{nombre}}\" no parece un correo electrónico.",
+      "valido": "Válido",
+      "cuidado": "Cuidado",
+      "autocompleteSinRegistros": "No hay más registros"
+    },
+    "busqueda": {
+      "formularioBusqueda": {
+        "tituloFormulario": "Filtros",
+        "descripcionFormulario": "Use los filtros para buscar <%= nombreMayusculaEspanol %>",
+        "tituloFormularioConGrupo": " ",
+        "descripcionFormularioConGrupo": " "
+      },
+      "campoBusqueda": {
+        "nombreMostrar": "Busqueda",
+        "textoAyuda": "Busque por .......",
+        "placeholderEjemplo": "Ej: ......"
+      },
+      "campoHabilitado": {
+        "nombreMostrar": "Habilitado",
+        "textoAyuda": "Seleccione Activo o Inactivo.",
+        "placeholderEjemplo": "Ej: Activo / Inactivo / Todos",
+        "placeholderFiltro": "Filtre A = Activo I = Inactivo",
+        "mensajeFiltroVacio": "No se encontró",
+        "opcionActivo": "Activo",
+        "opcionInactivo": "Inactivo",
+        "opcionTodos": "Todos"
+      }
+    },
+    "crearEditar": {
+      "formularioCrearEditar": {
+        "tituloCrear": "Crear <%= nombreMayusculaEspanol %>",
+        "descripcionCrear": "Llene el formulario para crear un nuevo <%= nombreMayusculaEspanol %>",
+        "tituloActualizar": "Editar <%= nombreMayusculaEspanol %>",
+        "descripcionActualizar": "Actualice el formulario para editar el <%= nombreMayusculaEspanol %>",
+        "tituloFormulario": " ",
+        "descripcionFormulario": " ",
+        "tituloFormularioConGrupo": " ",
+        "descripcionFormularioConGrupo": " "
+      },
+      "campoNombre": {
+        "nombreMostrar": "Nombre",
+        "textoAyuda": "Ingrese nombre del <%= nombreMayusculaEspanol %>.",
+        "placeholderEjemplo": "Ej: .............",
+        "placeholderFiltro": " ",
+        "mensajeFiltroVacio": " ",
+        "opcionUno": " ",
+        "opcionDos": " ",
+        "opcionTodos": " "
+      }
+    }
+  }
+}
