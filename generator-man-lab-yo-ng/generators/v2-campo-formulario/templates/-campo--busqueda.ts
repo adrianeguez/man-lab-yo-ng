@@ -104,12 +104,34 @@ export const <%= nombreSoloMayusculas %>_BUSQUEDA_CAMPO_<%= nombreCampoSoloMayus
     disabled: false,
     asyncValidators: null,
     nombreCampo: '<%= nombrePrefijo ? nombrePrefijo + nombreCampoMayuscula : nombreCampoCamel %>Busqueda',
+
+    <% if(internacionalizar) { %>
+    nombreMostrar: 'formularios.busqueda.campo<%= nombreCampoMayuscula %>Busqueda.nombreMostrar',
+    <% } else{ %>
     nombreMostrar: '<%= nombreCampoEspacioMayuscula %> Búsqueda',
+    <% } %>
+
+    <% if(internacionalizar) { %>
+    textoAyuda: 'formularios.busqueda.campo<%= nombreCampoMayuscula %>Busqueda.textoAyuda',
+    <% } else{ %>
     textoAyuda: 'Selecciona un tipo de búsqueda Mayor, Menor, Mayor o igual, Menor o igual o Igual.',
+    <% } %>
+
+    <% if(internacionalizar) { %>
+    placeholderEjemplo: 'formularios.busqueda.campo<%= nombreCampoMayuscula %>Busqueda.placeholderEjemplo',
+    <% } else{ %>
     placeholderEjemplo: 'Ej: > o < o >= o <= o =',
+    <% } %>
+
     mensajes: MENSAJES_ERROR(claseComponente),
     parametros: {
+
+      <% if(internacionalizar) { %>
+      nombreCampo: 'formularios.busqueda.campo<%= nombreCampoMayuscula %>Busqueda.nombreMostrar',
+      <% } else{ %>
       nombreCampo: '<%= nombreCampoEspacioMayuscula %> Búsqueda',
+      <% } %>
+
     },
     select: {
       valoresSelect: [
@@ -129,29 +151,55 @@ export const <%= nombreSoloMayusculas %>_BUSQUEDA_CAMPO_<%= nombreCampoSoloMayus
           <%= nombrePrefijo ? nombrePrefijo + nombreCampoMayuscula : nombreCampoCamel %>Busqueda: Busqueda.Mayor
         },
       ],
+
+      <% if(internacionalizar) { %>
+      placeholderFiltro: 'formularios.busqueda.campo<%= nombreCampoMayuscula %>Busqueda.placeholderFiltro',
+      <% } else{ %>
       placeholderFiltro: 'Filtre por Tipo Búsqueda Ej: > o < o >= o <= o =',
-      mensajeFiltroVacio: 'No se encontró',
+      <% } %>
+
+      <% if(internacionalizar) { %>
+        mensajeFiltroVacio: 'formularios.busqueda.campo<%= nombreCampoMayuscula %>Busqueda.mensajeFiltroVacio',
+      <% } else{ %>
+        mensajeFiltroVacio: 'No se encontró',
+      <% } %>
+
       campoFiltrado: '<%= nombrePrefijo ? nombrePrefijo + nombreCampoMayuscula : nombreCampoCamel %>Busqueda',
       fnMostrarEnSelect: (campo: { <%= nombrePrefijo ? nombrePrefijo + nombreCampoMayuscula : nombreCampoCamel %>Busqueda: Busqueda | undefined }) => {
         if (campo.<%= nombrePrefijo ? nombrePrefijo + nombreCampoMayuscula : nombreCampoCamel %>Busqueda === Busqueda.Igual) {
-
-          return 'Igual';
+          <% if(internacionalizar) { %>
+            return 'formularios.busqueda.campo<%= nombreCampoMayuscula %>Busqueda.opcionIgual';
+          <% } else{ %>
+            return 'Igual';
+          <% } %>
         }
         if (campo.<%= nombrePrefijo ? nombrePrefijo + nombreCampoMayuscula : nombreCampoCamel %>Busqueda === Busqueda.Mayor) {
-
+          <% if(internacionalizar) { %>
+          return 'formularios.busqueda.campo<%= nombreCampoMayuscula %>Busqueda.opcionMayor';
+          <% } else{ %>
           return 'Mayor';
+          <% } %>
         }
         if (campo.<%= nombrePrefijo ? nombrePrefijo + nombreCampoMayuscula : nombreCampoCamel %>Busqueda === Busqueda.MayorOIgual) {
-
+          <% if(internacionalizar) { %>
+          return 'formularios.busqueda.campo<%= nombreCampoMayuscula %>Busqueda.opcionMayorOIgual';
+          <% } else{ %>
           return 'Mayor o Igual';
+          <% } %>
         }
         if (campo.<%= nombrePrefijo ? nombrePrefijo + nombreCampoMayuscula : nombreCampoCamel %>Busqueda === Busqueda.Menor) {
-
+          <% if(internacionalizar) { %>
+          return 'formularios.busqueda.campo<%= nombreCampoMayuscula %>Busqueda.opcionMenor';
+          <% } else{ %>
           return 'Menor';
+          <% } %>
         }
         if (campo.<%= nombrePrefijo ? nombrePrefijo + nombreCampoMayuscula : nombreCampoCamel %>Busqueda === Busqueda.MenorOIgual) {
-
+          <% if(internacionalizar) { %>
+          return 'formularios.busqueda.campo<%= nombreCampoMayuscula %>Busqueda.opcionMenorOIgual';
+          <% } else{ %>
           return 'Menor o Igual';
+          <% } %>
         }
         return '';
       },

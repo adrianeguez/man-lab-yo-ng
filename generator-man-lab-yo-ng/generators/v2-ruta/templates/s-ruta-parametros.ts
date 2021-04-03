@@ -1,3 +1,4 @@
+import {RutaParametrosComun} from '@manticore-labs/ng-2021';
 
 export interface SRuta<%= nombreMayuscula %>Parametros extends RutaParametrosComun {
     <%= id %>?: string; <%= !esFirebase ? "" : "// Solo para que no de errores de lint (no borrar a menos que tenga otros parametros)" %>

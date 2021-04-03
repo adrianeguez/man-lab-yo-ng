@@ -1,4 +1,5 @@
 import {Validators} from '@angular/forms';
+import {CampoFormulario, ModalComponente} from '@manticore-labs/ng-2021';
 import {Ruta<%= nombreMayuscula %>Component} from '../../ruta/ruta-<%= nombreGuiones %>/ruta-<%= nombreGuiones %>.component';
 import {<%= nombreMayuscula %>Interface} from '../../interfaces/<%= nombreGuiones %>.interface';
 import {<%= nombreMayuscula %>BusquedaDto} from '../../dto/<%= nombreGuiones %>-busqueda.dto';
@@ -56,12 +57,33 @@ export const <%= nombreSoloMayusculas %>_CAMPO_TEXTO_NOMBRE: (
       disabled: false,
       asyncValidators: null,
       nombreCampo: 'nombre',
-      nombreMostrar: 'Nombre',
-      textoAyuda: 'Escriba un nombre.',
-      placeholderEjemplo: 'Ej: Nombre ...',
+
+        <% if(internacionalizar) { %>
+    nombreMostrar: 'formularios.busqueda.campo<%= nombreCampoMayuscula %>.nombreMostrar',
+    <% } else{ %>
+    nombreMostrar: 'Nombre',
+    <% } %>
+
+  <% if(internacionalizar) { %>
+    textoAyuda: 'formularios.busqueda.campo<%= nombreCampoMayuscula %>.textoAyuda',
+    <% } else{ %>
+    textoAyuda: 'Escriba un nombre.',
+    <% } %>
+
+  <% if(internacionalizar) { %>
+    placeholderEjemplo: 'formularios.busqueda.campo<%= nombreCampoMayuscula %>.placeholderEjemplo',
+    <% } else{ %>
+    placeholderEjemplo: 'Ej: Nombre ...',
+    <% } %>
+
+
       mensajes: MENSAJES_ERROR(claseComponente),
       parametros: {
-        nombreCampo: 'Nombre',
+    <% if(internacionalizar) { %>
+      nombreCampo: 'formularios.busqueda.campo<%= nombreCampoMayuscula %>.nombreMostrar',
+      <% } else{ %>
+      nombreCampo: 'Nombre',
+      <% } %>
         minlength: 10,
         maxlength: 60,
       },

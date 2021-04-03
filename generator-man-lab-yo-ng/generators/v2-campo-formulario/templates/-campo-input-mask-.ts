@@ -98,6 +98,7 @@ export const <%= nombreSoloMayusculas %><%= esFormulario ? '' : '_BUSQUEDA' %>_C
   <% } %>
     disabled: false,
     asyncValidators: null,
+
     nombreCampo: '<%= nombrePrefijo ? nombrePrefijo + nombreCampoMayuscula : nombreCampoCamel %>',
     nombreMostrar: '<%= nombreCampoEspacioMayuscula %>',
     textoAyuda: 'Ingresa <%= nombreCampoEspacioMayuscula %>.',

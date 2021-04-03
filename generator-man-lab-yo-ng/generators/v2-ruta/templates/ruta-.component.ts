@@ -9,6 +9,13 @@ import {Actualizar<%= nombreMayuscula %>} from './clases/actualizar-<%= nombreGu
 import {<%= nombreSoloMayusculas%>_FORMULARIO_BUSQUEDA} from './busqueda-filtros/busqueda/<%= nombreGuiones %>-formulario-busqueda';
 import {MenuItem} from 'primeng/api';
 import {<%= nombreSoloMayusculas%>_MIGAS_PAN} from './migas-pan/<%= nombreGuiones %>-migas-pan';
+import {
+  ArregloFiltroBusquedaFirestore,
+  EventoCambioAutocomplete,
+  EventoCambioFormulario, ObjetoBusquedaADto, ObjetoInternacionalizacionFormulario,
+  SetearObjeto,
+  TodosCamposValidados
+} from '@manticore-labs/ng-2021';
 
 @Component({
   selector: 'app-ruta-<%= nombreGuiones %>',
@@ -23,6 +30,9 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
     //   header: 'Nombre a mostrarse',
     //   posicion: 'text-center',
     //   tamanio: '60%', // tamaño en porcentaje de la columna
+    //   fnMostrar: (valor: string) => {
+    //   return valor;
+    // },
     //     fnMostrar: (valor:TipoValor)=>{
     //       switch (valor) {
     //         case TipoValor.ValorUno:
@@ -32,7 +42,7 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
     //         default:
     //           return valor;
     //       }
-    //     }
+    //     },
     // },
     {
       field: '<%= nombreHabilitado %>',
@@ -57,7 +67,8 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
     //     'termina-ruta' // opcional path final
     //     ]; // ruta en arreglo
     //   },
-    //   nombre: 'Otra acción de ...'
+    //   nombre: 'Otra acción de ...',
+    //   rutaImagen: '/<%= nombreGuiones %>/imagen-principal.svg'
     // }
   ];
 
@@ -92,12 +103,31 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
   //   grupoFormulario: [],
   // };
 
-  migasPan: MenuItem[] = [];
+  migasPan: MigaDePanInterface[] = [];
+
+  rutaImagenAssets = 'assets/img/' + NOMBRE_MODULO_ASSETS
+
+  <% if(internacionalizar) { %>
+  objetoInternacionalizacion: ObjetoInternacionalizacionFormulario = {
+        botonAtras: 'botonAtras',
+        botonLimpiarFormulario: 'botonLimpiarFormulario',
+        botonSiguiente: 'botonSiguiente',
+        nombreScopeTransloco: NOMBRE_SCOPE_ENTRENADOR,
+      }
+  <% } else{ %>
+
+  <% } %>
+
 
   constructor(
     public readonly _sRuta<%= nombreMayuscula %>Service: SRuta<%= nombreMayuscula %>Service,
     private readonly _activatedRoute: ActivatedRoute,
-    public readonly _router: Router
+    public readonly _router: Router,
+  <% if(internacionalizar) { %>
+    public readonly translocoService: TranslocoService,
+  <% } else{ %>
+
+  <% } %>
   ) {
   }
 
@@ -132,13 +162,10 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
           this._sRuta<%= nombreMayuscula %>Service
               .construirMigasPan(
                   this,
-                  NombreOpcionesMenu.NombreContenedorObjetoMenu,
                   [
-                    // MODULO_PAPA_MIGAS_PAN, // Migas de pan anteriores "padres"
-                    <%= nombreSoloMayusculas %>_MIGAS_PAN,
+                    // MODULO_MIGAS_PAN,
+                    // <%= nombreSoloMayusculas%>_MIGAS_PAN,
                   ],
-                  PosicionOpcionesMenu.PosicionContenedorObjetoMenu,
-                  0
               );
           this.buscarConFiltros();
         }
@@ -204,8 +231,15 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
                 error
               });
               this._sRuta<%= nombreMayuscula %>Service._notificacionService.anadir({
+
+                <% if(internacionalizar) { %>
+                titulo: this.translocoService.translate('generales.toasters.toastErrorConexionServidorVacio.title'),
+                detalle: this.translocoService.translate('generales.toasters.toastErrorConexionServidorVacio.body'),
+                <% } else{ %>
                 titulo: 'Error',
                 detalle: 'Error del servidor',
+                <% } %>
+
                 severidad: 'error'
               });
               this._sRuta<%= nombreMayuscula %>Service._cargandoService.deshabilitarCargando();
@@ -587,8 +621,15 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
               this._sRuta<%= nombreMayuscula %>Service.arregloDatosFiltrado.unshift(nuevoRegistro);
               this._sRuta<%= nombreMayuscula %>Service.matDialog.closeAll();
               this._sRuta<%= nombreMayuscula %>Service._notificacionService.anadir({
+
+                <% if(internacionalizar) { %>
+                titulo: this.translocoService.translate('generales.toasters.toastExitoCrear.title'),
+                detalle: this.translocoService.translate('generales.toasters.toastExitoCrear.body', {nombre: nuevoRegistro.nombre}),
+                <% } else{ %>
                 titulo: 'Éxito',
                 detalle: 'Creo nuevo registro',
+                <% } %>
+
                 severidad: 'success'
               });
               this._sRuta<%= nombreMayuscula %>Service._cargandoService.deshabilitarCargando();
@@ -600,8 +641,14 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
                 error
               });
               this._sRuta<%= nombreMayuscula %>Service._notificacionService.anadir({
+                <% if(internacionalizar) { %>
+                titulo: this.translocoService.translate('generales.toasters.toastErrorConexionServidorVacio.title'),
+                detalle: this.translocoService.translate('generales.toasters.toastErrorConexionServidorVacio.body'),
+                <% } else{ %>
                 titulo: 'Error',
                 detalle: 'Error del servidor',
+                <% } %>
+
                 severidad: 'error'
               });
               this._sRuta<%= nombreMayuscula %>Service._cargandoService.deshabilitarCargando();
@@ -662,8 +709,15 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
               this._sRuta<%= nombreMayuscula %>Service.arregloDatosFiltrado[indiceArregloFiltrado] = registroEditado;
               this._sRuta<%= nombreMayuscula %>Service.matDialog.closeAll();
               this._sRuta<%= nombreMayuscula %>Service._notificacionService.anadir({
+
+                <% if(internacionalizar) { %>
+                titulo: this.translocoService.translate('generales.toasters.toastExitoEditar.title'),
+                detalle: this.translocoService.translate('generales.toasters.toastExitoEditar.body', {nombre: registroEditado.nombre}),
+                <% } else{ %>
                 titulo: 'Éxito',
                 detalle: 'Edito registro',
+                <% } %>
+
                 severidad: 'success'
               });
               this._sRuta<%= nombreMayuscula %>Service._cargandoService.deshabilitarCargando();
@@ -675,8 +729,15 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
                 error
               });
               this._sRuta<%= nombreMayuscula %>Service._notificacionService.anadir({
+
+                <% if(internacionalizar) { %>
+                titulo: this.translocoService.translate('generales.toasters.toastErrorConexionServidorVacio.title'),
+                detalle: this.translocoService.translate('generales.toasters.toastErrorConexionServidorVacio.body'),
+                <% } else{ %>
                 titulo: 'Error',
                 detalle: 'Error del servidor',
+                <% } %>
+
                 severidad: 'error'
               });
               this._sRuta<%= nombreMayuscula %>Service._cargandoService.deshabilitarCargando();

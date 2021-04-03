@@ -1,3 +1,4 @@
+import {CampoFormulario} from '@manticore-labs/ng-2021';
 
 export const <%= nombreSoloMayusculas %>_BUSQUEDA_CAMPO_SELECT_HABILITADO: (claseComponente: any) => CampoFormulario = (claseComponente: any) => {
   return {
@@ -7,13 +8,36 @@ export const <%= nombreSoloMayusculas %>_BUSQUEDA_CAMPO_SELECT_HABILITADO: (clas
     asyncValidators: null,
     valorInicial: '',
     nombreCampo: '<%= nombreHabilitado %>',
+
+
+    <% if(internacionalizar) { %>
+    nombreMostrar: 'formularios.busqueda.campo<%= nombreCampoMayuscula %>.nombreMostrar',
+    <% } else{ %>
     nombreMostrar: 'Habilitado',
+    <% } %>
+
+  <% if(internacionalizar) { %>
+    textoAyuda: 'formularios.busqueda.campo<%= nombreCampoMayuscula %>.textoAyuda',
+    <% } else{ %>
     textoAyuda: 'Filtra por habilitado.',
+    <% } %>
+
+  <% if(internacionalizar) { %>
+    placeholderEjemplo: 'formularios.busqueda.campo<%= nombreCampoMayuscula %>.placeholderEjemplo',
+    <% } else{ %>
     placeholderEjemplo: 'Ej: Activo / Inactivo',
+    <% } %>
+
+
+
     formulario: {},
     mensajes: MENSAJES_ERROR(claseComponente),
     parametros: {
-      nombreCampo: '<%= nombreHabilitado %>',
+    <% if(internacionalizar) { %>
+      nombreCampo: 'formularios.busqueda.campo<%= nombreCampoMayuscula %>.nombreMostrar',
+      <% } else{ %>
+      nombreCampo: 'Habilitado',
+      <% } %>
     },
     estaValido: true,
     tipoCampoHtml: 'select',
@@ -32,20 +56,45 @@ export const <%= nombreSoloMayusculas %>_BUSQUEDA_CAMPO_SELECT_HABILITADO: (clas
         <%= nombreHabilitado %>: undefined
         },
       ],
+
+      <% if(internacionalizar) { %>
+      placeholderFiltro: 'formularios.busqueda.campo<%= nombreCampoMayuscula %>.placeholderFiltro',
+      <% } else{ %>
       placeholderFiltro: 'Filtre por Activo Ej: A o I',
+      <% } %>
+
+     <% if(internacionalizar) { %>
+      mensajeFiltroVacio: 'formularios.busqueda.campo<%= nombreCampoMayuscula %>.mensajeFiltroVacio',
+      <% } else{ %>
       mensajeFiltroVacio: 'No se encontró',
+      <% } %>
+
+
       campoFiltrado: '<%= nombreHabilitado %>',
       fnMostrarEnSelect: (campo: { <%= nombreHabilitado %>: ActivoInactivo | undefined }) => {
         if (campo.<%= nombreHabilitado %> === undefined) {
-          return 'Todos';
+
+          <% if(internacionalizar) { %>
+            return 'formularios.busqueda.campoHabilitado.opcionTodos';
+          <% } else{ %>
+            return 'Todos';
+          <% } %>
+
+
         }
         if (campo.<%= nombreHabilitado %> === ActivoInactivo.Activo) {
-
+          <% if(internacionalizar) { %>
+          return 'formularios.busqueda.campoHabilitado.opcionActivo';
+          <% } else{ %>
           return 'Activo';
+          <% } %>
         }
         if (campo.<%= nombreHabilitado %> === ActivoInactivo.Inactivo) {
-
+          <% if(internacionalizar) { %>
+          return 'formularios.busqueda.campoHabilitado.opcionInactivo';
+          <% } else{ %>
           return 'Inactivo';
+          <% } %>
         }
         return '';
       },

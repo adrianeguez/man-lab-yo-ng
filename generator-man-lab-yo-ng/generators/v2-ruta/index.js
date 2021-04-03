@@ -54,6 +54,7 @@ const TEMPLATES = {
     CAMPO_NOMBRE: 'campo--nombre.ts',
     FORMULARIO_CREAR_EDITAR: 'formulario-.ts',
     MIGAS_PAN: '-migas-pan.ts',
+    LOADER_TRANSLOCO: 'loader-.ts',
 }
 const OPCIONES = {
     ES_FIREBASE: {
@@ -62,6 +63,14 @@ const OPCIONES = {
             type: String,
             default: undefined,
             desc: 'Si debe de crearse con los servicios de Firebase EJ: NombreRuta idRuta nombreHabilitado --esFirebase true'
+        }
+    },
+    INTERNACIONALIZAR: {
+        nombre: 'internacionalizar',
+        configuracion: {
+            type: String,
+            default: undefined,
+            desc: 'Modificar el template si es internacionalizable. EJ:  NombreRuta NombreCampo texto --internacionalizar=true'
         }
     },
 }
@@ -121,6 +130,7 @@ module.exports = class extends Generator {
 
         // opciones
         this.option(OPCIONES.ES_FIREBASE.nombre, OPCIONES.ES_FIREBASE.configuracion);
+        this.option(OPCIONES.INTERNACIONALIZAR.nombre, OPCIONES.INTERNACIONALIZAR.configuracion);
     }
 
     initializing() {
@@ -169,6 +179,7 @@ module.exports = class extends Generator {
 
         // opciones
         const esFirebase = this.options[OPCIONES.ES_FIREBASE.nombre];
+        const internacionalizar = this.options[OPCIONES.INTERNACIONALIZAR.nombre];
 
         if (!id) {
             id = 'id';
@@ -186,6 +197,7 @@ module.exports = class extends Generator {
             id,
             nombreHabilitado,
             esFirebase,
+            internacionalizar,
         };
 
         const templateActualizar = this.templatePath(TEMPLATES.ACTUALIZAR);
@@ -367,6 +379,16 @@ module.exports = class extends Generator {
             destinoMP,
             variables
         );
+        if(variables.internacionalizar){
+            const templateLT = this.templatePath(TEMPLATES.LOADER_TRANSLOCO);
+            const destinoLT = this.destinationPath(`./transloco/loader-${nombreGuiones}.ts`);
+
+            this.fs.copyTpl(
+                templateLT,
+                destinoLT,
+                variables
+            );
+        }
     }
 
     conflicts() {

@@ -1,11 +1,26 @@
 
+<% if(!internacionalizar){ %>
+<app-migas-de-pan [migasDePan]="migasPan"
+                  [classA]="'miga-pan-link'"
+                  [classSpan]="'miga-pan'"
+></app-migas-de-pan>
 <mat-card class="filtros">
-  <p-breadcrumb [model]="migasPan"></p-breadcrumb>
+
+  <div class="animate__animated animate__fadeInRight">
+    <mlab-titulo-pantalla
+            [titulo]="'<%= nombreMayuscula %>'"
+            [descripcion]="'Descripcion <%= nombreMayuscula %>'"
+            [imagen]="rutaImagenPrincipal"
+            [ayuda]="'Ayuda <%= nombreMayuscula %>'"
+    >
+    </mlab-titulo-pantalla>
+  </div>
+
   <div class="mat-elevation-z8">
     <div class="padding20px">
       <h1><%= nombreMayuscula %></h1>
 
-      <div class="row animate__animated animate__fadeInUp animate__delay-1s">
+      <div class="row animate__animated animate__fadeIn">
         <div class="col-md-12">
           <app-ml-contenedor-campos-formulario (todosCamposValidos)="formularioValidoBusqueda($event)"
                                                (cambioCampo)="cambioCampoBusqueda($event)"
@@ -56,122 +71,128 @@
                [rowsPerPageOptions]="_sRuta<%= nombreMayuscula %>Service.registrosPorPagina"
                [(first)]="_sRuta<%= nombreMayuscula %>Service.first"
                dataKey="<%= id %>"
+               styleClass="p-datatable-responsive-demo"
                [customSort]="true"
       >
-      <% } %>
+        <% } %>
 
-      <% if(esFirebase){ %>
-      <p-table [columns]="columnasPrimeTable"
-               [value]="_sRuta<%= nombreMayuscula %>Service.arregloDatosFiltrado"
-               [rows]="_sRuta<%= nombreMayuscula %>Service.take"
-               [(first)]="_sRuta<%= nombreMayuscula %>Service.first"
-               dataKey="<%= id %>"
-               [customSort]="true"
-               (sortFunction)="_sRuta<%= nombreMayuscula %>Service.sortFirebase($event, this)"
-      >
-      <% }%>
+        <% if(esFirebase){ %>
+        <p-table [columns]="columnasPrimeTable"
+                 [value]="_sRuta<%= nombreMayuscula %>Service.arregloDatosFiltrado"
+                 [rows]="_sRuta<%= nombreMayuscula %>Service.take"
+                 [(first)]="_sRuta<%= nombreMayuscula %>Service.first"
+                 dataKey="<%= id %>"
+                 styleClass="p-datatable-responsive-demo"
+                 [customSort]="true"
+                 (sortFunction)="_sRuta<%= nombreMayuscula %>Service.sortFirebase($event, this)"
+        >
+          <% }%>
 
-        <ng-template pTemplate="caption">
-          <div class="p-d-flex table-header">
-            <div class="row">
-              <div class="col-sm-8">
-                <div color="accent">
-                  <label class="form-label">Filtro:</label>
-                  <input placeholder="Ej: ..."
-                         class="form-control"
-                         [(ngModel)]="_sRuta<%= nombreMayuscula %>Service.filtroGeneralTabla"
-                         (keyup)="_sRuta<%= nombreMayuscula %>Service.aplicarFiltro($event, [])"
-                  >
+          <ng-template pTemplate="caption">
+            <div class="p-d-flex table-header">
+              <div class="row">
+                <div class="col-sm-8">
+                  <div color="accent">
+                    <label class="form-label">Filtro:</label>
+                    <input placeholder="Ej: ..."
+                           class="form-control"
+                           [(ngModel)]="_sRuta<%= nombreMayuscula %>Service.filtroGeneralTabla"
+                           (keyup)="_sRuta<%= nombreMayuscula %>Service.aplicarFiltro($event, [])"
+                    >
+                  </div>
                 </div>
-              </div>
-<!--              Seccion para campos autogenerados para mostrar table y formulario-->
+                <!--              Seccion para campos autogenerados para mostrar table y formulario-->
 
-<!--              <div class="col-sm-2">-->
-<!--                <div class="float-end margen-boton-crear-tabla">-->
-<!--                  <button pButton-->
-<!--                          pRipple-->
-<!--                          label="Previsualizar tabla"-->
-<!--                          icon="pi pi-plus"-->
-<!--                          class="p-button-primary p-mr-2"-->
-<!--                          (click)="abrirModalAutogenerados(true)"-->
-<!--                  ></button>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--              <div class="col-sm-2">-->
-<!--                <div class="float-end margen-boton-crear-tabla">-->
-<!--                  <button pButton-->
-<!--                          pRipple-->
-<!--                          label="Actualizar Nuevos Campos"-->
-<!--                          icon="pi pi-plus"-->
-<!--                          class="p-button-primary p-mr-2"-->
-<!--                          (click)="abrirModalAutogenerados()"-->
-<!--                  ></button>-->
-<!--                </div>-->
-<!--              </div>-->
-              <div class="col-sm-2">
-                <div class="paddingTop36px text-center">
-                  <button (click)="_sRuta<%= nombreMayuscula %>Service.limpiarFiltroGeneral()"
-                          *ngIf="_sRuta<%= nombreMayuscula %>Service.filtroGeneralTabla !== ''"
-                          pButton
-                          pRipple
-                          type="button"
-                          icon="pi pi-times"
-                          class="p-button-rounded p-button-help p-button-outlined"></button>
+                <!--              <div class="col-sm-2">-->
+                <!--                <div class="float-end margen-boton-crear-tabla">-->
+                <!--                  <button pButton-->
+                <!--                          pRipple-->
+                <!--                          label="Previsualizar tabla"-->
+                <!--                          icon="pi pi-plus"-->
+                <!--                          class="p-button-primary p-mr-2"-->
+                <!--                          (click)="abrirModalAutogenerados(true)"-->
+                <!--                  ></button>-->
+                <!--                </div>-->
+                <!--              </div>-->
+                <!--              <div class="col-sm-2">-->
+                <!--                <div class="float-end margen-boton-crear-tabla">-->
+                <!--                  <button pButton-->
+                <!--                          pRipple-->
+                <!--                          label="Actualizar Nuevos Campos"-->
+                <!--                          icon="pi pi-plus"-->
+                <!--                          class="p-button-primary p-mr-2"-->
+                <!--                          (click)="abrirModalAutogenerados()"-->
+                <!--                  ></button>-->
+                <!--                </div>-->
+                <!--              </div>-->
+                <div class="col-sm-2">
+                  <div class="paddingTop36px text-center">
+                    <button (click)="_sRuta<%= nombreMayuscula %>Service.limpiarFiltroGeneral()"
+                            *ngIf="_sRuta<%= nombreMayuscula %>Service.filtroGeneralTabla !== ''"
+                            pButton
+                            pRipple
+                            type="button"
+                            icon="pi pi-times"
+                            class="p-button-rounded p-button-help p-button-outlined"></button>
+                  </div>
                 </div>
-              </div>
-              <div class="col-sm-2">
-                <div class="float-end margen-boton-crear-tabla">
-                  <button pButton
-                          pRipple
-                          label="Crear"
-                          icon="pi pi-plus"
-                          class="p-button-success p-mr-2"
-                          (click)="botonAceptarModalDisabled = true;"
-                          (click)="_sRuta<%= nombreMayuscula %>Service.formularioEnModalActual = undefined;"
-                          (click)="_sRuta<%= nombreMayuscula %>Service.camposSeleccionadosFormulario = {};"
-                          (click)="_sRuta<%= nombreMayuscula %>Service.setearCamposRequeridosAFalso(this);"
-                          (click)="_sRuta<%= nombreMayuscula %>Service.abrirModal(this,undefined)"
-                  ></button>
+                <div class="col-sm-2">
+                  <div class="float-end margen-boton-crear-tabla">
+                    <button pButton
+                            pRipple
+                            label="Crear"
+                            icon="pi pi-plus"
+                            class="p-button-success p-mr-2"
+                            (click)="botonAceptarModalDisabled = true;"
+                            (click)="_sRuta<%= nombreMayuscula %>Service.formularioEnModalActual = undefined;"
+                            (click)="_sRuta<%= nombreMayuscula %>Service.camposSeleccionadosFormulario = {};"
+                            (click)="_sRuta<%= nombreMayuscula %>Service.setearCamposRequeridosAFalso(this);"
+                            (click)="_sRuta<%= nombreMayuscula %>Service.abrirModal(this,undefined)"
+                    ></button>
+                  </div>
                 </div>
-              </div>
 
+              </div>
             </div>
-          </div>
-        </ng-template>
+          </ng-template>
 
-        <ng-template pTemplate="colgroup" let-columns>
-          <colgroup>
-            <col *ngFor="let col of columns" [style.width]="col.tamanio">
-          </colgroup>
-        </ng-template>
-        <ng-template pTemplate="header" let-columns>
-          <tr>
-            <th *ngFor="let col of columns" [pSortableColumn]="col.field" [pSortableColumn]="col.field">
-              <div class="p-d-flex p-jc-between p-ai-center">
-                <div class="text-center">
-                  {{col.header}}
+<!--          <ng-template pTemplate="colgroup" let-columns>-->
+<!--            <colgroup>-->
+<!--              <col *ngFor="let col of columns" [style.width]="col.tamanio">-->
+<!--            </colgroup>-->
+<!--          </ng-template>-->
+          <ng-template pTemplate="header" let-columns>
+            <tr>
+              <th *ngFor="let col of columns" [pSortableColumn]="col.field" [pSortableColumn]="col.field">
+                <div class="p-d-flex p-jc-between p-ai-center">
+                  <div class="text-center">
+                    {{col.header}}
+                  </div>
                 </div>
-              </div>
-              <p-sortIcon [field]="col.field"></p-sortIcon>
-            </th>
-          </tr>
-        </ng-template>
+                <p-sortIcon [field]="col.field"></p-sortIcon>
+              </th>
+            </tr>
+          </ng-template>
 
-        <ng-template pTemplate="body" let-<%= nombreCamel %> let-columns="columns" let-indice="rowIndex" let-expandido="expanded">
+          <ng-template pTemplate="body" let-<%= nombreCamel %> let-columns="columns" let-indice="rowIndex" let-expandido="expanded">
 
-<!--        <tr-->
-<!--                *ngIf="_sRuta<%= nombreMayuscula %>Service.rowGroupMetadata[<%= nombreCamel %>.campoRelacion.campoNombre].index === indice && _sRuta<%= nombreMayuscula %>Service.nombreAtributoAAgrupar.length > 0"-->
-<!--                class="p-selectable-row"-->
-<!--        >-->
-<!--          <td [colSpan]="columns.length">-->
-<!--            <span class="p-text-bold p-ml-2"> <strong class="color-grupo">CAMPO NOMBRE: </strong> <strong>{{<%= nombreCamel %>.campoRelacion.campoNombre}}</strong></span>-->
-<!--          </td>-->
-<!--        </tr>-->
+          <!--        <tr-->
+          <!--                *ngIf="_sRuta<%= nombreMayuscula %>Service.rowGroupMetadata[<%= nombreCamel %>.campoRelacion.campoNombre].index === indice && _sRuta<%= nombreMayuscula %>Service.nombreAtributoAAgrupar.length > 0"-->
+          <!--                class="p-selectable-row"-->
+          <!--        >-->
+          <!--          <td [colSpan]="columns.length">-->
+          <!--            <span class="p-text-bold p-ml-2"> <strong class="color-grupo">CAMPO NOMBRE: </strong> <strong>{{<%= nombreCamel %>.campoRelacion.campoNombre}}</strong></span>-->
+          <!--          </td>-->
+          <!--        </tr>-->
 
           <tr class="p-selectable-row">
             <td *ngFor="let col of columns"  [ngClass]="{
            'valido-carta':<%= nombreCamel %>.habilitado,
            'invalido-carta':!<%= nombreCamel %>.habilitado }">
+
+
+              <span class="p-column-title">{{col.header}}:</span>
+
               <div *ngIf="col.field !== '<%= id %>' && col.field !== '<%= nombreHabilitado %>'">
                 <div [ngClass]="{
           'text-center':col.posicion === 'text-center',
@@ -200,81 +221,89 @@
                 <div class="text-center">
                   <br>
                   <p-button
-                    label="Editar"
-                    [disabled]="!<%= nombreCamel %>.habilitado"
-                    icon="pi pi-pencil"
-                    styleClass="p-button-warning"
-                    (click)="botonAceptarModalDisabled = true;"
-                    (click)="_sRuta<%= nombreMayuscula %>Service.formularioEnModalActual = undefined;"
-                    (click)="_sRuta<%= nombreMayuscula %>Service.camposSeleccionadosFormulario = {};"
-                    (click)="_sRuta<%= nombreMayuscula %>Service.setearCamposRequeridosAFalso(this);"
-                    (click)="abrirModal(<%= nombreCamel %>)"
+                          label="Editar"
+                          [disabled]="!<%= nombreCamel %>.habilitado"
+                          icon="pi pi-pencil"
+                          styleClass="p-button-warning"
+                          (click)="botonAceptarModalDisabled = true;"
+                          (click)="_sRuta<%= nombreMayuscula %>Service.formularioEnModalActual = undefined;"
+                          (click)="_sRuta<%= nombreMayuscula %>Service.camposSeleccionadosFormulario = {};"
+                          (click)="_sRuta<%= nombreMayuscula %>Service.setearCamposRequeridosAFalso(this);"
+                          (click)="abrirModal(<%= nombreCamel %>)"
                   ></p-button>
-<!--                  <div *ngFor="let opcion of opciones">-->
-<!--                    <br>-->
-<!--                    <p-button-->
-<!--                      [label]="opcion.nombre"-->
-<!--                      [disabled]="!<%= nombreCamel %>.habilitado"-->
-<!--                      icon="pi pi-angle-double-right"-->
-<!--                      styleClass="p-button-help"-->
-<!--                      (click)="_sRuta<%= nombreMayuscula %>Service.navegar(-->
-<!--                  _router,-->
-<!--                  opcion.ruta(<%= nombreCamel %>.<%= !esFirebase ? id : 'uid' %>)-->
-<!--                )"-->
-<!--                    ></p-button>-->
-<!--                  </div>-->
+
+<!--                  <button mat-icon-button [matMenuTriggerFor]="opcionesRuta"-->
+<!--                          aria-label="Example icon-button with a menu">-->
+<!--                    <mat-icon>more_vert</mat-icon>-->
+<!--                  </button>-->
+<!--                  <mat-menu #opcionesRuta="matMenu">-->
+<!--                    <button *ngFor="let opcion of opciones"-->
+<!--                            mat-menu-item-->
+<!--                            [disabled]="!entrenador.habilitado"-->
+<!--                            (click)="_sRutaEntrenadorService.navegar(-->
+<!--                                           _router,-->
+<!--                                           opcion.ruta(entrenador.id))"-->
+<!--                    >-->
+
+<!--                      <mat-icon>keyboard_arrow_right</mat-icon>-->
+<!--                      <img [src]="rutaImagenAssets + opcion.rutaImagen"-->
+<!--                           alt=""-->
+<!--                           class="icono-navegacion"-->
+<!--                      > {{opcion.nombre}}-->
+<!--                    </button>-->
+<!--                  </mat-menu>-->
                 </div>
               </div>
             </td>
           </tr>
-        </ng-template>
+          </ng-template>
 
 
-<!--        <ng-template pTemplate="rowexpansion" let-<%= nombreCamel %> let-columns="columns">-->
-<!--          <tr class="detalle-tr p-selectable-row animate__animated animate__fadeIn">-->
-<!--            <td [colSpan]="columns.length" [ngClass]="{-->
-<!--           'valido-carta':<%= nombreCamel %>.habilitado,-->
-<!--           'invalido-carta':!<%= nombreCamel %>.habilitado }">-->
-<!--              <table class="detalle">-->
-<!--                <tr class="p-selectable-row detalle">-->
-<!--                  <th><strong>ATRIBUTO</strong></th>-->
-<!--                  <th><strong>VALOR</strong></th>-->
-<!--                </tr>-->
-<!--                <tr class="p-selectable-row detalle"-->
-<!--                    *ngFor="let valor of _sRuta<%= nombreMayuscula %>Service.generarObjeto(<%= nombreCamel %>)">-->
-<!--                  <td><strong>{{valor.llave}}</strong></td>-->
-<!--                  <td>-->
-<!--                    &lt;!&ndash;  CAMPOS QUE USEN PIPES      &ndash;&gt   -->
-<!--                <span *ngIf="valor.nombreCampo === 'algunCampoQueQuireaUsarUnPipe'">-->
-<!--                {{valor.valor | currency}}-->
-<!--                </span>-->
-<!--                     &lt;!&ndash; TODOS LOS DEMAS CAMPOS       &ndash;&gt   -->
-<!--                    <span *ngIf="valor.nombreCampo !== 'algunCampoQueQuireaUsarUnPipe'">-->
-<!--                  {{valor.valor}}-->
-<!--                </span>-->
+          <!--        <ng-template pTemplate="rowexpansion" let-<%= nombreCamel %> let-columns="columns">-->
+          <!--          <tr class="detalle-tr p-selectable-row animate__animated animate__fadeIn">-->
+          <!--            <td [colSpan]="columns.length" [ngClass]="{-->
+          <!--           'valido-carta':<%= nombreCamel %>.habilitado,-->
+          <!--           'invalido-carta':!<%= nombreCamel %>.habilitado }">-->
+          <!--              <table class="detalle">-->
+          <!--                <tr class="p-selectable-row detalle">-->
+          <!--                  <th><strong>ATRIBUTO</strong></th>-->
+          <!--                  <th><strong>VALOR</strong></th>-->
+          <!--                </tr>-->
+          <!--                <tr class="p-selectable-row detalle"-->
+          <!--                    *ngFor="let valor of _sRuta<%= nombreMayuscula %>Service.generarObjeto(<%= nombreCamel %>)">-->
+          <!--                  <td><strong>{{valor.llave}}</strong></td>-->
+          <!--                  <td>-->
+          <!--                    &lt;!&ndash;  CAMPOS QUE USEN PIPES      &ndash;&gt   -->
+          <!--                <span *ngIf="valor.nombreCampo === 'algunCampoQueQuireaUsarUnPipe'">-->
+          <!--                {{valor.valor | currency}}-->
+          <!--                </span>-->
+          <!--                     &lt;!&ndash; TODOS LOS DEMAS CAMPOS       &ndash;&gt   -->
+          <!--                    <span *ngIf="valor.nombreCampo !== 'algunCampoQueQuireaUsarUnPipe'">-->
+          <!--                  {{valor.valor}}-->
+          <!--                </span>-->
 
-<!--                  </td>-->
-<!--                </tr>-->
-<!--                     &lt;!&ndash; CAMPOS RELACIONADOS      &ndash;&gt   -->
-<!--                <tr class="p-selectable-row detalle">-->
-<!--                  <td><strong>Campo Relacionado</strong></td>-->
-<!--                  <td>{{<%= nombreCamel %>.campoRelacion.campoNombre}}</td>-->
-<!--                </tr>-->
-<!--              </table>-->
-<!--            </td>-->
-<!--          </tr>-->
+          <!--                  </td>-->
+          <!--                </tr>-->
+          <!--                     &lt;!&ndash; CAMPOS RELACIONADOS      &ndash;&gt   -->
+          <!--                <tr class="p-selectable-row detalle">-->
+          <!--                  <td><strong>Campo Relacionado</strong></td>-->
+          <!--                  <td>{{<%= nombreCamel %>.campoRelacion.campoNombre}}</td>-->
+          <!--                </tr>-->
+          <!--              </table>-->
+          <!--            </td>-->
+          <!--          </tr>-->
 
-<!--        </ng-template>-->
-<!--        -->
+          <!--        </ng-template>-->
+          <!--        -->
 
-        <ng-template pTemplate="summary">
-          <div class="row">
-            <div class="col-sm-4"></div>
-            <div class="col-sm-4 text-center">
-              <% if(!esFirebase){ %>
-              {{_sRuta<%= nombreMayuscula %>Service.registrosPagina}} registros de un total de {{_sRuta<%= nombreMayuscula %>Service.totalRecords}} registros.
-              <% } %>
-              <% if(esFirebase){ %>
+          <ng-template pTemplate="summary">
+            <div class="row">
+              <div class="col-sm-4"></div>
+              <div class="col-sm-4 text-center">
+                <% if(!esFirebase){ %>
+                {{_sRuta<%= nombreMayuscula %>Service.registrosPagina}} registros de un total de {{_sRuta<%= nombreMayuscula %>Service.totalRecords}} registros.
+                <% } %>
+                <% if(esFirebase){ %>
                 <div *ngIf="_sRuta<%= nombreMayuscula %>Service.yaNoHayMasRegistros">
                   <p class="text-center bold">No hay mas registros.</p>
                 </div>
@@ -289,13 +318,13 @@
                   >
                   </button>
                 </div>
-              <% } %>
+                <% } %>
 
+              </div>
+              <div class="col-sm-4"></div>
             </div>
-            <div class="col-sm-4"></div>
-          </div>
-        </ng-template>
-      </p-table>
+          </ng-template>
+        </p-table>
 
     </div>
   </div>
@@ -303,3 +332,353 @@
 
 <br>
 <br>
+
+<% } %>
+
+<% if(internacionalizar){ %>
+<ng-container *transloco="let l; read:objetoInternacionalizacion.nombreScopeTransloco">
+  <app-migas-de-pan [migasDePan]="migasPan"
+                    [classA]="'miga-pan-link'"
+                    [classSpan]="'miga-pan'"
+                    [habilitarInternacionalizacion]="true"
+  ></app-migas-de-pan>
+  <mat-card class="filtros">
+
+    <div class="animate__animated animate__fadeInRight">
+      <mlab-titulo-pantalla
+              [titulo]="l('nombreRuta')"
+              [descripcion]="l('descripcionRuta')"
+              [imagen]="rutaImagenPrincipal"
+              [ayuda]="l('ayudaRuta')"
+      >
+      </mlab-titulo-pantalla>
+    </div>
+
+    <div class="mat-elevation-z8">
+      <div class="padding20px">
+        <h1><%= nombreMayuscula %></h1>
+
+        <div class="row animate__animated animate__fadeIn">
+          <div class="col-md-12">
+            <app-ml-contenedor-campos-formulario (todosCamposValidos)="formularioValidoBusqueda($event)"
+                                                 (cambioCampo)="cambioCampoBusqueda($event)"
+                                                 (cambioAutocomplete)="formularioBusquedacambioCampoAutocomplete($event)"
+                                                 [vertical]="false"
+                                                 class="campo-formulario"
+                                                 tituloFormulario="formularios.busqueda.formularioBusqueda.tituloFormulario"
+                                                 descripcionFormulario="formularios.busqueda.formularioBusqueda.descripcionFormulario"
+                                                 descripcionFormularioConGrupo="formularios.busqueda.formularioBusqueda.descripcionFormularioConGrupo"
+                                                 tituloFormularioConGrupo="formularios.busqueda.formularioBusqueda.tituloFormularioConGrupo"
+                                                 [habilitarInternacionalizacion]="true"
+                                                 [objetoInternacionalizacion]="objetoInternacionalizacion"
+                                                 [camposFormularioFuncion]="camposFormularioBusqueda"
+                                                 [selectedStepperIndex]="stepperActualBusqueda"
+                                                 [gruposFormularioFuncion]="_sRuta<%= nombreMayuscula %>Service.gruposFormularioBusqueda"
+                                                 [componente]="this"
+            ></app-ml-contenedor-campos-formulario>
+          </div>
+          <div class="col-md-2"></div>
+          <div class="col-md-8">
+            <br>
+            <button pButton
+                    pRipple
+                    type="button"
+                    [label]="'generales.botones.buscar' | transloco"
+                    class="p-button-raised p-button-primary"
+                    icon="pi pi-search"
+                    (click)="buscarConFiltros()"
+            ></button>
+          </div>
+          <div class="col-md-2"></div>
+        </div>
+      </div>
+
+    </div>
+
+  </mat-card>
+  <br>
+  <mat-card>
+    <div class="padding20px">
+      <h1>{{l('tituloTabla')}}</h1>
+      <p>{{l('descripcionTabla')}}</p>
+      <div class="mat-elevation-z8">
+        <% if(!esFirebase){ %>
+        <p-table [columns]="columnasPrimeTable"
+                 [value]="_sRuta<%= nombreMayuscula %>Service.arregloDatosFiltrado"
+                 [lazy]="true"
+                 (onLazyLoad)="_sRuta<%= nombreMayuscula %>Service.cargarMasDatos($event)"
+                 [paginator]="true"
+                 [rows]="_sRuta<%= nombreMayuscula %>Service.take"
+                 [totalRecords]="_sRuta<%= nombreMayuscula %>Service.totalRecords"
+                 [rowsPerPageOptions]="_sRuta<%= nombreMayuscula %>Service.registrosPorPagina"
+                 [(first)]="_sRuta<%= nombreMayuscula %>Service.first"
+                 styleClass="p-datatable-responsive-demo"
+                 dataKey="<%= id %>"
+                 [customSort]="true"
+        >
+          <% } %>
+
+          <% if(esFirebase){ %>
+          <p-table [columns]="columnasPrimeTable"
+                   [value]="_sRuta<%= nombreMayuscula %>Service.arregloDatosFiltrado"
+                   [rows]="_sRuta<%= nombreMayuscula %>Service.take"
+                   [(first)]="_sRuta<%= nombreMayuscula %>Service.first"
+                   styleClass="p-datatable-responsive-demo"
+                   dataKey="<%= id %>"
+                   [customSort]="true"
+                   (sortFunction)="_sRuta<%= nombreMayuscula %>Service.sortFirebase($event, this)"
+          >
+            <% }%>
+
+            <ng-template pTemplate="caption">
+              <div class="p-d-flex table-header">
+                <div class="row">
+                  <div class="col-sm-8">
+                    <div color="accent">
+                      <label class="form-label">{{'generales.filtro' | transloco}}:</label>
+                      <input [placeholder]="l('filtroTabla')"
+                             class="form-control"
+                             [(ngModel)]="_sRuta<%= nombreMayuscula %>Service.filtroGeneralTabla"
+                             (keyup)="_sRuta<%= nombreMayuscula %>Service.aplicarFiltro($event, [])"
+                      >
+                    </div>
+                  </div>
+                  <!--              Seccion para campos autogenerados para mostrar table y formulario-->
+
+                  <!--              <div class="col-sm-2">-->
+                  <!--                <div class="float-end margen-boton-crear-tabla">-->
+                  <!--                  <button pButton-->
+                  <!--                          pRipple-->
+                  <!--                          label="Previsualizar tabla"-->
+                  <!--                          icon="pi pi-plus"-->
+                  <!--                          class="p-button-primary p-mr-2"-->
+                  <!--                          (click)="abrirModalAutogenerados(true)"-->
+                  <!--                  ></button>-->
+                  <!--                </div>-->
+                  <!--              </div>-->
+                  <!--              <div class="col-sm-2">-->
+                  <!--                <div class="float-end margen-boton-crear-tabla">-->
+                  <!--                  <button pButton-->
+                  <!--                          pRipple-->
+                  <!--                          label="Actualizar Nuevos Campos"-->
+                  <!--                          icon="pi pi-plus"-->
+                  <!--                          class="p-button-primary p-mr-2"-->
+                  <!--                          (click)="abrirModalAutogenerados()"-->
+                  <!--                  ></button>-->
+                  <!--                </div>-->
+                  <!--              </div>-->
+                  <div class="col-sm-2">
+                    <div class="paddingTop36px text-center">
+                      <button (click)="_sRuta<%= nombreMayuscula %>Service.limpiarFiltroGeneral()"
+                              *ngIf="_sRuta<%= nombreMayuscula %>Service.filtroGeneralTabla !== ''"
+                              pButton
+                              pRipple
+                              type="button"
+                              icon="pi pi-times"
+                              class="p-button-rounded p-button-help p-button-outlined"></button>
+                    </div>
+                  </div>
+                  <div class="col-sm-2">
+                    <div class="float-end margen-boton-crear-tabla">
+                      <button pButton
+                              pRipple
+                              [label]="'generales.botones.crear' | transloco"
+                              icon="pi pi-plus"
+                              class="p-button-success p-mr-2"
+                              (click)="botonAceptarModalDisabled = true;"
+                              (click)="_sRuta<%= nombreMayuscula %>Service.formularioEnModalActual = undefined;"
+                              (click)="_sRuta<%= nombreMayuscula %>Service.camposSeleccionadosFormulario = {};"
+                              (click)="_sRuta<%= nombreMayuscula %>Service.setearCamposRequeridosAFalso(this);"
+                              (click)="_sRuta<%= nombreMayuscula %>Service.abrirModal(this,undefined)"
+                      ></button>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </ng-template>
+
+<!--            <ng-template pTemplate="colgroup" let-columns>-->
+<!--              <colgroup>-->
+<!--                <col *ngFor="let col of columns" [style.width]="col.tamanio">-->
+<!--              </colgroup>-->
+<!--            </ng-template>-->
+            <ng-template pTemplate="header" let-columns>
+              <tr>
+                <th *ngFor="let col of columns" [pSortableColumn]="col.field" [pSortableColumn]="col.field">
+                  <div class="p-d-flex p-jc-between p-ai-center">
+                    <div class="text-center">
+                      {{l('cabeceraTabla.' + col.header)}}
+                    </div>
+                  </div>
+                  <p-sortIcon [field]="col.field"></p-sortIcon>
+                </th>
+              </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-<%= nombreCamel %> let-columns="columns" let-indice="rowIndex" let-expandido="expanded">
+
+            <!--        <tr-->
+            <!--                *ngIf="_sRuta<%= nombreMayuscula %>Service.rowGroupMetadata[<%= nombreCamel %>.campoRelacion.campoNombre].index === indice && _sRuta<%= nombreMayuscula %>Service.nombreAtributoAAgrupar.length > 0"-->
+            <!--                class="p-selectable-row"-->
+            <!--        >-->
+            <!--          <td [colSpan]="columns.length">-->
+            <!--            <span class="p-text-bold p-ml-2"> <strong class="color-grupo">{{l('cabeceraTabla.nombreGrupo')}}: </strong> <strong>{{<%= nombreCamel %>.campoRelacion.campoNombre}}</strong></span>-->
+            <!--          </td>-->
+            <!--        </tr>-->
+
+            <tr class="p-selectable-row">
+              <td *ngFor="let col of columns"  [ngClass]="{
+           'valido-carta':<%= nombreCamel %>.habilitado,
+           'invalido-carta':!<%= nombreCamel %>.habilitado }">
+
+
+                <span class="p-column-title">{{l('cabeceraTabla.' + col.header)}}:</span>
+
+                <div *ngIf="col.field !== '<%= id %>' && col.field !== '<%= nombreHabilitado %>'">
+                  <div [ngClass]="{
+          'text-center':col.posicion === 'text-center',
+          'text-left':col.posicion === 'text-left',
+          'text-right':col.posicion === 'text-right'
+          }">
+                    {{col.fnMostrar ? col.fnMostrar(<%= nombreCamel %>[col.field]) : <%= nombreCamel %>[col.field]}}
+                  </div>
+                </div>
+                <div *ngIf="col.field === '<%= nombreHabilitado %>'">
+                  <div class="text-center">
+                    <br>
+                    <p-inputSwitch [(ngModel)]="<%= nombreCamel %>.habilitado"
+                                   (onChange)="_sRuta<%= nombreMayuscula %>Service
+                             .activarDesactivar(
+                             $event,
+                             <%= nombreCamel %>.<%= id %>,
+                             <%= nombreCamel %>.habilitado,
+                             '<%= nombreHabilitado %>',
+                             <%= nombreCamel %>
+                             )"
+                    ></p-inputSwitch>
+                  </div>
+                </div>
+                <div *ngIf="col.field === '<%= id %>'">
+                  <div class="text-center">
+                    <br>
+                    <p-button
+                            [label]="'generales.botones.editar' | transloco"
+                            [disabled]="!<%= nombreCamel %>.habilitado"
+                            icon="pi pi-pencil"
+                            styleClass="p-button-warning"
+                            (click)="botonAceptarModalDisabled = true;"
+                            (click)="_sRuta<%= nombreMayuscula %>Service.formularioEnModalActual = undefined;"
+                            (click)="_sRuta<%= nombreMayuscula %>Service.camposSeleccionadosFormulario = {};"
+                            (click)="_sRuta<%= nombreMayuscula %>Service.setearCamposRequeridosAFalso(this);"
+                            (click)="abrirModal(<%= nombreCamel %>)"
+                    ></p-button>
+<!--                    <button mat-icon-button [matMenuTriggerFor]="opcionesRuta"-->
+<!--                            aria-label="Example icon-button with a menu">-->
+<!--                      <mat-icon>more_vert</mat-icon>-->
+<!--                    </button>-->
+<!--                    <mat-menu #opcionesRuta="matMenu">-->
+<!--                      <button *ngFor="let opcion of opciones"-->
+<!--                              mat-menu-item-->
+<!--                              [disabled]="!entrenador.habilitado"-->
+<!--                              (click)="_sRutaEntrenadorService.navegar(-->
+<!--                                           _router,-->
+<!--                                           opcion.ruta(entrenador.id))"-->
+<!--                      >-->
+
+<!--                        <mat-icon>keyboard_arrow_right</mat-icon>-->
+<!--                        <img [src]="rutaImagenAssets + opcion.rutaImagen"-->
+<!--                             alt=""-->
+<!--                             class="icono-navegacion"-->
+<!--                        > {{l(opcion.nombre)}}-->
+<!--                      </button>-->
+<!--                    </mat-menu>-->
+                  </div>
+                </div>
+              </td>
+            </tr>
+            </ng-template>
+
+
+            <!--        <ng-template pTemplate="rowexpansion" let-<%= nombreCamel %> let-columns="columns">-->
+            <!--          <tr class="detalle-tr p-selectable-row animate__animated animate__fadeIn">-->
+            <!--            <td [colSpan]="columns.length" [ngClass]="{-->
+            <!--           'valido-carta':<%= nombreCamel %>.habilitado,-->
+            <!--           'invalido-carta':!<%= nombreCamel %>.habilitado }">-->
+            <!--              <table class="detalle">-->
+            <!--                <tr class="p-selectable-row detalle">-->
+            <!--                  <th><strong>ATRIBUTO</strong></th>-->
+            <!--                  <th><strong>VALOR</strong></th>-->
+            <!--                </tr>-->
+            <!--                <tr class="p-selectable-row detalle"-->
+            <!--                    *ngFor="let valor of _sRuta<%= nombreMayuscula %>Service.generarObjeto(<%= nombreCamel %>)">-->
+            <!--                  <td><strong>{{valor.llave}}</strong></td>-->
+            <!--                  <td>-->
+            <!--                    &lt;!&ndash;  CAMPOS QUE USEN PIPES      &ndash;&gt   -->
+            <!--                <span *ngIf="valor.nombreCampo === 'algunCampoQueQuireaUsarUnPipe'">-->
+            <!--                {{valor.valor | currency}}-->
+            <!--                </span>-->
+            <!--                     &lt;!&ndash; TODOS LOS DEMAS CAMPOS       &ndash;&gt   -->
+            <!--                    <span *ngIf="valor.nombreCampo !== 'algunCampoQueQuireaUsarUnPipe'">-->
+            <!--                  {{valor.valor}}-->
+            <!--                </span>-->
+
+            <!--                  </td>-->
+            <!--                </tr>-->
+            <!--                     &lt;!&ndash; CAMPOS RELACIONADOS      &ndash;&gt   -->
+            <!--                <tr class="p-selectable-row detalle">-->
+            <!--                  <td><strong>Campo Relacionado</strong></td>-->
+            <!--                  <td>{{<%= nombreCamel %>.campoRelacion.campoNombre}}</td>-->
+            <!--                </tr>-->
+            <!--              </table>-->
+            <!--            </td>-->
+            <!--          </tr>-->
+
+            <!--        </ng-template>-->
+            <!--        -->
+
+            <ng-template pTemplate="summary">
+              <div class="row">
+                <div class="col-sm-4"></div>
+                <div class="col-sm-4 text-center">
+                  <% if(!esFirebase){ %>
+                  {{_sRuta<%= nombreMayuscula %>Service.registrosPagina}}
+
+                  {{'generales.registrosDeUnTotalDe' | transloco}}
+
+                  {{_sRuta<%= nombreMayuscula %>Service.totalRecords}}
+
+                  {{'generales.registros' | transloco}}
+                  <% } %>
+                  <% if(esFirebase){ %>
+                  <div *ngIf="_sRuta<%= nombreMayuscula %>Service.yaNoHayMasRegistros">
+                    <p class="text-center bold">{{'generales.otros.sinRegistros' | transloco}}</p>
+                  </div>
+                  <div *ngIf="!_sRuta<%= nombreMayuscula %>Service.yaNoHayMasRegistros">
+                    <button pButton
+                            pRipple
+                            [label]="'generales.cargarMas' | transloco"
+                            icon="pi pi-download"
+                            class="p-button-help p-mr-2"
+                            (click)="_sRuta<%= nombreMayuscula %>Service.limpiarFiltroGeneral()"
+                            (click)="buscarSuscrito()"
+                    >
+                    </button>
+                  </div>
+                  <% } %>
+
+                </div>
+                <div class="col-sm-4"></div>
+              </div>
+            </ng-template>
+          </p-table>
+
+      </div>
+    </div>
+  </mat-card>
+
+  <br>
+  <br>
+</ng-container>
+
+<% } %>

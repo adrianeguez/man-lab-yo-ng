@@ -100,12 +100,37 @@ export const <%= nombreSoloMayusculas %><%= esFormulario ? '' : '_BUSQUEDA' %>_C
     disabled: false,
     asyncValidators: null,
     nombreCampo: '<%= nombrePrefijo ? nombrePrefijo + nombreCampoMayuscula : nombreCampoCamel %>',
-    nombreMostrar: '<%= nombreCampoEspacioMayuscula %>',
-    textoAyuda: 'Ingresa <%= nombreCampoEspacioMayuscula %>',
-    placeholderEjemplo: 'Ej: ***********',
+
+
+
+<% if(internacionalizar) { %>
+  nombreMostrar: 'formularios.busqueda.campo<%= nombreCampoMayuscula %>.nombreMostrar',
+  <% } else{ %>
+  nombreMostrar: '<%= nombreCampoEspacioMayuscula %>',
+  <% } %>
+
+<% if(internacionalizar) { %>
+  textoAyuda: 'formularios.busqueda.campo<%= nombreCampoMayuscula %>.textoAyuda',
+  <% } else{ %>
+  textoAyuda: 'Ingrese <%= nombreCampoEspacioMayuscula %>.',
+  <% } %>
+
+<% if(internacionalizar) { %>
+  placeholderEjemplo: 'formularios.busqueda.campo<%= nombreCampoMayuscula %>.placeholderEjemplo',
+  <% } else{ %>
+  placeholderEjemplo: 'Ej: ********',
+  <% } %>
+
+
+
     mensajes: MENSAJES_ERROR(claseComponente),
     parametros: {
-      nombreCampo: '<%= nombreCampoEspacioMayuscula %>',
+
+  <% if(internacionalizar) { %>
+    nombreCampo: 'formularios.busqueda.campo<%= nombreCampoMayuscula %>.nombreMostrar',
+    <% } else{ %>
+    nombreCampo: '<%= nombreCampoEspacioMayuscula %>',
+    <% } %>
       // minlength: 2,
       // maxlength:10,
       // min:100,

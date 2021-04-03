@@ -9,7 +9,9 @@ import {<%= nombreSoloMayusculas %>_FORMULARIO} from '../../../formularios/<%= n
 import {GRUPOS_FORMULARIO_BUSQUEDA} from './grupos-formulario-busqueda';
 import {GRUPOS_FORMULARIO_CREAR_EDITAR} from './grupos-formulario-crear-editar';
 
+<% if(!internacionalizar) { %>
 const nombre = '<%= nombreEspacioMayuscula %>';
+<% } %>
 
 @Injectable({
   providedIn: SRuta<%= nombreMayuscula %>Module
@@ -31,10 +33,23 @@ export class SRuta<%= nombreMayuscula %>Service extends RutaComun<SRuta<%= nombr
       _notificacionService,
       matDialog,
       <%= nombreSoloMayusculas %>_FORMULARIO,
-    'Creando ' + nombre,
-      'Llene el formulario con los datos de '+ nombre,
-      'Actualizando '+ nombre,
-      'Llene el formulario con los datos de '+ nombre,
+
+        <% if(internacionalizar) { %>
+
+        'formularios.crearEditar.formularioCrearEditar.tituloCrear',
+        'formularios.crearEditar.formularioCrearEditar.descripcionCrear',
+        'formularios.crearEditar.formularioCrearEditar.tituloActualizar',
+        'formularios.crearEditar.formularioCrearEditar.descripcionActualizar',
+
+        <% } else{ %>
+
+        'Creando ' + nombre,
+        'Llene el formulario con los datos de '+ nombre,
+        'Actualizando '+ nombre,
+        'Llene el formulario con los datos de '+ nombre,
+
+        <% } %>
+
       GRUPOS_FORMULARIO_BUSQUEDA,
       GRUPOS_FORMULARIO_CREAR_EDITAR,
       ()=> {

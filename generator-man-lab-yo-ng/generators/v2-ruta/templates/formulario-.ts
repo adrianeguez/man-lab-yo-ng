@@ -1,3 +1,5 @@
+import {CampoFormulario, ModalComponente} from '@manticore-labs/ng-2021';
+
 export const <%= nombreSoloMayusculas %>_FORMULARIO: (claseComponente: ModalComponente) => CampoFormulario[] =
   (claseComponente: ModalComponente) => {
     return [

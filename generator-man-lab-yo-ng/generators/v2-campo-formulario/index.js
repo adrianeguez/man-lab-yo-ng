@@ -102,6 +102,14 @@ const OPCIONES = {
             desc: 'Modificar el template si es dependiente. EJ:  NombreRuta NombreCampo texto --esDependiente=true'
         }
     },
+    INTERNACIONALIZAR: {
+        nombre: 'internacionalizar',
+        configuracion: {
+            type: String,
+            default: undefined,
+            desc: 'Modificar el template si es internacionalizable. EJ:  NombreRuta NombreCampo texto --internacionalizar=true'
+        }
+    },
 }
 const TEMPLATES = {
     CAMPO_BUSQUEDA: '-campo--busqueda.ts',
@@ -177,6 +185,7 @@ module.exports = class extends Generator {
         this.option(OPCIONES.NOMBRE_PROPIEDAD_ID.nombre, OPCIONES.NOMBRE_PROPIEDAD_ID.configuracion);
         this.option(OPCIONES.ES_FORMULARIO.nombre, OPCIONES.ES_FORMULARIO.configuracion);
         this.option(OPCIONES.ES_DEPENDIENTE.nombre, OPCIONES.ES_DEPENDIENTE.configuracion);
+        this.option(OPCIONES.INTERNACIONALIZAR.nombre, OPCIONES.INTERNACIONALIZAR.configuracion);
 
     }
 
@@ -238,6 +247,7 @@ module.exports = class extends Generator {
         const nombrePropiedadId = this.options[OPCIONES.NOMBRE_PROPIEDAD_ID.nombre];
         const esFormulario = this.options[OPCIONES.ES_FORMULARIO.nombre];
         const esDependiente = this.options[OPCIONES.ES_DEPENDIENTE.nombre];
+        const internacionalizar = this.options[OPCIONES.INTERNACIONALIZAR.nombre];
 
         const variables = {
             nombreMayuscula,
@@ -256,7 +266,8 @@ module.exports = class extends Generator {
             nombrePrefijo,
             esFormulario,
             esDependiente,
-            nombrePropiedadId
+            nombrePropiedadId,
+            internacionalizar,
         };
 
 

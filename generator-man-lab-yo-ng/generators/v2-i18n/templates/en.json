@@ -1,5 +1,6 @@
 {
   "nombreRuta": "<%= nombreMayusculaIngles %>",
+  "migaPan": "<%= nombreMayusculaIngles %> management",
   "descripcionRuta": "<%= nombreMayusculaIngles %> management",
   "ayudaRuta": "Help ...",
   "tituloTabla": "Records",
@@ -8,7 +9,14 @@
   "cabeceraTabla": {
     "nombre": "Name",
     "habilitado": "Enabled",
-    "acciones": "Options"
+    "acciones": "Options",
+    "nombreGrupo": "Group name"
+  },
+  "tablaDesplegable": {
+    "nombreAtributo": "Attribute",
+    "nombreValor": "Value",
+    "nombreCampoNombre": "Name",
+    "nombreCampoRelacionNombre": "Relationship name"
   },
   "opcionesIrRuta": {
     "ejemplo": "Manag. Example"
@@ -38,6 +46,18 @@
         "nombreMostrar": "Search",
         "textoAyuda": "Search by ......",
         "placeholderEjemplo": "Ex: ........"
+      },
+      "campoBusquedaBusqueda": {
+        "nombreMostrar": "Search type",
+        "textoAyuda": "Filter by type of search",
+        "placeholderEjemplo": "Ex: > o < o >= o <= o =",
+        "placeholderFiltro": "Filter by type of search Ex: > o < o >= o <= o =",
+        "mensajeFiltroVacio": "Not found",
+        "opcionIgual": "Equal",
+        "opcionMayor": "More",
+        "opcionMayorIgual": "More than",
+        "opcionMenor": "Less",
+        "opcionMenorIgual": "Less than"
       },
       "campoHabilitado": {
         "nombreMostrar": "Enable",

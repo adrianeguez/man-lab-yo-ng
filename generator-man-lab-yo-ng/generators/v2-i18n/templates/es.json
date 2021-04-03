@@ -1,5 +1,6 @@
 {
   "nombreRuta": "<%= nombreMayusculaEspanol %>",
+  "migaPan": "Gestión de <%= nombreMayusculaEspanol %>",
   "descripcionRuta": "Gestión de <%= nombreMayusculaEspanol %>",
   "ayudaRuta": "Ayuda ...",
   "tituloTabla": "Registros",
@@ -8,7 +9,14 @@
   "cabeceraTabla": {
     "nombre": "Nombre",
     "habilitado": "Habilitado",
-    "acciones": "Acciones"
+    "acciones": "Acciones",
+    "nombreGrupo": "Nombre grupo"
+  },
+  "tablaDesplegable": {
+    "nombreAtributo": "Atributo",
+    "nombreValor": "Valor",
+    "nombreCampoNombre": "Nombre",
+    "nombreCampoRelacionNombre": "Relación nombre"
   },
   "opcionesIrRuta": {
     "ejemplo": "Gest. Ejemplo"
@@ -38,6 +46,18 @@
         "nombreMostrar": "Busqueda",
         "textoAyuda": "Busque por .......",
         "placeholderEjemplo": "Ej: ......"
+      },
+      "campoBusquedaBusqueda": {
+        "nombreMostrar": "Tipo de búsqueda",
+        "textoAyuda": "Filtre por el tipo de búsqueda",
+        "placeholderEjemplo": "Ej: > o < o >= o <= o =",
+        "placeholderFiltro": "Filtre por el tipo de búsqueda Ej: > o < o >= o <= o =",
+        "mensajeFiltroVacio": "No encontrado",
+        "opcionIgual": "Igual",
+        "opcionMayor": "Mayor",
+        "opcionMayorOIgual": "Mayor que",
+        "opcionMenor": "Menor",
+        "opcionMenorOIgual": "Menor que"
       },
       "campoHabilitado": {
         "nombreMostrar": "Habilitado",

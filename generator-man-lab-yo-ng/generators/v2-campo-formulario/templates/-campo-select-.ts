@@ -106,16 +106,40 @@ export const <%= nombreSoloMayusculas %><%= esFormulario ? '' : '_BUSQUEDA' %>_C
     disabled: false,
     asyncValidators: null,
     nombreCampo: '<%= nombrePrefijo ? nombrePrefijo + nombreCampoMayuscula : nombreCampoCamel %>',
+
+
+<% if(internacionalizar) { %>
+    nombreMostrar: 'formularios.busqueda.campo<%= nombreCampoMayuscula %>.nombreMostrar',
+    <% } else{ %>
     nombreMostrar: '<%= nombreCampoEspacioMayuscula %>',
-    textoAyuda: 'Seleccione <%= nombreCampoEspacioMayuscula %>.',
+    <% } %>
+
+<% if(internacionalizar) { %>
+    textoAyuda: 'formularios.busqueda.campo<%= nombreCampoMayuscula %>.textoAyuda',
+    <% } else{ %>
+    textoAyuda: 'Ingrese <%= nombreCampoEspacioMayuscula %>.',
+    <% } %>
+
+<% if(internacionalizar) { %>
+    placeholderEjemplo: 'formularios.busqueda.campo<%= nombreCampoMayuscula %>.placeholderEjemplo',
+    <% } else{ %>
     placeholderEjemplo: 'Ej: ' +
-      <% for (let campo of arregloOpciones) {%>
+    <% for (let campo of arregloOpciones) {%>
         '<%= campo.nombre %> / ' +
         <% } %>
-      '',
+    '',
+    <% } %>
+
+
+
+
     mensajes: MENSAJES_ERROR(claseComponente),
     parametros: {
-      nombreCampo: '<%= nombreCampoEspacioMayuscula %>',
+    <% if(internacionalizar) { %>
+        nombreCampo: 'formularios.busqueda.campo<%= nombreCampoMayuscula %>.nombreMostrar',
+        <% } else{ %>
+        nombreCampo: '<%= nombreCampoEspacioMayuscula %>',
+        <% } %>
     },
     select: {
       valoresSelect: [
@@ -130,12 +154,26 @@ export const <%= nombreSoloMayusculas %><%= esFormulario ? '' : '_BUSQUEDA' %>_C
             },
       <% } %>
       ],
-      placeholderFiltro: 'Filtre por Ej:' +
-      <% for (let campo of arregloOpciones) {%>
-      '<%= campo.filtro %> ' +
-      <% } %>
-      '',
-      mensajeFiltroVacio: 'No se encontró',
+
+        <% if(internacionalizar) { %>
+            placeholderFiltro: 'formularios.busqueda.campo<%= nombreCampoMayuscula %>.placeholderFiltro',
+            <% } else{ %>
+
+            placeholderFiltro: 'Filtre por Ej:' +
+            <% for (let campo of arregloOpciones) {%>
+                '<%= campo.filtro %> ' +
+                <% } %>
+            '',
+            <% } %>
+
+        <% if(internacionalizar) { %>
+            mensajeFiltroVacio: 'formularios.busqueda.campo<%= nombreCampoMayuscula %>.mensajeFiltroVacio',
+            <% } else{ %>
+            mensajeFiltroVacio: 'No se encontró',
+            <% } %>
+
+
+
       campoFiltrado: '<%= nombrePrefijo ? nombrePrefijo + nombreCampoMayuscula : nombreCampoCamel %>',
       fnMostrarEnSelect: (campo: { <%= nombrePrefijo ? nombrePrefijo + nombreCampoMayuscula : nombreCampoCamel %>: any <%= undefinedValor ? '| undefined' : '' %> }) => {
         <% if(undefinedValor) {%>

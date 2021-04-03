@@ -105,19 +105,48 @@ export const <%= nombreSoloMayusculas %><%= esFormulario ? '' : '_BUSQUEDA' %>_C
       disabled: false,
       asyncValidators: null,
       nombreCampo: '<%= nombrePrefijo ? nombrePrefijo + nombreCampoMayuscula : nombreCampoCamel %>',
-      nombreMostrar: '<%= nombreCampoEspacioMayuscula %>',
-      textoAyuda: 'Ingrese <%= nombreCampoEspacioMayuscula %>.',
-      placeholderEjemplo: 'Ej: ...',
+
+        <% if(internacionalizar) { %>
+        nombreMostrar: 'formularios.busqueda.campo<%= nombreCampoMayuscula %>.nombreMostrar',
+        <% } else{ %>
+        nombreMostrar: '<%= nombreCampoEspacioMayuscula %>',
+        <% } %>
+
+        <% if(internacionalizar) { %>
+        textoAyuda: 'formularios.busqueda.campo<%= nombreCampoMayuscula %>.textoAyuda',
+        <% } else{ %>
+        textoAyuda: 'Ingrese <%= nombreCampoEspacioMayuscula %>.',
+        <% } %>
+
+        <% if(internacionalizar) { %>
+        placeholderEjemplo: 'formularios.busqueda.campo<%= nombreCampoMayuscula %>.placeholderEjemplo',
+        <% } else{ %>
+        placeholderEjemplo: 'Ej: ...',
+        <% } %>
+
+
+
       mensajes: MENSAJES_ERROR(claseComponente),
       parametros: {
+        <% if(internacionalizar) { %>
+        nombreCampo: 'formularios.busqueda.campo<%= nombreCampoMayuscula %>.nombreMostrar',
+        <% } else{ %>
         nombreCampo: '<%= nombreCampoEspacioMayuscula %>',
+        <% } %>
+
       },
       autocomplete: {
         suggestions: [],
         field: '<%= nombrePropiedad %>', // Nombre de la propiedad del objeto a visualizarse
         delay: 2000,
         inputId: '<%= nombrePropiedadId %>', // Id a ser seleccionado
-        emptyMessage: 'No hay registros',
+
+          <% if(internacionalizar) { %>
+          emptyMessage: 'formularios.comunes.autocompleteSinRegistros',
+          <% } else{ %>
+          emptyMessage: 'No hay registros',
+          <% } %>
+
         fnMostrarEnAutoComplete: (campo:any) => {
          // Se puede concatenar los campos EJ: campo.nombreCampoRelacionUno + ' ' + campo.nombreCampoRelacionDos
          return campo.<%= nombrePropiedad %>; // Nombre de la propiedad del objeto a visualizarse

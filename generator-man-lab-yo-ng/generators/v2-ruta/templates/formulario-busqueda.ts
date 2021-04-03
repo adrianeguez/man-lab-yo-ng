@@ -1,4 +1,4 @@
-
+import {CampoFormulario} from '@manticore-labs/ng-2021';
 import {<%= nombreSoloMayusculas %>_BUSQUEDA_CAMPO_TEXTO_BUSQUEDA} from './<%= nombreGuiones %>-busqueda-campo-texto-busqueda';
 import {<%= nombreSoloMayusculas %>_BUSQUEDA_CAMPO_SELECT_HABILITADO} from './<%= nombreGuiones %>-busqueda-campo-select-habilitado';
 
