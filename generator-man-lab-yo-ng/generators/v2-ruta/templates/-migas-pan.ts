@@ -21,7 +21,14 @@ export const <%= nombreSoloMayusculas %>_MIGAS_PAN
     // path que va a ir en el RoutingModule
     id: 'path-uno/:parametroRutaUno/path-dos/:parametroRutaDos/path-tres/:parametroRutaTres/path-final',
     // Nombre a visualizarse
+
+    <% if(internacionalizar) { %>
+    label: 'migaPan',
+    <% } else{ %>
     label: '<%= nombreEspacioMayuscula %>',
+    <% } %>
+
+
     // Aqui se debe de llenar el arreglo del path de esta ruta.
     // Se puede utilizar las migas de pan de la anterior ruta.
     routerLink: [

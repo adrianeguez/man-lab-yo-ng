@@ -59,19 +59,19 @@ export const <%= nombreSoloMayusculas %>_CAMPO_TEXTO_NOMBRE: (
       nombreCampo: 'nombre',
 
         <% if(internacionalizar) { %>
-    nombreMostrar: 'formularios.busqueda.campo<%= nombreCampoMayuscula %>.nombreMostrar',
+    nombreMostrar: 'formularios.busqueda.campoNombre.nombreMostrar',
     <% } else{ %>
     nombreMostrar: 'Nombre',
     <% } %>
 
   <% if(internacionalizar) { %>
-    textoAyuda: 'formularios.busqueda.campo<%= nombreCampoMayuscula %>.textoAyuda',
+    textoAyuda: 'formularios.busqueda.campoNombre.textoAyuda',
     <% } else{ %>
     textoAyuda: 'Escriba un nombre.',
     <% } %>
 
   <% if(internacionalizar) { %>
-    placeholderEjemplo: 'formularios.busqueda.campo<%= nombreCampoMayuscula %>.placeholderEjemplo',
+    placeholderEjemplo: 'formularios.busqueda.campoNombre.placeholderEjemplo',
     <% } else{ %>
     placeholderEjemplo: 'Ej: Nombre ...',
     <% } %>
@@ -80,7 +80,7 @@ export const <%= nombreSoloMayusculas %>_CAMPO_TEXTO_NOMBRE: (
       mensajes: MENSAJES_ERROR(claseComponente),
       parametros: {
     <% if(internacionalizar) { %>
-      nombreCampo: 'formularios.busqueda.campo<%= nombreCampoMayuscula %>.nombreMostrar',
+      nombreCampo: 'formularios.busqueda.campoNombre.nombreMostrar',
       <% } else{ %>
       nombreCampo: 'Nombre',
       <% } %>

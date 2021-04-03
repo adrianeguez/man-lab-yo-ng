@@ -11,19 +11,19 @@ export const <%= nombreSoloMayusculas %>_BUSQUEDA_CAMPO_SELECT_HABILITADO: (clas
 
 
     <% if(internacionalizar) { %>
-    nombreMostrar: 'formularios.busqueda.campo<%= nombreCampoMayuscula %>.nombreMostrar',
+    nombreMostrar: 'formularios.busqueda.campoHabilitado.nombreMostrar',
     <% } else{ %>
     nombreMostrar: 'Habilitado',
     <% } %>
 
   <% if(internacionalizar) { %>
-    textoAyuda: 'formularios.busqueda.campo<%= nombreCampoMayuscula %>.textoAyuda',
+    textoAyuda: 'formularios.busqueda.campoHabilitado.textoAyuda',
     <% } else{ %>
     textoAyuda: 'Filtra por habilitado.',
     <% } %>
 
   <% if(internacionalizar) { %>
-    placeholderEjemplo: 'formularios.busqueda.campo<%= nombreCampoMayuscula %>.placeholderEjemplo',
+    placeholderEjemplo: 'formularios.busqueda.campoHabilitado.placeholderEjemplo',
     <% } else{ %>
     placeholderEjemplo: 'Ej: Activo / Inactivo',
     <% } %>
@@ -34,7 +34,7 @@ export const <%= nombreSoloMayusculas %>_BUSQUEDA_CAMPO_SELECT_HABILITADO: (clas
     mensajes: MENSAJES_ERROR(claseComponente),
     parametros: {
     <% if(internacionalizar) { %>
-      nombreCampo: 'formularios.busqueda.campo<%= nombreCampoMayuscula %>.nombreMostrar',
+      nombreCampo: 'formularios.busqueda.campoHabilitado.nombreMostrar',
       <% } else{ %>
       nombreCampo: 'Habilitado',
       <% } %>
@@ -58,13 +58,13 @@ export const <%= nombreSoloMayusculas %>_BUSQUEDA_CAMPO_SELECT_HABILITADO: (clas
       ],
 
       <% if(internacionalizar) { %>
-      placeholderFiltro: 'formularios.busqueda.campo<%= nombreCampoMayuscula %>.placeholderFiltro',
+      placeholderFiltro: 'formularios.busqueda.campoHabilitado.placeholderFiltro',
       <% } else{ %>
       placeholderFiltro: 'Filtre por Activo Ej: A o I',
       <% } %>
 
      <% if(internacionalizar) { %>
-      mensajeFiltroVacio: 'formularios.busqueda.campo<%= nombreCampoMayuscula %>.mensajeFiltroVacio',
+      mensajeFiltroVacio: 'formularios.busqueda.campoHabilitado.mensajeFiltroVacio',
       <% } else{ %>
       mensajeFiltroVacio: 'No se encontró',
       <% } %>

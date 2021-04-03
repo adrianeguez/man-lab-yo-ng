@@ -107,12 +107,14 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
 
   rutaImagenAssets = 'assets/img/' + NOMBRE_MODULO_ASSETS
 
+  rutaImagenPrincipal = this.rutaImagenAssets + '/<%= nombreGuiones %>/imagen-principal.svg'
+
   <% if(internacionalizar) { %>
   objetoInternacionalizacion: ObjetoInternacionalizacionFormulario = {
         botonAtras: 'botonAtras',
         botonLimpiarFormulario: 'botonLimpiarFormulario',
         botonSiguiente: 'botonSiguiente',
-        nombreScopeTransloco: NOMBRE_SCOPE_ENTRENADOR,
+        nombreScopeTransloco: NOMBRE_SCOPE_<%= nombreSoloMayusculas %>,
       }
   <% } else{ %>
 
@@ -164,7 +166,7 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
                   this,
                   [
                     // MODULO_MIGAS_PAN,
-                    // <%= nombreSoloMayusculas%>_MIGAS_PAN,
+                    <%= nombreSoloMayusculas%>_MIGAS_PAN,
                   ],
               );
           this.buscarConFiltros();

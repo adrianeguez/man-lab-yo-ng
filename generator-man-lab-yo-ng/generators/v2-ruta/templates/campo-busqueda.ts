@@ -9,19 +9,19 @@ export const <%= nombreSoloMayusculas %>_BUSQUEDA_CAMPO_TEXTO_BUSQUEDA: (claseCo
     nombreCampo: '<%= !esFirebase ? "busqueda" : "__busquedaGlobal" %>',
 
       <% if(internacionalizar) { %>
-      nombreMostrar: 'formularios.busqueda.campo<%= nombreCampoMayuscula %>.nombreMostrar',
+      nombreMostrar: 'formularios.busqueda.campoBusqueda.nombreMostrar',
       <% } else{ %>
       nombreMostrar: 'Búsqueda',
       <% } %>
 
     <% if(internacionalizar) { %>
-      textoAyuda: 'formularios.busqueda.campo<%= nombreCampoMayuscula %>.textoAyuda',
+      textoAyuda: 'formularios.busqueda.campoBusqueda.textoAyuda',
       <% } else{ %>
       textoAyuda: 'Busca por nombre.',
       <% } %>
 
     <% if(internacionalizar) { %>
-      placeholderEjemplo: 'formularios.busqueda.campo<%= nombreCampoMayuscula %>.placeholderEjemplo',
+      placeholderEjemplo: 'formularios.busqueda.campoBusqueda.placeholderEjemplo',
       <% } else{ %>
       placeholderEjemplo: 'Ej: ...',
       <% } %>
@@ -31,7 +31,7 @@ export const <%= nombreSoloMayusculas %>_BUSQUEDA_CAMPO_TEXTO_BUSQUEDA: (claseCo
     mensajes: MENSAJES_ERROR(claseComponente),
     parametros: {
     <% if(internacionalizar) { %>
-      nombreCampo: 'formularios.busqueda.campo<%= nombreCampoMayuscula %>.nombreMostrar',
+      nombreCampo: 'formularios.busqueda.campoBusqueda.nombreMostrar',
       <% } else{ %>
       nombreCampo: 'Búsqueda',
       <% } %>
