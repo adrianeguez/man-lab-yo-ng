@@ -46,13 +46,21 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
     // },
     {
       field: '<%= nombreHabilitado %>',
+    <% if(internacionalizar) { %>
+      header: 'habilitado',
+        <% } else{ %>
       header: 'Habilitado',
+    <% } %>
       posicion: 'text-left',
       tamanio: '20%'
     },
     {
       field: '<%= id %>',
+      <% if(internacionalizar) { %>
+      header: 'acciones',
+      <% } else{ %>
       header: 'Acciones',
+      <% } %>
       posicion: 'text-right',
       tamanio: '20%'
     }
