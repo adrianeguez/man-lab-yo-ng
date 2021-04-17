@@ -3,8 +3,6 @@ import {pruebaSeguridadPermiso<%= nombreMayuscula %>Funcion} from './prueba-segu
 
 declare var cy: any;
 
-
-
 export const OBJETO_PRUEBA_SEGURIDAD_PERMISO_<%= nombreSoloMayusculas %>: (rutaPrueba: RutaCypressInterface) => ObjetoPruebaManticore
   = (rutaPrueba: RutaCypressInterface) => {
   return {

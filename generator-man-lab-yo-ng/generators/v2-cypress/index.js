@@ -161,7 +161,7 @@ module.exports = class extends Generator {
         );
 
         const templateAPC = this.templatePath(TEMPLATES.ARREGLO_PRUEBAS_CONSTANTE);
-        const destinoAPC = this.destinationPath(`./ruta-${nombreGuiones}/constantes/ruta-${nombreGuiones}.constante.ts`);
+        const destinoAPC = this.destinationPath(`./ruta-${nombreGuiones}/pruebas/arreglo-pruebas.constante.ts`);
 
         this.fs.copyTpl(
             templateAPC,
@@ -223,6 +223,78 @@ module.exports = class extends Generator {
             variables
         );
 
+        const templatePNI = this.templatePath(TEMPLATES.PRUEBA_NAVEGACION_INTERFACE);
+        const destinoPNI = this.destinationPath(`./ruta-${nombreGuiones}/pruebas/prueba-navegacion-${nombreGuiones}/prueba-navegacion-${nombreGuiones}.interface.ts`);
+
+        this.fs.copyTpl(
+            templatePNI,
+            destinoPNI,
+            variables
+        );
+
+        const templatePNS = this.templatePath(TEMPLATES.PRUEBA_NAVEGACION_SPEC);
+        const destinoPNS = this.destinationPath(`./ruta-${nombreGuiones}/pruebas/prueba-navegacion-${nombreGuiones}/prueba-navegacion-${nombreGuiones}.spec.ts`);
+
+        this.fs.copyTpl(
+            templatePNS,
+            destinoPNS,
+            variables
+        );
+
+        const templatePSPC = this.templatePath(TEMPLATES.PRUEBA_SEGURIDAD_PERMISO_CONSTANTE);
+        const destinoPSPC = this.destinationPath(`./ruta-${nombreGuiones}/pruebas/prueba-seguridad-permiso-${nombreGuiones}/prueba-seguridad-permiso-${nombreGuiones}.constante.ts`);
+
+        this.fs.copyTpl(
+            templatePSPC,
+            destinoPSPC,
+            variables
+        );
+
+        const templatePSPE = this.templatePath(TEMPLATES.PRUEBA_SEGURIDAD_PERMISO_ETIQUETAS);
+        const destinoPSPE = this.destinationPath(`./ruta-${nombreGuiones}/pruebas/prueba-seguridad-permiso-${nombreGuiones}/prueba-seguridad-permiso-${nombreGuiones}.etiquetas.ts`);
+
+        this.fs.copyTpl(
+            templatePSPE,
+            destinoPSPE,
+            variables
+        );
+
+        const templatePSPF = this.templatePath(TEMPLATES.PRUEBA_SEGURIDAD_PERMISO_FUNCION);
+        const destinoPSPF = this.destinationPath(`./ruta-${nombreGuiones}/pruebas/prueba-seguridad-permiso-${nombreGuiones}/prueba-seguridad-permiso-${nombreGuiones}.funcion.ts`);
+
+        this.fs.copyTpl(
+            templatePSPF,
+            destinoPSPF,
+            variables
+        );
+
+        const templatePSPFI = this.templatePath(TEMPLATES.PRUEBA_SEGURIDAD_PERMISO_INTERFACE);
+        const destinoPSPFI = this.destinationPath(`./ruta-${nombreGuiones}/pruebas/prueba-seguridad-permiso-${nombreGuiones}/prueba-seguridad-permiso-${nombreGuiones}.interface.ts`);
+
+        this.fs.copyTpl(
+            templatePSPFI,
+            destinoPSPFI,
+            variables
+        );
+
+        const templatePSPFS = this.templatePath(TEMPLATES.PRUEBA_SEGURIDAD_PERMISO_SPEC);
+        const destinoPSPFS = this.destinationPath(`./ruta-${nombreGuiones}/pruebas/prueba-seguridad-permiso-${nombreGuiones}/prueba-seguridad-permiso-${nombreGuiones}.spec.ts`);
+
+        this.fs.copyTpl(
+            templatePSPFS,
+            destinoPSPFS,
+            variables
+        );
+
+        const templateRC = this.templatePath(TEMPLATES.RUTA_CONSTANTE);
+        const destinoRC = this.destinationPath(`./ruta-${nombreGuiones}/constantes/ruta-${nombreGuiones}.constante.ts`);
+
+        this.fs.copyTpl(
+            templateRC,
+            destinoRC,
+            variables
+        );
+
     }
 
     conflicts() {
@@ -234,7 +306,7 @@ module.exports = class extends Generator {
     }
 
     end() {
-        const nombre = this.options[ARGUMENTOS.NOMBRE_CAMPO.nombre];
+        const nombre = this.options[ARGUMENTOS.NOMBRE_RUTA.nombre];
         this.log(`Campo ${nombre} creado :)`)
     }
 

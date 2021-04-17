@@ -57,7 +57,7 @@ export function pruebaNavegacion<%= nombreMayuscula %>Funcion(
           // buscar por nombre
           chain = chain.get('#' + nombreFormularioBusqueda + 'busqueda');
           chain = chain.type(LLENAR_CON_VALORES_DE_LA_BUSQUEDA);
-          chain = chain.get('#busqueda-filtros-clase-bien');
+          chain = chain.get('#busqueda-filtros-<%= nombreGuiones %>');
           chain = chain.click();
           chain = chain.wait(500);
           chain = chain.get('tbody').find('tr').should('have.length', 1);
@@ -72,6 +72,8 @@ export function pruebaNavegacion<%= nombreMayuscula %>Funcion(
 
           chain = chain.get('#crear-<%= nombreGuiones %>');
           chain = chain.click();
+
+          LLENAR_FORMULARIO_CREAR;
           //
           // const objetoFormularioNombreCampo: FormularioCypressInterface = {
           //   input: {
@@ -106,6 +108,9 @@ export function pruebaNavegacion<%= nombreMayuscula %>Funcion(
 
           chain = chain.get('tbody').find('tr').contains('Editar').click();
 
+
+          LLENAR_FORMULARIO_EDITAR;
+
           // formularioFuncion(chain, objetoFormularioNombreCampo);
           // if (objetoFormularioNombreCampoPDropdown.pDropdown) {
           //   objetoFormularioNombreCampoPDropdown.pDropdown.opcionASeleccionar = 'OTRA_OPCION';
@@ -139,6 +144,7 @@ export function pruebaNavegacion<%= nombreMayuscula %>Funcion(
           .escenarios
           .navegacionFalla, () => {
 
+          const rutaAnterior = LLENAR_RUTA_ANTERIOR;
           let chain: Cypress.cy | Cypress.Chainable = cy.visit('/desarrollo');
           chain = chain.wait(10);
           chain = chain.get('#permiso');
@@ -146,7 +152,7 @@ export function pruebaNavegacion<%= nombreMayuscula %>Funcion(
           chain = chain.get('#permiso-boton');
           chain = chain.click();
           chain = chain.get('#ruta');
-          chain = chain.type('["/LLENAR_CON_RUTA_ANTERIOR", "gestion-<%= nombreGuiones %>"]');
+          chain = chain.type(`[${rutaAnterior}, "gestion-<%= nombreGuiones %>"]`);
           chain = chain.get('#ruta-boton');
           chain = chain.click();
           chain = chain.location('pathname').should('include', 'no-tiene-permisos');

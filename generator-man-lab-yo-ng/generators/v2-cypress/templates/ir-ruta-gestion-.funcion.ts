@@ -6,6 +6,7 @@ export function irRutaGestion<%= nombreMayuscula %>Funcion(
   cy: Cypress.cy | Cypress.Chainable
 ): Cypress.cy | Cypress.Chainable {
   let chain: Cypress.cy | Cypress.Chainable;
+  const rutaAnterior = LLENAR_RUTA_ANTERIOR;
   chain = cy.visit('/desarrollo');
   chain = chain.wait(10);
   chain = chain.get('#permiso');
@@ -13,7 +14,7 @@ export function irRutaGestion<%= nombreMayuscula %>Funcion(
   chain = chain.click();
   chain = chain.get('#permiso-boton');
   chain = chain.get('#ruta');
-  chain = chain.type('["/LLENAR_CON_RUTA_ANTERIOR", "gestion-<%= nombreGuiones %>"]');
+  chain = chain.type(`[${rutaAnterior}, "gestion-<%= nombreGuiones %>"]`);
   chain = chain.get('#ruta-boton');
   chain = chain.click();
   chain = chain.location('pathname').should('include', 'gestion-<%= nombreGuiones %>');
