@@ -11,6 +11,7 @@
                                                (cambioCampo)="cambioCampoBusqueda($event)"
                                                (cambioAutocomplete)="formularioBusquedacambioCampoAutocomplete($event)"
                                                [vertical]="false"
+                                               id="filtro-<%= nombreGuiones %>"
                                                class="campo-formulario"
                                                tituloFormulario=""
                                                descripcionFormulario=""
@@ -26,6 +27,7 @@
           <button pButton
                   pRipple
                   type="button"
+                  id="busqueda-filtros-<%= nombreGuiones %>"
                   label="Buscar"
                   class="p-button-raised p-button-primary"
                   icon="pi pi-search"
@@ -111,6 +113,7 @@
                   <button pButton
                           pRipple
                           label="Crear"
+                          id="crear-<%= nombreGuiones %>"
                           icon="pi pi-plus"
                           class="p-button-success p-mr-2"
                           (click)="botonAceptarModalDisabled = true;"
@@ -126,11 +129,11 @@
           </div>
         </ng-template>
 
-        <ng-template pTemplate="colgroup" let-columns>
-          <colgroup>
-            <col *ngFor="let col of columns" [style.width]="col.tamanio">
-          </colgroup>
-        </ng-template>
+<!--        <ng-template pTemplate="colgroup" let-columns>-->
+<!--          <colgroup>-->
+<!--            <col *ngFor="let col of columns" [style.width]="col.tamanio">-->
+<!--          </colgroup>-->
+<!--        </ng-template>-->
         <ng-template pTemplate="header" let-columns>
           <tr>
             <th *ngFor="let col of columns" [pSortableColumn]="col.field" [pSortableColumn]="col.field">
@@ -155,7 +158,7 @@
 <!--          </td>-->
 <!--        </tr>-->
 
-          <tr class="p-selectable-row">
+          <tr class="p-selectable-row" [id]="'tr-' + clase.idClase">
             <td *ngFor="let col of columns"  [ngClass]="{
            'valido-carta':<%= nombreCamel %>.habilitado,
            'invalido-carta':!<%= nombreCamel %>.habilitado }">
@@ -187,6 +190,7 @@
                   <br>
                   <p-button
                     label="Editar"
+                    [id]="'tr' + clase.idClase +'_editar'"
                     [disabled]="!<%= nombreCamel %>.habilitado"
                     icon="pi pi-pencil"
                     styleClass="p-button-warning"

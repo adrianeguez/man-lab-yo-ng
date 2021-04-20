@@ -40,7 +40,7 @@ const ARGUMENTOS = {
         configuracion: {
             type: String,
             required: true,
-            desc: 'Tipo de campo EJ: busqueda / autocomplete / inputMask / inputNumber / inputSwitch / password / select / texto'
+            desc: 'Tipo de campo EJ: busqueda / autocomplete / inputMask / inputNumber / inputSwitch / password / select / texto / date'
         }
     },
     ARREGLO_OPCIONES: {
@@ -112,6 +112,7 @@ const TEMPLATES = {
     CAMPO_PASSWORD: '-campo-password-.ts',
     CAMPO_SELECT: '-campo-select-.ts',
     CAMPO_TEXTO: '-campo-texto-.ts',
+    CAMPO_DATE: '-campo-date-.ts',
 }
 
 const aCamel = (cadena) => {
@@ -368,6 +369,15 @@ module.exports = class extends Generator {
                 this.fs.copyTpl(
                     templateCT,
                     destinoCT,
+                    variables
+                );
+                break;
+            case 'date':
+                const templateCD = this.templatePath(TEMPLATES.CAMPO_DATE);
+                const destinoCD = this.destinationPath(`${nombreGuiones}-campo-date-${nombreCampoGuiones}.ts`);
+                this.fs.copyTpl(
+                    templateCD,
+                    destinoCD,
                     variables
                 );
                 break;

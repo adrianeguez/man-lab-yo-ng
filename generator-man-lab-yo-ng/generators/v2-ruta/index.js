@@ -54,6 +54,7 @@ const TEMPLATES = {
     CAMPO_NOMBRE: 'campo--nombre.ts',
     FORMULARIO_CREAR_EDITAR: 'formulario-.ts',
     MIGAS_PAN: '-migas.pan.ts',
+    GUARD: '.guard.ts',
 }
 
 const aCamel = (cadena) => {
@@ -348,6 +349,15 @@ module.exports = class extends Generator {
         this.fs.copyTpl(
             templateMP,
             destinoMP,
+            variables
+        );
+
+        const templateG = this.templatePath(TEMPLATES.GUARD);
+        const destinoG = this.destinationPath(`./guard/${nombreGuiones}.guard.ts`);
+
+        this.fs.copyTpl(
+            templateG,
+            destinoG,
             variables
         );
     }
