@@ -55,6 +55,7 @@ const TEMPLATES = {
     FORMULARIO_CREAR_EDITAR: 'formulario-.ts',
     MIGAS_PAN: '-migas-pan.ts',
     LOADER_TRANSLOCO: 'loader-.ts',
+    GUARD: '.guard.ts',
 }
 const OPCIONES = {
     ES_FIREBASE: {
@@ -389,6 +390,16 @@ module.exports = class extends Generator {
                 variables
             );
         }
+
+
+        const templateGRD = this.templatePath(TEMPLATES.GUARD);
+        const destinoGRD = this.destinationPath(`./guard/${nombreGuiones}.guard.ts`);
+
+        this.fs.copyTpl(
+            templateGRD,
+            destinoGRD,
+            variables
+        );
     }
 
     conflicts() {

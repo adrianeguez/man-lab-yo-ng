@@ -27,6 +27,7 @@
                                                (cambioAutocomplete)="formularioBusquedacambioCampoAutocomplete($event)"
                                                [vertical]="false"
                                                class="campo-formulario"
+                                               id="filtro-<%= nombreGuiones %>"
                                                tituloFormulario=""
                                                descripcionFormulario=""
                                                [camposFormularioFuncion]="camposFormularioBusqueda"
@@ -42,6 +43,7 @@
                   pRipple
                   type="button"
                   label="Buscar"
+                  id="busqueda-filtros-<%= nombreGuiones %>"
                   class="p-button-raised p-button-primary"
                   icon="pi pi-search"
                   (click)="buscarConFiltros()"
@@ -141,6 +143,7 @@
                     <button pButton
                             pRipple
                             label="Crear"
+                            id="crear-<%= nombreGuiones %>"
                             icon="pi pi-plus"
                             class="p-button-success p-mr-2"
                             (click)="botonAceptarModalDisabled = true;"
@@ -185,7 +188,7 @@
           <!--          </td>-->
           <!--        </tr>-->
 
-          <tr class="p-selectable-row">
+          <tr class="p-selectable-row"  [id]="'tr-' + <%= nombreCamel %>.<%= id %>">
             <td *ngFor="let col of columns"  [ngClass]="{
            'valido-carta':<%= nombreCamel %>.habilitado,
            'invalido-carta':!<%= nombreCamel %>.habilitado }">
@@ -223,6 +226,7 @@
                   <br>
                   <p-button
                           label="Editar"
+                          [id]="'tr' + <%= nombreCamel %>.<%= id %> +'_editar'"
                           [disabled]="!<%= nombreCamel %>.habilitado"
                           icon="pi pi-pencil"
                           styleClass="p-button-warning"
