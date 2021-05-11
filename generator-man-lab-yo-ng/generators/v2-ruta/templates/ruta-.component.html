@@ -370,6 +370,7 @@
                                                  (cambioAutocomplete)="formularioBusquedacambioCampoAutocomplete($event)"
                                                  [vertical]="false"
                                                  class="campo-formulario"
+                                                 id="filtro-<%= nombreGuiones %>"
                                                  tituloFormulario="formularios.busqueda.formularioBusqueda.tituloFormulario"
                                                  descripcionFormulario="formularios.busqueda.formularioBusqueda.descripcionFormulario"
                                                  descripcionFormularioConGrupo="formularios.busqueda.formularioBusqueda.descripcionFormularioConGrupo"
@@ -389,6 +390,7 @@
                     pRipple
                     type="button"
                     [label]="'generales.botones.buscar' | transloco"
+                    id="busqueda-filtros-<%= nombreGuiones %>"
                     class="p-button-raised p-button-primary"
                     icon="pi pi-search"
                     (click)="buscarConFiltros()"
@@ -488,6 +490,7 @@
                       <button pButton
                               pRipple
                               [label]="'generales.botones.crear' | transloco"
+                              id="crear-<%= nombreGuiones %>"
                               icon="pi pi-plus"
                               class="p-button-success p-mr-2"
                               (click)="botonAceptarModalDisabled = true;"
@@ -532,7 +535,7 @@
             <!--          </td>-->
             <!--        </tr>-->
 
-            <tr class="p-selectable-row">
+            <tr class="p-selectable-row" [id]="'tr-' + <%= nombreCamel %>.<%= id %>">
               <td *ngFor="let col of columns"  [ngClass]="{
            'valido-carta':<%= nombreCamel %>.habilitado,
            'invalido-carta':!<%= nombreCamel %>.habilitado }">
@@ -570,6 +573,7 @@
                     <br>
                     <p-button
                             [label]="'generales.botones.editar' | transloco"
+                            [id]="'tr' + <%= nombreCamel %>.<%= id %> +'_editar'"
                             [disabled]="!<%= nombreCamel %>.habilitado"
                             icon="pi pi-pencil"
                             styleClass="p-button-warning"
