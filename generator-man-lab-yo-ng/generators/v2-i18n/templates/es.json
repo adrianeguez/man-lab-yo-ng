@@ -10,7 +10,11 @@
     "nombre": "Nombre",
     "habilitado": "Habilitado",
     "acciones": "Acciones",
-    "nombreGrupo": "Nombre grupo"
+    "nombreGrupo": "Nombre grupo",
+    "archivo": "Archivo",
+    "archivoNombre": "Nombre archivo",
+    "imagen": "Imagen",
+    "imagenNombre": "Nombre imagen"
   },
   "tablaDesplegable": {
     "nombreAtributo": "Atributo",

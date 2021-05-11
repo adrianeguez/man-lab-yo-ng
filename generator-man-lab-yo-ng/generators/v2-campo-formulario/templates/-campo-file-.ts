@@ -4,7 +4,9 @@ import {<%= nombreMayuscula %>Interface} from '../../interfaces/<%= nombreGuione
 import {<%= nombreMayuscula %>BusquedaDto} from '../../dto/<%= nombreGuiones %>-busqueda.dto';
 <% } else{ %>
 <% } %>
-export const <%= nombreSoloMayusculas %><%= esFormulario ? '' : '_BUSQUEDA' %>_CAMPO_INPUT_MASK_<%= nombreCampoSoloMayusculas %>: (
+
+
+export const <%= nombreSoloMayusculas %><%= esFormulario ? '' : '_BUSQUEDA' %>_CAMPO_FILE_<%= nombreCampoSoloMayusculas %>: (
     <% if(esFormulario) { %>
   claseComponente: ModalComponente) => CampoFormulario =
     (claseComponente: ModalComponente<Ruta<%= nombreMayuscula %>Component, <%= nombreMayuscula %>Interface, <%= nombreMayuscula %>BusquedaDto>) => {
@@ -45,8 +47,16 @@ export const <%= nombreSoloMayusculas %><%= esFormulario ? '' : '_BUSQUEDA' %>_C
   // }
   <% } %>
 
+    let accept = '';
+    const tipo = claseComponente.data.componente._sRuta<%= nombreMayuscula %>Service.parametros.tipo;
+    if (tipo){
+      if (tipo === 'imagen'){
+        accept = '.png,.jpg,.jpeg,.bmp,';
+      }
+    }
+
   return {
-    tipoCampoHtml: 'inputMask',
+    tipoCampoHtml: 'file',
       <% if(esFormulario) { %>
   valorInicial: valorCampo,
   <% } else{ %>
@@ -98,14 +108,16 @@ export const <%= nombreSoloMayusculas %><%= esFormulario ? '' : '_BUSQUEDA' %>_C
   <% } %>
     disabled: false,
     asyncValidators: null,
-
     nombreCampo: '<%= nombrePrefijo ? nombrePrefijo + nombreCampoMayuscula : nombreCampoCamel %>',
+
+
 
 <% if(internacionalizar) { %>
   nombreMostrar: 'formularios.busqueda.campo<%= nombreCampoMayuscula %>.nombreMostrar',
   <% } else{ %>
   nombreMostrar: '<%= nombreCampoEspacioMayuscula %>',
   <% } %>
+
 <% if(internacionalizar) { %>
   textoAyuda: 'formularios.busqueda.campo<%= nombreCampoMayuscula %>.textoAyuda',
   <% } else{ %>
@@ -117,6 +129,9 @@ export const <%= nombreSoloMayusculas %><%= esFormulario ? '' : '_BUSQUEDA' %>_C
   <% } else{ %>
   placeholderEjemplo: 'Ej: ...',
   <% } %>
+
+
+
     mensajes: MENSAJES_ERROR(claseComponente),
     parametros: {
   <% if(internacionalizar) { %>
@@ -124,19 +139,18 @@ export const <%= nombreSoloMayusculas %><%= esFormulario ? '' : '_BUSQUEDA' %>_C
     <% } else{ %>
     nombreCampo: '<%= nombreCampoEspacioMayuscula %>',
     <% } %>
-      // minlength: 11,
+      // minlength: 2,
+      // maxlength:10,
+      // min:100,
+      // max:0,
+      // mensajePattern: 'Solo letras y espacios',
+      // tamanioMaximoEnBytes: 10 * 1024 * 1000
     },
-    inputMask: {
-      mask: '99-99999999',
-      slotChar: '_',
-      characterPattern: [],
-      fnValidar: (campo, componente) => {
-        // const numeros = campo.replaceAll('_', '').replaceAll('-', '');
-        // return numeros.length >= 10;
-        return true;
-      }
-    },
-    componente: claseComponente,
+    file: {
+      tamanioMaximoEnBytes: 10 * 1024 * 1000,
+      accept
+    }
     formulario: {},
+    componente: claseComponente,
   };
 };

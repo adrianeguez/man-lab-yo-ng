@@ -4,7 +4,9 @@ import {<%= nombreMayuscula %>Interface} from '../../interfaces/<%= nombreGuione
 import {<%= nombreMayuscula %>BusquedaDto} from '../../dto/<%= nombreGuiones %>-busqueda.dto';
 <% } else{ %>
 <% } %>
-export const <%= nombreSoloMayusculas %><%= esFormulario ? '' : '_BUSQUEDA' %>_CAMPO_INPUT_MASK_<%= nombreCampoSoloMayusculas %>: (
+
+
+export const <%= nombreSoloMayusculas %><%= esFormulario ? '' : '_BUSQUEDA' %>_CAMPO_DATE_<%= nombreCampoSoloMayusculas %>: (
     <% if(esFormulario) { %>
   claseComponente: ModalComponente) => CampoFormulario =
     (claseComponente: ModalComponente<Ruta<%= nombreMayuscula %>Component, <%= nombreMayuscula %>Interface, <%= nombreMayuscula %>BusquedaDto>) => {
@@ -45,8 +47,9 @@ export const <%= nombreSoloMayusculas %><%= esFormulario ? '' : '_BUSQUEDA' %>_C
   // }
   <% } %>
 
+
   return {
-    tipoCampoHtml: 'inputMask',
+    tipoCampoHtml: 'date',
       <% if(esFormulario) { %>
   valorInicial: valorCampo,
   <% } else{ %>
@@ -98,14 +101,16 @@ export const <%= nombreSoloMayusculas %><%= esFormulario ? '' : '_BUSQUEDA' %>_C
   <% } %>
     disabled: false,
     asyncValidators: null,
-
     nombreCampo: '<%= nombrePrefijo ? nombrePrefijo + nombreCampoMayuscula : nombreCampoCamel %>',
+
+
 
 <% if(internacionalizar) { %>
   nombreMostrar: 'formularios.busqueda.campo<%= nombreCampoMayuscula %>.nombreMostrar',
   <% } else{ %>
   nombreMostrar: '<%= nombreCampoEspacioMayuscula %>',
   <% } %>
+
 <% if(internacionalizar) { %>
   textoAyuda: 'formularios.busqueda.campo<%= nombreCampoMayuscula %>.textoAyuda',
   <% } else{ %>
@@ -117,6 +122,9 @@ export const <%= nombreSoloMayusculas %><%= esFormulario ? '' : '_BUSQUEDA' %>_C
   <% } else{ %>
   placeholderEjemplo: 'Ej: ...',
   <% } %>
+
+
+
     mensajes: MENSAJES_ERROR(claseComponente),
     parametros: {
   <% if(internacionalizar) { %>
@@ -124,19 +132,16 @@ export const <%= nombreSoloMayusculas %><%= esFormulario ? '' : '_BUSQUEDA' %>_C
     <% } else{ %>
     nombreCampo: '<%= nombreCampoEspacioMayuscula %>',
     <% } %>
-      // minlength: 11,
+      // minlength: 2,
+      // maxlength:10,
+      // min:100,
+      // max:0,
+      // mensajePattern: 'Solo letras y espacios',
     },
-    inputMask: {
-      mask: '99-99999999',
-      slotChar: '_',
-      characterPattern: [],
-      fnValidar: (campo, componente) => {
-        // const numeros = campo.replaceAll('_', '').replaceAll('-', '');
-        // return numeros.length >= 10;
-        return true;
-      }
+    date: {
+      selectionMode: 'single',
     },
-    componente: claseComponente,
     formulario: {},
+    componente: claseComponente,
   };
 };

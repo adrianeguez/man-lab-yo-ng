@@ -40,7 +40,7 @@ const ARGUMENTOS = {
         configuracion: {
             type: String,
             required: true,
-            desc: 'Tipo de campo EJ: busqueda / autocomplete / inputMask / inputNumber / inputSwitch / password / select / texto'
+            desc: 'Tipo de campo EJ: busqueda / autocomplete / inputMask / inputNumber / inputSwitch / password / select / texto / date / file'
         }
     },
     ARREGLO_OPCIONES: {
@@ -120,6 +120,8 @@ const TEMPLATES = {
     CAMPO_PASSWORD: '-campo-password-.ts',
     CAMPO_SELECT: '-campo-select-.ts',
     CAMPO_TEXTO: '-campo-texto-.ts',
+    CAMPO_DATE: '-campo-date-.ts',
+    CAMPO_FILE: '-campo-file-.ts',
 }
 
 const aCamel = (cadena) => {
@@ -382,8 +384,26 @@ module.exports = class extends Generator {
                     variables
                 );
                 break;
+            case 'date':
+                const templateDAT = this.templatePath(TEMPLATES.CAMPO_DATE);
+                const destinoDAT = this.destinationPath(`${nombreGuiones}${variables.esFormulario ? '' : '-busqueda'}-campo-date-${nombreCampoGuiones}.ts`);
+                this.fs.copyTpl(
+                    templateDAT,
+                    destinoDAT,
+                    variables
+                );
+                break;
+            case 'file':
+                const templateFIL = this.templatePath(TEMPLATES.CAMPO_FILE);
+                const destinoFIL = this.destinationPath(`${nombreGuiones}${variables.esFormulario ? '' : '-busqueda'}-campo-file-${nombreCampoGuiones}.ts`);
+                this.fs.copyTpl(
+                    templateFIL,
+                    destinoFIL,
+                    variables
+                );
+                break;
             default:
-                throw new Error('Campo no implementado, solo puedes usar: busqueda / autocomplete / inputMask / inputNumber / inputSwitch / password / select / texto');
+                throw new Error('Campo no implementado, solo puedes usar: busqueda / autocomplete / inputMask / inputNumber / inputSwitch / password / select / texto / date / file');
 
         }
     }

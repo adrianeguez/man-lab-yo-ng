@@ -183,7 +183,14 @@ export const <%= nombreSoloMayusculas %><%= esFormulario ? '' : '_BUSQUEDA' %>_C
         <% } %>
        <% for (let campo of arregloOpciones) {%>
         if (campo.<%= nombrePrefijo ? nombrePrefijo + nombreCampoMayuscula : nombreCampoCamel %> === <%- campo.valor %>) {
-          return '<%= campo.nombre %>';
+
+            <% if(internacionalizar) { %>
+
+                return 'formularios.crearEditar.campo<%= nombreMayuscula %>.opcion<%= campo.nombre.charAt(0).toUpperCase() + campo.nombre.slice(1)  %>';
+                <% } else{ %>
+
+                return '<%= campo.nombre %>';
+                <% } %>
         }
         <% } %>
         return '';

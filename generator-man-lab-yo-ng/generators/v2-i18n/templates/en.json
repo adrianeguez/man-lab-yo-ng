@@ -10,7 +10,11 @@
     "nombre": "Name",
     "habilitado": "Enabled",
     "acciones": "Options",
-    "nombreGrupo": "Group name"
+    "nombreGrupo": "Group name",
+    "archivo": "File",
+    "archivoNombre": "File name",
+    "imagen": "Image",
+    "imagenNombre": "Image name"
   },
   "tablaDesplegable": {
     "nombreAtributo": "Attribute",

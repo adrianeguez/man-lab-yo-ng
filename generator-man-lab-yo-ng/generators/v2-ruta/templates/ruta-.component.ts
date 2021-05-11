@@ -44,6 +44,18 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
     //       }
     //     },
     // },
+    // {
+    //   field: '',
+    //   header: 'Imagen',
+    //   posicion: 'text-center',
+    //   tamanio: '15%', // tamaño en porcentaje de la columna
+    //   fnMostrarImagen: (<%= nombreCamel %>: <%= nombreMayuscula %>Interface) => {
+    //     if (<%= nombreCamel %>.sis_imagen) {
+    //       return this._sRuta<%= nombreMayuscula %>Service._domSanitizer.bypassSecurityTrustResourceUrl(`data:${<%= nombreCamel %>.sis_imagen.mimetype};base64, ${<%= nombreCamel %>.sis_imagen.buffer}`);
+    //     } else {
+    //       return '';
+    //     }
+    //   },
     {
       field: '<%= nombreHabilitado %>',
     <% if(internacionalizar) { %>
@@ -756,4 +768,80 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
       }
     }
   }
+
+  // irRutaArchivos(tipo: 'imagen' | 'archivo', registro: <%= nombreMayuscula %>Interface) {
+  //   const ruta = [LLENAR_RUTA, registro.<%= id %>, tipo, LLENAR_NOMBRE_IDENTIFICADOR, `Gestionar ${tipo} de ..... ${registro.nombreCampo}`];
+  //   this._router.navigate(ruta);
+  // }
+
+  // mostrarFormularioCrearArchivo(tipo: 'imagen' | 'archivo', registro: <%= nombreMayuscula %>Interface) {
+  //   const formulario = tipo === 'imagen' ? ALGUN_FORMULARIO : OTRO_FORMULARIO;
+  //   this._sRuta<%= nombreMayuscula %>Service.abrirModalArchivos(
+  //       this,
+  //       formulario,
+  //       'Editar archivo de artículo',
+  //       'Seleccione un archivo',
+  //       tipo,
+  //       registro
+  //   );
+  //
+  // }
+
+  // formularioArchivoCambio(eventoCambioCampo: EventoCambioFormulario, tipo:string) {
+  //   // campo cambio
+  // }
+  //
+  // formularioArchivoValido(estaValido: TodosCamposValidados, tipo:string) {
+  //   this.guardarFormularioValido(estaValido);
+  // }
+  //
+  // guardarFormularioValido(estaValido: TodosCamposValidados, tipo:string) {
+  //   if (estaValido.valido) {º
+  //     this._sRuta<%= nombreMayuscula %>Service.formularioArchivo = estaValido;
+  //     this.botonAceptarModalDisabled = false;
+  //   } else {
+  //     this.botonAceptarModalDisabled = true;
+  //   }
+  // }
+
+  // crearArchivo(tipo: 'imagen' | 'archivo', registro: <%= nombreMayuscula %>Interface) {
+  //     this._sRuta<%= nombreMayuscula %>Service
+  //         .crearArchivo(tipo, registro)
+  //         .subscribe(
+  //             (nuevoRegistro) => {
+  //               this._sRuta<%= nombreMayuscula %>Service.archivoPrincipalArchivoActual = nuevoRegistro;
+  //               if (tipo === 'imagen') {
+  //                 registro.sis_imagen = nuevoRegistro;
+  //               }
+  //               if (tipo === 'archivo') {
+  //                 registro.sis_archivo = nuevoRegistro;
+  //               }
+  //               this._sRuta<%= nombreMayuscula %>Service.matDialog.closeAll();
+  //               this._sRuta<%= nombreMayuscula %>Service._notificacionService.anadir({
+  //                 titulo: 'Éxito',
+  //                 detalle: 'Actualizo el archivo',
+  //                 severidad: 'success'
+  //               });
+  //               this._sRuta<%= nombreMayuscula %>Service._cargandoService.deshabilitarCargando();
+  //             },
+  //             (error) => {
+  //               console.error({
+  //                 mensaje: 'Error cargando registros',
+  //                 data: this._sRuta<%= nombreMayuscula %>Service.busquedaDto,
+  //                 error
+  //               });
+  //               this._sRuta<%= nombreMayuscula %>Service._notificacionService.anadir({
+  //                 titulo: 'Error',
+  //                 detalle: 'Error del Sistema',
+  //                 severidad: 'error'
+  //               });
+  //               this._sRuta<%= nombreMayuscula %>Service._cargandoService.deshabilitarCargando();
+  //             }
+  //         );
+  // }
+
+
+
+
+
 }
