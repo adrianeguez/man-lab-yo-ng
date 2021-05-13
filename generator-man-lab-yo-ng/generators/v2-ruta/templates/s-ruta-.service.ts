@@ -8,7 +8,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {<%= nombreSoloMayusculas %>_FORMULARIO} from '../../../formularios/<%= nombreGuiones %>/<%= nombreGuiones %>-formulario';
 import {GRUPOS_FORMULARIO_BUSQUEDA} from './grupos-formulario-busqueda';
 import {GRUPOS_FORMULARIO_CREAR_EDITAR} from './grupos-formulario-crear-editar';
-
+import {DomSanitizer} from '@angular/platform-browser';
 <% if(!internacionalizar) { %>
 const nombre = '<%= nombreEspacioMayuscula %>';
 <% } %>
@@ -26,6 +26,8 @@ export class SRuta<%= nombreMayuscula %>Service extends RutaComun<SRuta<%= nombr
     public readonly _notificacionService: NotificacionService,
     public matDialog: MatDialog,
     public readonly _menuGeneralService: MenuGeneralService,
+    private readonly _archivoPrincipalService: ArchivoPrincipalService,
+    public readonly _domSanitizer: DomSanitizer,
   ) {
     super(
       _<%= nombreCamel %>Service,
@@ -44,9 +46,9 @@ export class SRuta<%= nombreMayuscula %>Service extends RutaComun<SRuta<%= nombr
         <% } else{ %>
 
         'Creando ' + nombre,
-        'Llene el formulario con los datos de '+ nombre,
-        'Actualizando '+ nombre,
-        'Llene el formulario con los datos de '+ nombre,
+        'Llene el formulario con los datos de ' + nombre,
+        'Actualizando ' + nombre,
+        'Llene el formulario con los datos de ' + nombre,
 
         <% } %>
 
@@ -84,6 +86,8 @@ export class SRuta<%= nombreMayuscula %>Service extends RutaComun<SRuta<%= nombr
         REGISTROS_POR_PAGINA,
         ActivoInactivo as {Activo:any, Inactivo:any},
         _menuGeneralService,
+        _archivoPrincipalService,
+        _domSanitizer,
     );
     // Si se quiere que el stepper sea horizontal
     // this.vertical = false;

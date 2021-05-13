@@ -107,19 +107,19 @@ export const <%= nombreSoloMayusculas %><%= esFormulario ? '' : '_BUSQUEDA' %>_C
       nombreCampo: '<%= nombrePrefijo ? nombrePrefijo + nombreCampoMayuscula : nombreCampoCamel %>',
 
         <% if(internacionalizar) { %>
-        nombreMostrar: 'formularios.busqueda.campo<%= nombreCampoMayuscula %>.nombreMostrar',
+        nombreMostrar: 'formularios.<%= esFormulario ? "crearEditar" : "busqueda" %>.campo<%= nombreCampoMayuscula %>.nombreMostrar',
         <% } else{ %>
         nombreMostrar: '<%= nombreCampoEspacioMayuscula %>',
         <% } %>
 
         <% if(internacionalizar) { %>
-        textoAyuda: 'formularios.busqueda.campo<%= nombreCampoMayuscula %>.textoAyuda',
+        textoAyuda: 'formularios.<%= esFormulario ? "crearEditar" : "busqueda" %>.campo<%= nombreCampoMayuscula %>.textoAyuda',
         <% } else{ %>
         textoAyuda: 'Ingrese <%= nombreCampoEspacioMayuscula %>.',
         <% } %>
 
         <% if(internacionalizar) { %>
-        placeholderEjemplo: 'formularios.busqueda.campo<%= nombreCampoMayuscula %>.placeholderEjemplo',
+        placeholderEjemplo: 'formularios.<%= esFormulario ? "crearEditar" : "busqueda" %>.campo<%= nombreCampoMayuscula %>.placeholderEjemplo',
         <% } else{ %>
         placeholderEjemplo: 'Ej: ...',
         <% } %>
@@ -129,7 +129,7 @@ export const <%= nombreSoloMayusculas %><%= esFormulario ? '' : '_BUSQUEDA' %>_C
       mensajes: MENSAJES_ERROR(claseComponente),
       parametros: {
         <% if(internacionalizar) { %>
-        nombreCampo: 'formularios.busqueda.campo<%= nombreCampoMayuscula %>.nombreMostrar',
+        nombreCampo: 'formularios.<%= esFormulario ? "crearEditar" : "busqueda" %>.campo<%= nombreCampoMayuscula %>.nombreMostrar',
         <% } else{ %>
         nombreCampo: '<%= nombreCampoEspacioMayuscula %>',
         <% } %>

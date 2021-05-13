@@ -206,17 +206,32 @@
                 </div>
               </div>
 
-<!--              <div *ngIf="col.header === 'Imagen'" class="text-center">-->
-<!--                <div *ngIf="<%= nombreCamel %>.sis_imagen">-->
+
+<!--              <div *ngIf="col.header === 'sis_IM'" class="text-center">-->
+<!--                <div *ngIf="<%= nombreCamel %>.sis_IM">-->
+<!--                  <p *ngIf="<%= nombreCamel %>.sis_IM.nombre && <%= nombreCamel %>.sis_IM.nombre !== 'undefined'">-->
+<!--                    <strong>{{<%= nombreCamel %>.sis_IM.nombre}}</strong> {{<%= nombreCamel %>.sis_IM.descripcion}}</p>-->
 <!--                  <p><strong>Imagen:</strong></p>-->
 <!--                  <img class="img-fluid imagen-tabla" [src]="col.fnMostrarImagen(<%= nombreCamel %>)" alt="">-->
-<!--                  <p><strong>Nombre imagen:</strong> {{<%= nombreCamel %>.sis_imagen.originalname}}</p>-->
+<!--                  <p><strong>Nombre Imagen-->
+<!--                    :</strong> {{<%= nombreCamel %>.sis_IM.originalname}}</p>-->
 <!--                </div>-->
-<!--                <div *ngIf="<%= nombreCamel %>.sis_archivo">-->
-<!--                  <div class="text-center" >-->
-<!--                    <strong>Archivo:</strong> {{<%= nombreCamel %>.sis_archivo.mimetype}} <img class="imagen-icono" src="assets/libreria/icono-archivo.svg" alt="">-->
+<!--                <div *ngIf="!<%= nombreCamel %>.sis_IM">-->
+<!--                  <p><strong>Imagen:</strong></p>-->
+<!--                  <img class="img-fluid imagen-tabla" src="assets/img/comun/imagen.svg" alt="">-->
+<!--                  <p><strong>Nombre Imagen-->
+<!--                    :</strong> Sube aquí tu imagen</p>-->
+<!--                </div>-->
+<!--                <div class="espaciador"></div>-->
+<!--                <div *ngIf="<%= nombreCamel %>.sis_AR">-->
+<!--                  <p *ngIf="<%= nombreCamel %>.sis_AR.nombre  && <%= nombreCamel %>.sis_AR.nombre !== 'undefined'">-->
+<!--                    <strong>{{<%= nombreCamel %>.sis_AR.nombre}}</strong> {{<%= nombreCamel %>.sis_AR.descripcion}}</p>-->
+<!--                  <div class="text-center">-->
+<!--                    <strong>Archivo:</strong> {{<%= nombreCamel %>.sis_AR.mimetype}} <img-->
+<!--                          class="imagen-icono" src="assets/libreria/icono-archivo.svg" alt="">-->
 <!--                  </div>-->
-<!--                  <p><strong>Nombre archivo:</strong> {{<%= nombreCamel %>.sis_archivo.originalname}}</p>-->
+<!--                  <p><strong>Nombre archivo-->
+<!--                    :</strong> {{<%= nombreCamel %>.sis_AR.originalname}}</p>-->
 
 <!--                  <div>-->
 <!--                    <br>-->
@@ -225,7 +240,7 @@
 <!--                            [disabled]="!<%= nombreCamel %>.habilitado"-->
 <!--                            icon="pi pi-angle-double-right"-->
 <!--                            styleClass="p-button-help"-->
-<!--                            (click)="_sRuta<%= nombreMayuscula %>Service.descargarArchivo(<%= nombreCamel %>.sis_archivo)"-->
+<!--                            (click)="_sRuta<%= nombreMayuscula %>Service.descargarArchivo(<%= nombreCamel %>.sis_AR)"-->
 <!--                    ></p-button>-->
 <!--                  </div>-->
 <!--                </div>-->
@@ -248,6 +263,24 @@
                 </div>
               </div>
               <div *ngIf="col.field === '<%= id %>'">
+<!--                <div class="row">-->
+<!--                  <div class="col-sm-6">-->
+<!--                    <p-button-->
+<!--                            [disabled]="!<%= nombreCamel %>.habilitado"-->
+<!--                            icon="pi pi-image"-->
+<!--                            styleClass="p-button-help boton-archivos"-->
+<!--                            (click)="abrirFormularioCrearArchivo('IM', <%= nombreCamel %>)"-->
+<!--                    ></p-button>-->
+<!--                  </div>-->
+<!--                  <div class="col-sm-6">-->
+<!--                    <p-button-->
+<!--                            [disabled]="!<%= nombreCamel %>.habilitado"-->
+<!--                            icon="pi pi-file"-->
+<!--                            styleClass="p-button-help boton-archivos"-->
+<!--                            (click)="abrirFormularioCrearArchivo('AR', <%= nombreCamel %>)"-->
+<!--                    ></p-button>-->
+<!--                  </div>-->
+<!--                </div>-->
                 <div class="text-center">
                   <br>
                   <p-button
@@ -620,27 +653,40 @@
                   </div>
                 </div>
 
-<!--                <div *ngIf="col.header === 'Imagen'" class="text-center">-->
-<!--                  <div *ngIf="<%= nombreCamel %>.sis_imagen">-->
-<!--                    <p><strong>{{l('cabeceraTabla.imagen')}}:</strong></p>-->
-<!--                    <p><strong>{{l('cabeceraTabla.imagen')}}:</strong></p>-->
+<!--                <div *ngIf="col.header === 'sis_IM'" class="text-center">-->
+<!--                  <div *ngIf="<%= nombreCamel %>.sis_IM">-->
+<!--                    <p *ngIf="<%= nombreCamel %>.sis_IM.nombre && <%= nombreCamel %>.sis_IM.nombre !== 'undefined'">-->
+<!--                      <strong>{{<%= nombreCamel %>.sis_IM.nombre}}</strong> {{<%= nombreCamel %>.sis_IM.descripcion}}</p>-->
+<!--                    <p><strong>{{g('generales.archivos.imagen.nombre')}}:</strong></p>-->
 <!--                    <img class="img-fluid imagen-tabla" [src]="col.fnMostrarImagen(<%= nombreCamel %>)" alt="">-->
-<!--                    <p><strong>{{l('cabeceraTabla.nombreImagen')}}:</strong> {{<%= nombreCamel %>.sis_imagen.originalname}}</p>-->
+<!--                    <p><strong>{{g('generales.archivos.imagen.mensajeNombre')}}-->
+<!--                      :</strong> {{<%= nombreCamel %>.sis_IM.originalname}}</p>-->
 <!--                  </div>-->
-<!--                  <div *ngIf="<%= nombreCamel %>.sis_archivo">-->
-<!--                    <div class="text-center" >-->
-<!--                      <strong>{{l('cabeceraTabla.archivo')}}:</strong> {{<%= nombreCamel %>.sis_archivo.mimetype}} <img class="imagen-icono" src="assets/libreria/icono-archivo.svg" alt="">-->
+<!--                  <div *ngIf="!<%= nombreCamel %>.sis_IM">-->
+<!--                    <p><strong>{{g('generales.archivos.imagen.nombre')}}:</strong></p>-->
+<!--                    <img class="img-fluid imagen-tabla" src="assets/img/comun/imagen.svg" alt="">-->
+<!--                    <p><strong>{{g('generales.archivos.imagen.mensajeNombre')}}-->
+<!--                      :</strong> {{g('generales.archivos.imagen.mensajeVacio')}}</p>-->
+<!--                  </div>-->
+<!--                  <div class="espaciador"></div>-->
+<!--                  <div *ngIf="<%= nombreCamel %>.sis_AR">-->
+<!--                    <p *ngIf="<%= nombreCamel %>.sis_AR.nombre  && <%= nombreCamel %>.sis_AR.nombre !== 'undefined'">-->
+<!--                      <strong>{{<%= nombreCamel %>.sis_AR.nombre}}</strong> {{<%= nombreCamel %>.sis_AR.descripcion}}</p>-->
+<!--                    <div class="text-center">-->
+<!--                      <strong>{{g('generales.archivos.archivo.nombre')}}:</strong> {{<%= nombreCamel %>.sis_AR.mimetype}} <img-->
+<!--                            class="imagen-icono" src="assets/libreria/icono-archivo.svg" alt="">-->
 <!--                    </div>-->
-<!--                    <p><strong>{{l('cabeceraTabla.nombreArchivo')}}:</strong> {{<%= nombreCamel %>.sis_archivo.originalname}}</p>-->
+<!--                    <p><strong>{{g('generales.archivos.archivo.mensajeNombre')}}-->
+<!--                      :</strong> {{<%= nombreCamel %>.sis_AR.originalname}}</p>-->
 
 <!--                    <div>-->
 <!--                      <br>-->
 <!--                      <p-button-->
-<!--                              [label]="'Descargar archivo'"-->
+<!--                              [label]="g('generales.archivos.archivo.botonDescargarArchivo')"-->
 <!--                              [disabled]="!<%= nombreCamel %>.habilitado"-->
 <!--                              icon="pi pi-angle-double-right"-->
 <!--                              styleClass="p-button-help"-->
-<!--                              (click)="_sRuta<%= nombreMayuscula %>Service.descargarArchivo(<%= nombreCamel %>.sis_archivo)"-->
+<!--                              (click)="_sRuta<%= nombreMayuscula %>Service.descargarArchivo(<%= nombreCamel %>.sis_AR)"-->
 <!--                      ></p-button>-->
 <!--                    </div>-->
 <!--                  </div>-->
@@ -663,6 +709,25 @@
                   </div>
                 </div>
                 <div *ngIf="col.field === '<%= id %>'">
+<!--                  <div class="row">-->
+<!--                    <div class="col-sm-6">-->
+<!--                      <p-button-->
+<!--                              [disabled]="!<%= nombreCamel %>.habilitado"-->
+<!--                              icon="pi pi-image"-->
+<!--                              styleClass="p-button-help boton-archivos"-->
+<!--                              (click)="abrirFormularioCrearArchivo('IM', <%= nombreCamel %>)"-->
+<!--                      ></p-button>-->
+<!--                    </div>-->
+<!--                    <div class="col-sm-6">-->
+<!--                      <p-button-->
+<!--                              [disabled]="!<%= nombreCamel %>.habilitado"-->
+<!--                              icon="pi pi-file"-->
+<!--                              styleClass="p-button-help boton-archivos"-->
+<!--                              (click)="abrirFormularioCrearArchivo('AR', <%= nombreCamel %>)"-->
+<!--                      ></p-button>-->
+<!--                    </div>-->
+<!--                  </div>-->
+
                   <div class="text-center">
                     <br>
                     <p-button

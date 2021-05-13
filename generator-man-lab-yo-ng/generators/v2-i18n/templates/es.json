@@ -7,6 +7,7 @@
   "descripcionTabla": "Gestione <%= nombreMayusculaEspanol %>",
   "filtroTabla": "Filtre por ............ Ej: .............",
   "cabeceraTabla": {
+    "sis_IM": "Imagen",
     "nombre": "Nombre",
     "habilitado": "Habilitado",
     "acciones": "Acciones",
@@ -23,7 +24,9 @@
     "nombreCampoRelacionNombre": "Relación nombre"
   },
   "opcionesIrRuta": {
-    "ejemplo": "Gest. Ejemplo"
+    "ejemplo": "Gest. Ejemplo",
+    "gestionarArchivos": "Archivos",
+    "gestionarImagenes": "Imagenes"
   },
   "formularios": {
     "comunes": {
@@ -37,7 +40,8 @@
       "correo": "El campo \"{{nombre}}\" no parece un correo electrónico.",
       "valido": "Válido",
       "cuidado": "Cuidado",
-      "autocompleteSinRegistros": "No hay más registros"
+      "autocompleteSinRegistros": "No hay más registros",
+      "tamanioMaximoEnBytes": "El archivo es muy grande \"{{tamanioMaximoEnBytes}}\" es la cantidad de Bytes permitidos"
     },
     "busqueda": {
       "formularioBusqueda": {
@@ -80,6 +84,10 @@
         "descripcionCrear": "Llene el formulario para crear un nuevo <%= nombreMayusculaEspanol %>",
         "tituloActualizar": "Editar <%= nombreMayusculaEspanol %>",
         "descripcionActualizar": "Actualice el formulario para editar el <%= nombreMayusculaEspanol %>",
+        "tituloCrearArchivo": "Subir archivo",
+        "descripcionCrearArchivo": "Selecciona un archivo y guardalo",
+        "tituloCrearImagen": "Subir imagen",
+        "descripcionCrearImagen": "Selecciona una imagen y guardala",
         "tituloFormulario": " ",
         "descripcionFormulario": " ",
         "tituloFormularioConGrupo": " ",
@@ -89,6 +97,39 @@
         "nombreMostrar": "Nombre",
         "textoAyuda": "Ingrese nombre del <%= nombreMayusculaEspanol %>.",
         "placeholderEjemplo": "Ej: .............",
+        "placeholderFiltro": " ",
+        "mensajeFiltroVacio": " ",
+        "opcionUno": " ",
+        "opcionDos": " ",
+        "opcionTodos": " "
+      },
+      "campoArchivo": {
+        "nombreMostrar": "Archivo",
+        "textoAyuda": "Selecciona un archivo.",
+        "placeholderEjemplo": "Ej: archivo.pdf / imagen.png",
+        "textoBoton": "Subir archivo",
+        "placeholderFiltro": " ",
+        "mensajeFiltroVacio": " ",
+        "opcionUno": " ",
+        "opcionDos": " ",
+        "opcionTodos": " "
+      },
+      "campoArchivoNombre": {
+        "nombreMostrar": "Nombre",
+        "textoAyuda": "Llena un nombre.",
+        "placeholderEjemplo": "Ej: Archivo de ...",
+        "textoBoton": "Upload file",
+        "placeholderFiltro": " ",
+        "mensajeFiltroVacio": " ",
+        "opcionUno": " ",
+        "opcionDos": " ",
+        "opcionTodos": " "
+      },
+      "campoArchivoDescripcion": {
+        "nombreMostrar": "Descripción",
+        "textoAyuda": "Llena una descripción.",
+        "placeholderEjemplo": "Ex: Este archivo es usado para ...",
+        "textoBoton": "Upload file",
         "placeholderFiltro": " ",
         "mensajeFiltroVacio": " ",
         "opcionUno": " ",

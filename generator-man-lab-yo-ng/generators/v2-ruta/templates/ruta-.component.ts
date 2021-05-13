@@ -24,61 +24,75 @@ import {
 })
 export class Ruta<%= nombreMayuscula %>Component implements OnInit {
 
-  columnasPrimeTable = [
-    // {
-    //   field: 'nombreCampo',
-    //   header: 'Nombre a mostrarse',
-    //   posicion: 'text-center',
-    //   tamanio: '60%', // tamaño en porcentaje de la columna
-    //   fnMostrar: (valor: string) => {
-    //   return valor;
-    // },
-    //     fnMostrar: (valor:TipoValor)=>{
-    //       switch (valor) {
-    //         case TipoValor.ValorUno:
-    //           return 'Valor de uno';
-    //         case TipoValor.ValorDos:
-    //           return 'Valor de dos';
-    //         default:
-    //           return valor;
-    //       }
-    //     },
-    // },
-    // {
-    //   field: '',
-    //   header: 'Imagen',
-    //   posicion: 'text-center',
-    //   tamanio: '15%', // tamaño en porcentaje de la columna
-    //   fnMostrarImagen: (<%= nombreCamel %>: <%= nombreMayuscula %>Interface) => {
-    //     if (<%= nombreCamel %>.sis_imagen) {
-    //       return this._sRuta<%= nombreMayuscula %>Service._domSanitizer.bypassSecurityTrustResourceUrl(`data:${<%= nombreCamel %>.sis_imagen.mimetype};base64, ${<%= nombreCamel %>.sis_imagen.buffer}`);
-    //     } else {
-    //       return '';
-    //     }
-    //   },
-    {
-      field: '<%= nombreHabilitado %>',
-    <% if(internacionalizar) { %>
-      header: 'habilitado',
-        <% } else{ %>
-      header: 'Habilitado',
-    <% } %>
-      posicion: 'text-left',
-      tamanio: '20%'
-    },
-    {
-      field: '<%= id %>',
-      <% if(internacionalizar) { %>
-      header: 'acciones',
-      <% } else{ %>
-      header: 'Acciones',
-      <% } %>
-      posicion: 'text-right',
-      tamanio: '20%'
-    }
-  ];
 
   opciones = [
+    <% if(internacionalizar) { %>
+    // {
+    //   ruta: (id: string) => { // parametros de la ruta
+    //     const parametros: SRutaArchivoSecundarioParametros = {
+    //       nombreIdentificador: '<%= nombreGuiones %>',
+    //       tipo: TipoArchivo.Archivo,
+    //       idReferencial: id,
+    //       tituloVista: this.translocoService.translate(this.objetoInternacionalizacion.nombreScopeTransloco + '.nombreRuta'),
+    //     };
+    //     return [
+    //       ...ARCHIVO_SECUNDARIO_MIGAS_PAN(this, parametros).routerLink,
+    //     ]; // ruta en arreglo
+    //   },
+    //   nombre: 'opcionesIrRuta.gestionarArchivos',
+    //   rutaImagen: '/../comun/archivo.svg'
+    // },
+    // {
+    //   ruta: (id: string) => { // parametros de la ruta
+    //     const parametros: SRutaArchivoSecundarioParametros = {
+    //       nombreIdentificador: '<%= nombreGuiones %>',
+    //       tipo: TipoArchivo.Imagen,
+    //       idReferencial: id,
+    //       tituloVista: this.translocoService.translate(this.objetoInternacionalizacion.nombreScopeTransloco + '.nombreRuta'),
+    //     };
+    //     return [
+    //       ...ARCHIVO_SECUNDARIO_MIGAS_PAN(this, parametros).routerLink,
+    //     ]; // ruta en arreglo
+    //   },
+    //   nombre: 'opcionesIrRuta.gestionarImagenes',
+    //   rutaImagen: '/../comun/imagen.svg'
+    // },
+    <% } else{ %>
+
+    // {
+    //   ruta: (id: string) => { // parametros de la ruta
+    //     const parametros: SRutaArchivoSecundarioParametros = {
+    //       nombreIdentificador: '<%= nombreGuiones %>',
+    //       tipo: TipoArchivo.Archivo,
+    //       idReferencial: id,
+    //       tituloVista: '<%= nombreMayuscula %>',
+    //     };
+    //     return [
+    //       ...ARCHIVO_SECUNDARIO_MIGAS_PAN(this, parametros).routerLink,
+    //     ]; // ruta en arreglo
+    //   },
+    //   nombre: 'opcionesIrRuta.gestionarArchivos',
+    //   rutaImagen: '/../comun/archivo.svg'
+    // },
+    // {
+    //   ruta: (id: string) => { // parametros de la ruta
+    //     const parametros: SRutaArchivoSecundarioParametros = {
+    //       nombreIdentificador: '<%= nombreGuiones %>',
+    //       tipo: TipoArchivo.Imagen,
+    //       idReferencial: id,
+    //       tituloVista: '<%= nombreMayuscula %>',
+    //     };
+    //     return [
+    //       ...ARCHIVO_SECUNDARIO_MIGAS_PAN(this, parametros).routerLink,
+    //     ]; // ruta en arreglo
+    //   },
+    //   nombre: 'opcionesIrRuta.gestionarImagenes',
+    //   rutaImagen: '/../comun/imagen.svg'
+    // },
+
+    <% } %>
+
+
     // {
     //   ruta: (id: string) => { // parametros de la ruta
     //     return [
@@ -152,6 +166,64 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
   <% } %>
   ) {
   }
+
+
+
+  columnasPrimeTable = [
+    // {
+    //   field: 'nombreCampo',
+    //   header: 'Nombre a mostrarse',
+    //   posicion: 'text-center',
+    //   tamanio: '60%', // tamaño en porcentaje de la columna
+    //   fnMostrar: (valor: string) => {
+    //   return valor;
+    // },
+    //     fnMostrar: (valor:TipoValor)=>{
+    //       switch (valor) {
+    //         case TipoValor.ValorUno:
+    //           return 'Valor de uno';
+    //         case TipoValor.ValorDos:
+    //           return 'Valor de dos';
+    //         default:
+    //           return valor;
+    //       }
+    //     },
+    // },
+
+    // {
+    //   field: '',
+    //   header: 'sis_IM',
+    //   posicion: 'text-center',
+    //   tamanio: '15%', // tamaño en porcentaje de la columna
+    //   fnMostrarImagen: (entrenador: <%= nombreMayuscula %>Interface) => {
+    //     if (entrenador.sis_IM) {
+    //       return this._sRuta<%= nombreMayuscula %>Service._domSanitizer.bypassSecurityTrustResourceUrl(`data:${<%= nombreCamel %>.sis_IM.mimetype};base64, ${<%= nombreCamel %>.sis_IM.buffer}`);
+    //     } else {
+    //       return '';
+    //     }
+    //   }
+    // },
+    {
+      field: '<%= nombreHabilitado %>',
+    <% if(internacionalizar) { %>
+    header: 'habilitado',
+    <% } else{ %>
+    header: 'Habilitado',
+    <% } %>
+  posicion: 'text-left',
+      tamanio: '20%'
+},
+  {
+    field: '<%= id %>',
+    <% if(internacionalizar) { %>
+    header: 'acciones',
+    <% } else{ %>
+    header: 'Acciones',
+    <% } %>
+    posicion: 'text-right',
+        tamanio: '20%'
+  }
+];
 
   ngOnInit(): void {
     this._obtenerParametros();
@@ -774,29 +846,39 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
   //   this._router.navigate(ruta);
   // }
 
-  // mostrarFormularioCrearArchivo(tipo: 'imagen' | 'archivo', registro: <%= nombreMayuscula %>Interface) {
-  //   const formulario = tipo === 'imagen' ? ALGUN_FORMULARIO : OTRO_FORMULARIO;
-  //   this._sRuta<%= nombreMayuscula %>Service.abrirModalArchivos(
+  // abrirFormularioCrearArchivo(tipo: string, registro: <%= nombreMayuscula %>Interface) {
+  //   const formulario = tipo === TipoArchivo.Imagen ? ARTICULO_ARCHIVO_FORMULARIO : ARTICULO_ARCHIVO_FORMULARIO;
+  //     <% if(internacionalizar) { %>
+  //     const rutaComunInternacionalizacion = 'formularios.crearEditar.formularioCrearEditar.';
+  //     <% } else{ %>
+  //
+  //     <% } %>
+  //     this._sRuta<%= nombreMayuscula %>Service.abrirModalArchivos(
   //       this,
   //       formulario,
-  //       'Editar archivo de artículo',
-  //       'Seleccione un archivo',
+  //         <% if(internacionalizar) { %>
+  //       rutaComunInternacionalizacion + (tipo === TipoArchivo.Imagen ? 'tituloCrearImagen' : 'tituloCrearArchivo'),
+  //       rutaComunInternacionalizacion + (tipo === TipoArchivo.Imagen ? 'descripcionCrearImagen' : 'descripcionCrearArchivo'),
+  //         <% } else{ %>
+  //         tipo === TipoArchivo.Imagen ? 'Crear imagen' : 'Crear archivo',
+  //         tipo === TipoArchivo.Imagen ? 'Selecciona una imagen' : 'Selecciona un archivo'
+  //         <% } %>
   //       tipo,
   //       registro
   //   );
   //
   // }
 
-  // formularioArchivoCambio(eventoCambioCampo: EventoCambioFormulario, tipo:string) {
+  // formularioArchivoCambio(eventoCambioCampo: EventoCambioFormulario, registro: <%= nombreMayuscula %>Interface, tipo: TipoArchivo) {
   //   // campo cambio
   // }
   //
-  // formularioArchivoValido(estaValido: TodosCamposValidados, tipo:string) {
-  //   this.guardarFormularioValido(estaValido);
+  // formularioArchivoValido(estaValido: TodosCamposValidados, registro: <%= nombreMayuscula %>Interface, tipo: TipoArchivo) {
+  //   this.guardarFormularioValido(estaValido, registro, tipo);
   // }
   //
-  // guardarFormularioValido(estaValido: TodosCamposValidados, tipo:string) {
-  //   if (estaValido.valido) {º
+  // guardarFormularioValido(estaValido: TodosCamposValidados, registro: <%= nombreMayuscula %>Interface, tipo: TipoArchivo) {
+  //   if (estaValido.valido) {
   //     this._sRuta<%= nombreMayuscula %>Service.formularioArchivo = estaValido;
   //     this.botonAceptarModalDisabled = false;
   //   } else {
@@ -804,23 +886,31 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
   //   }
   // }
 
-  // crearArchivo(tipo: 'imagen' | 'archivo', registro: <%= nombreMayuscula %>Interface) {
+  // crearArchivo(tipo: TipoArchivo | string, registro: <%= nombreMayuscula %>Interface) {
   //     this._sRuta<%= nombreMayuscula %>Service
-  //         .crearArchivo(tipo, registro)
+  //         .crearArchivo(tipo, registro, '<%= nombreGuiones %>')
   //         .subscribe(
   //             (nuevoRegistro) => {
-  //               this._sRuta<%= nombreMayuscula %>Service.archivoPrincipalArchivoActual = nuevoRegistro;
-  //               if (tipo === 'imagen') {
-  //                 registro.sis_imagen = nuevoRegistro;
+  //               if (tipo === TipoArchivo.Imagen) {
+  //                 this._sRuta<%= nombreMayuscula %>Service.archivoPrincipalActual = nuevoRegistro;
+  //                 registro.sis_IM = nuevoRegistro;
   //               }
-  //               if (tipo === 'archivo') {
-  //                 registro.sis_archivo = nuevoRegistro;
+  //               if (tipo === TipoArchivo.Archivo) {
+  //                 this._sRuta<%= nombreMayuscula %>Service.archivoPrincipalActual = nuevoRegistro;
+  //                 registro.sis_AR = nuevoRegistro;
   //               }
   //               this._sRuta<%= nombreMayuscula %>Service.matDialog.closeAll();
   //               this._sRuta<%= nombreMayuscula %>Service._notificacionService.anadir({
-  //                 titulo: 'Éxito',
-  //                 detalle: 'Actualizo el archivo',
-  //                 severidad: 'success'
+  //                   <% if(internacionalizar) { %>
+  //                     titulo: this.translocoService.translate('generales.toasters.toastExitoEditar.title'),
+  //                     detalle: this.translocoService.translate('generales.toasters.toastExitoEditar.body', {nombre: '<%= nombreMayuscula %>'}),
+  //                     severidad: 'success'
+  //                 <% } else{ %>
+  //                     titulo: 'Éxito',
+  //                     detalle: 'Actualizo el archivo',
+  //                     severidad: 'success'
+  //                 <% } %>
+  //
   //               });
   //               this._sRuta<%= nombreMayuscula %>Service._cargandoService.deshabilitarCargando();
   //             },
@@ -831,9 +921,15 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
   //                 error
   //               });
   //               this._sRuta<%= nombreMayuscula %>Service._notificacionService.anadir({
-  //                 titulo: 'Error',
-  //                 detalle: 'Error del Sistema',
-  //                 severidad: 'error'
+  //                   <% if(internacionalizar) { %>
+  //                     titulo: this.translocoService.translate('generales.toasters.toastErrorConexionServidorVacio.title'),
+  //                     detalle: this.translocoService.translate('generales.toasters.toastErrorConexionServidorVacio.body'),
+  //                     severidad: 'error'
+  //                 <% } else{ %>
+  //                     titulo: 'Error',
+  //                     detalle: 'Error del Sistema',
+  //                     severidad: 'error'
+  //                 <% } %>
   //               });
   //               this._sRuta<%= nombreMayuscula %>Service._cargandoService.deshabilitarCargando();
   //             }

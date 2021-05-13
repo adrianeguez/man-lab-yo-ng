@@ -7,6 +7,7 @@
   "descripcionTabla": "Manage <%= nombreMayusculaIngles %>",
   "filtroTabla": "Filter by ...... Ex: .....",
   "cabeceraTabla": {
+    "sis_IM": "Image",
     "nombre": "Name",
     "habilitado": "Enabled",
     "acciones": "Options",
@@ -23,7 +24,9 @@
     "nombreCampoRelacionNombre": "Relationship name"
   },
   "opcionesIrRuta": {
-    "ejemplo": "Manag. Example"
+    "ejemplo": "Manag. Example",
+    "gestionarArchivos": "Files",
+    "gestionarImagenes": "Images"
   },
   "formularios": {
     "comunes": {
@@ -37,7 +40,8 @@
       "correo": "The field \"{{nombre}}\" does not look like an email.",
       "valido": "Valid",
       "cuidado": "Warning",
-      "autocompleteSinRegistros": "There are no records"
+      "autocompleteSinRegistros": "There are no records",
+      "tamanioMaximoEnBytes": "The file is too large \"{{tamanioMaximoEnBytes}}\" are the Bytes permited"
     },
     "busqueda": {
       "formularioBusqueda": {
@@ -80,6 +84,10 @@
         "descripcionCrear": "Fill the form to create a new <%= nombreMayusculaIngles %>",
         "tituloActualizar": "Edit <%= nombreMayusculaIngles %>",
         "descripcionActualizar": "Fill the form to edit the <%= nombreMayusculaIngles %>",
+        "tituloCrearArchivo": "Upload file",
+        "descripcionCrearArchivo": "Choose a file and upload it",
+        "tituloCrearImagen": "Upload image",
+        "descripcionCrearImagen": "Choose an image and upload it",
         "tituloFormulario": " ",
         "descripcionFormulario": " ",
         "tituloFormularioConGrupo": " ",
@@ -89,6 +97,39 @@
         "nombreMostrar": "Name",
         "textoAyuda": "Fill the <%= nombreMayusculaIngles %> name.",
         "placeholderEjemplo": "Ex: .......",
+        "placeholderFiltro": " ",
+        "mensajeFiltroVacio": " ",
+        "opcionUno": " ",
+        "opcionDos": " ",
+        "opcionTodos": " "
+      },
+      "campoArchivo": {
+        "nombreMostrar": "File",
+        "textoAyuda": "Select a file.",
+        "placeholderEjemplo": "Ex: file.pdf / image.png",
+        "textoBoton": "Upload file",
+        "placeholderFiltro": " ",
+        "mensajeFiltroVacio": " ",
+        "opcionUno": " ",
+        "opcionDos": " ",
+        "opcionTodos": " "
+      },
+      "campoArchivoNombre": {
+        "nombreMostrar": "Name",
+        "textoAyuda": "Fill a name.",
+        "placeholderEjemplo": "Ex: File of ...",
+        "textoBoton": "Upload file",
+        "placeholderFiltro": " ",
+        "mensajeFiltroVacio": " ",
+        "opcionUno": " ",
+        "opcionDos": " ",
+        "opcionTodos": " "
+      },
+      "campoArchivoDescripcion": {
+        "nombreMostrar": "Description",
+        "textoAyuda": "Fill a description.",
+        "placeholderEjemplo": "Ex: This file is used to ...",
+        "textoBoton": "Upload file",
         "placeholderFiltro": " ",
         "mensajeFiltroVacio": " ",
         "opcionUno": " ",

@@ -109,19 +109,19 @@ export const <%= nombreSoloMayusculas %><%= esFormulario ? '' : '_BUSQUEDA' %>_C
 
 
 <% if(internacionalizar) { %>
-    nombreMostrar: 'formularios.busqueda.campo<%= nombreCampoMayuscula %>.nombreMostrar',
+    nombreMostrar: 'formularios.<%= esFormulario ? "crearEditar" : "busqueda" %>.campo<%= nombreCampoMayuscula %>.nombreMostrar',
     <% } else{ %>
     nombreMostrar: '<%= nombreCampoEspacioMayuscula %>',
     <% } %>
 
 <% if(internacionalizar) { %>
-    textoAyuda: 'formularios.busqueda.campo<%= nombreCampoMayuscula %>.textoAyuda',
+    textoAyuda: 'formularios.<%= esFormulario ? "crearEditar" : "busqueda" %>.campo<%= nombreCampoMayuscula %>.textoAyuda',
     <% } else{ %>
     textoAyuda: 'Ingrese <%= nombreCampoEspacioMayuscula %>.',
     <% } %>
 
 <% if(internacionalizar) { %>
-    placeholderEjemplo: 'formularios.busqueda.campo<%= nombreCampoMayuscula %>.placeholderEjemplo',
+    placeholderEjemplo: 'formularios.<%= esFormulario ? "crearEditar" : "busqueda" %>.campo<%= nombreCampoMayuscula %>.placeholderEjemplo',
     <% } else{ %>
     placeholderEjemplo: 'Ej: ' +
     <% for (let campo of arregloOpciones) {%>
@@ -136,7 +136,7 @@ export const <%= nombreSoloMayusculas %><%= esFormulario ? '' : '_BUSQUEDA' %>_C
     mensajes: MENSAJES_ERROR(claseComponente),
     parametros: {
     <% if(internacionalizar) { %>
-        nombreCampo: 'formularios.busqueda.campo<%= nombreCampoMayuscula %>.nombreMostrar',
+        nombreCampo: 'formularios.<%= esFormulario ? "crearEditar" : "busqueda" %>.campo<%= nombreCampoMayuscula %>.nombreMostrar',
         <% } else{ %>
         nombreCampo: '<%= nombreCampoEspacioMayuscula %>',
         <% } %>
@@ -156,7 +156,7 @@ export const <%= nombreSoloMayusculas %><%= esFormulario ? '' : '_BUSQUEDA' %>_C
       ],
 
         <% if(internacionalizar) { %>
-            placeholderFiltro: 'formularios.busqueda.campo<%= nombreCampoMayuscula %>.placeholderFiltro',
+            placeholderFiltro: 'formularios.<%= esFormulario ? "crearEditar" : "busqueda" %>.campo<%= nombreCampoMayuscula %>.placeholderFiltro',
             <% } else{ %>
 
             placeholderFiltro: 'Filtre por Ej:' +
@@ -167,7 +167,7 @@ export const <%= nombreSoloMayusculas %><%= esFormulario ? '' : '_BUSQUEDA' %>_C
             <% } %>
 
         <% if(internacionalizar) { %>
-            mensajeFiltroVacio: 'formularios.busqueda.campo<%= nombreCampoMayuscula %>.mensajeFiltroVacio',
+            mensajeFiltroVacio: 'formularios.<%= esFormulario ? "crearEditar" : "busqueda" %>.campo<%= nombreCampoMayuscula %>.mensajeFiltroVacio',
             <% } else{ %>
             mensajeFiltroVacio: 'No se encontró',
             <% } %>
@@ -186,7 +186,7 @@ export const <%= nombreSoloMayusculas %><%= esFormulario ? '' : '_BUSQUEDA' %>_C
 
             <% if(internacionalizar) { %>
 
-                return 'formularios.crearEditar.campo<%= nombreMayuscula %>.opcion<%= campo.nombre.charAt(0).toUpperCase() + campo.nombre.slice(1)  %>';
+                return 'formularios.<%= esFormulario ? "crearEditar" : "busqueda" %>.campo<%= nombreMayuscula %>.opcion<%= campo.nombre.charAt(0).toUpperCase() + campo.nombre.slice(1)  %>';
                 <% } else{ %>
 
                 return '<%= campo.nombre %>';

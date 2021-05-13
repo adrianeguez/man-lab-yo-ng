@@ -9,6 +9,9 @@ import {HttpClient} from '@angular/common/http';
 import {FirestoreServicioAbstractClass} from '@manticore-labs/firebase-angular';
 import {AngularFirestore} from '@angular/fire/firestore';
 <% } %>
+<% if(internacionalizar){ %>
+import {TranslocoService} from '@ngneat/transloco';
+<% } %>
 @Injectable({
   providedIn: <%= nombreMayuscula %>Module
 })
@@ -19,6 +22,7 @@ export class <%= nombreMayuscula %>Service
       private readonly _httpClient: HttpClient,
       private readonly _notificacionService: NotificacionService,
       private readonly _confirmationService: ConfirmationService,
+      public readonly translocoService: TranslocoService
   ) {
     super(
         '<%= nombreGuiones %>',
@@ -29,7 +33,37 @@ export class <%= nombreMayuscula %>Service
         environment.url,
         _notificacionService,
         _confirmationService,
+        <% if(internacionalizar){ %>
 
+      {
+        crear: (clase: <%= nombreMayuscula %>Service) => {
+          const texto = this.translocoService.translate('generales.modalConfirmacion.mensajeCrear');
+          return texto;
+        },
+            actualizar: (clase: <%= nombreMayuscula %>Service) => {
+        const texto = this.translocoService.translate('generales.modalConfirmacion.mensajeActualizar');
+        return texto;
+      },
+          mensajeCancelacion: (clase: <%= nombreMayuscula %>Service) => {
+        return {
+          titulo: this.translocoService.translate('generales.modalConfirmacion.mensajeCancelarTitulo'),
+          detalle: this.translocoService.translate('generales.modalConfirmacion.mensajeCancelarDescripcion')
+        };
+      },
+          habilitar: (clase: <%= nombreMayuscula %>Service) => {
+        const texto = this.translocoService.translate('generales.modalConfirmacion.mensajeHabilitar');
+        return texto;
+      },
+          aceptar: (clase: <%= nombreMayuscula %>Service) => {
+        const texto = this.translocoService.translate('generales.modalConfirmacion.aceptar');
+        return texto;
+      },
+          cancelar: (clase: <%= nombreMayuscula %>Service) => {
+        const texto = this.translocoService.translate('generales.modalConfirmacion.cancelar');
+        return texto;
+      },
+      }
+        <% } %>
     );
   }
 <% } %>
