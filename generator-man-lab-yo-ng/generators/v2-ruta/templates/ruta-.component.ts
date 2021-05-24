@@ -847,7 +847,7 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
   // }
 
   // abrirFormularioCrearArchivo(tipo: string, registro: <%= nombreMayuscula %>Interface) {
-  //   const formulario = tipo === TipoArchivo.Imagen ? ARTICULO_ARCHIVO_FORMULARIO : ARTICULO_ARCHIVO_FORMULARIO;
+  //   const formulario = ARTICULO_ARCHIVO_FORMULARIO;
   //     <% if(internacionalizar) { %>
   //     const rutaComunInternacionalizacion = 'formularios.crearEditar.formularioCrearEditar.';
   //     <% } else{ %>
@@ -937,7 +937,13 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
   // }
 
 
-
+  mostrarImagen(<%= nombreCamel %>: <%= nombreMayuscula %>Interface){
+    if (<%= nombreCamel %>.sis_IM) {
+      return this._sRuta<%= nombreMayuscula %>Service._domSanitizer.bypassSecurityTrustResourceUrl(`data:${<%= nombreCamel %>.sis_IM.mimetype};base64, ${<%= nombreCamel %>.sis_IM.buffer}`);
+    } else {
+      return '';
+    }
+  }
 
 
 }

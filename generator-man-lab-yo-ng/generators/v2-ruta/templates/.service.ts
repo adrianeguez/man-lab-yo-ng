@@ -65,6 +65,12 @@ export class <%= nombreMayuscula %>Service
       }
         <% } %>
     );
+
+    <% if(ionic){ %>
+      this.confirmarCrear = false;
+      this.confirmarActualizar = false;
+      this.confirmarHabilitar = false;
+    <% } %>
   }
 <% } %>
 <% if(esFirebase){ %>

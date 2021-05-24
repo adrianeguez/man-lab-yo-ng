@@ -1,4 +1,75 @@
 
+<% if(ionic){ %>
+<ion-content>
+  <ng-container *transloco="let l; read:objetoInternacionalizacion.nombreScopeTransloco">
+    <br>
+    <ion-refresher slot="fixed" (ionRefresh)="buscarConFiltros($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    <ion-list>
+      <ion-item>
+        <ion-icon (click)="mostrarFiltros = !mostrarFiltros;" slot="end" [name]="mostrarFiltros ? 'filter-circle-outline': 'filter-outline'"></ion-icon>
+        <ion-label>{{mostrarFiltros ? 'Filtros activos' : 'Filtros ocultos'}}</ion-label>
+      </ion-item>
+    </ion-list>
+    <div *ngIf="mostrarFiltros">
+      <app-ml-contenedor-campos-formulario (todosCamposValidos)="formularioValidoBusqueda($event)"
+                                           (cambioCampo)="cambioCampoBusqueda($event)"
+                                           (cambioAutocomplete)="formularioBusquedacambioCampoAutocomplete($event)"
+                                           [vertical]="false"
+                                           class="campo-formulario"
+                                           id="filtro-entrenador"
+                                           tituloFormulario="formularios.busqueda.formularioBusqueda.tituloFormulario"
+                                           descripcionFormulario="formularios.busqueda.formularioBusqueda.descripcionFormulario"
+                                           descripcionFormularioConGrupo="formularios.busqueda.formularioBusqueda.descripcionFormularioConGrupo"
+                                           tituloFormularioConGrupo="formularios.busqueda.formularioBusqueda.tituloFormularioConGrupo"
+                                           [habilitarInternacionalizacion]="true"
+                                           [objetoInternacionalizacion]="objetoInternacionalizacion"
+                                           [camposFormularioFuncion]="camposFormularioBusqueda"
+                                           [selectedStepperIndex]="stepperActualBusqueda"
+                                           [gruposFormularioFuncion]="_sRutaEntrenadorService.gruposFormularioBusqueda"
+                                           [componente]="this"
+      ></app-ml-contenedor-campos-formulario>
+    </div>
+
+    <ion-list>
+      <ion-item  *ngIf="mostrarFiltros">
+
+        <ion-button class="w-100"
+                    size="small"
+                    expand="block"
+                    (click)="buscarConFiltros()"
+                    (click)="mostrarFiltros = false;"
+        >
+          Buscar
+        </ion-button>
+      </ion-item>
+      <ion-item *ngFor="let entrenador of _sRutaEntrenadorService.arregloDatosFiltrado">
+        <app-mostrar-entrenador-lista class="w-100" [registro]="entrenador" [componente]="this">
+
+        </app-mostrar-entrenador-lista>
+      </ion-item>
+    </ion-list>
+    <div class="text-center">
+      <br>
+      <ion-button size="small" *ngIf="!_sRutaEntrenadorService.yaNoHayMasRegistros"
+                  (click)="paginaActual.vecesPeticion = paginaActual.vecesPeticion + 1;"
+                  (click)="paginaActual.first = _sRutaEntrenadorService.arregloDatosFiltrado.length * paginaActual.vecesPeticion;"
+                  (click)="_sRutaEntrenadorService.cargarMasDatos(paginaActual, this, true)"
+      >Cargar más</ion-button>
+    </div>
+    <h1 *ngIf="_sRutaEntrenadorService.yaNoHayMasRegistros"
+        class="text-center"
+    >
+      Ya no hay más registros <ion-icon name="sad"></ion-icon>
+    </h1>
+    <br>
+    <br>
+  </ng-container>
+</ion-content>
+
+<% } else { %>
+
 <% if(!internacionalizar){ %>
 <app-migas-de-pan [migasDePan]="migasPan"
                   [classA]="'miga-pan-link'"
@@ -159,11 +230,11 @@
             </div>
           </ng-template>
 
-<!--          <ng-template pTemplate="colgroup" let-columns>-->
-<!--            <colgroup>-->
-<!--              <col *ngFor="let col of columns" [style.width]="col.tamanio">-->
-<!--            </colgroup>-->
-<!--          </ng-template>-->
+          <!--          <ng-template pTemplate="colgroup" let-columns>-->
+          <!--            <colgroup>-->
+          <!--              <col *ngFor="let col of columns" [style.width]="col.tamanio">-->
+          <!--            </colgroup>-->
+          <!--          </ng-template>-->
           <ng-template pTemplate="header" let-columns>
             <tr>
               <th *ngFor="let col of columns" [pSortableColumn]="col.field" [pSortableColumn]="col.field">
@@ -207,44 +278,44 @@
               </div>
 
 
-<!--              <div *ngIf="col.header === 'sis_IM'" class="text-center">-->
-<!--                <div *ngIf="<%= nombreCamel %>.sis_IM">-->
-<!--                  <p *ngIf="<%= nombreCamel %>.sis_IM.nombre && <%= nombreCamel %>.sis_IM.nombre !== 'undefined'">-->
-<!--                    <strong>{{<%= nombreCamel %>.sis_IM.nombre}}</strong> {{<%= nombreCamel %>.sis_IM.descripcion}}</p>-->
-<!--                  <p><strong>Imagen:</strong></p>-->
-<!--                  <img class="img-fluid imagen-tabla" [src]="col.fnMostrarImagen(<%= nombreCamel %>)" alt="">-->
-<!--                  <p><strong>Nombre Imagen-->
-<!--                    :</strong> {{<%= nombreCamel %>.sis_IM.originalname}}</p>-->
-<!--                </div>-->
-<!--                <div *ngIf="!<%= nombreCamel %>.sis_IM">-->
-<!--                  <p><strong>Imagen:</strong></p>-->
-<!--                  <img class="img-fluid imagen-tabla" src="assets/img/comun/imagen.svg" alt="">-->
-<!--                  <p><strong>Nombre Imagen-->
-<!--                    :</strong> Sube aquí tu imagen</p>-->
-<!--                </div>-->
-<!--                <div class="espaciador"></div>-->
-<!--                <div *ngIf="<%= nombreCamel %>.sis_AR">-->
-<!--                  <p *ngIf="<%= nombreCamel %>.sis_AR.nombre  && <%= nombreCamel %>.sis_AR.nombre !== 'undefined'">-->
-<!--                    <strong>{{<%= nombreCamel %>.sis_AR.nombre}}</strong> {{<%= nombreCamel %>.sis_AR.descripcion}}</p>-->
-<!--                  <div class="text-center">-->
-<!--                    <strong>Archivo:</strong> {{<%= nombreCamel %>.sis_AR.mimetype}} <img-->
-<!--                          class="imagen-icono" src="assets/libreria/icono-archivo.svg" alt="">-->
-<!--                  </div>-->
-<!--                  <p><strong>Nombre archivo-->
-<!--                    :</strong> {{<%= nombreCamel %>.sis_AR.originalname}}</p>-->
+              <!--              <div *ngIf="col.header === 'sis_IM'" class="text-center">-->
+              <!--                <div *ngIf="<%= nombreCamel %>.sis_IM">-->
+              <!--                  <p *ngIf="<%= nombreCamel %>.sis_IM.nombre && <%= nombreCamel %>.sis_IM.nombre !== 'undefined'">-->
+              <!--                    <strong>{{<%= nombreCamel %>.sis_IM.nombre}}</strong> {{<%= nombreCamel %>.sis_IM.descripcion}}</p>-->
+              <!--                  <p><strong>Imagen:</strong></p>-->
+              <!--                  <img class="img-fluid imagen-tabla" [src]="col.fnMostrarImagen(<%= nombreCamel %>)" alt="">-->
+              <!--                  <p><strong>Nombre Imagen-->
+              <!--                    :</strong> {{<%= nombreCamel %>.sis_IM.originalname}}</p>-->
+              <!--                </div>-->
+              <!--                <div *ngIf="!<%= nombreCamel %>.sis_IM">-->
+              <!--                  <p><strong>Imagen:</strong></p>-->
+              <!--                  <img class="img-fluid imagen-tabla" src="assets/img/comun/imagen.svg" alt="">-->
+              <!--                  <p><strong>Nombre Imagen-->
+              <!--                    :</strong> Sube aquí tu imagen</p>-->
+              <!--                </div>-->
+              <!--                <div class="espaciador"></div>-->
+              <!--                <div *ngIf="<%= nombreCamel %>.sis_AR">-->
+              <!--                  <p *ngIf="<%= nombreCamel %>.sis_AR.nombre  && <%= nombreCamel %>.sis_AR.nombre !== 'undefined'">-->
+              <!--                    <strong>{{<%= nombreCamel %>.sis_AR.nombre}}</strong> {{<%= nombreCamel %>.sis_AR.descripcion}}</p>-->
+              <!--                  <div class="text-center">-->
+              <!--                    <strong>Archivo:</strong> {{<%= nombreCamel %>.sis_AR.mimetype}} <img-->
+              <!--                          class="imagen-icono" src="assets/libreria/icono-archivo.svg" alt="">-->
+              <!--                  </div>-->
+              <!--                  <p><strong>Nombre archivo-->
+              <!--                    :</strong> {{<%= nombreCamel %>.sis_AR.originalname}}</p>-->
 
-<!--                  <div>-->
-<!--                    <br>-->
-<!--                    <p-button-->
-<!--                            [label]="'Descargar archivo'"-->
-<!--                            [disabled]="!<%= nombreCamel %>.habilitado"-->
-<!--                            icon="pi pi-angle-double-right"-->
-<!--                            styleClass="p-button-help"-->
-<!--                            (click)="_sRuta<%= nombreMayuscula %>Service.descargarArchivo(<%= nombreCamel %>.sis_AR)"-->
-<!--                    ></p-button>-->
-<!--                  </div>-->
-<!--                </div>-->
-<!--              </div>-->
+              <!--                  <div>-->
+              <!--                    <br>-->
+              <!--                    <p-button-->
+              <!--                            [label]="'Descargar archivo'"-->
+              <!--                            [disabled]="!<%= nombreCamel %>.habilitado"-->
+              <!--                            icon="pi pi-angle-double-right"-->
+              <!--                            styleClass="p-button-help"-->
+              <!--                            (click)="_sRuta<%= nombreMayuscula %>Service.descargarArchivo(<%= nombreCamel %>.sis_AR)"-->
+              <!--                    ></p-button>-->
+              <!--                  </div>-->
+              <!--                </div>-->
+              <!--              </div>-->
 
               <div *ngIf="col.field === '<%= nombreHabilitado %>'">
                 <div class="text-center">
@@ -263,24 +334,24 @@
                 </div>
               </div>
               <div *ngIf="col.field === '<%= id %>'">
-<!--                <div class="row">-->
-<!--                  <div class="col-sm-6">-->
-<!--                    <p-button-->
-<!--                            [disabled]="!<%= nombreCamel %>.habilitado"-->
-<!--                            icon="pi pi-image"-->
-<!--                            styleClass="p-button-help boton-archivos"-->
-<!--                            (click)="abrirFormularioCrearArchivo('IM', <%= nombreCamel %>)"-->
-<!--                    ></p-button>-->
-<!--                  </div>-->
-<!--                  <div class="col-sm-6">-->
-<!--                    <p-button-->
-<!--                            [disabled]="!<%= nombreCamel %>.habilitado"-->
-<!--                            icon="pi pi-file"-->
-<!--                            styleClass="p-button-help boton-archivos"-->
-<!--                            (click)="abrirFormularioCrearArchivo('AR', <%= nombreCamel %>)"-->
-<!--                    ></p-button>-->
-<!--                  </div>-->
-<!--                </div>-->
+                <!--                <div class="row">-->
+                <!--                  <div class="col-sm-6">-->
+                <!--                    <p-button-->
+                <!--                            [disabled]="!<%= nombreCamel %>.habilitado"-->
+                <!--                            icon="pi pi-image"-->
+                <!--                            styleClass="p-button-help boton-archivos"-->
+                <!--                            (click)="abrirFormularioCrearArchivo('IM', <%= nombreCamel %>)"-->
+                <!--                    ></p-button>-->
+                <!--                  </div>-->
+                <!--                  <div class="col-sm-6">-->
+                <!--                    <p-button-->
+                <!--                            [disabled]="!<%= nombreCamel %>.habilitado"-->
+                <!--                            icon="pi pi-file"-->
+                <!--                            styleClass="p-button-help boton-archivos"-->
+                <!--                            (click)="abrirFormularioCrearArchivo('AR', <%= nombreCamel %>)"-->
+                <!--                    ></p-button>-->
+                <!--                  </div>-->
+                <!--                </div>-->
                 <div class="text-center">
                   <br>
                   <p-button
@@ -296,68 +367,68 @@
                           (click)="abrirModal(<%= nombreCamel %>)"
                   ></p-button>
 
-<!--                  <button mat-icon-button [matMenuTriggerFor]="opcionesRuta"-->
-<!--                          aria-label="Example icon-button with a menu">-->
-<!--                    <mat-icon>more_vert</mat-icon>-->
-<!--                  </button>-->
-<!--                  <mat-menu #opcionesRuta="matMenu">-->
-<!--                    <button *ngFor="let opcion of opciones"-->
-<!--                            mat-menu-item-->
-<!--                            [disabled]="!entrenador.habilitado"-->
-<!--                            (click)="_sRutaEntrenadorService.navegar(-->
-<!--                                           _router,-->
-<!--                                           opcion.ruta(entrenador.id))"-->
-<!--                    >-->
+                  <!--                  <button mat-icon-button [matMenuTriggerFor]="opcionesRuta"-->
+                  <!--                          aria-label="Example icon-button with a menu">-->
+                  <!--                    <mat-icon>more_vert</mat-icon>-->
+                  <!--                  </button>-->
+                  <!--                  <mat-menu #opcionesRuta="matMenu">-->
+                  <!--                    <button *ngFor="let opcion of opciones"-->
+                  <!--                            mat-menu-item-->
+                  <!--                            [disabled]="!entrenador.habilitado"-->
+                  <!--                            (click)="_sRutaEntrenadorService.navegar(-->
+                  <!--                                           _router,-->
+                  <!--                                           opcion.ruta(entrenador.id))"-->
+                  <!--                    >-->
 
-<!--                      <mat-icon>keyboard_arrow_right</mat-icon>-->
-<!--                      <img [src]="rutaImagenAssets + opcion.rutaImagen"-->
-<!--                           alt=""-->
-<!--                           class="icono-navegacion"-->
-<!--                      > {{opcion.nombre}}-->
-<!--                    </button>-->
-<!--                  </mat-menu>-->
+                  <!--                      <mat-icon>keyboard_arrow_right</mat-icon>-->
+                  <!--                      <img [src]="rutaImagenAssets + opcion.rutaImagen"-->
+                  <!--                           alt=""-->
+                  <!--                           class="icono-navegacion"-->
+                  <!--                      > {{opcion.nombre}}-->
+                  <!--                    </button>-->
+                  <!--                  </mat-menu>-->
                 </div>
 
-<!--                <div>-->
-<!--                  <br>-->
-<!--                  <p-button-->
-<!--                          [label]="'Subir imagen'"-->
-<!--                          [disabled]="!<%= nombreCamel %>.habilitado"-->
-<!--                          icon="pi pi-angle-double-right"-->
-<!--                          styleClass="p-button-help"-->
-<!--                          (click)="abrirFormularioCrearArchivo('imagen', <%= nombreCamel %>)"-->
-<!--                  ></p-button>-->
-<!--                </div>-->
-<!--                <div>-->
-<!--                  <br>-->
-<!--                  <p-button-->
-<!--                          [label]="'Subir archivo'"-->
-<!--                          [disabled]="!<%= nombreCamel %>.habilitado"-->
-<!--                          icon="pi pi-angle-double-right"-->
-<!--                          styleClass="p-button-help"-->
-<!--                          (click)="abrirFormularioCrearArchivo('archivo', <%= nombreCamel %>)"-->
-<!--                  ></p-button>-->
-<!--                </div>-->
-<!--                <div>-->
-<!--                  <br>-->
-<!--                  <p-button-->
-<!--                          [label]="'Gestionar imagenes'"-->
-<!--                          [disabled]="!<%= nombreCamel %>.habilitado"-->
-<!--                          icon="pi pi-angle-double-right"-->
-<!--                          styleClass="p-button-help"-->
-<!--                          (click)="irRutaArchivos('imagen', <%= nombreCamel %>)"-->
-<!--                  ></p-button>-->
-<!--                </div>-->
-<!--                <div>-->
-<!--                  <br>-->
-<!--                  <p-button-->
-<!--                          [label]="'Gestionar archivos'"-->
-<!--                          [disabled]="!<%= nombreCamel %>.habilitado"-->
-<!--                          icon="pi pi-angle-double-right"-->
-<!--                          styleClass="p-button-help"-->
-<!--                          (click)="irRutaArchivos('archivo', <%= nombreCamel %>)"-->
-<!--                  ></p-button>-->
-<!--                </div>-->
+                <!--                <div>-->
+                <!--                  <br>-->
+                <!--                  <p-button-->
+                <!--                          [label]="'Subir imagen'"-->
+                <!--                          [disabled]="!<%= nombreCamel %>.habilitado"-->
+                <!--                          icon="pi pi-angle-double-right"-->
+                <!--                          styleClass="p-button-help"-->
+                <!--                          (click)="abrirFormularioCrearArchivo('imagen', <%= nombreCamel %>)"-->
+                <!--                  ></p-button>-->
+                <!--                </div>-->
+                <!--                <div>-->
+                <!--                  <br>-->
+                <!--                  <p-button-->
+                <!--                          [label]="'Subir archivo'"-->
+                <!--                          [disabled]="!<%= nombreCamel %>.habilitado"-->
+                <!--                          icon="pi pi-angle-double-right"-->
+                <!--                          styleClass="p-button-help"-->
+                <!--                          (click)="abrirFormularioCrearArchivo('archivo', <%= nombreCamel %>)"-->
+                <!--                  ></p-button>-->
+                <!--                </div>-->
+                <!--                <div>-->
+                <!--                  <br>-->
+                <!--                  <p-button-->
+                <!--                          [label]="'Gestionar imagenes'"-->
+                <!--                          [disabled]="!<%= nombreCamel %>.habilitado"-->
+                <!--                          icon="pi pi-angle-double-right"-->
+                <!--                          styleClass="p-button-help"-->
+                <!--                          (click)="irRutaArchivos('imagen', <%= nombreCamel %>)"-->
+                <!--                  ></p-button>-->
+                <!--                </div>-->
+                <!--                <div>-->
+                <!--                  <br>-->
+                <!--                  <p-button-->
+                <!--                          [label]="'Gestionar archivos'"-->
+                <!--                          [disabled]="!<%= nombreCamel %>.habilitado"-->
+                <!--                          icon="pi pi-angle-double-right"-->
+                <!--                          styleClass="p-button-help"-->
+                <!--                          (click)="irRutaArchivos('archivo', <%= nombreCamel %>)"-->
+                <!--                  ></p-button>-->
+                <!--                </div>-->
               </div>
             </td>
           </tr>
@@ -606,11 +677,11 @@
               </div>
             </ng-template>
 
-<!--            <ng-template pTemplate="colgroup" let-columns>-->
-<!--              <colgroup>-->
-<!--                <col *ngFor="let col of columns" [style.width]="col.tamanio">-->
-<!--              </colgroup>-->
-<!--            </ng-template>-->
+            <!--            <ng-template pTemplate="colgroup" let-columns>-->
+            <!--              <colgroup>-->
+            <!--                <col *ngFor="let col of columns" [style.width]="col.tamanio">-->
+            <!--              </colgroup>-->
+            <!--            </ng-template>-->
             <ng-template pTemplate="header" let-columns>
               <tr>
                 <th *ngFor="let col of columns" [pSortableColumn]="col.field" [pSortableColumn]="col.field">
@@ -653,44 +724,44 @@
                   </div>
                 </div>
 
-<!--                <div *ngIf="col.header === 'sis_IM'" class="text-center">-->
-<!--                  <div *ngIf="<%= nombreCamel %>.sis_IM">-->
-<!--                    <p *ngIf="<%= nombreCamel %>.sis_IM.nombre && <%= nombreCamel %>.sis_IM.nombre !== 'undefined'">-->
-<!--                      <strong>{{<%= nombreCamel %>.sis_IM.nombre}}</strong> {{<%= nombreCamel %>.sis_IM.descripcion}}</p>-->
-<!--                    <p><strong>{{g('generales.archivos.imagen.nombre')}}:</strong></p>-->
-<!--                    <img class="img-fluid imagen-tabla" [src]="col.fnMostrarImagen(<%= nombreCamel %>)" alt="">-->
-<!--                    <p><strong>{{g('generales.archivos.imagen.mensajeNombre')}}-->
-<!--                      :</strong> {{<%= nombreCamel %>.sis_IM.originalname}}</p>-->
-<!--                  </div>-->
-<!--                  <div *ngIf="!<%= nombreCamel %>.sis_IM">-->
-<!--                    <p><strong>{{g('generales.archivos.imagen.nombre')}}:</strong></p>-->
-<!--                    <img class="img-fluid imagen-tabla" src="assets/img/comun/imagen.svg" alt="">-->
-<!--                    <p><strong>{{g('generales.archivos.imagen.mensajeNombre')}}-->
-<!--                      :</strong> {{g('generales.archivos.imagen.mensajeVacio')}}</p>-->
-<!--                  </div>-->
-<!--                  <div class="espaciador"></div>-->
-<!--                  <div *ngIf="<%= nombreCamel %>.sis_AR">-->
-<!--                    <p *ngIf="<%= nombreCamel %>.sis_AR.nombre  && <%= nombreCamel %>.sis_AR.nombre !== 'undefined'">-->
-<!--                      <strong>{{<%= nombreCamel %>.sis_AR.nombre}}</strong> {{<%= nombreCamel %>.sis_AR.descripcion}}</p>-->
-<!--                    <div class="text-center">-->
-<!--                      <strong>{{g('generales.archivos.archivo.nombre')}}:</strong> {{<%= nombreCamel %>.sis_AR.mimetype}} <img-->
-<!--                            class="imagen-icono" src="assets/libreria/icono-archivo.svg" alt="">-->
-<!--                    </div>-->
-<!--                    <p><strong>{{g('generales.archivos.archivo.mensajeNombre')}}-->
-<!--                      :</strong> {{<%= nombreCamel %>.sis_AR.originalname}}</p>-->
+                <!--                <div *ngIf="col.header === 'sis_IM'" class="text-center">-->
+                <!--                  <div *ngIf="<%= nombreCamel %>.sis_IM">-->
+                <!--                    <p *ngIf="<%= nombreCamel %>.sis_IM.nombre && <%= nombreCamel %>.sis_IM.nombre !== 'undefined'">-->
+                <!--                      <strong>{{<%= nombreCamel %>.sis_IM.nombre}}</strong> {{<%= nombreCamel %>.sis_IM.descripcion}}</p>-->
+                <!--                    <p><strong>{{g('generales.archivos.imagen.nombre')}}:</strong></p>-->
+                <!--                    <img class="img-fluid imagen-tabla" [src]="col.fnMostrarImagen(<%= nombreCamel %>)" alt="">-->
+                <!--                    <p><strong>{{g('generales.archivos.imagen.mensajeNombre')}}-->
+                <!--                      :</strong> {{<%= nombreCamel %>.sis_IM.originalname}}</p>-->
+                <!--                  </div>-->
+                <!--                  <div *ngIf="!<%= nombreCamel %>.sis_IM">-->
+                <!--                    <p><strong>{{g('generales.archivos.imagen.nombre')}}:</strong></p>-->
+                <!--                    <img class="img-fluid imagen-tabla" src="assets/img/comun/imagen.svg" alt="">-->
+                <!--                    <p><strong>{{g('generales.archivos.imagen.mensajeNombre')}}-->
+                <!--                      :</strong> {{g('generales.archivos.imagen.mensajeVacio')}}</p>-->
+                <!--                  </div>-->
+                <!--                  <div class="espaciador"></div>-->
+                <!--                  <div *ngIf="<%= nombreCamel %>.sis_AR">-->
+                <!--                    <p *ngIf="<%= nombreCamel %>.sis_AR.nombre  && <%= nombreCamel %>.sis_AR.nombre !== 'undefined'">-->
+                <!--                      <strong>{{<%= nombreCamel %>.sis_AR.nombre}}</strong> {{<%= nombreCamel %>.sis_AR.descripcion}}</p>-->
+                <!--                    <div class="text-center">-->
+                <!--                      <strong>{{g('generales.archivos.archivo.nombre')}}:</strong> {{<%= nombreCamel %>.sis_AR.mimetype}} <img-->
+                <!--                            class="imagen-icono" src="assets/libreria/icono-archivo.svg" alt="">-->
+                <!--                    </div>-->
+                <!--                    <p><strong>{{g('generales.archivos.archivo.mensajeNombre')}}-->
+                <!--                      :</strong> {{<%= nombreCamel %>.sis_AR.originalname}}</p>-->
 
-<!--                    <div>-->
-<!--                      <br>-->
-<!--                      <p-button-->
-<!--                              [label]="g('generales.archivos.archivo.botonDescargarArchivo')"-->
-<!--                              [disabled]="!<%= nombreCamel %>.habilitado"-->
-<!--                              icon="pi pi-angle-double-right"-->
-<!--                              styleClass="p-button-help"-->
-<!--                              (click)="_sRuta<%= nombreMayuscula %>Service.descargarArchivo(<%= nombreCamel %>.sis_AR)"-->
-<!--                      ></p-button>-->
-<!--                    </div>-->
-<!--                  </div>-->
-<!--                </div>-->
+                <!--                    <div>-->
+                <!--                      <br>-->
+                <!--                      <p-button-->
+                <!--                              [label]="g('generales.archivos.archivo.botonDescargarArchivo')"-->
+                <!--                              [disabled]="!<%= nombreCamel %>.habilitado"-->
+                <!--                              icon="pi pi-angle-double-right"-->
+                <!--                              styleClass="p-button-help"-->
+                <!--                              (click)="_sRuta<%= nombreMayuscula %>Service.descargarArchivo(<%= nombreCamel %>.sis_AR)"-->
+                <!--                      ></p-button>-->
+                <!--                    </div>-->
+                <!--                  </div>-->
+                <!--                </div>-->
 
                 <div *ngIf="col.field === '<%= nombreHabilitado %>'">
                   <div class="text-center">
@@ -709,24 +780,24 @@
                   </div>
                 </div>
                 <div *ngIf="col.field === '<%= id %>'">
-<!--                  <div class="row">-->
-<!--                    <div class="col-sm-6">-->
-<!--                      <p-button-->
-<!--                              [disabled]="!<%= nombreCamel %>.habilitado"-->
-<!--                              icon="pi pi-image"-->
-<!--                              styleClass="p-button-help boton-archivos"-->
-<!--                              (click)="abrirFormularioCrearArchivo('IM', <%= nombreCamel %>)"-->
-<!--                      ></p-button>-->
-<!--                    </div>-->
-<!--                    <div class="col-sm-6">-->
-<!--                      <p-button-->
-<!--                              [disabled]="!<%= nombreCamel %>.habilitado"-->
-<!--                              icon="pi pi-file"-->
-<!--                              styleClass="p-button-help boton-archivos"-->
-<!--                              (click)="abrirFormularioCrearArchivo('AR', <%= nombreCamel %>)"-->
-<!--                      ></p-button>-->
-<!--                    </div>-->
-<!--                  </div>-->
+                  <!--                  <div class="row">-->
+                  <!--                    <div class="col-sm-6">-->
+                  <!--                      <p-button-->
+                  <!--                              [disabled]="!<%= nombreCamel %>.habilitado"-->
+                  <!--                              icon="pi pi-image"-->
+                  <!--                              styleClass="p-button-help boton-archivos"-->
+                  <!--                              (click)="abrirFormularioCrearArchivo('IM', <%= nombreCamel %>)"-->
+                  <!--                      ></p-button>-->
+                  <!--                    </div>-->
+                  <!--                    <div class="col-sm-6">-->
+                  <!--                      <p-button-->
+                  <!--                              [disabled]="!<%= nombreCamel %>.habilitado"-->
+                  <!--                              icon="pi pi-file"-->
+                  <!--                              styleClass="p-button-help boton-archivos"-->
+                  <!--                              (click)="abrirFormularioCrearArchivo('AR', <%= nombreCamel %>)"-->
+                  <!--                      ></p-button>-->
+                  <!--                    </div>-->
+                  <!--                  </div>-->
 
                   <div class="text-center">
                     <br>
@@ -742,67 +813,67 @@
                             (click)="_sRuta<%= nombreMayuscula %>Service.setearCamposRequeridosAFalso(this);"
                             (click)="abrirModal(<%= nombreCamel %>)"
                     ></p-button>
-<!--                    <button mat-icon-button [matMenuTriggerFor]="opcionesRuta"-->
-<!--                            aria-label="Example icon-button with a menu">-->
-<!--                      <mat-icon>more_vert</mat-icon>-->
-<!--                    </button>-->
-<!--                    <mat-menu #opcionesRuta="matMenu">-->
-<!--                      <button *ngFor="let opcion of opciones"-->
-<!--                              mat-menu-item-->
-<!--                              [disabled]="!entrenador.habilitado"-->
-<!--                              (click)="_sRutaEntrenadorService.navegar(-->
-<!--                                           _router,-->
-<!--                                           opcion.ruta(entrenador.id))"-->
-<!--                      >-->
+                    <!--                    <button mat-icon-button [matMenuTriggerFor]="opcionesRuta"-->
+                    <!--                            aria-label="Example icon-button with a menu">-->
+                    <!--                      <mat-icon>more_vert</mat-icon>-->
+                    <!--                    </button>-->
+                    <!--                    <mat-menu #opcionesRuta="matMenu">-->
+                    <!--                      <button *ngFor="let opcion of opciones"-->
+                    <!--                              mat-menu-item-->
+                    <!--                              [disabled]="!entrenador.habilitado"-->
+                    <!--                              (click)="_sRutaEntrenadorService.navegar(-->
+                    <!--                                           _router,-->
+                    <!--                                           opcion.ruta(entrenador.id))"-->
+                    <!--                      >-->
 
-<!--                        <mat-icon>keyboard_arrow_right</mat-icon>-->
-<!--                        <img [src]="rutaImagenAssets + opcion.rutaImagen"-->
-<!--                             alt=""-->
-<!--                             class="icono-navegacion"-->
-<!--                        > {{l(opcion.nombre)}}-->
-<!--                      </button>-->
-<!--                    </mat-menu>-->
+                    <!--                        <mat-icon>keyboard_arrow_right</mat-icon>-->
+                    <!--                        <img [src]="rutaImagenAssets + opcion.rutaImagen"-->
+                    <!--                             alt=""-->
+                    <!--                             class="icono-navegacion"-->
+                    <!--                        > {{l(opcion.nombre)}}-->
+                    <!--                      </button>-->
+                    <!--                    </mat-menu>-->
                   </div>
-<!--                  <div>-->
-<!--                    <br>-->
-<!--                    <p-button-->
-<!--                            [label]="'generales.botones.subirImagen' | transloco"-->
-<!--                            [disabled]="!<%= nombreCamel %>.habilitado"-->
-<!--                            icon="pi pi-angle-double-right"-->
-<!--                            styleClass="p-button-help"-->
-<!--                            (click)="abrirFormularioCrearArchivo('imagen', <%= nombreCamel %>)"-->
-<!--                    ></p-button>-->
-<!--                  </div>-->
-<!--                  <div>-->
-<!--                    <br>-->
-<!--                    <p-button-->
-<!--                            [label]="'generales.botones.subirArchivo' | transloco"-->
-<!--                            [disabled]="!<%= nombreCamel %>.habilitado"-->
-<!--                            icon="pi pi-angle-double-right"-->
-<!--                            styleClass="p-button-help"-->
-<!--                            (click)="abrirFormularioCrearArchivo('archivo', <%= nombreCamel %>)"-->
-<!--                    ></p-button>-->
-<!--                  </div>-->
-<!--                  <div>-->
-<!--                    <br>-->
-<!--                    <p-button-->
-<!--                            [label]="'generales.botones.gestionarImagenes' | transloco"-->
-<!--                            [disabled]="!<%= nombreCamel %>.habilitado"-->
-<!--                            icon="pi pi-angle-double-right"-->
-<!--                            styleClass="p-button-help"-->
-<!--                            (click)="irRutaArchivos('imagen', <%= nombreCamel %>)"-->
-<!--                    ></p-button>-->
-<!--                  </div>-->
-<!--                  <div>-->
-<!--                    <br>-->
-<!--                    <p-button-->
-<!--                            [label]="'generales.botones.gestionarArchivos' | transloco"-->
-<!--                            [disabled]="!<%= nombreCamel %>.habilitado"-->
-<!--                            icon="pi pi-angle-double-right"-->
-<!--                            styleClass="p-button-help"-->
-<!--                            (click)="irRutaArchivos('archivo', <%= nombreCamel %>)"-->
-<!--                    ></p-button>-->
-<!--                  </div>-->
+                  <!--                  <div>-->
+                  <!--                    <br>-->
+                  <!--                    <p-button-->
+                  <!--                            [label]="'generales.botones.subirImagen' | transloco"-->
+                  <!--                            [disabled]="!<%= nombreCamel %>.habilitado"-->
+                  <!--                            icon="pi pi-angle-double-right"-->
+                  <!--                            styleClass="p-button-help"-->
+                  <!--                            (click)="abrirFormularioCrearArchivo('imagen', <%= nombreCamel %>)"-->
+                  <!--                    ></p-button>-->
+                  <!--                  </div>-->
+                  <!--                  <div>-->
+                  <!--                    <br>-->
+                  <!--                    <p-button-->
+                  <!--                            [label]="'generales.botones.subirArchivo' | transloco"-->
+                  <!--                            [disabled]="!<%= nombreCamel %>.habilitado"-->
+                  <!--                            icon="pi pi-angle-double-right"-->
+                  <!--                            styleClass="p-button-help"-->
+                  <!--                            (click)="abrirFormularioCrearArchivo('archivo', <%= nombreCamel %>)"-->
+                  <!--                    ></p-button>-->
+                  <!--                  </div>-->
+                  <!--                  <div>-->
+                  <!--                    <br>-->
+                  <!--                    <p-button-->
+                  <!--                            [label]="'generales.botones.gestionarImagenes' | transloco"-->
+                  <!--                            [disabled]="!<%= nombreCamel %>.habilitado"-->
+                  <!--                            icon="pi pi-angle-double-right"-->
+                  <!--                            styleClass="p-button-help"-->
+                  <!--                            (click)="irRutaArchivos('imagen', <%= nombreCamel %>)"-->
+                  <!--                    ></p-button>-->
+                  <!--                  </div>-->
+                  <!--                  <div>-->
+                  <!--                    <br>-->
+                  <!--                    <p-button-->
+                  <!--                            [label]="'generales.botones.gestionarArchivos' | transloco"-->
+                  <!--                            [disabled]="!<%= nombreCamel %>.habilitado"-->
+                  <!--                            icon="pi pi-angle-double-right"-->
+                  <!--                            styleClass="p-button-help"-->
+                  <!--                            (click)="irRutaArchivos('archivo', <%= nombreCamel %>)"-->
+                  <!--                    ></p-button>-->
+                  <!--                  </div>-->
                 </div>
               </td>
             </tr>
@@ -889,5 +960,8 @@
   <br>
   <br>
 </ng-container>
+
+<% } %>
+
 
 <% } %>

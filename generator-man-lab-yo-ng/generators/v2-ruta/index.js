@@ -56,6 +56,20 @@ const TEMPLATES = {
     MIGAS_PAN: '-migas-pan.ts',
     LOADER_TRANSLOCO: 'loader-.ts',
     GUARD: '.guard.ts',
+    PAGE_MODULE: '-page.module.ts',
+    PAGE_ROUTING_MODULE: '-page-routing.module.ts',
+    MOSTRAR_LISTA_HTML: 'mostrar--lista.component.html',
+    MOSTRAR_LISTA_SCSS: 'mostrar--lista.component.scss',
+    MOSTRAR_LISTA_TS: 'mostrar--lista.component.ts',
+    MOSTRAR_LISTA_MODULE: 'mostrar--lista.module.ts',
+
+    NOMBRE_MODULO: 'nombre-modulo.ts',
+    NOMBRE_MODULO_ASSETS: 'nombre-modulo-assets.ts',
+
+    PERFIL_HTML: 'perfil-.component.html',
+    PERFIL_SCSS: 'perfil-.component.scss',
+    PERFIL_TS: 'perfil-.component.ts',
+    PERFIL_MODULE: 'perfil-.module.ts',
 }
 const OPCIONES = {
     ES_FIREBASE: {
@@ -71,7 +85,15 @@ const OPCIONES = {
         configuracion: {
             type: String,
             default: undefined,
-            desc: 'Modificar el template si es internacionalizable. EJ:  NombreRuta NombreCampo texto --internacionalizar=true'
+            desc: 'Modificar el template si es internacionalizable. EJ:  NombreRuta idRuta nombreHabilitado --internacionalizar=true'
+        }
+    },
+    IONIC: {
+        nombre: 'ionic',
+        configuracion: {
+            type: String,
+            default: undefined,
+            desc: 'Rutas para ionic (no es necesario mandar internacionalizar) EJ:  NombreRuta idRuta nombreHabilitado --ionic=true'
         }
     },
 }
@@ -132,6 +154,7 @@ module.exports = class extends Generator {
         // opciones
         this.option(OPCIONES.ES_FIREBASE.nombre, OPCIONES.ES_FIREBASE.configuracion);
         this.option(OPCIONES.INTERNACIONALIZAR.nombre, OPCIONES.INTERNACIONALIZAR.configuracion);
+        this.option(OPCIONES.IONIC.nombre, OPCIONES.IONIC.configuracion);
     }
 
     initializing() {
@@ -181,6 +204,7 @@ module.exports = class extends Generator {
         // opciones
         const esFirebase = this.options[OPCIONES.ES_FIREBASE.nombre];
         const internacionalizar = this.options[OPCIONES.INTERNACIONALIZAR.nombre];
+        const ionic = this.options[OPCIONES.IONIC.nombre];
 
         if (!id) {
             id = 'id';
@@ -199,6 +223,7 @@ module.exports = class extends Generator {
             nombreHabilitado,
             esFirebase,
             internacionalizar,
+            ionic,
         };
 
         const templateActualizar = this.templatePath(TEMPLATES.ACTUALIZAR);
@@ -400,6 +425,117 @@ module.exports = class extends Generator {
             destinoGRD,
             variables
         );
+
+        if(variables.ionic){
+            const templatePM = this.templatePath(TEMPLATES.PAGE_MODULE);
+            const destinoPM = this.destinationPath(`../../${nombreGuiones}-page.module.ts`);
+
+            this.fs.copyTpl(
+                templatePM,
+                destinoPM,
+                variables
+            );
+
+            const templatePRM = this.templatePath(TEMPLATES.PAGE_ROUTING_MODULE);
+            const destinoPRM = this.destinationPath(`../../${nombreGuiones}-page-routing.module.ts`);
+
+            this.fs.copyTpl(
+                templatePRM,
+                destinoPRM,
+                variables
+            );
+
+            const templateMLH = this.templatePath(TEMPLATES.MOSTRAR_LISTA_HTML);
+            const destinoMLH = this.destinationPath(`../../componentes/mostrar-${nombreGuiones}-lista/mostrar-${nombreGuiones}-lista.component.html`);
+
+            this.fs.copyTpl(
+                templateMLH,
+                destinoMLH,
+                variables
+            );
+
+            const templateMLS = this.templatePath(TEMPLATES.MOSTRAR_LISTA_SCSS);
+            const destinoMLS = this.destinationPath(`../../componentes/mostrar-${nombreGuiones}-lista/mostrar-${nombreGuiones}-lista.component.scss`);
+
+            this.fs.copyTpl(
+                templateMLS,
+                destinoMLS,
+                variables
+            );
+
+            const templateMLTS = this.templatePath(TEMPLATES.MOSTRAR_LISTA_TS);
+            const destinoMLTS = this.destinationPath(`../../componentes/mostrar-${nombreGuiones}-lista/mostrar-${nombreGuiones}-lista.component.ts`);
+
+            this.fs.copyTpl(
+                templateMLTS,
+                destinoMLTS,
+                variables
+            );
+
+            const templateMLM = this.templatePath(TEMPLATES.MOSTRAR_LISTA_MODULE);
+            const destinoMLM = this.destinationPath(`../../componentes/mostrar-${nombreGuiones}-lista/mostrar-${nombreGuiones}-lista.module.ts`);
+
+            this.fs.copyTpl(
+                templateMLM,
+                destinoMLM,
+                variables
+            );
+
+            const templateNM = this.templatePath(TEMPLATES.NOMBRE_MODULO);
+            const destinoNM = this.destinationPath(`../../constantes/nombre-modulo.ts`);
+
+            this.fs.copyTpl(
+                templateNM,
+                destinoNM,
+                variables
+            );
+
+            const templateNMA = this.templatePath(TEMPLATES.NOMBRE_MODULO_ASSETS);
+            const destinoNMA = this.destinationPath(`../../constantes/nombre-modulo-assets.ts`);
+
+            this.fs.copyTpl(
+                templateNMA,
+                destinoNMA,
+                variables
+            );
+
+            const templatePH = this.templatePath(TEMPLATES.PERFIL_HTML);
+            const destinoPH = this.destinationPath(`../../componentes/perfil-${nombreGuiones}/perfil-${nombreGuiones}.component.html`);
+
+            this.fs.copyTpl(
+                templatePH,
+                destinoPH,
+                variables
+            );
+
+            const templatePS = this.templatePath(TEMPLATES.PERFIL_SCSS);
+            const destinoPS = this.destinationPath(`../../componentes/perfil-${nombreGuiones}/perfil-${nombreGuiones}.component.scss`);
+
+            this.fs.copyTpl(
+                templatePS,
+                destinoPS,
+                variables
+            );
+
+            const templatePTS = this.templatePath(TEMPLATES.PERFIL_TS);
+            const destinoPTS = this.destinationPath(`../../componentes/perfil-${nombreGuiones}/perfil-${nombreGuiones}.component.ts`);
+
+            this.fs.copyTpl(
+                templatePTS,
+                destinoPTS,
+                variables
+            );
+
+            const templatePMOD = this.templatePath(TEMPLATES.PERFIL_MODULE);
+            const destinoPMOD = this.destinationPath(`../../componentes/perfil-${nombreGuiones}/perfil-${nombreGuiones}.module.ts`);
+
+            this.fs.copyTpl(
+                templatePMOD,
+                destinoPMOD,
+                variables
+            );
+
+        }
     }
 
     conflicts() {

@@ -1,0 +1,118 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Perfil <%= nombreMayuscula %></ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="modalController.dismiss()">
+        <ion-icon name="close-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ng-container *transloco="let l; read:componenteModal.componente.objetoInternacionalizacion.nombreScopeTransloco">
+  <ion-grid>
+    <ion-row>
+
+      <ion-col>
+        <ion-fab horizontal="start">
+          <ion-fab-button color="light">
+            <a href="https://www.google.com/maps/search/?api=1&query=%27+ coordenadas.latitud+ ','+coordenadas.longitud"
+               target="_blank">
+              <img src="assets/google-maps.svg" alt="">
+            </a>
+          </ion-fab-button>
+        </ion-fab>
+      </ion-col>
+      <ion-col (click)="componenteModal.componente.abrirFormularioCrearArchivo('IM', componenteModal.registro)">
+
+        <div *ngIf="componenteModal.registro">
+          <div *ngIf="componenteModal.registro.sis_IM">
+            <img [src]="componenteModal.componente.mostrarImagen(componenteModal.registro)" alt="">
+          </div>
+
+          <div *ngIf="!componenteModal.registro.sis_IM">
+            <img src="assets/img/comun/imagen.svg" alt="">
+          </div>
+        </div>
+
+      </ion-col>
+      <ion-col>
+        <ion-fab horizontal="end">
+          <a href="whatsapp://send?phone=59397949269">
+            <ion-fab-button color="light">
+              <img src="assets/whatsapp.svg" alt="">
+            </ion-fab-button>
+          </a>
+        </ion-fab>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <div class="text-center">
+          <h3>{{componenteModal.registro}}</h3>
+          <h5>Subtitulo</h5>
+          <p>Dscripciones de algunas cosas</p>
+          <div class="separador"></div>
+          <p><strong>Algo:</strong>algo</p>
+          <p><strong>Otro:</strong>otro</p>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <div *ngIf="componenteModal.registro">
+          <div *ngIf="componenteModal.registro.sis_AR">
+            <div class="text-center">
+              <strong>Archivo:</strong> {{componenteModal.registro.sis_AR.mimetype}} <img
+              class="imagen-icono" src="assets/libreria/icono-archivo.svg" alt="">
+            </div>
+            <p *ngIf="componenteModal.registro">
+              <strong>Nombre:</strong> </p>
+            <p>
+              {{componenteModal.registro.sis_AR.originalname}}
+            </p>
+
+            <div class="text-center">
+              <br>
+              <p-button
+                [label]="'Descargar archivo'"
+                [disabled]="!componenteModal.registro.habilitado"
+                icon="pi pi-angle-double-right"
+                styleClass="p-button-help"
+                (click)="componenteModal.componente._sRuta<%= nombreMayuscula %>Service.descargarArchivo(componenteModal.registro.sis_AR)"
+              ></p-button>
+            </div>
+          </div>
+          <div class="text-center">
+            <ion-button size="small"
+                        color="secondary"
+                        (click)="componenteModal.componente.abrirFormularioCrearArchivo('AR', componenteModal.registro)"
+            >
+              {{!componenteModal.registro.sis_AR ? 'Subir archivo': 'Actualizar archivo'}}
+            </ion-button>
+          </div>
+        </div>
+
+
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <div class="text-center">
+          <ion-button size="small"
+                      color="warning"
+                      (click)="componenteModal.componente.botonAceptarModalDisabled = true;"
+                      (click)="componenteModal.componente._sRuta<%= nombreMayuscula %>Service.formularioEnModalActual = undefined;"
+                      (click)="componenteModal.componente._sRuta<%= nombreMayuscula %>Service.camposSeleccionadosFormulario = {};"
+                      (click)="componenteModal.componente._sRuta<%= nombreMayuscula %>Service.setearCamposRequeridosAFalso(componenteModal.componente);"
+                      (click)="abrirModal()"
+          >
+            Editar
+          </ion-button>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  </ng-container>
+</ion-content>

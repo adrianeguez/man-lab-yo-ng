@@ -1,0 +1,71 @@
+
+
+<ion-content>
+  <ng-container *transloco="let l; read:objetoInternacionalizacion.nombreScopeTransloco">
+    <br>
+    <ion-refresher slot="fixed" (ionRefresh)="buscarConFiltros($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    <ion-list>
+      <ion-item>
+        <ion-icon (click)="mostrarFiltros = !mostrarFiltros;" slot="end" [name]="mostrarFiltros ? 'filter-circle-outline': 'filter-outline'"></ion-icon>
+        <ion-label>{{mostrarFiltros ? 'Filtros activos' : 'Filtros ocultos'}}</ion-label>
+      </ion-item>
+    </ion-list>
+    <div *ngIf="mostrarFiltros">
+      <app-ml-contenedor-campos-formulario (todosCamposValidos)="formularioValidoBusqueda($event)"
+                                           (cambioCampo)="cambioCampoBusqueda($event)"
+                                           (cambioAutocomplete)="formularioBusquedacambioCampoAutocomplete($event)"
+                                           [vertical]="false"
+                                           class="campo-formulario"
+                                           id="filtro-entrenador"
+                                           tituloFormulario="formularios.busqueda.formularioBusqueda.tituloFormulario"
+                                           descripcionFormulario="formularios.busqueda.formularioBusqueda.descripcionFormulario"
+                                           descripcionFormularioConGrupo="formularios.busqueda.formularioBusqueda.descripcionFormularioConGrupo"
+                                           tituloFormularioConGrupo="formularios.busqueda.formularioBusqueda.tituloFormularioConGrupo"
+                                           [habilitarInternacionalizacion]="true"
+                                           [objetoInternacionalizacion]="objetoInternacionalizacion"
+                                           [camposFormularioFuncion]="camposFormularioBusqueda"
+                                           [selectedStepperIndex]="stepperActualBusqueda"
+                                           [gruposFormularioFuncion]="_sRutaEntrenadorService.gruposFormularioBusqueda"
+                                           [componente]="this"
+      ></app-ml-contenedor-campos-formulario>
+    </div>
+
+    <ion-list>
+      <ion-item  *ngIf="mostrarFiltros">
+
+        <ion-button class="w-100"
+                    size="small"
+                    expand="block"
+                    (click)="buscarConFiltros()"
+                    (click)="mostrarFiltros = false;"
+        >
+          Buscar
+        </ion-button>
+      </ion-item>
+      <ion-item *ngFor="let entrenador of _sRutaEntrenadorService.arregloDatosFiltrado">
+        <app-mostrar-entrenador-lista class="w-100" [registro]="entrenador" [componente]="this">
+
+        </app-mostrar-entrenador-lista>
+      </ion-item>
+    </ion-list>
+    <div class="text-center">
+      <br>
+      <ion-button size="small" *ngIf="!_sRutaEntrenadorService.yaNoHayMasRegistros"
+                  (click)="paginaActual.vecesPeticion = paginaActual.vecesPeticion + 1;"
+                  (click)="paginaActual.first = _sRutaEntrenadorService.arregloDatosFiltrado.length * paginaActual.vecesPeticion;"
+                  (click)="_sRutaEntrenadorService.cargarMasDatos(paginaActual, this, true)"
+      >Cargar más</ion-button>
+    </div>
+    <h1 *ngIf="_sRutaEntrenadorService.yaNoHayMasRegistros"
+        class="text-center"
+    >
+      Ya no hay más registros <ion-icon name="sad"></ion-icon>
+    </h1>
+    <br>
+    <br>
+  </ng-container>
+</ion-content>
+
+
