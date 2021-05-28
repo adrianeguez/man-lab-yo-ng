@@ -1,6 +1,7 @@
 
 <% if(ionic){ %>
 <ion-content>
+  <ng-container *transloco="let g;">
   <ng-container *transloco="let l; read:objetoInternacionalizacion.nombreScopeTransloco">
     <br>
     <ion-refresher slot="fixed" (ionRefresh)="buscarConFiltros($event)">
@@ -9,10 +10,15 @@
     <ion-list>
       <ion-item>
         <ion-icon (click)="mostrarFiltros = !mostrarFiltros;" slot="end" [name]="mostrarFiltros ? 'filter-circle-outline': 'filter-outline'"></ion-icon>
-        <ion-label>{{mostrarFiltros ? 'Filtros activos' : 'Filtros ocultos'}}</ion-label>
+        <ion-label>{{mostrarFiltros ? g('generales.filtroMovil.tituloFiltroActivo') : g('generales.filtroMovil.tituloFiltroOculto')}}</ion-label>
       </ion-item>
     </ion-list>
-    <div *ngIf="mostrarFiltros">
+    <div *ngIf="mostrarFiltros"
+         [ngClass]="{
+         'contenedor-movil': true,
+         'filtros': true
+         }"
+    >
       <app-ml-contenedor-campos-formulario (todosCamposValidos)="formularioValidoBusqueda($event)"
                                            (cambioCampo)="cambioCampoBusqueda($event)"
                                            (cambioAutocomplete)="formularioBusquedacambioCampoAutocomplete($event)"
@@ -41,7 +47,7 @@
                     (click)="buscarConFiltros()"
                     (click)="mostrarFiltros = false;"
         >
-          Buscar
+          {{g('generales.botones.buscar')}}
         </ion-button>
       </ion-item>
       <ion-item *ngFor="let entrenador of _sRutaEntrenadorService.arregloDatosFiltrado">
@@ -56,15 +62,16 @@
                   (click)="paginaActual.vecesPeticion = paginaActual.vecesPeticion + 1;"
                   (click)="paginaActual.first = _sRutaEntrenadorService.arregloDatosFiltrado.length * paginaActual.vecesPeticion;"
                   (click)="_sRutaEntrenadorService.cargarMasDatos(paginaActual, this, true)"
-      >Cargar más</ion-button>
+      > {{g('generales.cargarMas')}}</ion-button>
     </div>
     <h1 *ngIf="_sRutaEntrenadorService.yaNoHayMasRegistros"
         class="text-center"
     >
-      Ya no hay más registros <ion-icon name="sad"></ion-icon>
+      {{g('generales.noHayMasRegistros')}} <ion-icon name="sad"></ion-icon>
     </h1>
     <br>
     <br>
+  </ng-container>
   </ng-container>
 </ion-content>
 

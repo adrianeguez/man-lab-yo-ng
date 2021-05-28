@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {<%= nombreMayuscula %>Interface} from '../../interfaces/<%= nombreGuiones %>.interface';
 import {ModalController} from '@ionic/angular';
-import {PerfilEntrenadorComponent} from '../perfil-<%= nombreGuiones %>/perfil-<%= nombreGuiones %>.component';
+import {Perfil<%= nombreMayuscula %>Component} from '../perfil-<%= nombreGuiones %>/perfil-<%= nombreGuiones %>.component';
 import {Ruta<%= nombreMayuscula %>Component} from '../../ruta/ruta-<%= nombreGuiones %>/ruta-<%= nombreGuiones %>.component';
 
 @Component({

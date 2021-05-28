@@ -25,4 +25,9 @@ export class Perfil<%= nombreMayuscula %>Component implements OnInit {
     });
   }
 
+  abrirModalSeleccionarGeolocalizacion(){
+    this.componenteModal.componente.abrirModalSeleccionarGeolocalizacion();
+
+  }
+
 }

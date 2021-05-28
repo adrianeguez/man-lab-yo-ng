@@ -11,6 +11,7 @@ import {Mostrar<%= nombreMayuscula %>ListaModule} from './componentes/mostrar-<%
         <%= nombreMayuscula %>Module,
         SRuta<%= nombreMayuscula %>Module,
         Mostrar<%= nombreMayuscula %>ListaModule,
+        ModalSeleccionarGeolocalizacionComunModule,
         ...IMPORTS_COMUNES_MODULOS
     ],
     declarations: [

@@ -937,6 +937,35 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
   // }
 
 
+
+  // abrirModalSeleccionarGeolocalizacion() {
+  //   const dataModal: DataSeleccionarGeolocalizacion = {
+  //     componente: this,
+  //     tituloCrear: this.translocoService.translate('generales.mapa.tituloSeleccionar'),
+  //     descripcionCrear: this.translocoService.translate('generales.mapa.descripcionSeleccionar')
+  //   }
+  //   const respuesta: MatDialogRef<any> = this._sRutaEntrenadorService.matDialog.open(
+  //       ModalSeleccionarGeolocalizacionComunComponent,
+  //       {
+  //         data: dataModal
+  //       }
+  //   );
+  //
+  //   if (respuesta) {
+  //     respuesta
+  //         .afterClosed()
+  //         .subscribe(
+  //             (data: {
+  //               latitud: number;
+  //               longitud: number;
+  //             }) => {
+  //               console.log(data);
+  //             }
+  //         )
+  //   }
+  // }
+  //
+
   mostrarImagen(<%= nombreCamel %>: <%= nombreMayuscula %>Interface){
     if (<%= nombreCamel %>.sis_IM) {
       return this._sRuta<%= nombreMayuscula %>Service._domSanitizer.bypassSecurityTrustResourceUrl(`data:${<%= nombreCamel %>.sis_IM.mimetype};base64, ${<%= nombreCamel %>.sis_IM.buffer}`);
@@ -944,6 +973,8 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
       return '';
     }
   }
+
+
 
 
 }

@@ -1,71 +1,72 @@
-<ng-container *transloco="let l; read:componente.objetoInternacionalizacion.nombreScopeTransloco">
-    <ion-card *ngIf="registro">
-        <ion-grid>
-            <ion-row>
-                <ion-col size="4">
-                    <div *ngIf="registro">
-                        <div *ngIf="registro.sis_IM">
-                            <img [src]="componente.mostrarImagen(registro)" alt="">
-                        </div>
+<ng-container *transloco="let g;">
+    <ng-container *transloco="let l; read:componente.objetoInternacionalizacion.nombreScopeTransloco">
+        <ion-card *ngIf="registro">
+            <ion-grid>
+                <ion-row>
+                    <ion-col size="4">
+                        <div *ngIf="registro">
+                            <div *ngIf="registro.sis_IM">
+                                <img [src]="componente.mostrarImagen(registro)" alt="">
+                            </div>
 
-                        <div *ngIf="!registro.sis_IM">
-                            <img src="assets/img/comun/imagen.svg" alt="">
+                            <div *ngIf="!registro.sis_IM">
+                                <img src="assets/img/comun/imagen.svg" alt="">
+                            </div>
                         </div>
-                    </div>
-                </ion-col>
-                <ion-col size="8">
-                    <ion-grid>
-                        <ion-row>
-                            <ion-col size="8">
-                                <div class="texto-oscuro">
-                                    {{registro}}
-                                </div>
-                            </ion-col>
-                            <ion-col size="4">
-                                <div class="float-end">
-                                    <ion-badge color="primary">11
-                                        <ion-icon name="star"></ion-icon>
-                                    </ion-badge>
-                                </div>
-                            </ion-col>
-                        </ion-row>
-                        <ion-row>
-                            <ion-col size="10">
-                                <p>Descripcion de la entidad corta</p>
-                            </ion-col>
-                            <ion-col size="2" (click)="abrirPerfil()">
-                                <ion-icon name="chevron-forward"></ion-icon>
-                            </ion-col>
-                        </ion-row>
-                    </ion-grid>
-                </ion-col>
-            </ion-row>
-            <ion-row (click)="abierto = !abierto;">
-                <ion-col size="8">
-                    Más información
-                </ion-col>
-                <ion-col size="4">
-                    <ion-icon class="float-end"
-                              [name]="abierto ? 'chevron-up-circle' : 'chevron-down-circle'"></ion-icon>
-                </ion-col>
-            </ion-row>
-            <ion-row *ngIf="abierto" class="animate__animated animate__backInDown">
-                <ion-card>
-                    <ion-card-header>
-                        <ion-card-subtitle>Titulo</ion-card-subtitle>
-                        <ion-card-title>Subtitulo</ion-card-title>
-                    </ion-card-header>
+                    </ion-col>
+                    <ion-col size="8">
+                        <ion-grid>
+                            <ion-row>
+                                <ion-col size="8">
+                                    <div class="texto-oscuro">
+                                        {{registro}}
+                                    </div>
+                                </ion-col>
+                                <ion-col size="4">
+                                    <div class="float-end">
+                                        <ion-badge color="primary">11
+                                            <ion-icon name="star"></ion-icon>
+                                        </ion-badge>
+                                    </div>
+                                </ion-col>
+                            </ion-row>
+                            <ion-row>
+                                <ion-col size="10">
+                                    <p>Descripcion de la entidad corta</p>
+                                </ion-col>
+                                <ion-col size="2" (click)="abrirPerfil()">
+                                    <ion-icon name="chevron-forward"></ion-icon>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                    </ion-col>
+                </ion-row>
+                <ion-row (click)="abierto = !abierto;">
+                    <ion-col size="8">
+                        {{g('generales.masInformacion')}}
+                    </ion-col>
+                    <ion-col size="4">
+                        <ion-icon class="float-end"
+                                  [name]="abierto ? 'chevron-up-circle' : 'chevron-down-circle'"></ion-icon>
+                    </ion-col>
+                </ion-row>
+                <ion-row *ngIf="abierto" class="animate__animated animate__backInDown">
+                    <ion-card>
+                        <ion-card-header>
+                            <ion-card-subtitle>Titulo</ion-card-subtitle>
+                            <ion-card-title>Subtitulo</ion-card-title>
+                        </ion-card-header>
 
-                    <ion-card-content>
-                        Un poco de contenido... después del contenido puede ir algo mas.
-                        <div class="separador"></div>
-                        <p><strong>Ejemplo:</strong> otro ejemplo.</p>
-                        <p><strong>Entre:</strong> entre nador .</p>
-                        <p><strong>Nador:</strong> otro pokemon.</p>
-                    </ion-card-content>
-                </ion-card>
-            </ion-row>
-        </ion-grid>
-    </ion-card>
+                        <ion-card-content>
+                            Un poco de contenido... después del contenido puede ir algo mas.
+                            <div class="separador"></div>
+                            <p><strong>Ejemplo:</strong> otro ejemplo.</p>
+                            <p><strong>Entre:</strong> entre nador .</p>
+                            <p><strong>Nador:</strong> otro pokemon.</p>
+                        </ion-card-content>
+                    </ion-card>
+                </ion-row>
+            </ion-grid>
+        </ion-card>
+    </ng-container>
 </ng-container>
-
