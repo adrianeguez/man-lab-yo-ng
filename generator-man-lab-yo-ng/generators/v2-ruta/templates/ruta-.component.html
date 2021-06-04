@@ -217,7 +217,7 @@
                   </div>
                 </div>
                 <div class="col-sm-2">
-                  <div class="float-end margen-boton-crear-tabla">
+                  <div class="float-end margen-boton-crear-tabla"  *ngIf="_seguridadService.encontrarPermisoPorNombre(nombreRuta + 'Crear')">
                     <button pButton
                             pRipple
                             label="Crear"
@@ -325,7 +325,7 @@
               <!--              </div>-->
 
               <div *ngIf="col.field === '<%= nombreHabilitado %>'">
-                <div class="text-center">
+                <div class="text-center"  *ngIf="_seguridadService.encontrarPermisoPorNombre(nombreRuta + 'EditarHabilitado')">
                   <br>
                   <p-inputSwitch [(ngModel)]="<%= nombreCamel %>.habilitado"
                                  (onChange)="_sRuta<%= nombreMayuscula %>Service
@@ -341,29 +341,32 @@
                 </div>
               </div>
               <div *ngIf="col.field === '<%= id %>'">
-                <!--                <div class="row">-->
-                <!--                  <div class="col-sm-6">-->
-                <!--                    <p-button-->
-                <!--                            [disabled]="!<%= nombreCamel %>.habilitado"-->
-                <!--                            icon="pi pi-image"-->
-                <!--                            styleClass="p-button-help boton-archivos"-->
-                <!--                            (click)="abrirFormularioCrearArchivo('IM', <%= nombreCamel %>)"-->
-                <!--                    ></p-button>-->
-                <!--                  </div>-->
-                <!--                  <div class="col-sm-6">-->
-                <!--                    <p-button-->
-                <!--                            [disabled]="!<%= nombreCamel %>.habilitado"-->
-                <!--                            icon="pi pi-file"-->
-                <!--                            styleClass="p-button-help boton-archivos"-->
-                <!--                            (click)="abrirFormularioCrearArchivo('AR', <%= nombreCamel %>)"-->
-                <!--                    ></p-button>-->
-                <!--                  </div>-->
-                <!--                </div>-->
+<!--                                <div class="row">-->
+<!--                                  <div class="col-sm-6">-->
+<!--                                    <p-button-->
+<!--                                            [disabled]="!<%= nombreCamel %>.habilitado"-->
+<!--                                            *ngIf="_seguridadService.encontrarPermisoPorNombre(nombreRuta + 'Editar')"-->
+<!--                                            icon="pi pi-image"-->
+<!--                                            styleClass="p-button-help boton-archivos"-->
+<!--                                            (click)="abrirFormularioCrearArchivo('IM', <%= nombreCamel %>)"-->
+<!--                                    ></p-button>-->
+<!--                                  </div>-->
+<!--                                  <div class="col-sm-6">-->
+<!--                                    <p-button-->
+<!--                                            [disabled]="!<%= nombreCamel %>.habilitado"-->
+<!--                                            *ngIf="_seguridadService.encontrarPermisoPorNombre(nombreRuta + 'Editar')"-->
+<!--                                            icon="pi pi-file"-->
+<!--                                            styleClass="p-button-help boton-archivos"-->
+<!--                                            (click)="abrirFormularioCrearArchivo('AR', <%= nombreCamel %>)"-->
+<!--                                    ></p-button>-->
+<!--                                  </div>-->
+<!--                                </div>-->
                 <div class="text-center">
                   <br>
                   <p-button
                           label="Editar"
                           [id]="'tr' + <%= nombreCamel %>.<%= id %> +'_editar'"
+                          *ngIf="_seguridadService.encontrarPermisoPorNombre(nombreRuta + 'Editar')"
                           [disabled]="!<%= nombreCamel %>.habilitado"
                           icon="pi pi-pencil"
                           styleClass="p-button-warning"
@@ -378,23 +381,30 @@
                   <!--                          aria-label="Example icon-button with a menu">-->
                   <!--                    <mat-icon>more_vert</mat-icon>-->
                   <!--                  </button>-->
-                  <!--                  <mat-menu #opcionesRuta="matMenu">-->
-                  <!--                    <button *ngFor="let opcion of opciones"-->
-                  <!--                            mat-menu-item-->
-                  <!--                            [disabled]="!entrenador.habilitado"-->
-                  <!--                            (click)="_sRutaEntrenadorService.navegar(-->
-                  <!--                                           _router,-->
-                  <!--                                           opcion.ruta(entrenador.id))"-->
-                  <!--                    >-->
 
-                  <!--                      <mat-icon>keyboard_arrow_right</mat-icon>-->
-                  <!--                      <img [src]="rutaImagenAssets + opcion.rutaImagen"-->
-                  <!--                           alt=""-->
-                  <!--                           class="icono-navegacion"-->
-                  <!--                      > {{opcion.nombre}}-->
-                  <!--                    </button>-->
-                  <!--                  </mat-menu>-->
-                </div>
+<!--                  <mat-menu #opcionesRuta="matMenu">-->
+<!--                  <div  *ngFor="let opcion of opciones">-->
+<!--                    <div *ngIf="opcion.permisoEditar ? _seguridadService.encontrarPermisoPorNombre(nombreRuta + 'Editar') : true">-->
+<!--                      <button *ngFor="let opcion of opciones"-->
+<!--                              mat-menu-item-->
+<!--                              [disabled]="!entrenador.habilitado"-->
+<!--                              (click)="_sRutaEntrenadorService.navegar(-->
+<!--                                                             _router,-->
+<!--                                                             opcion.ruta(entrenador.id))"-->
+<!--                      >-->
+
+<!--                        <mat-icon>keyboard_arrow_right</mat-icon>-->
+<!--                        <img [src]="rutaImagenAssets + opcion.rutaImagen"-->
+<!--                             alt=""-->
+<!--                             class="icono-navegacion"-->
+<!--                        > {{opcion.nombre}}-->
+<!--                      </button>-->
+<!--                    </div>-->
+
+<!--                  </div>-->
+
+<!--                  </mat-menu>-->
+<!--                </div>-->
 
                 <!--                <div>-->
                 <!--                  <br>-->
@@ -664,10 +674,11 @@
                     </div>
                   </div>
                   <div class="col-sm-2">
-                    <div class="float-end margen-boton-crear-tabla">
+                    <div class="float-end margen-boton-crear-tabla"  *ngIf="_seguridadService.encontrarPermisoPorNombre(nombreRuta + 'Crear')">
                       <button pButton
                               pRipple
                               [label]="'generales.botones.crear' | transloco"
+
                               id="crear-<%= nombreGuiones %>"
                               icon="pi pi-plus"
                               class="p-button-success p-mr-2"
@@ -771,7 +782,7 @@
                 <!--                </div>-->
 
                 <div *ngIf="col.field === '<%= nombreHabilitado %>'">
-                  <div class="text-center">
+                  <div class="text-center" *ngIf="_seguridadService.encontrarPermisoPorNombre(nombreRuta + 'EditarHabilitado')">
                     <br>
                     <p-inputSwitch [(ngModel)]="<%= nombreCamel %>.habilitado"
                                    (onChange)="_sRuta<%= nombreMayuscula %>Service
@@ -789,20 +800,22 @@
                 <div *ngIf="col.field === '<%= id %>'">
                   <!--                  <div class="row">-->
                   <!--                    <div class="col-sm-6">-->
-                  <!--                      <p-button-->
-                  <!--                              [disabled]="!<%= nombreCamel %>.habilitado"-->
-                  <!--                              icon="pi pi-image"-->
-                  <!--                              styleClass="p-button-help boton-archivos"-->
-                  <!--                              (click)="abrirFormularioCrearArchivo('IM', <%= nombreCamel %>)"-->
-                  <!--                      ></p-button>-->
-                  <!--                    </div>-->
-                  <!--                    <div class="col-sm-6">-->
-                  <!--                      <p-button-->
-                  <!--                              [disabled]="!<%= nombreCamel %>.habilitado"-->
-                  <!--                              icon="pi pi-file"-->
-                  <!--                              styleClass="p-button-help boton-archivos"-->
-                  <!--                              (click)="abrirFormularioCrearArchivo('AR', <%= nombreCamel %>)"-->
-                  <!--                      ></p-button>-->
+<!--                                        <p-button-->
+<!--                                                [disabled]="!<%= nombreCamel %>.habilitado"-->
+<!--                                                *ngIf="_seguridadService.encontrarPermisoPorNombre(nombreRuta + 'Editar')"-->
+<!--                                                icon="pi pi-image"-->
+<!--                                                styleClass="p-button-help boton-archivos"-->
+<!--                                                (click)="abrirFormularioCrearArchivo('IM', <%= nombreCamel %>)"-->
+<!--                                        ></p-button>-->
+<!--                                      </div>-->
+<!--                                      <div class="col-sm-6">-->
+<!--                                        <p-button-->
+<!--                                                [disabled]="!<%= nombreCamel %>.habilitado"-->
+<!--                                                *ngIf="_seguridadService.encontrarPermisoPorNombre(nombreRuta + 'Editar')"-->
+<!--                                                icon="pi pi-file"-->
+<!--                                                styleClass="p-button-help boton-archivos"-->
+<!--                                                (click)="abrirFormularioCrearArchivo('AR', <%= nombreCamel %>)"-->
+<!--                                        ></p-button>-->
                   <!--                    </div>-->
                   <!--                  </div>-->
 
@@ -810,6 +823,7 @@
                     <br>
                     <p-button
                             [label]="'generales.botones.editar' | transloco"
+                            *ngIf="_seguridadService.encontrarPermisoPorNombre(nombreRuta + 'Editar')"
                             [id]="'tr' + <%= nombreCamel %>.<%= id %> +'_editar'"
                             [disabled]="!<%= nombreCamel %>.habilitado"
                             icon="pi pi-pencil"
@@ -824,22 +838,28 @@
                     <!--                            aria-label="Example icon-button with a menu">-->
                     <!--                      <mat-icon>more_vert</mat-icon>-->
                     <!--                    </button>-->
-                    <!--                    <mat-menu #opcionesRuta="matMenu">-->
-                    <!--                      <button *ngFor="let opcion of opciones"-->
-                    <!--                              mat-menu-item-->
-                    <!--                              [disabled]="!entrenador.habilitado"-->
-                    <!--                              (click)="_sRutaEntrenadorService.navegar(-->
-                    <!--                                           _router,-->
-                    <!--                                           opcion.ruta(entrenador.id))"-->
-                    <!--                      >-->
+<!--                                        <mat-menu #opcionesRuta="matMenu">-->
+<!--                                          <div *ngFor="let opcion of opciones">-->
+<!--                                            <div *ngIf="opcion.permisoEditar ? _seguridadService.encontrarPermisoPorNombre(nombreRuta + 'Editar') : true">-->
 
-                    <!--                        <mat-icon>keyboard_arrow_right</mat-icon>-->
-                    <!--                        <img [src]="rutaImagenAssets + opcion.rutaImagen"-->
-                    <!--                             alt=""-->
-                    <!--                             class="icono-navegacion"-->
-                    <!--                        > {{l(opcion.nombre)}}-->
-                    <!--                      </button>-->
-                    <!--                    </mat-menu>-->
+<!--                                              <button-->
+<!--                                                      mat-menu-item-->
+<!--                                                      [disabled]="!entrenador.habilitado"-->
+<!--                                                      (click)="_sRutaEntrenadorService.navegar(-->
+<!--                                                               _router,-->
+<!--                                                               opcion.ruta(entrenador.id))"-->
+<!--                                              >-->
+
+<!--                                                <mat-icon>keyboard_arrow_right</mat-icon>-->
+<!--                                                <img [src]="rutaImagenAssets + opcion.rutaImagen"-->
+<!--                                                     alt=""-->
+<!--                                                     class="icono-navegacion"-->
+<!--                                                > {{l(opcion.nombre)}}-->
+<!--                                              </button>-->
+<!--                                              -->
+<!--                                            </div>-->
+<!--                                          </div>-->
+<!--                                        </mat-menu>-->
                   </div>
                   <!--                  <div>-->
                   <!--                    <br>-->

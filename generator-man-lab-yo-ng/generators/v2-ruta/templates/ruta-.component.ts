@@ -41,6 +41,7 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
     //   },
     //   nombre: 'opcionesIrRuta.gestionarArchivos',
     //   rutaImagen: '/../comun/archivo.svg'
+    //   permisoEditar: true,
     // },
     // {
     //   ruta: (id: string) => { // parametros de la ruta
@@ -56,6 +57,7 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
     //   },
     //   nombre: 'opcionesIrRuta.gestionarImagenes',
     //   rutaImagen: '/../comun/imagen.svg'
+    //   permisoEditar: true,
     // },
     <% } else{ %>
 
@@ -73,6 +75,7 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
     //   },
     //   nombre: 'opcionesIrRuta.gestionarArchivos',
     //   rutaImagen: '/../comun/archivo.svg'
+    //   permisoEditar: true,
     // },
     // {
     //   ruta: (id: string) => { // parametros de la ruta
@@ -88,6 +91,7 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
     //   },
     //   nombre: 'opcionesIrRuta.gestionarImagenes',
     //   rutaImagen: '/../comun/imagen.svg'
+    //   permisoEditar: true,
     // },
 
     <% } %>
@@ -103,6 +107,7 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
     //   },
     //   nombre: 'Otra acción de ...',
     //   rutaImagen: '/<%= nombreGuiones %>/imagen-principal.svg'
+  //   permisoEditar: true,
     // }
   ];
 
@@ -154,11 +159,12 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
 
   <% } %>
 
-
+  nombreRuta = '<%= nombreGuiones %>';
   constructor(
     public readonly _sRuta<%= nombreMayuscula %>Service: SRuta<%= nombreMayuscula %>Service,
     private readonly _activatedRoute: ActivatedRoute,
     public readonly _router: Router,
+    public readonly _seguridadService: SeguridadService,
   <% if(internacionalizar) { %>
     public readonly translocoService: TranslocoService,
   <% } else{ %>
