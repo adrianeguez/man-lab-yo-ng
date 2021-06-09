@@ -5,7 +5,8 @@ export const NOMBRE_SCOPE_<%= nombreSoloMayusculas %> = NOMBRE_MODULO + '<%= nom
 
 export const SCOPE_<%= nombreSoloMayusculas %> = (http: HttpClient) => {
   const loader<%= nombreMayuscula %> = ['es', 'en'].reduce((acc: any, lang) => {
-    acc[lang] = () => http.get(`/assets/i18n/LLENAR_NOMBRE_MODULO/<%= nombreGuiones %>/${lang}.json`).toPromise();
+    const nombreModulo = LLENAR_NOMBRE_MODULO;
+    acc[lang] = () => http.get(`/assets/i18n/${nombreModulo}/<%= nombreGuiones %>/${lang}.json`).toPromise();
     return acc;
   }, {});
 

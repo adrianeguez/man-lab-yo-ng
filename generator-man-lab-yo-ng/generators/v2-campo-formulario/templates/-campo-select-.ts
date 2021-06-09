@@ -178,7 +178,14 @@ export const <%= nombreSoloMayusculas %><%= esFormulario ? '' : '_BUSQUEDA' %>_C
       fnMostrarEnSelect: (campo: { <%= nombrePrefijo ? nombrePrefijo + nombreCampoMayuscula : nombreCampoCamel %>: any <%= undefinedValor ? '| undefined' : '' %> }) => {
         <% if(undefinedValor) {%>
           if (campo.<%= nombrePrefijo ? nombrePrefijo + nombreCampoMayuscula : nombreCampoCamel %> === undefined) {
-            return '<%= undefinedValor %>';
+
+              <% if(internacionalizar) { %>
+
+                  return 'formularios.<%= esFormulario ? "crearEditar" : "busqueda" %>.campo<%= nombreCampoMayuscula %>.opcion<%= undefinedValor  %>';
+                  <% } else{ %>
+
+                  return '<%= undefinedValor %>';
+                  <% } %>
           }
         <% } %>
        <% for (let campo of arregloOpciones) {%>
@@ -186,7 +193,7 @@ export const <%= nombreSoloMayusculas %><%= esFormulario ? '' : '_BUSQUEDA' %>_C
 
             <% if(internacionalizar) { %>
 
-                return 'formularios.<%= esFormulario ? "crearEditar" : "busqueda" %>.campo<%= nombreMayuscula %>.opcion<%= campo.nombre.charAt(0).toUpperCase() + campo.nombre.slice(1)  %>';
+                return 'formularios.<%= esFormulario ? "crearEditar" : "busqueda" %>.campo<%= nombreCampoMayuscula %>.opcion<%= campo.nombre.charAt(0).toUpperCase() + campo.nombre.slice(1)  %>';
                 <% } else{ %>
 
                 return '<%= campo.nombre %>';

@@ -3,7 +3,7 @@ import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Route
 
 @Injectable()
 export class <%= nombreMayuscula %>Guard implements CanActivate {
-    nombrePermiso = '/<%= nombreGuiones %>';
+    nombrePermiso = '/<%= nombreGuiones %>Buscar';
 
     constructor(
         private readonly _seguridadService: SeguridadService,
