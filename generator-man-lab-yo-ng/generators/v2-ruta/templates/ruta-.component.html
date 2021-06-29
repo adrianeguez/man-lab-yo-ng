@@ -33,7 +33,7 @@
                                            [objetoInternacionalizacion]="objetoInternacionalizacion"
                                            [camposFormularioFuncion]="camposFormularioBusqueda"
                                            [selectedStepperIndex]="stepperActualBusqueda"
-                                           [gruposFormularioFuncion]="_sRutaEntrenadorService.gruposFormularioBusqueda"
+                                           [gruposFormularioFuncion]="_sRuta<%= nombreMayuscula %>Service.gruposFormularioBusqueda"
                                            [componente]="this"
       ></app-ml-contenedor-campos-formulario>
     </div>
@@ -50,21 +50,21 @@
           {{g('generales.botones.buscar')}}
         </ion-button>
       </ion-item>
-      <ion-item *ngFor="let entrenador of _sRutaEntrenadorService.arregloDatosFiltrado">
-        <app-mostrar-entrenador-lista class="w-100" [registro]="entrenador" [componente]="this">
+      <ion-item *ngFor="let <%= nombreCamel %> of _sRuta<%= nombreMayuscula %>Service.arregloDatosFiltrado">
+        <app-mostrar-<%= nombreGuiones %>-lista class="w-100" [registro]="<%= nombreCamel %>" [componente]="this">
 
-        </app-mostrar-entrenador-lista>
+        </app-mostrar-<%= nombreGuiones %>-lista>
       </ion-item>
     </ion-list>
     <div class="text-center">
       <br>
-      <ion-button size="small" *ngIf="!_sRutaEntrenadorService.yaNoHayMasRegistros"
+      <ion-button size="small" *ngIf="!_sRuta<%= nombreMayuscula %>Service.yaNoHayMasRegistros"
                   (click)="paginaActual.vecesPeticion = paginaActual.vecesPeticion + 1;"
-                  (click)="paginaActual.first = _sRutaEntrenadorService.arregloDatosFiltrado.length * paginaActual.vecesPeticion;"
-                  (click)="_sRutaEntrenadorService.cargarMasDatos(paginaActual, this, true)"
+                  (click)="paginaActual.first = _sRuta<%= nombreMayuscula %>Service.arregloDatosFiltrado.length * paginaActual.vecesPeticion;"
+                  (click)="_sRuta<%= nombreMayuscula %>Service.cargarMasDatos(paginaActual, this, true)"
       > {{g('generales.cargarMas')}}</ion-button>
     </div>
-    <h1 *ngIf="_sRutaEntrenadorService.yaNoHayMasRegistros"
+    <h1 *ngIf="_sRuta<%= nombreMayuscula %>Service.yaNoHayMasRegistros"
         class="text-center"
     >
       {{g('generales.noHayMasRegistros')}} <ion-icon name="sad"></ion-icon>

@@ -160,6 +160,21 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
   <% } %>
 
   nombreRuta = '<%= nombreGuiones %>';
+
+  <% if(ionic){ %>
+    registroActual: any = {};
+    mostrarFiltros = false;
+    paginaActual = {
+          first: 0,
+          rows: 1,
+          vecesPeticion: 0
+    };
+    paginaActual = {
+          first: 0,
+          rows: 1,
+          vecesPeticion: 0
+    };
+  <% } %>
   constructor(
     public readonly _sRuta<%= nombreMayuscula %>Service: SRuta<%= nombreMayuscula %>Service,
     private readonly _activatedRoute: ActivatedRoute,
@@ -272,8 +287,19 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
       );
   }
 
-  buscarConFiltros(): void {
+  buscarConFiltros(recargar?: any): void {
     <% if(!esFirebase){ %>
+
+    <% if(ionic){ %>
+    this.paginaActual = {
+      first: 0,
+      rows: 1,
+      vecesPeticion: 0
+    };
+      this._sRuta<%= nombreMayuscula %>Service.arregloDatos = [];
+      this._sRuta<%= nombreMayuscula %>Service.arregloDatosFiltrado = [];
+      this._sRuta<%= nombreMayuscula %>Service.yaNoHayMasRegistros = false;
+    <% } %>
     if (this._sRuta<%= nombreMayuscula %>Service.busquedaDto) {
       this._sRuta<%= nombreMayuscula %>Service.busquedaDto.skip = 0;
       this._sRuta<%= nombreMayuscula %>Service.first = 0;
@@ -311,17 +337,25 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
       ];
       this._sRuta<%= nombreMayuscula %>Service.establecerWhereFirestore(arregloFiltroBusquedaFirestore);
     }
-    this.buscarSuscrito();
+    this.buscarSuscrito(recargar);
     <% } %>
   }
 
-  buscarSuscrito(){
+  buscarSuscrito(recargar?: any){
     this._sRuta<%= nombreMayuscula %>Service._cargandoService.habilitarCargando();
     this._sRuta<%= nombreMayuscula %>Service
         .buscar()
         .subscribe(
             (data) => {
               this._sRuta<%= nombreMayuscula %>Service.registrosPagina = data[0].length;
+
+              <% if(ionic){ %>
+              this.paginaActual.first = this._sRuta<%= nombreMayuscula %>Service.registrosPagina;
+              if (recargar) {
+                recargar.target.complete();
+              }
+              <% } %>
+
               this._sRuta<%= nombreMayuscula %>Service._cargandoService.deshabilitarCargando();
             },
             (error) => {
@@ -389,6 +423,21 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
       ];
       this._sRuta<%= nombreMayuscula %>Service.transformarObjetosBusquedaABusquedaDto(
         arregloCamposBusquedaConObjeto
+      );
+      const arregloCamposBusquedaDate: ObjetoBusquedaADateDto[] = [
+        // {
+        //   nombreCampoEnBusqueda: 'fechaEmpiezaRango'
+        // },
+        // {
+        //   nombreCampoEnBusqueda: 'fechaFinRango'
+        // },
+        // {
+        //   nombreCampoEnBusqueda: 'campoDate',
+        // },
+      ];
+
+      this._sRuta<%= nombreMayuscula %>Service.transformarObjetosBusquedaDateAIsoStringBusquedaDto(
+          arregloCamposBusquedaDate
       );
     }
   }
@@ -540,7 +589,23 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
     // if(camposRequeridos.campoDependeDos){
     //   camposRequeridos.nombreCampoDependienteDos = true;
     // }
-    this._sRuta<%= nombreMayuscula %>Service.abrirModal(this, registro);
+    const respuesta: MatDialogRef<any> = this._sRuta<%= nombreMayuscula %>Service.abrirModal(this, registro);
+    console.info(respuesta);
+      <% if(ionic){ %>
+
+      if (respuesta) {
+        respuesta
+            .afterClosed()
+            .subscribe(
+                (data) => {
+                  // this.crearEditar(registro);
+                  this.registroActual = data;
+
+                }
+            )
+      }
+      <% } %>
+
 
     // En el caso de cammpos AUTOGERENADOS se habilita esta parte del codigo
 
@@ -950,7 +1015,7 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
   //     tituloCrear: this.translocoService.translate('generales.mapa.tituloSeleccionar'),
   //     descripcionCrear: this.translocoService.translate('generales.mapa.descripcionSeleccionar')
   //   }
-  //   const respuesta: MatDialogRef<any> = this._sRutaEntrenadorService.matDialog.open(
+  //   const respuesta: MatDialogRef<any> = this._sRuta<%= nombreMayuscula %>Service.matDialog.open(
   //       ModalSeleccionarGeolocalizacionComunComponent,
   //       {
   //         data: dataModal
