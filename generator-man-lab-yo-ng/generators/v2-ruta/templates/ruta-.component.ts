@@ -182,8 +182,10 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
     public readonly _seguridadService: SeguridadService,
   <% if(internacionalizar) { %>
     public readonly translocoService: TranslocoService,
-  <% } else{ %>
+  <% } %>
 
+  <% if(ionic){ %>
+    public modalController: ModalController,
   <% } %>
   ) {
   }
@@ -293,7 +295,7 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
     <% if(ionic){ %>
     this.paginaActual = {
       first: 0,
-      rows: 1,
+      rows: this._sRuta<%= nombreMayuscula %>Service.take,
       vecesPeticion: 0
     };
       this._sRuta<%= nombreMayuscula %>Service.arregloDatos = [];
@@ -798,6 +800,9 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
                 severidad: 'success'
               });
               this._sRuta<%= nombreMayuscula %>Service._cargandoService.deshabilitarCargando();
+              <% if(ionic){ %>
+                this.modalController.dismiss();
+              <% } %>
             },
             (error) => {
               console.error({
@@ -886,6 +891,9 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
                 severidad: 'success'
               });
               this._sRuta<%= nombreMayuscula %>Service._cargandoService.deshabilitarCargando();
+              <% if(ionic){ %>
+              this.modalController.dismiss();
+              <% } %>
             },
             (error) => {
               console.error({

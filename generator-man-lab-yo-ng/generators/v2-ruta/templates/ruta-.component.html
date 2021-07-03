@@ -7,6 +7,29 @@
     <ion-refresher slot="fixed" (ionRefresh)="buscarConFiltros($event)">
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+        </ion-col>
+        <ion-col></ion-col>
+        <ion-col>
+          <div class="text-center">
+
+          </div>
+          <ion-button size="small"
+                      color="success"
+                      expand="full"
+                      (click)="botonAceptarModalDisabled = true;"
+                      (click)="_sRuta<%= nombreMayuscula %>Service.formularioEnModalActual = undefined;"
+                      (click)="_sRuta<%= nombreMayuscula %>Service.camposSeleccionadosFormulario = {};"
+                      (click)="_sRuta<%= nombreMayuscula %>Service.setearCamposRequeridosAFalso(this);"
+                      (click)="abrirModal()"
+          >
+            {{g('generales.botones.crear')}}
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
     <ion-list>
       <ion-item>
         <ion-icon (click)="mostrarFiltros = !mostrarFiltros;" slot="end" [name]="mostrarFiltros ? 'filter-circle-outline': 'filter-outline'"></ion-icon>
@@ -24,7 +47,7 @@
                                            (cambioAutocomplete)="formularioBusquedacambioCampoAutocomplete($event)"
                                            [vertical]="false"
                                            class="campo-formulario"
-                                           id="filtro-entrenador"
+                                           id="filtro-<%= nombreGuiones %>"
                                            tituloFormulario="formularios.busqueda.formularioBusqueda.tituloFormulario"
                                            descripcionFormulario="formularios.busqueda.formularioBusqueda.descripcionFormulario"
                                            descripcionFormularioConGrupo="formularios.busqueda.formularioBusqueda.descripcionFormularioConGrupo"
@@ -60,7 +83,7 @@
       <br>
       <ion-button size="small" *ngIf="!_sRuta<%= nombreMayuscula %>Service.yaNoHayMasRegistros"
                   (click)="paginaActual.vecesPeticion = paginaActual.vecesPeticion + 1;"
-                  (click)="paginaActual.first = _sRuta<%= nombreMayuscula %>Service.arregloDatosFiltrado.length * paginaActual.vecesPeticion;"
+                  (click)="paginaActual.first = _sRuta<%= nombreMayuscula %>Service.arregloDatosFiltrado.length;"
                   (click)="_sRuta<%= nombreMayuscula %>Service.cargarMasDatos(paginaActual, this, true)"
       > {{g('generales.cargarMas')}}</ion-button>
     </div>
@@ -387,10 +410,10 @@
 <!--                    <div *ngIf="opcion.permisoEditar ? _seguridadService.encontrarPermisoPorNombre(nombreRuta + 'Editar') : true">-->
 <!--                      <button *ngFor="let opcion of opciones"-->
 <!--                              mat-menu-item-->
-<!--                              [disabled]="!entrenador.habilitado"-->
-<!--                              (click)="_sRutaEntrenadorService.navegar(-->
+<!--                              [disabled]="!<%= nombreCamel %>.habilitado"-->
+<!--                              (click)="_sRuta<%= nombreMayuscula %>Service.navegar(-->
 <!--                                                             _router,-->
-<!--                                                             opcion.ruta(entrenador.id))"-->
+<!--                                                             opcion.ruta(<%= nombreCamel %>.id))"-->
 <!--                      >-->
 
 <!--                        <mat-icon>keyboard_arrow_right</mat-icon>-->
@@ -844,10 +867,10 @@
 
 <!--                                              <button-->
 <!--                                                      mat-menu-item-->
-<!--                                                      [disabled]="!entrenador.habilitado"-->
-<!--                                                      (click)="_sRutaEntrenadorService.navegar(-->
+<!--                                                      [disabled]="!<%= nombreCamel %>.habilitado"-->
+<!--                                                      (click)="_sRuta<%= nombreMayuscula %>Service.navegar(-->
 <!--                                                               _router,-->
-<!--                                                               opcion.ruta(entrenador.id))"-->
+<!--                                                               opcion.ruta(<%= nombreCamel %>.id))"-->
 <!--                                              >-->
 
 <!--                                                <mat-icon>keyboard_arrow_right</mat-icon>-->
