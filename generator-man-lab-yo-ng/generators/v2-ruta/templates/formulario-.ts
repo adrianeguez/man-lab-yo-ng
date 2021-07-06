@@ -15,6 +15,14 @@ export const <%= nombreSoloMayusculas %>_FORMULARIO: (claseComponente: ModalComp
 // NombreRuta NombreCampo texto --esFormulario true --nombrePrefijo prefijo --esDependiente true
 // NombreRuta NombreCampo texto --esFormulario true --nombrePrefijo prefijo --esDependiente true --internacionalizar=true
 
+// Latitud Longitud:
+// NombreRuta NombreCampo latitudLongitud
+// NombreRuta NombreCampo latitudLongitud --esFormulario true
+// NombreRuta NombreCampo latitudLongitud --esFormulario true --nombrePrefijo prefijo
+// NombreRuta NombreCampo latitudLongitud --esFormulario true --nombrePrefijo prefijo --esDependiente true
+// NombreRuta NombreCampo latitudLongitud --esFormulario true --nombrePrefijo prefijo --esDependiente true --internacionalizar=true
+
+
 // Date:
 // NombreRuta NombreCampo date
 // NombreRuta NombreCampo date --esFormulario true

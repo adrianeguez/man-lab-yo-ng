@@ -40,7 +40,7 @@ const ARGUMENTOS = {
         configuracion: {
             type: String,
             required: true,
-            desc: 'Tipo de campo EJ: busqueda / autocomplete / inputMask / inputNumber / inputSwitch / password / select / texto / date / file'
+            desc: 'Tipo de campo EJ: busqueda / autocomplete / inputMask / inputNumber / inputSwitch / password / select / texto / date / file / latitudLongitud'
         }
     },
     ARREGLO_OPCIONES: {
@@ -122,6 +122,7 @@ const TEMPLATES = {
     CAMPO_TEXTO: '-campo-texto-.ts',
     CAMPO_DATE: '-campo-date-.ts',
     CAMPO_FILE: '-campo-file-.ts',
+    CAMPO_LATITUD_LONGITUD: '-campo-latitud-longitud-.ts',
 }
 
 const aCamel = (cadena) => {
@@ -402,8 +403,18 @@ module.exports = class extends Generator {
                     variables
                 );
                 break;
+                break;
+            case 'latitudLongitud':
+                const templateLLD = this.templatePath(TEMPLATES.CAMPO_LATITUD_LONGITUD);
+                const destinoLLD = this.destinationPath(`${nombreGuiones}${variables.esFormulario ? '' : '-busqueda'}-campo-latitud-longitud-${nombreCampoGuiones}.ts`);
+                this.fs.copyTpl(
+                    templateLLD,
+                    destinoLLD,
+                    variables
+                );
+                break;
             default:
-                throw new Error('Campo no implementado, solo puedes usar: busqueda / autocomplete / inputMask / inputNumber / inputSwitch / password / select / texto / date / file');
+                throw new Error('Campo no implementado, solo puedes usar: busqueda / autocomplete / inputMask / inputNumber / inputSwitch / password / select / texto / date / file / latitudLongitud');
 
         }
     }
