@@ -169,11 +169,6 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
           rows: 1,
           vecesPeticion: 0
     };
-    paginaActual = {
-          first: 0,
-          rows: 1,
-          vecesPeticion: 0
-    };
   <% } %>
   constructor(
     public readonly _sRuta<%= nombreMayuscula %>Service: SRuta<%= nombreMayuscula %>Service,
@@ -284,7 +279,7 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
                     <%= nombreSoloMayusculas%>_MIGAS_PAN,
                   ],
               );
-          this.buscarConFiltros();
+          this.buscarSuscrito();
         }
       );
   }
@@ -306,7 +301,13 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
       this._sRuta<%= nombreMayuscula %>Service.busquedaDto.skip = 0;
       this._sRuta<%= nombreMayuscula %>Service.first = 0;
     }
-    this.buscarSuscrito();
+
+      <% if(ionic){ %>
+      this.buscarSuscrito(recargar);
+      <% } else {%>
+      this.buscarSuscrito();
+      <% } %>
+
     <% } %>
     <% if(esFirebase){ %>
     if (this._sRuta<%= nombreMayuscula %>Service.busquedaDto) {
@@ -591,7 +592,7 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
     // if(camposRequeridos.campoDependeDos){
     //   camposRequeridos.nombreCampoDependienteDos = true;
     // }
-    const respuesta: MatDialogRef<any> = this._sRuta<%= nombreMayuscula %>Service.abrirModal(this, registro);
+    const respuesta: any = this._sRuta<%= nombreMayuscula %>Service.abrirModal(this, registro);
     console.info(respuesta);
       <% if(ionic){ %>
 
