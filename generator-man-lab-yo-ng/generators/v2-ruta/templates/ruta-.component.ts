@@ -120,12 +120,12 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
           this._sRuta<%= nombreMayuscula %>Service
               .construirMigasPan(
                   this,
-                  NombreOpcionesMenu.NombreContenedorObjetoMenu,
+                  NombreOpcionesMenu.Clase,
                   [
                     // ABASTECIMIENTO_2_MIGAS_PAN, // Migas de pan anteriores "padres"
                     <%= nombreSoloMayusculas %>_MIGAS_PAN,
                   ],
-                  PosicionesOpcionesMenu.PosicionContenedorObjetoMenu,
+                  PosicionesOpcionesMenu.Clase,
               );
           this.buscarConFiltros();
         }

@@ -158,7 +158,7 @@
 <!--          </td>-->
 <!--        </tr>-->
 
-          <tr class="p-selectable-row" [id]="'tr-' + clase.idClase">
+          <tr class="p-selectable-row" [id]="'tr-' + <%= nombreCamel %>.<%= id %>">
             <td *ngFor="let col of columns"  [ngClass]="{
            'valido-carta':<%= nombreCamel %>.habilitado,
            'invalido-carta':!<%= nombreCamel %>.habilitado }">
@@ -190,7 +190,7 @@
                   <br>
                   <p-button
                     label="Editar"
-                    [id]="'tr' + clase.idClase +'_editar'"
+                    [id]="'tr' + <%= nombreCamel %>.<%= id %> +'_editar'"
                     [disabled]="!<%= nombreCamel %>.habilitado"
                     icon="pi pi-pencil"
                     styleClass="p-button-warning"
