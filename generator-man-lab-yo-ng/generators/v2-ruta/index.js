@@ -114,7 +114,7 @@ const aTodoMayuscula = (cadena) => {
                         arreglo.push('_');
                         arreglo.push(letra.toUpperCase());
                     } else {
-                        arreglo.push(letra.toUpperCase());
+                        arreglo.push(lconst templateCrear = this.templatePath(TEMPLATES.CREAR);etra.toUpperCase());
                     }
                 } else {
                     arreglo.push(letra.toUpperCase());
@@ -192,6 +192,24 @@ module.exports = class extends Generator {
 
 
     writing() {
+
+        /**
+         * 
+         *
+         *  LibroAutor
+        const nombreMayuscula = this.options[ARGUMENTOS.NOMBRE.nombre];
+        // LibroAutor
+        const nombreCamel = aCamel(nombreMayuscula);
+        // libroAutor
+        const nombreGuiones = camelADash(nombreCamel);
+        // libro-autor
+        const nombreSoloMayusculas = aTodoMayuscula(nombreMayuscula);
+        // LIBRO_AUTOR
+        const nombreEspacioMayuscula = aNombreEspacioMayuscula(nombreMayuscula); 
+        // LIBRO AUTOR
+         * 
+         * 
+         */
 
         const nombreMayuscula = this.options[ARGUMENTOS.NOMBRE.nombre];
         const nombreCamel = aCamel(nombreMayuscula);
