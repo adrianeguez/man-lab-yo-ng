@@ -4,12 +4,16 @@ import {<%= nombreMayuscula %>PerfilComponent} from './<%= nombreGuiones %>-perf
 
 
 @NgModule({
-    declarations: [
-        <%= nombreMayuscula %>PerfilComponent
-    ],
-    imports: [
-        CommonModule
-    ]
+  declarations: [
+    <%= nombreMayuscula %>PerfilComponent
+  ],
+  exports: [
+    <%= nombreMayuscula %>PerfilComponent
+  ],
+  imports: [
+    CommonModule,
+    ListInfoModule
+  ]
 })
 export class <%= nombreMayuscula %>PerfilModule {
 }
