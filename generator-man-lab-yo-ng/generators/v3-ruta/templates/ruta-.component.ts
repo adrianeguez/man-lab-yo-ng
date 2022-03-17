@@ -5,7 +5,7 @@ import {Component} from '@angular/core';
   templateUrl: './ruta-<%= nombreGuiones %>.component.html',
   styleUrls: ['./ruta-<%= nombreGuiones %>.component.scss']
 })
-export class <%= nombreMayuscula %>Component {
+export class Ruta<%= nombreMayuscula %>Component {
 
   constructor() {
   }
