@@ -1,0 +1,96 @@
+package com.ec.<%= nombrePaquete %>.entidad;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
+
+import com.ec.<%= nombrePaquete %>.abstracts.AbstractEntities;
+import com.ec.<%= nombrePaquete %>.dao.ArchivoDao;
+
+@Entity
+@Table(name = "<%= nombreGuionesBajos %>")
+public class <%= nombreMayuscula %> extends AbstractEntities {
+	// Columnas de la entidad
+
+	/*
+	@Column(name = "nombres")
+	@NotNull
+	private String nombres;
+	*/
+
+	@Transient
+	private ArchivoDao sisArchivo;
+
+	@Transient
+	private ArchivoDao sisImagen;
+
+	// Relaciones de la entidad
+
+	/*
+	@OneToMany(mappedBy = "idNombreRelacionHijo")
+	private List<NombreRelacionHijo> nombreRelacionCollection;
+
+	@ManyToOne
+	@JoinColumn(name = "id_nombre_columna_fk", referencedColumnName = "id")
+	private NombreRelacionPapa idNombreRelacionPapa;
+	*/
+
+	public <%= nombreMayuscula %>() {
+	}
+
+	// Setters y Getters
+	/*
+	public String getNombres() {
+		return nombres;
+	}
+
+	public void setNombres(String nombres) {
+		this.nombres = nombres;
+	}
+	/*
+
+	public ArchivoDao getSisArchivo() {
+		return sisArchivo;
+	}
+
+	public void setSisArchivo(ArchivoDao sisArchivo) {
+		this.sisArchivo = sisArchivo;
+	}
+
+	public ArchivoDao getSisImagen() {
+		return sisImagen;
+	}
+
+	public void setSisImagen(ArchivoDao sisImagen) {
+		this.sisImagen = sisImagen;
+	}
+
+	public <%= nombreMayuscula %> setValoresDiferentes(<%= nombreMayuscula %> registroAntiguo, <%= nombreMayuscula %> registroActualizar) {
+		// Cambiar propiedad nueva a la antigua
+		/*
+		if (registroActualizar.getNombres() != null) {
+			registroAntiguo.setNombres(registroActualizar.getNombres());
+		}
+		*/
+		return registroAntiguo;
+	}
+
+	public void setDaoToEntity(<%= nombreMayuscula %>Dao dao) {
+		this.setId(dao.getId());
+		// Settear Dao
+		/*
+		this.setNombres(dao.getNombres());
+
+		// Para relaciones
+
+		NombreRelacionPapa nombreRelacionPapa = new NombreRelacionPapa();
+		nombreRelacionPapa.setId(dao.getIdNombreRelacionPapa());
+		this.setIdNombreRelacionPapa(nombreRelacionPapa);
+		*/
+	}
+
+}

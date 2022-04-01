@@ -1,0 +1,53 @@
+package com.ec.<%= nombrePaquete %>.repository.repositoryImpl;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import javax.persistence.Query;
+
+import com.ec.<%= nombrePaquete %>.abstracts.AbstractRepository;
+import com.ec.<%= nombrePaquete %>.dao.ArchivoDao;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+
+@Service
+public class <%= nombreMayuscula %>RepositoryImpl extends AbstractRepository<<%= nombreMayuscula %>, Integer> {
+
+    @Autowired
+    private ArchivoRepositoryImpl archivoRepository;
+
+    @Override
+    public List<Object> findBySearchAndFilter(Map<String, Object> params, Pageable pageable) {
+        // Ejemplo
+        // String dbQuery = "SELECT e FROM <%= nombreMayuscula %> e WHERE (e.nombre like :busqueda OR e.isbn like :busqueda ) ";
+        String dbQuery = "SELECT e FROM <%= nombreMayuscula %>";
+        // Anadir a esta lista todos los FILTROS
+        List<String> listFilters = new ArrayList<>();
+        listFilters.add("sisHabilitado");
+        //listFilters.add("otroCampoFiltro");
+        Query queryEM = this.CreateQueryWithFilters(listFilters, params, dbQuery) // esta funcion crea la consulta con filtros
+                // agregamos TODOS los parametros que no están listados en "listFilters" (lista de filtros)
+                // EJEMPLO:
+                //.setParameter("otroCampoBusqueda", "%" + params.get("otroCampoBusqueda") + "%");
+                .setParameter("busqueda", "%" + params.get("busqueda") + "%");
+        int countResults = queryEM.getResultList().size();
+        List<?> list<%= nombreMayuscula %> = queryEM.setFirstResult(pageable.getPageNumber())
+                .setMaxResults(pageable.getPageSize()).getResultList();
+
+        return this.getResponse(addFile(list<%= nombreMayuscula %>), countResults);
+    }
+
+    public List<<%= nombreMayuscula %>> addFile(List<?> list) {
+        List<<%= nombreMayuscula %>> newList = new ArrayList<>();
+        for (Object object : list) {
+            <%= nombreMayuscula %> <%= nombreCamel %> = (<%= nombreMayuscula %>) object;
+            ArchivoDao archivoDao = archivoRepository.getFilePrimary("<%= nombreGuionesBajos %>", <%= nombreCamel %>.getId());
+            <%= nombreCamel %>.setSisImagen(archivoDao);
+            newList.add(<%= nombreCamel %>);
+        }
+        return newList;
+    }
+}

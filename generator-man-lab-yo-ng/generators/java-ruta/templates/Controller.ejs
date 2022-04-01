@@ -1,0 +1,96 @@
+package com.ec.<%= nombrePaquete %>.controller;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
+
+import com.ec.<%= nombrePaquete %>.abstracts.AbstractController;
+import com.ec.<%= nombrePaquete %>.abstracts.GenericMethods;
+import com.ec.<%= nombrePaquete %>.dao.AutorLibroDao;
+import com.ec.<%= nombrePaquete %>.entidad.AutorLibro;
+import com.ec.<%= nombrePaquete %>.enums.EnumSisHabilitado;
+import com.ec.<%= nombrePaquete %>.exception.ExceptionResponse;
+import com.ec.<%= nombrePaquete %>.repository.repositoryImpl.AutorLibroRepositoryImpl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
+@RestController
+@RequestMapping("/api/<%= nombreGuiones %>")
+@CrossOrigin(origins = "*", methods = { RequestMethod.GET, RequestMethod.POST })
+@Api(tags = "Lista <%= nombreEspacioMayuscula %>", description = "Gestion de lista <%= nombreEspacioMayuscula %>")
+public class <%= nombreMayuscula %>Controller extends AbstractController<<%= nombreMayuscula %>, <%= nombreMayuscula %>Dao, Integer> {
+
+	public <%= nombreMayuscula %>Controller() {
+		super(new <%= nombreMayuscula %>());
+	}
+
+	private GenericMethods genericMethods = new GenericMethods();
+
+	@Autowired
+	private <%= nombreMayuscula %>RepositoryImpl <%= nombreCamel %>Repository;
+	@PersistenceContext
+	private EntityManager entityManager;
+
+	@Override
+	@Transactional
+	public <%= nombreMayuscula %> devolverRespuestaUpdate(<%= nombreMayuscula %> entity, Integer id) {
+		<%= nombreMayuscula %> antiguo = (<%= nombreMayuscula %>) genericMethods.findById("<%= nombreMayuscula %>", entityManager, id);
+		if (antiguo != null) {
+			antiguo = antiguo.setValoresDiferentes(antiguo, entity);
+		}
+		return antiguo;
+	}
+
+	@Override
+	public <%= nombreMayuscula %> setDaoToEntity(<%= nombreMayuscula %> entity, <%= nombreMayuscula %>Dao dao) {
+		entity.setDaoToEntity(dao);
+		return entity;
+	}
+
+	@RequestMapping(value = "", method = RequestMethod.GET)
+	@ApiOperation(tags = "<%= nombreEspacioMayuscula %>", value = "buscar por ... y filtrar por ...")
+	public ResponseEntity<?> findBySearchAndUpdate(String busqueda,
+			String generoLibro, EnumSisHabilitado sisHabilitado, Integer skip,
+			Integer take, String sortField, Boolean sortAscending) {
+		final HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+		try {
+			// Se debe de crear el HashMap de todos los parametros que se van a enviar a la busqueda
+			Map<String, Object> params = new HashMap<>();
+			params.put("busqueda", busqueda == null ? "" : busqueda);
+			params.put("sisHabilitado", sisHabilitado == null ? "" : sisHabilitado);
+			String sortFieldDefault = "id";
+			sortField = sortField == null ? sortFieldDefault : sortField;
+			sortAscending = sortAscending == null ? true : sortAscending;
+
+			List<Object> list = this.findWithSkipAndTake(
+					this.<%= nombreCamel %>Repository,
+					params,
+					skip,
+					take,
+					sortField,
+					sortAscending);
+
+			return new ResponseEntity<>(list, httpHeaders, HttpStatus.OK);
+		} catch (Exception e) {
+			httpHeaders.add("STATUS", "400");
+			return new ResponseEntity<ExceptionResponse>(new ExceptionResponse("400", e.getMessage()), httpHeaders,
+					HttpStatus.BAD_REQUEST);
+		}
+	}
+}
