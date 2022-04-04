@@ -1,0 +1,72 @@
+package com.ec.<%= nombrePaquete %>.mapper;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Function;
+
+import com.ec.<%= nombrePaquete %>.dao.<%= nombreMayuscula %>RequestDao;
+import com.ec.<%= nombrePaquete %>.dao.<%= nombreMayuscula %>ResponseDao;
+
+public class <%= nombreMayuscula %>Mapper {
+    public static Function<<%= nombreMayuscula %>RequestDao, <%= nombreMayuscula %>> setDaoRequestToEntity;
+    public static Function<<%= nombreMayuscula %>, <%= nombreMayuscula %>ResponseDao> setEntityToDaoResponse;
+    // Solamente cuando es un PAPA
+    // public static Function<<%= nombreMayuscula %>, <%= nombreMayuscula %>ResponseDao> setEntityToDaoReference;
+    public static Function<List<<%= nombreMayuscula %>>, List<<%= nombreMayuscula %>ResponseDao>> setEntityListToDaoResponseList;
+
+    static {
+        setDaoRequestToEntity = (daoRequest -> {
+            <%= nombreMayuscula %> entity = new <%= nombreMayuscula %>();
+            entity.setId(daoRequest.getId());
+            // otras propiedades
+            // entity.setNombres(daoRequest.getNombres());
+            entity.setSisHabilitado(daoRequest.getSisHabilitado());
+            // Relaciones hacia el padre
+            // RelacionPapa relacionPapa = new RelacionPapa();
+            // RelacionPapa.setId(daoRequest.getIdRelacionPapa());
+            // entity.setIdRelacionPapa(relacionPaparelacionPapa);
+            return entity;
+        });
+        setEntityToDaoResponse = (entity -> {
+            <%= nombreMayuscula %>ResponseDao dao = new <%= nombreMayuscula %>ResponseDao();
+            dao.setId(entity.getId());
+            // Otras propiedades
+            //dao.setNombres(entity.getNombres());
+            /* //Si hay colecciones, verificamos si es null y luego apply
+            if (entity.getRelacionHijosCollection() != null) {
+                dao.setRelacionHijosCollection(
+                    RelacionHijosMapper.setEntityListToDaoResponseList.apply(entity.getRelacionHijosCollection())
+                );
+            }
+            */
+            dao.setSisHabilitado(entity.getSisHabilitado());
+            dao.setSisActualizado(entity.getSisActualizado());
+            dao.setSisCreado(entity.getSisCreado());
+            dao.setSisArchivo(entity.getSisArchivo());
+            dao.setSisImagen(entity.getSisImagen());
+            return dao;
+        });
+        // Solo cuando es PAPA
+        /*
+        setEntityToDaoReference = (entity -> {
+            <%= nombreMayuscula %>ResponseDao dao = new <%= nombreMayuscula %>ResponseDao();
+            dao.setId(entity.getId());
+            // Otras propiedades
+            //dao.setNombres(entity.getNombres());
+            dao.setSisHabilitado(entity.getSisHabilitado());
+            dao.setSisActualizado(entity.getSisActualizado());
+            dao.setSisCreado(entity.getSisCreado());
+            dao.setSisArchivo(entity.getSisArchivo());
+            dao.setSisImagen(entity.getSisImagen());
+            // Para relaciones asi:
+            // dao.setIdRelacionPapa(RelacionPapaMapper.setEntityToDaoResponse.apply(entity.getIdRelacionPapa()));
+            return dao;
+        });
+        */
+
+        setEntityListToDaoResponseList = (entityList -> {
+            return (List<<%= nombreMayuscula %>ResponseDao>) StreamSupport.stream(entityList.spliterator(), true)
+                .map(<%= nombreMayuscula %>Mapper.setEntityToDaoResponse).collect(Collectors.toList());
+                });
+    }
+}

@@ -1,0 +1,50 @@
+package com.ec.<%= nombrePaquete %>.dao;
+
+import com.ec.<%= nombrePaquete %>.abstracts.AbstractResponseDao;
+
+public class <%= nombreMayuscula %>ResponseDao extends AbstractResponseDao {
+	// Ejemplo de alguna propiedad
+	// private String nombres;
+	// private Integer idNombreRelacion;
+	private ArchivoRequestDao sisArchivo;
+	private ArchivoRequestDao sisImagen;
+
+	public <%= nombreMayuscula %>ResponseDao() {
+	}
+
+	/* //Ejemplo setter getters propiedades
+	public String getNombres() {
+		return nombres;
+	}
+
+	public void setNombres(String nombres) {
+		this.nombres = nombres;
+	}
+	*/
+
+	/* //Ejemplo setter getters relacion
+	public Integer getIdNombreRelacion() {
+		return idNombreRelacion;
+	}
+
+	public void setIdNombreRelacion(Integer idNombreRelacion) {
+		this.idNombreRelacion = idNombreRelacion;
+	}
+	*/
+
+	public ArchivoRequestDao getSisArchivo() {
+		return sisArchivo;
+	}
+
+	public void setSisArchivo(ArchivoRequestDao sisArchivo) {
+		this.sisArchivo = sisArchivo;
+	}
+
+	public ImagenRequestDao getSisImagen() {
+		return sisImagen;
+	}
+
+	public void setSisImagen(ArchivoRequestDao sisImagen) {
+		this.sisImagen = sisImagen;
+	}
+}

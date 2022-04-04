@@ -17,9 +17,9 @@ public class <%= nombreMayuscula %> extends AbstractEntities {
 	// Columnas de la entidad
 
 	/*
-	@Column(name = "nombres")
+	@Column(name = "nombres_apellidos", nullable = false, length = 255)
 	@NotNull
-	private String nombres;
+	private String nombresApellidos;
 	*/
 
 	@Transient
@@ -44,12 +44,12 @@ public class <%= nombreMayuscula %> extends AbstractEntities {
 
 	// Setters y Getters
 	/*
-	public String getNombres() {
-		return nombres;
+	public String getNombresApellidos() {
+		return nombresApellidos;
 	}
 
-	public void setNombres(String nombres) {
-		this.nombres = nombres;
+	public void setNombresApellidos(String nombresApellidos) {
+		this.nombresApellidos = nombresApellidos;
 	}
 	/*
 

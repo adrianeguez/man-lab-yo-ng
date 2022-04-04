@@ -27,7 +27,9 @@ const ARGUMENTOS = {
 }
 const TEMPLATES = {
     CONTROLLER: 'Controller.ejs',
-    DAO: 'Dao.ejs',
+    REQUEST_DAO: 'RequestDao.ejs',
+    RESPONSE_DAO: 'ResponseDao.ejs',
+    MAPPER: 'Mapper.ejs',
     ENTIDAD: 'Entidad.ejs',
     IMPL: 'RepositoryImpl.ejs',
 }
@@ -206,14 +208,34 @@ module.exports = class extends Generator {
             destinoController,
             variables
         );
-        const templateDao = this.templatePath(TEMPLATES.DAO);
-        const destinoDao = this.destinationPath(`./dao/${nombreMayuscula}Dao.java`);
+        const templateRequestDao = this.templatePath(TEMPLATES.REQUEST_DAO);
+        const destinoRequestDao = this.destinationPath(`./dao/${nombreMayuscula}RequestDao.java`);
 
         this.fs.copyTpl(
-            templateDao,
-            destinoDao,
+            templateRequestDao,
+            destinoRequestDao,
             variables
         );
+
+        const templateResponseDao = this.templatePath(TEMPLATES.RESPONSE_DAO);
+        const destinoResponseDao = this.destinationPath(`./dao/${nombreMayuscula}ResponseDao.java`);
+
+        this.fs.copyTpl(
+            templateResponseDao,
+            destinoResponseDao,
+            variables
+        );
+
+
+        const templateMapper = this.templatePath(TEMPLATES.MAPPER);
+        const destinoMapper = this.destinationPath(`./dao/${nombreMayuscula}Mapper.java`);
+
+        this.fs.copyTpl(
+            templateMapper,
+            destinoMapper,
+            variables
+        );
+
         const templateEntidad = this.templatePath(TEMPLATES.ENTIDAD);
         const destinoEntidad = this.destinationPath(`./entidad/${nombreMayuscula}.java`);
 

@@ -10,11 +10,12 @@ import javax.transaction.Transactional;
 
 import com.ec.<%= nombrePaquete %>.abstracts.AbstractController;
 import com.ec.<%= nombrePaquete %>.abstracts.GenericMethods;
-import com.ec.<%= nombrePaquete %>.dao.AutorLibroDao;
-import com.ec.<%= nombrePaquete %>.entidad.AutorLibro;
+import com.ec.<%= nombrePaquete %>.dao.<%= nombreMayuscula %>RequestDao;
+import com.ec.<%= nombrePaquete %>.dao.<%= nombreMayuscula %>ResponseDao;
 import com.ec.<%= nombrePaquete %>.enums.EnumSisHabilitado;
 import com.ec.<%= nombrePaquete %>.exception.ExceptionResponse;
-import com.ec.<%= nombrePaquete %>.repository.repositoryImpl.AutorLibroRepositoryImpl;
+import com.ec.<%= nombrePaquete %>.mapper.<%= nombreMayuscula %>Mapper;
+import com.ec.<%= nombrePaquete %>.repository.repositoryImpl.<%= nombreMayuscula %>RepositoryImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -33,11 +34,8 @@ import io.swagger.annotations.ApiOperation;
 @RequestMapping("/api/<%= nombreGuiones %>")
 @CrossOrigin(origins = "*", methods = { RequestMethod.GET, RequestMethod.POST })
 @Api(tags = "Lista <%= nombreEspacioMayuscula %>", description = "Gestion de lista <%= nombreEspacioMayuscula %>")
-public class <%= nombreMayuscula %>Controller extends AbstractController<<%= nombreMayuscula %>, <%= nombreMayuscula %>Dao, Integer> {
-
-	public <%= nombreMayuscula %>Controller() {
-		super(new <%= nombreMayuscula %>());
-	}
+public class <%= nombreMayuscula %>Controller extends AbstractController<<%= nombreMayuscula %>,
+								<%= nombreMayuscula %>RequestDao, <%= nombreMayuscula %>ResponseDao, Integer> {
 
 	private GenericMethods genericMethods = new GenericMethods();
 
@@ -45,6 +43,11 @@ public class <%= nombreMayuscula %>Controller extends AbstractController<<%= nom
 	private <%= nombreMayuscula %>RepositoryImpl <%= nombreCamel %>Repository;
 	@PersistenceContext
 	private EntityManager entityManager;
+
+	@Override
+	public <%= nombreMayuscula %>ResponseDao devolverRespuestaDao(<%= nombreMayuscula %> entity) {
+	return <%= nombreMayuscula %>Mapper.setEntityToDaoResponse.apply(entity);
+	}
 
 	@Override
 	@Transactional
@@ -57,16 +60,20 @@ public class <%= nombreMayuscula %>Controller extends AbstractController<<%= nom
 	}
 
 	@Override
-	public <%= nombreMayuscula %> setDaoToEntity(<%= nombreMayuscula %> entity, <%= nombreMayuscula %>Dao dao) {
-		entity.setDaoToEntity(dao);
-		return entity;
+	public <%= nombreMayuscula %> setDaoRequestToEntity(<%= nombreMayuscula %> entity, <%= nombreMayuscula %>Dao dao) {
+		return <%= nombreMayuscula %>Mapper.setDaoRequestToEntity.apply(dao);
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	@ApiOperation(tags = "<%= nombreEspacioMayuscula %>", value = "buscar por ... y filtrar por ...")
 	public ResponseEntity<?> findBySearchAndUpdate(String busqueda,
-			String generoLibro, EnumSisHabilitado sisHabilitado, Integer skip,
-			Integer take, String sortField, Boolean sortAscending) {
+			// Agregar los otros parametros de busqueda (queryParams)
+			// EJ: String tipo,
+			EnumSisHabilitado sisHabilitado,
+			Integer skip,
+			Integer take,
+			String sortField,
+			Boolean sortAscending) {
 		final HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setContentType(MediaType.APPLICATION_JSON);
 		try {

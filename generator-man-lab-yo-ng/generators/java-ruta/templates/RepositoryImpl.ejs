@@ -32,22 +32,38 @@ public class <%= nombreMayuscula %>RepositoryImpl extends AbstractRepository<<%=
                 // agregamos TODOS los parametros que no están listados en "listFilters" (lista de filtros)
                 // EJEMPLO:
                 //.setParameter("otroCampoBusqueda", "%" + params.get("otroCampoBusqueda") + "%");
-                .setParameter("busqueda", "%" + params.get("busqueda") + "%");
+                //
+        .setParameter("busqueda", "%" + params.get("busqueda") + "%");
         int countResults = queryEM.getResultList().size();
         List<?> list<%= nombreMayuscula %> = queryEM.setFirstResult(pageable.getPageNumber())
                 .setMaxResults(pageable.getPageSize()).getResultList();
+        List<<%= nombreMayuscula %>ResponseDao> listResponseDao = <%= nombreMayuscula %>Mapper.setEntityListToDaoResponseList
+            .apply((List<<%= nombreMayuscula %>>) listResponse);
 
-        return this.getResponse(addFile(list<%= nombreMayuscula %>), countResults);
+        return this.getResponse(addFile(listResponseDao), countResults);
     }
 
-    public List<<%= nombreMayuscula %>> addFile(List<?> list) {
-        List<<%= nombreMayuscula %>> newList = new ArrayList<>();
-        for (Object object : list) {
-            <%= nombreMayuscula %> <%= nombreCamel %> = (<%= nombreMayuscula %>) object;
-            ArchivoDao archivoDao = archivoRepository.getFilePrimary("<%= nombreGuionesBajos %>", <%= nombreCamel %>.getId());
-            <%= nombreCamel %>.setSisImagen(archivoDao);
+    public List<<%= nombreMayuscula %>ResponseDao> addFileArchivo(List<<%= nombreMayuscula %>ResponseDao> list) {
+        List<<%= nombreMayuscula %>ResponseDao> newList = new ArrayList<>();
+        for (<%= nombreMayuscula %>ResponseDao object : list) {
+            <%= nombreMayuscula %>ResponseDao <%= nombreCamel %> = object;
+            ArchivoRequestDao archivoDao = archivoRepository.getFilePrimary("<%= nombreGuionesBajos %>",
+            <%= nombreCamel %>.getId());
+            <%= nombreCamel %>.setSisArchivo(archivoDao);
             newList.add(<%= nombreCamel %>);
         }
         return newList;
     }
+
+                public List<<%= nombreMayuscula %>ResponseDao> addFileImagen(List<<%= nombreMayuscula %>ResponseDao> list) {
+                        List<<%= nombreMayuscula %>ResponseDao> newList = new ArrayList<>();
+                            for (<%= nombreMayuscula %>ResponseDao object : list) {
+                            <%= nombreMayuscula %>ResponseDao <%= nombreCamel %> = object;
+                            ArchivoRequestDao archivoDao = archivoRepository.getFilePrimary("<%= nombreGuionesBajos %>",
+                            <%= nombreCamel %>.getId());
+                            <%= nombreCamel %>.setSisImagen(archivoDao);
+                            newList.add(<%= nombreCamel %>);
+                            }
+                            return newList;
+                            }
 }
