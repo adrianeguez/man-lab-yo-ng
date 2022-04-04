@@ -31,6 +31,7 @@ public class <%= nombreMayuscula %> extends AbstractEntities {
 	// Relaciones de la entidad
 
 	// Papa a hijo
+	// @JsonIgnore
 	// @OneToMany(mappedBy = "idNombreRelacionHijo")
 	// private List<NombreRelacionHijo> nombreRelacionCollection;
 
@@ -39,10 +40,6 @@ public class <%= nombreMayuscula %> extends AbstractEntities {
 	// @ManyToOne
 	// @JoinColumn(name = "id_nombre_columna_fk", referencedColumnName = "id")
 	// private NombreRelacionPapa idNombreRelacionPapa;
-
-
-	public <%= nombreMayuscula %>() {
-	}
 
 	// Setters y Getters
 	/*
