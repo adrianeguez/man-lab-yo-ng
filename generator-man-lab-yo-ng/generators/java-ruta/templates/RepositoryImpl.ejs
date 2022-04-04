@@ -22,7 +22,7 @@ public class <%= nombreMayuscula %>RepositoryImpl extends AbstractRepository<<%=
     @Override
     public List<Object> findBySearchAndFilter(Map<String, Object> params, Pageable pageable) {
         // Ejemplo
-        // String dbQuery = "SELECT e FROM <%= nombreMayuscula %> e WHERE (e.nombre like :busqueda OR e.isbn like :busqueda ) ";
+        // String dbQuery = "SELECT e FROM <%= nombreMayuscula %> e WHERE (e.nombre like :busqueda OR e.otroCampo like :busqueda ) ";
         String dbQuery = "SELECT e FROM <%= nombreMayuscula %>";
         // Anadir a esta lista todos los FILTROS
         List<String> listFilters = new ArrayList<>();
@@ -32,15 +32,26 @@ public class <%= nombreMayuscula %>RepositoryImpl extends AbstractRepository<<%=
                 // agregamos TODOS los parametros que no están listados en "listFilters" (lista de filtros)
                 // EJEMPLO:
                 //.setParameter("otroCampoBusqueda", "%" + params.get("otroCampoBusqueda") + "%");
-                //
-        .setParameter("busqueda", "%" + params.get("busqueda") + "%");
+                // SI HAY BUSQUEDA descomentar esta linea
+                //.setParameter("busqueda", "%" + params.get("busqueda") + "%");
         int countResults = queryEM.getResultList().size();
-        List<?> list<%= nombreMayuscula %> = queryEM.setFirstResult(pageable.getPageNumber())
+        List<?> listResponse = queryEM.setFirstResult(pageable.getPageNumber())
                 .setMaxResults(pageable.getPageSize()).getResultList();
         List<<%= nombreMayuscula %>ResponseDao> listResponseDao = <%= nombreMayuscula %>Mapper.setEntityListToDaoResponseList
             .apply((List<<%= nombreMayuscula %>>) listResponse);
 
-        return this.getResponse(addFile(listResponseDao), countResults);
+        return this.getResponse(
+            // Cuando NO SE USA ARCHIVOS descomentar esta linea:
+            // listResponseDao, countResults
+            // Cuando SE USA ARCHIVOS
+            // IMAGEN
+            // addFileImagen(listResponseDao), countResults
+            // ARCHIVO
+            // addFileArchivo(listResponseDao), countResults
+            // ARCHIVO e IMAGEN
+            // addFileArchivo(listResponseDao), countResults
+            // addFileArchivoAndImagen(listResponseDao), countResults
+            );
     }
 
     public List<<%= nombreMayuscula %>ResponseDao> addFileArchivo(List<<%= nombreMayuscula %>ResponseDao> list) {
@@ -55,15 +66,21 @@ public class <%= nombreMayuscula %>RepositoryImpl extends AbstractRepository<<%=
         return newList;
     }
 
-                public List<<%= nombreMayuscula %>ResponseDao> addFileImagen(List<<%= nombreMayuscula %>ResponseDao> list) {
-                        List<<%= nombreMayuscula %>ResponseDao> newList = new ArrayList<>();
-                            for (<%= nombreMayuscula %>ResponseDao object : list) {
-                            <%= nombreMayuscula %>ResponseDao <%= nombreCamel %> = object;
-                            ArchivoRequestDao archivoDao = archivoRepository.getFilePrimary("<%= nombreGuionesBajos %>",
-                            <%= nombreCamel %>.getId());
-                            <%= nombreCamel %>.setSisImagen(archivoDao);
-                            newList.add(<%= nombreCamel %>);
-                            }
-                            return newList;
-                            }
+    public List<<%= nombreMayuscula %>ResponseDao> addFileImagen(List<<%= nombreMayuscula %>ResponseDao> list) {
+        List<<%= nombreMayuscula %>ResponseDao> newList = new ArrayList<>();
+        for (<%= nombreMayuscula %>ResponseDao object : list) {
+            <%= nombreMayuscula %>ResponseDao <%= nombreCamel %> = object;
+            ArchivoRequestDao archivoDao = archivoRepository.getFilePrimary("<%= nombreGuionesBajos %>",
+            <%= nombreCamel %>.getId());
+            <%= nombreCamel %>.setSisImagen(archivoDao);
+            newList.add(<%= nombreCamel %>);
+        }
+        return newList;
+    }
+    public List<<%= nombreMayuscula %>ResponseDao> addFileArchivoAndImagen(List<<%= nombreMayuscula %>ResponseDao> list) {
+            List<<%= nombreMayuscula %>ResponseDao> newList = new ArrayList<>();
+                newList = addFileArchivo(list);
+                newList = addFileImagen(newList);
+                return newList;
+    }
 }

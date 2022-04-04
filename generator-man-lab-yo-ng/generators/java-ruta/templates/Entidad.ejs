@@ -6,38 +6,40 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-import javax.validation.constraints.NotNull;
+
+import com.ec.prontiauto.dao.ArchivoRequestDao;
 
 import com.ec.<%= nombrePaquete %>.abstracts.AbstractEntities;
-import com.ec.<%= nombrePaquete %>.dao.ArchivoDao;
 
 @Entity
 @Table(name = "<%= nombreGuionesBajos %>")
 public class <%= nombreMayuscula %> extends AbstractEntities {
 	// Columnas de la entidad
 
-	/*
-	@Column(name = "nombres_apellidos", nullable = false, length = 255)
-	@NotNull
-	private String nombresApellidos;
-	*/
+
+	// @Column(name = "nombres_apellidos", nullable = false, length = 255)
+	// private String nombresApellidos;
 
 	@Transient
-	private ArchivoDao sisArchivo;
-
+	private ArchivoRequestDao sisArchivo;
 	@Transient
-	private ArchivoDao sisImagen;
+	private ArchivoRequestDao sisImagen;
+
+	public <%= nombreMayuscula %>{
+	}
 
 	// Relaciones de la entidad
 
-	/*
-	@OneToMany(mappedBy = "idNombreRelacionHijo")
-	private List<NombreRelacionHijo> nombreRelacionCollection;
+	// Papa a hijo
+	// @OneToMany(mappedBy = "idNombreRelacionHijo")
+	// private List<NombreRelacionHijo> nombreRelacionCollection;
 
-	@ManyToOne
-	@JoinColumn(name = "id_nombre_columna_fk", referencedColumnName = "id")
-	private NombreRelacionPapa idNombreRelacionPapa;
-	*/
+
+	// Hijo a papa
+	// @ManyToOne
+	// @JoinColumn(name = "id_nombre_columna_fk", referencedColumnName = "id")
+	// private NombreRelacionPapa idNombreRelacionPapa;
+
 
 	public <%= nombreMayuscula %>() {
 	}
@@ -51,46 +53,33 @@ public class <%= nombreMayuscula %> extends AbstractEntities {
 	public void setNombresApellidos(String nombresApellidos) {
 		this.nombresApellidos = nombresApellidos;
 	}
-	/*
+	*/
 
-	public ArchivoDao getSisArchivo() {
-		return sisArchivo;
+	public ArchivoRequestDao getSisArchivo() {
+	return sisArchivo;
 	}
 
-	public void setSisArchivo(ArchivoDao sisArchivo) {
-		this.sisArchivo = sisArchivo;
+	public void setSisArchivo(ArchivoRequestDao sisArchivo) {
+	this.sisArchivo = sisArchivo;
 	}
 
-	public ArchivoDao getSisImagen() {
-		return sisImagen;
+	public ArchivoRequestDao getSisImagen() {
+	return sisImagen;
 	}
 
-	public void setSisImagen(ArchivoDao sisImagen) {
-		this.sisImagen = sisImagen;
+	public void setSisImagen(ArchivoRequestDao sisImagen) {
+	this.sisImagen = sisImagen;
 	}
 
 	public <%= nombreMayuscula %> setValoresDiferentes(<%= nombreMayuscula %> registroAntiguo, <%= nombreMayuscula %> registroActualizar) {
 		// Cambiar propiedad nueva a la antigua
-		/*
-		if (registroActualizar.getNombres() != null) {
-			registroAntiguo.setNombres(registroActualizar.getNombres());
+		// if (registroActualizar.getNombres() != null) {
+		// 	registroAntiguo.setNombres(registroActualizar.getNombres());
+		// }
+		if (registroActualizar.getSisHabilitado() != null) {
+			registroAntiguo.setSisHabilitado(registroActualizar.getSisHabilitado());
 		}
-		*/
 		return registroAntiguo;
-	}
-
-	public void setDaoToEntity(<%= nombreMayuscula %>Dao dao) {
-		this.setId(dao.getId());
-		// Settear Dao
-		/*
-		this.setNombres(dao.getNombres());
-
-		// Para relaciones
-
-		NombreRelacionPapa nombreRelacionPapa = new NombreRelacionPapa();
-		nombreRelacionPapa.setId(dao.getIdNombreRelacionPapa());
-		this.setIdNombreRelacionPapa(nombreRelacionPapa);
-		*/
 	}
 
 }

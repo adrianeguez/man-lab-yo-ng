@@ -12,6 +12,7 @@ import com.ec.<%= nombrePaquete %>.abstracts.AbstractController;
 import com.ec.<%= nombrePaquete %>.abstracts.GenericMethods;
 import com.ec.<%= nombrePaquete %>.dao.<%= nombreMayuscula %>RequestDao;
 import com.ec.<%= nombrePaquete %>.dao.<%= nombreMayuscula %>ResponseDao;
+import com.ec.<%= nombrePaquete %>.entidad.Permiso;
 import com.ec.<%= nombrePaquete %>.enums.EnumSisHabilitado;
 import com.ec.<%= nombrePaquete %>.exception.ExceptionResponse;
 import com.ec.<%= nombrePaquete %>.mapper.<%= nombreMayuscula %>Mapper;
@@ -60,7 +61,7 @@ public class <%= nombreMayuscula %>Controller extends AbstractController<<%= nom
 	}
 
 	@Override
-	public <%= nombreMayuscula %> setDaoRequestToEntity(<%= nombreMayuscula %> entity, <%= nombreMayuscula %>Dao dao) {
+	public <%= nombreMayuscula %> setDaoRequestToEntity(<%= nombreMayuscula %>RequestDao dao) {
 		return <%= nombreMayuscula %>Mapper.setDaoRequestToEntity.apply(dao);
 	}
 
@@ -79,7 +80,7 @@ public class <%= nombreMayuscula %>Controller extends AbstractController<<%= nom
 		try {
 			// Se debe de crear el HashMap de todos los parametros que se van a enviar a la busqueda
 			Map<String, Object> params = new HashMap<>();
-			params.put("busqueda", busqueda == null ? "" : busqueda);
+			//params.put("busqueda", busqueda == null ? "" : busqueda);
 			params.put("sisHabilitado", sisHabilitado == null ? "" : sisHabilitado);
 			String sortFieldDefault = "id";
 			sortField = sortField == null ? sortFieldDefault : sortField;

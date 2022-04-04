@@ -228,7 +228,7 @@ module.exports = class extends Generator {
 
 
         const templateMapper = this.templatePath(TEMPLATES.MAPPER);
-        const destinoMapper = this.destinationPath(`./dao/${nombreMayuscula}Mapper.java`);
+        const destinoMapper = this.destinationPath(`./mapper/${nombreMayuscula}Mapper.java`);
 
         this.fs.copyTpl(
             templateMapper,

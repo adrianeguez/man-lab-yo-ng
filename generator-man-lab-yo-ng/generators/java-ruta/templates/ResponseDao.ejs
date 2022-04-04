@@ -5,6 +5,9 @@ import com.ec.<%= nombrePaquete %>.abstracts.AbstractResponseDao;
 public class <%= nombreMayuscula %>ResponseDao extends AbstractResponseDao {
 	// Ejemplo de alguna propiedad
 	// private String nombres;
+	// Papa a hijos
+	// private List<NombreHijoResponseDao> nombreHijoCollection;
+	// Hijos a papa
 	// private Integer idNombreRelacion;
 	private ArchivoRequestDao sisArchivo;
 	private ArchivoRequestDao sisImagen;
@@ -40,7 +43,7 @@ public class <%= nombreMayuscula %>ResponseDao extends AbstractResponseDao {
 		this.sisArchivo = sisArchivo;
 	}
 
-	public ImagenRequestDao getSisImagen() {
+	public ArchivoRequestDao getSisImagen() {
 		return sisImagen;
 	}
 

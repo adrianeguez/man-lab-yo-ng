@@ -32,13 +32,13 @@ public class <%= nombreMayuscula %>Mapper {
             dao.setId(entity.getId());
             // Otras propiedades
             //dao.setNombres(entity.getNombres());
-            /* //Si hay colecciones, verificamos si es null y luego apply
-            if (entity.getRelacionHijosCollection() != null) {
-                dao.setRelacionHijosCollection(
-                    RelacionHijosMapper.setEntityListToDaoResponseList.apply(entity.getRelacionHijosCollection())
-                );
-            }
-            */
+            // Si soy PAPA, si hay colecciones, verificamos si es null y luego apply
+            // if (entity.getRelacionHijosCollection() != null) {
+            //    dao.setRelacionHijosCollection(
+            //        RelacionHijosMapper.setEntityListToDaoResponseList.apply(entity.getRelacionHijosCollection())
+            //    );
+            // }
+
             dao.setSisHabilitado(entity.getSisHabilitado());
             dao.setSisActualizado(entity.getSisActualizado());
             dao.setSisCreado(entity.getSisCreado());
@@ -46,23 +46,21 @@ public class <%= nombreMayuscula %>Mapper {
             dao.setSisImagen(entity.getSisImagen());
             return dao;
         });
-        // Solo cuando es PAPA
-        /*
-        setEntityToDaoReference = (entity -> {
-            <%= nombreMayuscula %>ResponseDao dao = new <%= nombreMayuscula %>ResponseDao();
-            dao.setId(entity.getId());
-            // Otras propiedades
-            //dao.setNombres(entity.getNombres());
-            dao.setSisHabilitado(entity.getSisHabilitado());
-            dao.setSisActualizado(entity.getSisActualizado());
-            dao.setSisCreado(entity.getSisCreado());
-            dao.setSisArchivo(entity.getSisArchivo());
-            dao.setSisImagen(entity.getSisImagen());
-            // Para relaciones asi:
-            // dao.setIdRelacionPapa(RelacionPapaMapper.setEntityToDaoResponse.apply(entity.getIdRelacionPapa()));
-            return dao;
-        });
-        */
+        // Solo cuando es HIJO
+
+        //setEntityToDaoReference = (entity -> {
+        //    <%= nombreMayuscula %>ResponseDao dao = new <%= nombreMayuscula %>ResponseDao();
+        //    dao.setId(entity.getId());
+        //    // Otras propiedades
+        //    //dao.setNombres(entity.getNombres());
+        //    dao.setSisHabilitado(entity.getSisHabilitado());
+        //    dao.setSisActualizado(entity.getSisActualizado());
+        //    dao.setSisCreado(entity.getSisCreado());
+        //    dao.setSisArchivo(entity.getSisArchivo());
+        //    dao.setSisImagen(entity.getSisImagen());
+        //    return dao;
+        // });
+
 
         setEntityListToDaoResponseList = (entityList -> {
             return (List<<%= nombreMayuscula %>ResponseDao>) StreamSupport.stream(entityList.spliterator(), true)
