@@ -147,7 +147,7 @@ export class <%= nombreMayuscula %>TablaComponent extends AbstractTable<<%= nomb
     }
   }
 
-  openDialog(formFields: FormField[], arrayAccordeon: AccordeonForms[] = []): void {
+  openDialog(formFields: FormField[], arrayAccordeon: MatStepperArray[] = []): void {
     const createUpdateModalParameters: CreateUpdateModalParameters = {
       title: `${this.create ? 'Crear ' : 'Actualizar'} ${this.parameters.nombreRegistro}`,
       description: "Por favor llene la informacion pertinente.",
