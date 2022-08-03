@@ -176,6 +176,16 @@ export default function <%= nombreMayuscula %>() {
     };
     // Funciones UI - Eventos
     const eventoBuscar = (data: <%= nombreMayuscula %>FindDto) => {
+        // PARA FILTROS CON CAMPOS RELACIONADOS USAR LAS SIGUIENTES LINEAS
+        // POR CADA CAMPO RELACIONADO:
+
+        // if(data.campoRelacion && typeof data.campoRelacion === 'object'){
+        //     const campoRelacion = data.campoRelacion as CampoRelacionInterface;
+        //     data.campoRelacion = campoRelacion.id;
+        // }
+        // if(!data.campoRelacion && loaderData.findDto.campoRelacion){
+        //     data.campoRelacion = loaderData.findDto.campoRelacion;
+        // }
         recargarPaginaConNuevosQueryParams({
             findDto: {
                 ...loaderData.findDto,
@@ -184,6 +194,9 @@ export default function <%= nombreMayuscula %>() {
             }
         });
     };
+    const eventoLimpiarBusqueda = ()=>{
+        recargarPaginaSinQueryParams();
+    }
     const eventoClicBotonOpciones = (
         registro: <%= nombreMayuscula %>Interface,
         nombreEvento: <%= nombreMayuscula %>MostrarEnum
@@ -206,6 +219,7 @@ export default function <%= nombreMayuscula %>() {
     const obtenerQueryParams = () => navegarUtil.obtenerQueryParams;
     const recargarPaginaConNuevosQueryParams = navegarUtil.recargarPaginaConNuevosQueryParams;
     const eventoSeleccionoSort = navegarUtil.eventoSeleccionoSort;
+    const recargarPaginaSinQueryParams = navegarUtil.recargarPaginaSinQueryParams;
 
     // Autocomplete
     const actualizarValorCampoAutocompleteGlobal = autocompleteUtil.actualizarValorCampoAutocompleteGlobal;
@@ -286,9 +300,8 @@ export default function <%= nombreMayuscula %>() {
                 <>
                     {/* Ruta */}
                     <RutaComun<<%= nombreMayuscula %>Interface, <%= nombreMayuscula %>FindDto, <%= nombreMayuscula %>LoaderData>
-                        navigate={navigate}
+                        eventoLimpiarBusqueda={eventoLimpiarBusqueda}
                         findDto={loaderData.findDto}
-                        path={path}
                         navbar={navbar}
                         navigateFabNewFunction={() => {
                             navegarParametrosNuevo()
@@ -300,8 +313,6 @@ export default function <%= nombreMayuscula %>() {
                         mostrarFab={true}
                         camposFiltro={camposFiltrosBusqueda}
                         accordeonCamposFiltro={accordeonCamposFiltro}
-                        navegarUtil={navegarUtil}
-                        loaderData={loaderData}
                         mostrarItemEnLista={(registro, indice) => (<>
                             <motion.div
                                 initial={{opacity: 0, y: 10}}
@@ -354,6 +365,12 @@ export default function <%= nombreMayuscula %>() {
                     }} bold>
                         Gestionar Imagenes <BackupIcon className={'ml-2'}/>
                     </ActionsButton>
+                    {/*<ActionsButton onClick={() => {*/}
+                    {/*Se puede seleccionar la variable registroSeleccionadoRuta para obtener la informacion del registro actual*/}
+                    {/*    navigate(`/ruta-a-navegar?queryParams=${registroSeleccionadoRuta.id}`)*/}
+                    {/*}} bold>*/}
+                    {/*    Navegar otra ruta*/}
+                    {/*</ActionsButton>*/}
                     <ActionsButton
                         onClick={() => setAbrioOpciones(false)}
                         colors={{text: 'text-red-500'}}

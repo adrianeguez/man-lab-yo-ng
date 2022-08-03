@@ -48,7 +48,7 @@ const TEMPLATES = {
     HTTP_FORM_FORM: '.form.ts',
     HTTP_FORM_ACCORDION_FORM: '-accordion.form.tsx',
     HTTP_FORM_FILTRO_ENUM: '-filtro.enum.ts',
-    HTTP_FORM_FILTRO_FORM: '-filtro.form.ts',
+    HTTP_FORM_FILTRO_FORM: '-filtro.form.tsx',
     HTTP_FORM_FILTRO_ACCORDION_FORM: '-filtro-accordion.form.tsx',
     HTTP_SORT_SORT_FIELDS: '.sort-fields.ts',
     HTTP_HTTP: '.http.ts',
@@ -360,7 +360,7 @@ module.exports = class extends Generator {
         );
 
         const templateHttpFormFiltroForm = this.templatePath(TEMPLATES.HTTP_FORM_FILTRO_FORM);
-        const destinoHttpFormFiltroForm = this.destinationPath(`./http/${nombreGuiones}/form/${nombreGuiones}-filtro.form.ts`);
+        const destinoHttpFormFiltroForm = this.destinationPath(`./http/${nombreGuiones}/form/${nombreGuiones}-filtro.form.tsx`);
 
         this.fs.copyTpl(
             templateHttpFormFiltroForm,

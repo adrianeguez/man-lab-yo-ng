@@ -47,19 +47,50 @@ export default function <%= nombreCamel %>Id() {
                     // if (campo.formControlName === FormularioComunEnum.SisHabilitado) {
                     //     campo.initialValue = estaEditando.sisHabilitado
                     // }
+                    // if (campo.formControlName === <%= nombreMayuscula %>Enum.CampoRelacion) {
+                    //     if (typeof estaEditando.campoRelacion === 'object') {
+                    //         campo.initialValue = estaEditando.campoRelacion.id;
+                    //
+                    //     }
+                    //     if (typeof estaEditando.campoRelacion === 'number') {
+                    //         campo.initialValue = estaEditando.campoRelacion;
+                    //     }
+                    // }
                 }
                 return campo;
             }
         );
     const {
+        // DESCOMENTAR SI NECESITAN AUTOCOMPLETE:
+        // campoFormularioAutocompleteGlobal,
+        // setActionAutocompleteAbierto,
+        // seleccionoListaAutocomplete,
+        // textoAutocompleteBusqueda,
+        // setListaAutocomplete,
+        // setGenerarComponente,
+        // useFormReturnAutocompleteActual,
+        // setCampoFormularioAutocompleteGlobal,
+
         setLoading,
     } = useContext(KonstaContainerContext);
-
+    const tieneCampoFormulario = Object.keys(campoFormularioAutocompleteGlobal ? campoFormularioAutocompleteGlobal : {}).length > 0;
 
     // Inicializar variables
     const [popupOpened, setPopupOpened] = useState(false);
     const [camposFormularioCrearEditar, setCamposFormularioCrearEditar] = useState(
         [...camposFormulario] as CampoFormularioInterface[]
+    );
+    // DESCOMENTAR SI NECESITAN AUTOCOMPLETE:
+    // const [camposFiltrosBusqueda, setCamposFiltrosBusqueda] = useState([
+           // // Aqui filtramos todos los campos autocomplete descritos en el formulario
+    //     <%= nombreMayuscula %>FiltroForm().find((a) => a.formControlName === <%= nombreMayuscula %>Enum.CampoRelacion)
+    // ]);
+    const autocompleteUtil = UtilAutocomplete(
+        setActionAutocompleteAbierto,
+        setCamposFiltrosBusqueda,
+        camposFiltrosBusqueda,
+        seleccionoListaAutocomplete,
+        useFormReturnAutocompleteActual
     );
 
     const useFormReturn = useForm<any>({
@@ -85,12 +116,95 @@ export default function <%= nombreCamel %>Id() {
             setTimeout(
                 () => {
                     setPopupOpened(true);
+                    // DESCOMENTAR SI NECESITAN AUTOCOMPLETE:
+                    // actualizarVisualizarComponenteAutocomplete();
                 },
                 1
             );
         },
         []
     )
+
+    // DESCOMENTAR SI NECESITAN AUTOCOMPLETE:
+    // useEffect(
+    //     () => {
+    //         setCampoFormularioAutocompleteGlobal(eventoAutocomplete);
+    //     },
+    //     [eventoAutocomplete]
+    // )
+
+    // DESCOMENTAR SI NECESITAN AUTOCOMPLETE:
+    // useEffect(
+    //     () => {
+    //         buscarAutocomplete().then().catch();
+    //     },
+    //     [textoAutocompleteBusqueda]
+    // )
+
+
+    // DESCOMENTAR SI NECESITAN AUTOCOMPLETE:
+    // useEffect(
+    //     () => {
+    //         if (tieneCampoFormulario) {
+    //             setActionAutocompleteAbierto(true);
+    //             buscarAutocomplete().then().catch();
+    //         } else {
+    //             setActionAutocompleteAbierto(false);
+    //         }
+    //     },
+    //     [campoFormularioAutocompleteGlobal]
+    // )
+
+    // DESCOMENTAR SI NECESITAN AUTOCOMPLETE:
+    // useEffect(
+    //     () => {
+    //         if (seleccionoListaAutocomplete.registro) {
+    //             actualizarValorCampoAutocompleteGlobal();
+    //             // Por cada campo relacion se tiene que mandar el trigger
+    //             useFormReturn.trigger(<%= nombreMayuscula %>Enum.CampoRelacion as any).then()
+    //         }
+    //     },
+    //     [seleccionoListaAutocomplete]
+    // )
+
+    // DESCOMENTAR SI NECESITAN AUTOCOMPLETE:
+    // // Autocomplete
+    // const actualizarValorCampoAutocompleteGlobal = autocompleteUtil.actualizarValorCampoAutocompleteGlobal;
+    // const buscarAutocomplete = async () => {
+    //     switch (campoFormularioAutocompleteGlobal.formControlName) {
+    //         case <%= nombreMayuscula %>FiltroEnum.CampoRelacion:
+    //             buscarAutocompleteCampoRelacion();
+    //             break;
+    //         default:
+    //             break;
+    //     }
+    // };
+
+    // DESCOMENTAR SI NECESITAN AUTOCOMPLETE:
+    // const actualizarVisualizarComponenteAutocomplete = () => {
+    //     setGenerarComponente({
+    //         ...generarComponenteAutocompletePorFormControlName
+    //     });
+    // };
+
+    // DESCOMENTAR SI NECESITAN AUTOCOMPLETE:
+    // const generarComponenteAutocompletePorFormControlName = {
+    //     // nombreCampo: (registro: CampoRelacionInterface, campoFormulario: CampoFormularioInterface) => {
+    //     //     return (<><CampoRelacionMostrar registro={registro}/></>)
+    //     // },
+    // };
+
+    // DESCOMENTAR SI NECESITAN AUTOCOMPLETE:
+    // // Metodos REST
+    // const buscarAutocompleteCampoRelacion = async () => {
+    //     const respuesta = await CampoRelacionInstanceHttp.buscarCampoRelacion(
+    //         textoAutocompleteBusqueda,
+    //         setLoading,
+    //         toast
+    //     );
+    //     setListaAutocomplete(respuesta[0]);
+    // }
+
     // Metodos Page
     const salir = () => {
         setPopupOpened(false);
@@ -102,8 +216,17 @@ export default function <%= nombreCamel %>Id() {
         );
     }
     // Metodos Formulario
-    const onSubmit: SubmitHandler<any> = async (dataForm) => {
-        const formData = new FormData(document.getElementById('form'))
+    const onSubmit: SubmitHandler<any> = async (dataForm: <%= nombreMayuscula %>CreateDto | <%= nombreMayuscula %>UpdateDto) => {
+        const formData = new FormData(document.getElementById('form') as any);
+        // DESCOMENTAR SI NECESITAN AUTOCOMPLETE:
+        // // Si usamos campos autocompletes debemos de settear manualmente el formulario cada campo autocomplete
+        // if(typeof dataForm[<%= nombreMayuscula %>Enum.CampoRelacion] === 'object'){
+        //     // se puede settear cualquier otro campo que se desee que no este en el formulario
+        //     formData.set(<%= nombreMayuscula %>Enum.CampoRelacion, dataForm[<%= nombreMayuscula %>Enum.CampoRelacion].id);
+        // }
+        // if(typeof dataForm[<%= nombreMayuscula %>Enum.CampoRelacion] === 'number'){
+        //     formData.set(<%= nombreMayuscula %>Enum.CampoRelacion, dataForm[<%= nombreMayuscula %>Enum.CampoRelacion]);
+        // }
         setLoading(true);
         try {
             if (estaEditando && data.registro) {
