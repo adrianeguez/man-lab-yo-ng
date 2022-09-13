@@ -73,7 +73,7 @@ export default function <%= nombreCamel %>Id() {
 
         setLoading,
     } = useContext(KonstaContainerContext);
-    const tieneCampoFormulario = Object.keys(campoFormularioAutocompleteGlobal ? campoFormularioAutocompleteGlobal : {}).length > 0;
+    // const tieneCampoFormulario = Object.keys(campoFormularioAutocompleteGlobal ? campoFormularioAutocompleteGlobal : {}).length > 0;
 
     // Inicializar variables
     const [popupOpened, setPopupOpened] = useState(false);
@@ -85,13 +85,13 @@ export default function <%= nombreCamel %>Id() {
            // // Aqui filtramos todos los campos autocomplete descritos en el formulario
     //     <%= nombreMayuscula %>FiltroForm().find((a) => a.formControlName === <%= nombreMayuscula %>Enum.CampoRelacion)
     // ]);
-    const autocompleteUtil = UtilAutocomplete(
-        setActionAutocompleteAbierto,
-        setCamposFiltrosBusqueda,
-        camposFiltrosBusqueda,
-        seleccionoListaAutocomplete,
-        useFormReturnAutocompleteActual
-    );
+    // const autocompleteUtil = UtilAutocomplete(
+    //     setActionAutocompleteAbierto,
+    //     setCamposFiltrosBusqueda,
+    //     camposFiltrosBusqueda,
+    //     seleccionoListaAutocomplete,
+    //     useFormReturnAutocompleteActual
+    // );
 
     const useFormReturn = useForm<any>({
         defaultValues: {

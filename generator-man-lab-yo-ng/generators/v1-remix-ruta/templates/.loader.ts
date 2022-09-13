@@ -26,19 +26,21 @@ export const <%= nombreMayuscula %>Loader: LoaderFunction = async (
     const url = new URL(requestUrl);
     const id = url.searchParams.get('id');
     // Busqueda por ID
-    if (!Number.isNaN(+id) && +id > 0) {
-        findDto.id = +id;
+    if(id){
+        if (!Number.isNaN(+id) && +id > 0) {
+            findDto.id = +id;
+        }
     } else {
         // Busqueda por otros parametros
         const busqueda = url.searchParams.get('busqueda');
         if (busqueda) {
             findDto.busqueda = busqueda;
         }
-        findDto.sisHabilitado = url.searchParams.get("sisHabilitado") as SisHabilitadoEnum;
-        findDto.sisCreado = url.searchParams.get("sisCreado") as string;
-        findDto.sisModificado = url.searchParams.get("sisModificado") as string;
+        findDto.sisHabilitado = url.searchParams.get("sisHabilitado") as unknown as SisHabilitadoEnum;
+        findDto.sisCreado = url.searchParams.get("sisCreado") as unknown as string;
+        findDto.sisModificado = url.searchParams.get("sisModificado") as unknown as string;
     }
-    returnData.mensaje = url.searchParams.get("mensaje") as string;
+    returnData.mensaje = url.searchParams.get("mensaje") as unknown as string;
     returnData.findDto = {...findDto};
     try {
         returnData.registros = await <%= nombreMayuscula %>InstanceHttp.find(eliminarUndNullVacio(findDto))

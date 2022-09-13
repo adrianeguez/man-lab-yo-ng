@@ -16,17 +16,6 @@ export function <%= nombreMayuscula %>Tabla(props: <%= nombreMayuscula %>TablaIn
                     <TableHead>
                         <TableRow className={'tabla-cabecera'}>
                             <TableCell>ID</TableCell>
-                            {/*<TableCell>*/}
-                            {/*    <motion.div*/}
-                            {/*        initial={{opacity: 0, y: 10}}*/}
-                            {/*        animate={{opacity: 1, y: 0}}*/}
-                            {/*        exit={{opacity: 0, y: 0}}*/}
-                            {/*        transition={{delay: indice * 0.001}}>*/}
-                            {/*        <MostrarSisImagen registro={registro} claseCss={''}/>*/}
-                            {/*        <br/>*/}
-                            {/*        {registro.nombre}{' '}{registro.descripcion}*/}
-                            {/*    </motion.div>*/}
-                            {/*</TableCell>*/}
                             {/*<TableCell align="center">Descripcion</TableCell>*/}
                             {/*<TableCell align="center">Isbn</TableCell>*/}
                             {/*<TableCell align="center">Genero libro</TableCell>*/}
