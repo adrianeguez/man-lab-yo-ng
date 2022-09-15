@@ -20,12 +20,26 @@ export const <%= nombreMayuscula %>CrearEditarAction: ActionFunction = async (da
         let respuesta: any;
         const id = body.get('id');
         if (id) {
+            const permisosCrear = [
+                Permission.<%= nombreMayuscula%>Editar
+            ];
+            const tienePermisos = await verificarSessionPermisos(request, permisosCrear);
+            if(!tienePermisos){
+                return redirect('login-vendure')
+            }
             const updateDto: <%= nombreMayuscula %>UpdateDto = {
                 sisHabilitado: body.get(FormularioComunEnum.SisHabilitado) as unknown as SisHabilitadoEnum,
                 // nombre: body.get(<%= nombreMayuscula %>Enum.Nombre) as string,
             };
             respuesta = await <%= nombreMayuscula %>InstanceHttp.updateById(updateDto, +id);
         } else {
+            const permisosEditar = [
+                Permission.<%= nombreMayuscula%>Editar
+            ];
+            const tienePermisos = await verificarSessionPermisos(request, permisosEditar);
+            if(!tienePermisos){
+                return redirect('login-vendure')
+            }
             const createDto: <%= nombreMayuscula %>CreateDto = {
                 sisHabilitado: body.get(FormularioComunEnum.SisHabilitado) as unknown as SisHabilitadoEnum,
                 // nombre: body.get(<%= nombreMayuscula %>Enum.Nombre) as string,

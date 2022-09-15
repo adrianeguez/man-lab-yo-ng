@@ -14,11 +14,18 @@ export type <%= nombreMayuscula %>LoaderData = {
     findDto: <%= nombreMayuscula %>FindDto;
 };
 
+const permisos = [
+    Permission.<%= nombreMayuscula%>Buscar,
+];
 export const <%= nombreMayuscula %>Loader: LoaderFunction = async (
     {
         request,
         params,
     }) => {
+    const tienePermisos = await verificarSessionPermisos(request, permisos);
+    if(!tienePermisos){
+        return redirect('login-vendure')
+    }
     const returnData: <%= nombreMayuscula %>LoaderData = {} as any;
     const requestUrl = request.url;
     const findDto: <%= nombreMayuscula %>FindDto = LoaderSetQueryparams(requestUrl) as <%= nombreMayuscula %>FindDto;

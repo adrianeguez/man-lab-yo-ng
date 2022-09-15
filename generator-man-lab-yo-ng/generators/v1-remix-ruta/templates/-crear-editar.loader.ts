@@ -9,11 +9,19 @@ export type <%= nombreMayuscula%>CrearEditarLoaderData = {
     findDto: <%= nombreMayuscula%>FindDto; // Guardamos para devolver a la ruta anterior los query params
 };
 
+const permisos = [
+    Permission.<%= nombreMayuscula%>Crear,
+    Permission.<%= nombreMayuscula%>Editar
+];
 export const <%= nombreMayuscula%>CrearEditarLoader: LoaderFunction = async (
     {
         request,
         params,
     }) => {
+    const tienePermisos = await verificarSessionPermisos(request, permisos, false);
+    if(!tienePermisos){
+        return redirect('login-vendure')
+    }
     const returnData: <%= nombreMayuscula%>CrearEditarLoaderData = {} as any;
     const {<%= nombreCamel %>Id} = params;
     const requestUrl = request.url;
