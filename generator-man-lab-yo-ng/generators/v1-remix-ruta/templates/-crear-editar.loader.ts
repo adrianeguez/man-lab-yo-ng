@@ -7,6 +7,7 @@ import {<%= nombreMayuscula%>Interface} from "~/http/<%= nombreGuiones%>/<%= nom
 export type <%= nombreMayuscula%>CrearEditarLoaderData = {
     registro?: <%= nombreMayuscula%>Interface,
     findDto: <%= nombreMayuscula%>FindDto; // Guardamos para devolver a la ruta anterior los query params
+    sesion?: ObjetoSesionDto;
 };
 
 const permisos = [
@@ -31,5 +32,9 @@ export const <%= nombreMayuscula%>CrearEditarLoader: LoaderFunction = async (
         const registro = await <%= nombreMayuscula%>InstanceHttp.find({id: +<%= nombreCamel %>Id});
         returnData.registro = registro[0][0];
     }
+    const session = await getSession(
+        request.headers.get("Cookie")
+    );
+    returnData.sesion = await session.get('user');
     return json(returnData);
 };

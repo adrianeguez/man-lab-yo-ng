@@ -12,6 +12,7 @@ export type <%= nombreMayuscula %>LoaderData = {
     error?: string,
     mensaje?: string;
     findDto: <%= nombreMayuscula %>FindDto;
+    sesion?: ObjetoSesionDto;
 };
 
 const permisos = [
@@ -55,5 +56,9 @@ export const <%= nombreMayuscula %>Loader: LoaderFunction = async (
         console.error({error, mensaje: 'Error consultando registros'});
         returnData.error = 'Error consultando registros';
     }
+    const session = await getSession(
+        request.headers.get("Cookie")
+    );
+    returnData.sesion = await session.get('user');
     return json(returnData);
 };

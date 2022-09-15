@@ -141,9 +141,9 @@ export default function <%= nombreMayuscula %>() {
         const permisos = [
             Permission.<%= nombreMayuscula %>EditarHabilitado
         ];
-        if(loaderData.sesion) {
+        if (loaderData.sesion) {
             const tienePermisos = verificarSessionFrontend(loaderData.sesion, permisos);
-            if(!tienePermisos) {
+            if (!tienePermisos) {
                 toast.error('No tiene permisos');
             } else {
                 await DeshabilitarRegistroHttp(<%= nombreMayuscula %>InstanceHttp, registroSeleccionadoRuta);
