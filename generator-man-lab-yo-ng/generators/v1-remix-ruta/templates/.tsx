@@ -138,10 +138,20 @@ export default function <%= nombreMayuscula %>() {
     // Funciones UI
     // Funciones UI - Comunes tabla
     const deshabilitarRecurso = async () => {
-        await DeshabilitarRegistroHttp(<%= nombreMayuscula %>InstanceHttp, registroSeleccionadoRuta);
-        setAbrioOpciones(false);
-        toast.success('Registro actualizado');
-        recargarPaginaConNuevosQueryParams();
+        const permisos = [
+            Permission.<%= nombreMayuscula %>EditarHabilitado
+        ];
+        if(loaderData.sesion) {
+            const tienePermisos = verificarSessionFrontend(loaderData.sesion, permisos);
+            if(!tienePermisos) {
+                toast.error('No tiene permisos');
+            } else {
+                await DeshabilitarRegistroHttp(<%= nombreMayuscula %>InstanceHttp, registroSeleccionadoRuta);
+                setAbrioOpciones(false);
+                toast.success('Registro actualizado');
+                recargarPaginaConNuevosQueryParams();
+            }
+        }
     };
     const visualizarRegistro = () => {
         setAbrioOpciones(false);
