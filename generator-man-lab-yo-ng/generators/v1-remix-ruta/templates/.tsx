@@ -229,29 +229,32 @@ export default function <%= nombreMayuscula %>() {
         });
     };
     const generarComponenteAutocompletePorFormControlName = {
-        autocomplete: (registro: <%= nombreMayuscula %>Interface, campoFormulario: CampoFormularioInterface) => {
-            return (<><<%= nombreMayuscula %>Mostrar registro={registro}/></>)
-        },
+        // PARA AUTOCOMPLETE DESCOMENTAR ESTO Y COLOCAR EL nombreCampoRelacion y el NombreCampoRelacionMostrar
+        // nombreCampoRelacion: (registro: NombreCampoRelacionInterface, campoFormulario: CampoFormularioInterface) => {
+        //     return (<><NombreCampoRelacionMostrar registro={registro}/></>)
+        // },
     };
     const buscarAutocomplete = async () => {
         switch (campoFormularioAutocompleteGlobal.formControlName) {
-            case 'autocomplete':
-                buscarAutocompleteCampoAutocomplete();
-                break;
+            // PARA AUTOCOMPLETE DESCOMENTAR ESTO Y COLOCAR EL nombreCampoRelacion y el NombreCampoRelacion
+            // case 'nombreCampoRelacion':
+            //     buscarAutocompleteCampoNombreCampoRelacion();
+            //     break;
             default:
                 break;
         }
     };
 
     // Metodos REST
-    const buscarAutocompleteCampoAutocomplete = async () => {
-        const respuesta = await <%= nombreMayuscula %>InstanceHttp.buscar<%= nombreMayuscula %>(
-            textoAutocompleteBusqueda,
-            setLoading,
-            toast
-        );
-        setListaAutocomplete(respuesta[0]);
-    }
+    // const buscarAutocompleteCampoNombreCampoRelacion = async () => {
+        // PARA AUTOCOMPLETE DESCOMENTAR ESTO Y COLOCAR EL nombreCampoRelacion y el NombreCampoRelacion
+        // const respuesta = await NombreCampoRelacionInstanceHttp.buscarNombreCampoRelacion(
+        //     textoAutocompleteBusqueda,
+        //     setLoading,
+        //     toast
+        // );
+        // setListaAutocomplete(respuesta[0]);
+    // }
     const subirArchivo = () => {
         setSubirArchivoAbierto(true)
     };
@@ -276,7 +279,7 @@ export default function <%= nombreMayuscula %>() {
         recargarPaginaConNuevosQueryParams();
 
     };
-    const subirImagenHTTP = async (data: FileList) => {
+    const subirImagenHTTP = async (data?: FileList) => {
         if (data) {
             if (registroSeleccionadoRuta.id) {
                 const archivo: NuevoArchivoInterface = {
@@ -299,7 +302,7 @@ export default function <%= nombreMayuscula %>() {
             {loaderData.registros &&
                 <>
                     {/* Ruta */}
-                    <RutaComun<<%= nombreMayuscula %>Interface, <%= nombreMayuscula %>FindDto, <%= nombreMayuscula %>LoaderData>
+                    <RutaComun<<%= nombreMayuscula %>Interface, <%= nombreMayuscula %>FindDto>
                         eventoLimpiarBusqueda={eventoLimpiarBusqueda}
                         findDto={loaderData.findDto}
                         navbar={navbar}
@@ -391,7 +394,7 @@ export default function <%= nombreMayuscula %>() {
             <SubirArchivoContenedor sheetOpened={subirImagenAbierto}
                                     tipoArchivo={TipoArchivoEnum.Imagen}
                                     setSheetOpened={setSubirImagenAbierto}
-                                    accept={'.png'}
+                                    accept={'.png,.jpg'}
                                     tamanioMaximoEnBytes={1000 * 1024 * 0.5}
                                     eventoDioClicSubirArchivoOImagen={subirImagenHTTP}
                                     registroSeleccionadoRuta={registroSeleccionadoRuta}

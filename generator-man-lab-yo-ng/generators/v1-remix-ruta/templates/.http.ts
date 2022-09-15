@@ -11,22 +11,22 @@ export class <%= nombreMayuscula %>Http extends AbstractHttp<<%= nombreMayuscula
         );
     }
 
-    async buscar<%= nombreMayuscula %>(texto: string, setLoading, toast) {
+    async buscar<%= nombreMayuscula %>(texto: string, setLoading:any, toast:any) {
         try {
-            let librosBiblioteca: [<%= nombreMayuscula %>Interface[], number] = [[], 0];
+            let registros: [<%= nombreMayuscula %>Interface[], number] = [[], 0];
             setLoading(true);
-            librosBiblioteca = await <%= nombreMayuscula %>InstanceHttp.find({
+            registros = await <%= nombreMayuscula %>InstanceHttp.find({
                 busqueda: texto
             });
-            toast(`${librosBiblioteca[0].length} registros consultados`, {
+            toast(`${registros[0].length} registros consultados`, {
                 icon: '📑'
             });
             setLoading(false);
-            return librosBiblioteca;
+            return registros;
         } catch (error) {
             console.error({
                 error,
-                mensaje: 'Error consultado autocomplete libro biblioteca'
+                mensaje: 'Error consultado registros'
             });
             toast.error('Error del servidor');
             setLoading(false);

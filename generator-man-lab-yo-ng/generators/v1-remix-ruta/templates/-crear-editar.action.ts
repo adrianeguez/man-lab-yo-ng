@@ -21,13 +21,13 @@ export const <%= nombreMayuscula %>CrearEditarAction: ActionFunction = async (da
         const id = body.get('id');
         if (id) {
             const updateDto: <%= nombreMayuscula %>UpdateDto = {
-                sisHabilitado: body.get(FormularioComunEnum.SisHabilitado) as SisHabilitadoEnum,
+                sisHabilitado: body.get(FormularioComunEnum.SisHabilitado) as unknown as SisHabilitadoEnum,
                 // nombre: body.get(<%= nombreMayuscula %>Enum.Nombre) as string,
             };
             respuesta = await <%= nombreMayuscula %>InstanceHttp.updateById(updateDto, +id);
         } else {
             const createDto: <%= nombreMayuscula %>CreateDto = {
-                sisHabilitado: body.get(FormularioComunEnum.SisHabilitado) as SisHabilitadoEnum,
+                sisHabilitado: body.get(FormularioComunEnum.SisHabilitado) as unknown as SisHabilitadoEnum,
                 // nombre: body.get(<%= nombreMayuscula %>Enum.Nombre) as string,
             };
             respuesta = await <%= nombreMayuscula %>InstanceHttp.create(createDto);

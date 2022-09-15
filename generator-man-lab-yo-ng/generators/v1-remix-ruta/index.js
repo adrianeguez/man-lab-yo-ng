@@ -45,7 +45,7 @@ const TEMPLATES = {
     HTTP_DTO_FIND: '-find.dto.ts',
     HTTP_DTO_UPDATE: '-update.dto.ts',
     HTTP_FORM_ENUM: '.enum.ts',
-    HTTP_FORM_FORM: '.form.ts',
+    HTTP_FORM_FORM: '.form.tsx',
     HTTP_FORM_ACCORDION_FORM: '-accordion.form.tsx',
     HTTP_FORM_FILTRO_ENUM: '-filtro.enum.ts',
     HTTP_FORM_FILTRO_FORM: '-filtro.form.tsx',
@@ -333,7 +333,7 @@ module.exports = class extends Generator {
         );
 
         const templateHttpFormForm = this.templatePath(TEMPLATES.HTTP_FORM_FORM);
-        const destinoHttpFormForm = this.destinationPath(`./http/${nombreGuiones}/form/${nombreGuiones}.form.ts`);
+        const destinoHttpFormForm = this.destinationPath(`./http/${nombreGuiones}/form/${nombreGuiones}.form.tsx`);
 
         this.fs.copyTpl(
             templateHttpFormForm,

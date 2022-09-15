@@ -22,9 +22,6 @@ export const <%= nombreMayuscula%>CrearEditarLoader: LoaderFunction = async (
     if (!Number.isNaN(+<%= nombreCamel %>Id) && +<%= nombreCamel %>Id > 0) {
         const registro = await <%= nombreMayuscula%>InstanceHttp.find({id: +<%= nombreCamel %>Id});
         returnData.registro = registro[0][0];
-        return json({findDto, registro});
-    } else {
-        return json({findDto});
     }
-
+    return json(returnData);
 };

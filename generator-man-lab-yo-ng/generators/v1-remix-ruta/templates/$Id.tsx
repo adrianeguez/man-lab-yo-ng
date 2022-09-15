@@ -35,7 +35,7 @@ export default function <%= nombreCamel %>Id() {
     const data: <%= nombreMayuscula %>CrearEditarLoaderData = useLoaderData();
     let estaEditando: <%= nombreMayuscula %>Interface | undefined;
     if (data.registro) {
-        estaEditando = data.registro[0][0];
+        estaEditando = data.registro;
     }
     const camposFormulario: CampoFormularioInterface[] = [...<%= nombreMayuscula %>Form()]
         .map(
@@ -128,7 +128,7 @@ export default function <%= nombreCamel %>Id() {
     // DESCOMENTAR SI NECESITAN AUTOCOMPLETE:
     // useEffect(
     //     () => {
-    //         setCampoFormularioAutocompleteGlobal(eventoAutocomplete);
+    //         setCampoFormularioAutocompleteGlobal(eventoAutocomplete as CampoFormularioInterface);
     //     },
     //     [eventoAutocomplete]
     // )
@@ -170,15 +170,6 @@ export default function <%= nombreCamel %>Id() {
     // DESCOMENTAR SI NECESITAN AUTOCOMPLETE:
     // // Autocomplete
     // const actualizarValorCampoAutocompleteGlobal = autocompleteUtil.actualizarValorCampoAutocompleteGlobal;
-    // const buscarAutocomplete = async () => {
-    //     switch (campoFormularioAutocompleteGlobal.formControlName) {
-    //         case <%= nombreMayuscula %>FiltroEnum.CampoRelacion:
-    //             buscarAutocompleteCampoRelacion();
-    //             break;
-    //         default:
-    //             break;
-    //     }
-    // };
 
     // DESCOMENTAR SI NECESITAN AUTOCOMPLETE:
     // const actualizarVisualizarComponenteAutocomplete = () => {
@@ -188,21 +179,34 @@ export default function <%= nombreCamel %>Id() {
     // };
 
     // DESCOMENTAR SI NECESITAN AUTOCOMPLETE:
-    // const generarComponenteAutocompletePorFormControlName = {
-    //     // nombreCampo: (registro: CampoRelacionInterface, campoFormulario: CampoFormularioInterface) => {
-    //     //     return (<><CampoRelacionMostrar registro={registro}/></>)
-    //     // },
-    // };
+    const generarComponenteAutocompletePorFormControlName = {
+        // PARA AUTOCOMPLETE DESCOMENTAR ESTO Y COLOCAR EL nombreCampoRelacion y el NombreCampoRelacionMostrar
+        // nombreCampoRelacion: (registro: NombreCampoRelacionInterface, campoFormulario: CampoFormularioInterface) => {
+        //     return (<><NombreCampoRelacionMostrar registro={registro}/></>)
+        // },
+    };
+
+    const buscarAutocomplete = async () => {
+        switch (campoFormularioAutocompleteGlobal.formControlName) {
+            // PARA AUTOCOMPLETE DESCOMENTAR ESTO Y COLOCAR EL nombreCampoRelacion y el NombreCampoRelacion
+            // case 'nombreCampoRelacion':
+            //     buscarAutocompleteCampoNombreCampoRelacion();
+            //     break;
+            default:
+                break;
+        }
+    };
 
     // DESCOMENTAR SI NECESITAN AUTOCOMPLETE:
     // // Metodos REST
-    // const buscarAutocompleteCampoRelacion = async () => {
-    //     const respuesta = await CampoRelacionInstanceHttp.buscarCampoRelacion(
-    //         textoAutocompleteBusqueda,
-    //         setLoading,
-    //         toast
-    //     );
-    //     setListaAutocomplete(respuesta[0]);
+    // const buscarAutocompleteCampoNombreCampoRelacion = async () => {
+        // PARA AUTOCOMPLETE DESCOMENTAR ESTO Y COLOCAR EL nombreCampoRelacion y el NombreCampoRelacion
+        // const respuesta = await NombreCampoRelacionInstanceHttp.buscarNombreCampoRelacion(
+        //     textoAutocompleteBusqueda,
+        //     setLoading,
+        //     toast
+        // );
+        // setListaAutocomplete(respuesta[0]);
     // }
 
     // Metodos Page
@@ -230,7 +234,7 @@ export default function <%= nombreCamel %>Id() {
         setLoading(true);
         try {
             if (estaEditando && data.registro) {
-                formData.set('id', data.registro[0][0].id)
+                formData.set('id', data.registro.id + '')
             }
             const respuesta = await fetch(`/<%= nombreGuiones %>/new?${convertirQueryParams(data.findDto)}`, {
                 method: 'POST',
@@ -270,7 +274,7 @@ export default function <%= nombreCamel %>Id() {
             >
                 <PopUpContenedor popupOpened={popupOpened} estaEditando={estaEditando} eventoSalir={salir}>
 
-                    <Form id="form" action="/<%= nombreGuiones %>/new" method="POST"
+                    <Form id="form" action="/<%= nombreGuiones %>/new" method="post"
                           onSubmit={useFormReturn.handleSubmit(onSubmit)} noValidate>
                         <BlockTitle>Ingrese un nuevo <%= nombreEspacioMayuscula %></BlockTitle>
                         <br/>
