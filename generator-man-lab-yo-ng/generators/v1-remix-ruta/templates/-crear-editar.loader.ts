@@ -20,7 +20,7 @@ export const <%= nombreMayuscula%>CrearEditarLoader: LoaderFunction = async (
     }) => {
     const tienePermisos = await verificarSessionPermisos(request, permisos, false);
     if(!tienePermisos){
-        return redirect('login-vendure')
+        return redirect(CONFIG.LOGOUT_URL)
     }
     const returnData: <%= nombreMayuscula%>CrearEditarLoaderData = {} as any;
     const {<%= nombreCamel %>Id} = params;

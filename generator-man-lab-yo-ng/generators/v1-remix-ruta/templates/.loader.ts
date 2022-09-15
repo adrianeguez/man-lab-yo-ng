@@ -24,7 +24,7 @@ export const <%= nombreMayuscula %>Loader: LoaderFunction = async (
     }) => {
     const tienePermisos = await verificarSessionPermisos(request, permisos);
     if(!tienePermisos){
-        return redirect('login-vendure')
+        return redirect(CONFIG.LOGOUT_URL)
     }
     const returnData: <%= nombreMayuscula %>LoaderData = {} as any;
     const requestUrl = request.url;

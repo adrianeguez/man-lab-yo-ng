@@ -23,9 +23,9 @@ export const <%= nombreMayuscula %>CrearEditarAction: ActionFunction = async (da
             const permisosCrear = [
                 Permission.<%= nombreMayuscula%>Editar
             ];
-            const tienePermisos = await verificarSessionPermisos(request, permisosCrear);
+            const tienePermisos = await verificarSessionPermisos(dataFunctionArgs.request, permisosCrear);
             if(!tienePermisos){
-                return redirect('login-vendure')
+                return redirect(CONFIG.LOGOUT_URL)
             }
             const updateDto: <%= nombreMayuscula %>UpdateDto = {
                 sisHabilitado: body.get(FormularioComunEnum.SisHabilitado) as unknown as SisHabilitadoEnum,
@@ -36,9 +36,9 @@ export const <%= nombreMayuscula %>CrearEditarAction: ActionFunction = async (da
             const permisosEditar = [
                 Permission.<%= nombreMayuscula%>Editar
             ];
-            const tienePermisos = await verificarSessionPermisos(request, permisosEditar);
+            const tienePermisos = await verificarSessionPermisos(dataFunctionArgs.request, permisosEditar);
             if(!tienePermisos){
-                return redirect('login-vendure')
+                return redirect(CONFIG.LOGOUT_URL)
             }
             const createDto: <%= nombreMayuscula %>CreateDto = {
                 sisHabilitado: body.get(FormularioComunEnum.SisHabilitado) as unknown as SisHabilitadoEnum,
