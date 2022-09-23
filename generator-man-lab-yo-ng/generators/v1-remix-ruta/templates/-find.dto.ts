@@ -1,5 +1,5 @@
-import type {FindDto} from "~/interfaces/find.dto";
+import type {<%= nombreMayuscula %>BusquedaDto} from "~/generated/model/<%= nombreCamel %>BusquedaDto";
 
-export interface <%= nombreMayuscula %>FindDto extends FindDto {
-    // nombreCampo?: string;
+export interface <%= nombreMayuscula %>FindDto extends <%= nombreMayuscula %>BusquedaDto{
+
 }

@@ -1,5 +1,7 @@
-import {ComunHttpInterface} from "~/interfaces/comun-http.interface";
+import {<%= nombreMayuscula %>RespuestaBusquedaDto} from "~/generated/model/<%= nombreCamel %>RespuestaBusquedaDto";
 
-export interface <%= nombreMayuscula %>Interface extends ComunHttpInterface {
-    // nombre?: string;
+export interface <%= nombreMayuscula %>Interface extends <%= nombreMayuscula %>RespuestaBusquedaDto{
+    // <%= nombreMayuscula %>RespuestaBusquedaDto es generado en el backend
+    // otras propiedades del frontend
+    // propiedadFrontend?: string;
 }

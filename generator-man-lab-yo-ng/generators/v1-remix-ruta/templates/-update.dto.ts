@@ -1,5 +1,5 @@
-import {CreateDto} from "~/interfaces/create.dto";
+import type {<%= nombreMayuscula %>ActualizarDto} from "~/generated/model/<%= nombreCamel %>ActualizarDto";
 
-export interface <%= nombreMayuscula %>UpdateDto extends CreateDto {
-    // nombre?: any;
+export interface <%= nombreMayuscula %>UpdateDto extends <%= nombreMayuscula %>ActualizarDto{
+
 }
