@@ -2,7 +2,7 @@ import {json, LoaderFunction} from "@remix-run/node";
 import {<%= nombreMayuscula %>FindDto} from "~/http/<%= nombreGuiones %>/dto/<%= nombreGuiones %>-find.dto";
 import {LoaderSetQueryparams} from "~/functions/http/loader-set-queryparams";
 import {LoaderSettearFindtoComun} from "~/functions/http/loader-settear-findto-comun";
-import {SisHabilitadoEnum} from "~/enum/sis-habilitado.enum";
+import type {SisHabilitadoBuscarEnum} from "~/enum/sis-habilitado-buscar.enum";
 import {<%= nombreMayuscula %>InstanceHttp} from "~/http/<%= nombreGuiones %>/<%= nombreGuiones %>-instance.http";
 import {eliminarUndNullVacio} from "~/functions/util/eliminar-und-null-vacio";
 import {<%= nombreMayuscula %>Interface} from "~/http/<%= nombreGuiones %>/<%= nombreGuiones %>.interface";
@@ -44,7 +44,7 @@ export const <%= nombreMayuscula %>Loader: LoaderFunction = async (
         if (busqueda) {
             findDto.busqueda = busqueda;
         }
-        findDto.sisHabilitado = url.searchParams.get("sisHabilitado") as unknown as SisHabilitadoEnum;
+        findDto.sisHabilitado = url.searchParams.get("sisHabilitado") as unknown as SisHabilitadoBuscarEnum;
         findDto.sisCreado = url.searchParams.get("sisCreado") as unknown as string;
         findDto.sisModificado = url.searchParams.get("sisModificado") as unknown as string;
     }

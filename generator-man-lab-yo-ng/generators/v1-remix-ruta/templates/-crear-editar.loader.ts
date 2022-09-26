@@ -29,7 +29,7 @@ export const <%= nombreMayuscula%>CrearEditarLoader: LoaderFunction = async (
     const findDto: <%= nombreMayuscula%>FindDto = LoaderSetQueryparams(requestUrl) as <%= nombreMayuscula%>FindDto;
     returnData.findDto = findDto
     if (!Number.isNaN(+<%= nombreCamel %>Id) && +<%= nombreCamel %>Id > 0) {
-        const registro = await <%= nombreMayuscula%>InstanceHttp.find({id: +<%= nombreCamel %>Id});
+        const registro = await <%= nombreMayuscula%>InstanceHttp.find({id: <%= nombreCamel %>Id});
         returnData.registro = registro[0][0];
     }
     const session = await getSession(

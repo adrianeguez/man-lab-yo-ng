@@ -40,7 +40,7 @@ import SubirArchivoContenedor from "~/components/subir-archivos/SubirArchivoCont
 import {TipoArchivoEnum} from "~/enum/tipo-archivo.enum";
 import UploadFileIcon from '@mui/icons-material/UploadFile';
 import BackupIcon from '@mui/icons-material/Backup';
-import {SisHabilitadoEnum} from "~/enum/sis-habilitado.enum";
+import {SisHabilitadoCrearEnum} from "~/enum/sis-habilitado-crear.enum";
 import {NuevoArchivoInterface} from "~/classes/interfaces/nuevo-archivo.interface";
 import {<%= nombreMayuscula %>Tabla} from "~/components/<%= nombreGuiones %>/<%= nombreMayuscula %>Tabla";
 // Carga de datos en backend
@@ -191,7 +191,7 @@ export default function <%= nombreMayuscula %>() {
 
         // if(data.campoRelacion && typeof data.campoRelacion === 'object'){
         //     const campoRelacion = data.campoRelacion as CampoRelacionInterface;
-        //     data.campoRelacion = campoRelacion.id;
+        //     data.campoRelacion = campoRelacion.id.toString();
         // }
         // if(!data.campoRelacion && loaderData.findDto.campoRelacion){
         //     data.campoRelacion = loaderData.findDto.campoRelacion;
@@ -277,7 +277,7 @@ export default function <%= nombreMayuscula %>() {
                 const archivo: NuevoArchivoInterface = {
                     id: registroSeleccionadoRuta.id,
                     file: data[0],
-                    sisHabilitado: SisHabilitadoEnum.Activo,
+                    sisHabilitado: SisHabilitadoCrearEnum.Activo,
                     tipo: TipoArchivoEnum.Archivo,
                     nombreIdentificador: path.replace('/', '')
                 };
@@ -295,7 +295,7 @@ export default function <%= nombreMayuscula %>() {
                 const archivo: NuevoArchivoInterface = {
                     id: registroSeleccionadoRuta.id,
                     file: data[0],
-                    sisHabilitado: SisHabilitadoEnum.Activo,
+                    sisHabilitado: SisHabilitadoCrearEnum.Activo,
                     tipo: TipoArchivoEnum.Imagen,
                     nombreIdentificador: path.replace('/', '')
                 };

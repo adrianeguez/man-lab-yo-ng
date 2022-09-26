@@ -1,8 +1,6 @@
 import {CampoFormularioType} from "~/components/form/lib/enum/campo-formulario.type";
 import {<%= nombreMayuscula %>Enum} from "~/http/<%= nombreGuiones %>/form/<%= nombreGuiones %>.enum";
 import {CampoFormularioInterface} from "~/components/form/lib/interfaces/campo-formulario.interface";
-import {SisHabilitadoEnum} from "~/enum/sis-habilitado.enum";
-import {FormularioComunEnum} from "~/enum/formulario-comun.enum";
 
 export function <%= nombreMayuscula %>Form(): CampoFormularioInterface[] {
     return [

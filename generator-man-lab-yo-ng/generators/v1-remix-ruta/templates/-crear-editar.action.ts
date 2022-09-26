@@ -2,12 +2,12 @@ import {ActionFunction, redirect} from "@remix-run/node";
 import {LoaderSetQueryparams} from "~/functions/http/loader-set-queryparams";
 import {<%= nombreMayuscula %>InstanceHttp} from "~/http/<%= nombreGuiones %>/<%= nombreGuiones %>-instance.http";
 import {<%= nombreMayuscula %>CreateDto} from "~/http/<%= nombreGuiones %>/dto/<%= nombreGuiones %>-create.dto";
-import {SisHabilitadoEnum} from "~/enum/sis-habilitado.enum";
 import {convertirQueryParams} from "~/functions/http/convertir-query-params";
 import {eliminarUndNullVacio} from "~/functions/util/eliminar-und-null-vacio";
 import {<%= nombreMayuscula %>Enum} from "~/http/<%= nombreGuiones %>/form/<%= nombreGuiones %>.enum";
 import {<%= nombreMayuscula %>UpdateDto} from "~/http/<%= nombreGuiones %>/dto/<%= nombreGuiones %>-update.dto";
 import {FormularioComunEnum} from "~/enum/formulario-comun.enum";
+import {SisHabilitadoCrearEnum} from "~/enum/sis-habilitado-crear.enum";
 
 export const <%= nombreMayuscula %>CrearEditarAction: ActionFunction = async (dataFunctionArgs) => {
     // Cargar Queryparams
@@ -28,7 +28,6 @@ export const <%= nombreMayuscula %>CrearEditarAction: ActionFunction = async (da
                 return redirect(CONFIG.LOGOUT_URL)
             }
             const updateDto: <%= nombreMayuscula %>UpdateDto = {
-                sisHabilitado: body.get(FormularioComunEnum.SisHabilitado) as unknown as SisHabilitadoEnum,
                 // nombre: body.get(<%= nombreMayuscula %>Enum.Nombre) as string,
             };
             respuesta = await <%= nombreMayuscula %>InstanceHttp.updateById(updateDto, +id);
@@ -41,7 +40,7 @@ export const <%= nombreMayuscula %>CrearEditarAction: ActionFunction = async (da
                 return redirect(CONFIG.LOGOUT_URL)
             }
             const createDto: <%= nombreMayuscula %>CreateDto = {
-                sisHabilitado: body.get(FormularioComunEnum.SisHabilitado) as unknown as SisHabilitadoEnum,
+                sisHabilitado: body.get(FormularioComunEnum.SisHabilitado) as unknown as SisHabilitadoCrearEnum,
                 // nombre: body.get(<%= nombreMayuscula %>Enum.Nombre) as string,
             };
             respuesta = await <%= nombreMayuscula %>InstanceHttp.create(createDto);
