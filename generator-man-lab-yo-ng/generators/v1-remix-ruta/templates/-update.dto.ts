@@ -1,4 +1,4 @@
-import type {<%= nombreMayuscula %>ActualizarDto} from "~/generated/model/<%= nombreCamel %>ActualizarDto";
+import type {<%= nombreMayuscula %>ActualizarDto} from "~/generated/api-solo-back";
 
 export interface <%= nombreMayuscula %>UpdateDto extends <%= nombreMayuscula %>ActualizarDto{
 

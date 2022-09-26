@@ -1,4 +1,4 @@
-import type {AutorLibroCrearDto} from "~/generated/model/<%= nombreCamel %>CrearDto";
+import type {<%= nombreMayuscula %>CrearDto} from "~/generated/api-solo-back";
 
 export interface <%= nombreMayuscula %>CreateDto extends <%= nombreMayuscula %>CrearDto{
 

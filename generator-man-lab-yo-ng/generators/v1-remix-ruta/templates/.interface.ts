@@ -1,4 +1,4 @@
-import {<%= nombreMayuscula %>RespuestaBusquedaDto} from "~/generated/model/<%= nombreCamel %>RespuestaBusquedaDto";
+import {<%= nombreMayuscula %>RespuestaBusquedaDto} from "~/generated/api-solo-back";
 
 export interface <%= nombreMayuscula %>Interface extends <%= nombreMayuscula %>RespuestaBusquedaDto{
     // <%= nombreMayuscula %>RespuestaBusquedaDto es generado en el backend
