@@ -2,10 +2,10 @@ import {json, LoaderFunction} from "@remix-run/node";
 import {<%= nombreMayuscula%>FindDto} from "~/http/<%= nombreGuiones%>/dto/<%= nombreGuiones%>-find.dto";
 import {LoaderSetQueryparams} from "~/functions/http/loader-set-queryparams";
 import {<%= nombreMayuscula%>InstanceHttp} from "~/http/<%= nombreGuiones%>/<%= nombreGuiones%>-instance.http";
-import {<%= nombreMayuscula%>Interface} from "~/http/<%= nombreGuiones%>/<%= nombreGuiones%>.interface";
+import {<%= nombreMayuscula%>Class} from "~/http/<%= nombreGuiones%>/<%= nombreGuiones%>.class";
 
 export type <%= nombreMayuscula%>CrearEditarLoaderData = {
-    registro?: <%= nombreMayuscula%>Interface,
+    registro?: <%= nombreMayuscula%>Class,
     findDto: <%= nombreMayuscula%>FindDto; // Guardamos para devolver a la ruta anterior los query params
     sesion?: ObjetoSesionDto;
 };
@@ -31,6 +31,9 @@ export const <%= nombreMayuscula%>CrearEditarLoader: LoaderFunction = async (
     if (!Number.isNaN(+<%= nombreCamel %>Id) && +<%= nombreCamel %>Id > 0) {
         const registro = await <%= nombreMayuscula%>InstanceHttp.find({id: <%= nombreCamel %>Id});
         returnData.registro = registro[0][0];
+        if(registro[0][0]){
+            returnData.registro = new <%= nombreMayuscula%>Class(registro[0][0]);
+        }
     }
     const session = await getSession(
         request.headers.get("Cookie")

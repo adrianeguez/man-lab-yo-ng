@@ -52,7 +52,7 @@ const TEMPLATES = {
     HTTP_FORM_FILTRO_ACCORDION_FORM: '-filtro-accordion.form.tsx',
     HTTP_SORT_SORT_FIELDS: '.sort-fields.ts',
     HTTP_HTTP: '.http.ts',
-    HTTP_INTERFACE: '.interface.ts',
+    HTTP_CLASS: '.class.ts',
     HTTP_LOADER: '.loader.ts',
     HTTP_CREAR_EDITAR_ACTION: '-crear-editar.action.ts',
     HTTP_CREAR_EDITAR_LOADER: '-crear-editar.loader.ts',
@@ -395,12 +395,12 @@ module.exports = class extends Generator {
             variables
         );
 
-        const templateHttpInterface = this.templatePath(TEMPLATES.HTTP_INTERFACE);
-        const destinoHttpInterface = this.destinationPath(`./http/${nombreGuiones}/${nombreGuiones}.interface.ts`);
+        const templateHttpClass = this.templatePath(TEMPLATES.HTTP_CLASS);
+        const destinoHttpClass = this.destinationPath(`./http/${nombreGuiones}/${nombreGuiones}.class.ts`);
 
         this.fs.copyTpl(
-            templateHttpInterface,
-            destinoHttpInterface,
+            templateHttpClass,
+            destinoHttpClass,
             variables
         );
 

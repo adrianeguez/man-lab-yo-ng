@@ -1,8 +1,8 @@
-import {<%= nombreMayuscula %>Interface} from "~/http/<%= nombreGuiones %>/<%= nombreGuiones %>.interface";
+import {<%= nombreMayuscula %>Class} from "~/http/<%= nombreGuiones %>/<%= nombreGuiones %>.class";
 import {<%= nombreMayuscula %>MostrarEnum} from "~/components/<%= nombreGuiones %>/enums/<%= nombreGuiones %>-mostrar.enum";
 
 export interface <%= nombreMayuscula %>MostrarInterface {
-    registro: <%= nombreMayuscula %>Interface;
-    dioClicBoton?: (registro: <%= nombreMayuscula %>Interface,
+    registro: <%= nombreMayuscula %>Class;
+    dioClicBoton?: (registro: <%= nombreMayuscula %>Class,
                     nombreEvento: <%= nombreMayuscula %>MostrarEnum) => void;
 }

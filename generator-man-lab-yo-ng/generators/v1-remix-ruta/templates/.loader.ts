@@ -5,10 +5,10 @@ import {LoaderSettearFindtoComun} from "~/functions/http/loader-settear-findto-c
 import type {SisHabilitadoBuscarEnum} from "~/enum/sis-habilitado-buscar.enum";
 import {<%= nombreMayuscula %>InstanceHttp} from "~/http/<%= nombreGuiones %>/<%= nombreGuiones %>-instance.http";
 import {eliminarUndNullVacio} from "~/functions/util/eliminar-und-null-vacio";
-import {<%= nombreMayuscula %>Interface} from "~/http/<%= nombreGuiones %>/<%= nombreGuiones %>.interface";
+import {<%= nombreMayuscula %>Class} from "~/http/<%= nombreGuiones %>/<%= nombreGuiones %>.class";
 
 export type <%= nombreMayuscula %>LoaderData = {
-    registros?: [<%= nombreMayuscula %>Interface[], number],
+    registros?: [<%= nombreMayuscula %>Class[], number],
     error?: string,
     mensaje?: string;
     findDto: <%= nombreMayuscula %>FindDto;
@@ -51,7 +51,10 @@ export const <%= nombreMayuscula %>Loader: LoaderFunction = async (
     returnData.mensaje = url.searchParams.get("mensaje") as unknown as string;
     returnData.findDto = {...findDto};
     try {
-        returnData.registros = await <%= nombreMayuscula %>InstanceHttp.find(eliminarUndNullVacio(findDto))
+        returnData.registros = await <%= nombreMayuscula %>InstanceHttp.find(eliminarUndNullVacio(findDto));
+        if(returnData.registros){
+            returnData.registros[0] = returnData.registros[0].map((registro)=>  new <%= nombreMayuscula %>Class(registro));
+        }
     } catch (error: any) {
         console.error({error, mensaje: 'Error consultando registros'});
         returnData.error = 'Error consultando registros';

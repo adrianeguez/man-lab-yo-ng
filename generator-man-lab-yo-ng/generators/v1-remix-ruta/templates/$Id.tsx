@@ -8,7 +8,7 @@ import {<%= nombreMayuscula %>CrearEditarAction} from "~/http/<%= nombreGuiones 
 import PopUpContenedor from "~/components/util/PopUpContenedor";
 import {BlockTitle, Button, List} from "konsta/react";
 import {Form, useLoaderData, useNavigate} from "@remix-run/react";
-import {<%= nombreMayuscula %>Interface} from "~/http/<%= nombreGuiones %>/<%= nombreGuiones %>.interface";
+import {<%= nombreMayuscula %>Class} from "~/http/<%= nombreGuiones %>/<%= nombreGuiones %>.class";
 import {useContext, useEffect, useState} from "react";
 import {motion} from "framer-motion";
 import {convertirQueryParams} from "~/functions/http/convertir-query-params";
@@ -33,7 +33,7 @@ export default function <%= nombreCamel %>Id() {
     const navigate = useNavigate();
     const path = '/<%= nombreGuiones %>';
     const data: <%= nombreMayuscula %>CrearEditarLoaderData = useLoaderData();
-    let estaEditando: <%= nombreMayuscula %>Interface | undefined;
+    let estaEditando: <%= nombreMayuscula %>Class | undefined;
     if (data.registro) {
         estaEditando = data.registro;
     }
@@ -181,7 +181,7 @@ export default function <%= nombreCamel %>Id() {
     // DESCOMENTAR SI NECESITAN AUTOCOMPLETE:
     const generarComponenteAutocompletePorFormControlName = {
         // PARA AUTOCOMPLETE DESCOMENTAR ESTO Y COLOCAR EL nombreCampoRelacion y el NombreCampoRelacionMostrar
-        // nombreCampoRelacion: (registro: NombreCampoRelacionInterface, campoFormulario: CampoFormularioInterface) => {
+        // nombreCampoRelacion: (registro: NombreCampoRelacionClass, campoFormulario: CampoFormularioInterface) => {
         //     return (<><NombreCampoRelacionMostrar registro={registro}/></>)
         // },
     };

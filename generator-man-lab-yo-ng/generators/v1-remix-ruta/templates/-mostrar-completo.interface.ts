@@ -1,5 +1,5 @@
-import {<%= nombreMayuscula %>Interface} from "~/http/<%= nombreGuiones %>/<%= nombreGuiones %>.interface";
+import {<%= nombreMayuscula %>Class} from "~/http/<%= nombreGuiones %>/<%= nombreGuiones %>.class";
 
 export interface <%= nombreMayuscula %>MostrarCompletoInterface {
-    registro: <%= nombreMayuscula %>Interface
+    registro: <%= nombreMayuscula %>Class
 }

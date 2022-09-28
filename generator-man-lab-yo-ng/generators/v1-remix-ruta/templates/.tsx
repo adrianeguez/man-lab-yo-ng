@@ -1,5 +1,5 @@
 import KonstaContainer from "~/components/KonstaContainer";
-import type {<%= nombreMayuscula %>Interface} from "~/http/<%= nombreGuiones %>/<%= nombreGuiones %>.interface";
+import type {<%= nombreMayuscula %>Class} from "~/http/<%= nombreGuiones %>/<%= nombreGuiones %>.class";
 import type {LoaderFunction} from "@remix-run/node";
 import {useLoaderData, useNavigate} from "@remix-run/react";
 import {useContext, useEffect, useState} from "react";
@@ -77,7 +77,7 @@ export default function <%= nombreMayuscula %>() {
     const [abrioOpciones, setAbrioOpciones] = useState(false);
     const [subirImagenAbierto, setSubirImagenAbierto] = useState(false);
     const [subirArchivoAbierto, setSubirArchivoAbierto] = useState(false);
-    const [registroSeleccionadoRuta, setRegistroSeleccionadoRuta] = useState({} as <%= nombreMayuscula %>Interface);
+    const [registroSeleccionadoRuta, setRegistroSeleccionadoRuta] = useState({} as <%= nombreMayuscula %>Class);
     const [visualizacionRegistroAbierto, setVisualizacionRegistroAbierto] = useState(false);
     const [camposFiltrosBusqueda, setCamposFiltrosBusqueda] = useState([...<%= nombreMayuscula %>FiltroForm()]);
     const [accordeonCamposFiltro] = useState(<%= nombreMayuscula %>FiltroAccordionForm());
@@ -208,7 +208,7 @@ export default function <%= nombreMayuscula %>() {
         recargarPaginaSinQueryParams();
     }
     const eventoClicBotonOpciones = (
-        registro: <%= nombreMayuscula %>Interface,
+        registro: <%= nombreMayuscula %>Class,
         nombreEvento: <%= nombreMayuscula %>MostrarEnum
     ) => {
         setRegistroSeleccionadoRuta(registro);
@@ -312,7 +312,7 @@ export default function <%= nombreMayuscula %>() {
             {loaderData.registros &&
                 <>
                     {/* Ruta */}
-                    <RutaComun<<%= nombreMayuscula %>Interface, <%= nombreMayuscula %>FindDto>
+                    <RutaComun<<%= nombreMayuscula %>Class, <%= nombreMayuscula %>FindDto>
                         eventoLimpiarBusqueda={eventoLimpiarBusqueda}
                         findDto={loaderData.findDto}
                         navbar={navbar}
