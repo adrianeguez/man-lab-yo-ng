@@ -12,6 +12,7 @@ export class <%= nombreMayuscula %>Class implements <%= nombreMayuscula %>Respue
     sisHabilitado!: 1 | 0;
     sisModificado!: string;
     // <%= nombreMayuscula %>RespuestaBusquedaDto es generado en el backend
+    // Campos de la entidad
     // nombreCampoOpcional?: string;
     // nombreCampoRequerido!: string;
     // nombreRelacionRequerida!: ClaseRelacionRequeridaClass;
@@ -28,6 +29,7 @@ export class <%= nombreMayuscula %>Class implements <%= nombreMayuscula %>Respue
         this.sisImagen = dto.sisImagen;
         this.sisHabilitado = dto.sisHabilitado;
         this.sisModificado = dto.sisModificado;
+        // Campos de la entidad
         // this.nombreCampoOpcional = dto.nombreCampoOpcional;
         // this.nombreCampoRequerido = dto.nombreCampoRequerido;
         // this.nombreRelacionRequerida = new ClaseRelacionRequeridaClass(dto.nombreCampoRequerido);

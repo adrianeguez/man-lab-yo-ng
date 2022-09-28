@@ -11,7 +11,7 @@ export class <%= nombreMayuscula %>Http extends AbstractHttp<<%= nombreMayuscula
         );
     }
 
-    async buscar<%= nombreMayuscula %>(texto: string, setLoading:any, toast:any) {
+    async buscar<%= nombreMayuscula %>(texto: string, setLoading:any, toast:any): Promise<[<%= nombreMayuscula %>Class[], number] > {
         try {
             let registros: [<%= nombreMayuscula %>Class[], number] = [[], 0];
             setLoading(true);
