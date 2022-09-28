@@ -52,9 +52,6 @@ export const <%= nombreMayuscula %>Loader: LoaderFunction = async (
     returnData.findDto = {...findDto};
     try {
         returnData.registros = await <%= nombreMayuscula %>InstanceHttp.find(eliminarUndNullVacio(findDto));
-        if(returnData.registros){
-            returnData.registros[0] = returnData.registros[0].map((registro)=>  new <%= nombreMayuscula %>Class(registro));
-        }
     } catch (error: any) {
         console.error({error, mensaje: 'Error consultando registros'});
         returnData.error = 'Error consultando registros';

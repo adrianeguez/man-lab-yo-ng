@@ -32,7 +32,7 @@ export const <%= nombreMayuscula%>CrearEditarLoader: LoaderFunction = async (
         const registro = await <%= nombreMayuscula%>InstanceHttp.find({id: <%= nombreCamel %>Id});
         returnData.registro = registro[0][0];
         if(registro[0][0]){
-            returnData.registro = new <%= nombreMayuscula%>Class(registro[0][0]);
+            returnData.registro = registro[0][0];
         }
     }
     const session = await getSession(

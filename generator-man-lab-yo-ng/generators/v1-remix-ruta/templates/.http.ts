@@ -4,10 +4,11 @@ import {<%= nombreMayuscula %>CreateDto} from "~/http/<%= nombreGuiones %>/dto/<
 import {<%= nombreMayuscula %>Class} from "~/http/<%= nombreGuiones %>/<%= nombreGuiones %>.class";
 import {<%= nombreMayuscula %>InstanceHttp} from "~/http/<%= nombreGuiones %>/<%= nombreGuiones %>-instance.http";
 
-export class <%= nombreMayuscula %>Http extends AbstractHttp<<%= nombreMayuscula %>FindDto, <%= nombreMayuscula %>CreateDto, <%= nombreMayuscula %>BusquedaDto, <%= nombreMayuscula %>UpdateDto>{
+export class <%= nombreMayuscula %>Http extends AbstractHttp<<%= nombreMayuscula %>FindDto, <%= nombreMayuscula %>CreateDto, <%= nombreMayuscula %>BusquedaDto, <%= nombreMayuscula %>UpdateDto, <%= nombreMayuscula %>Class>{
     constructor(url:string) {
         super(
-            url
+            url,
+            <%= nombreMayuscula %>Class
         );
     }
 
