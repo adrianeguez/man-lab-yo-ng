@@ -43,6 +43,10 @@ import BackupIcon from '@mui/icons-material/Backup';
 import {SisHabilitadoCrearEnum} from "~/enum/sis-habilitado-crear.enum";
 import {NuevoArchivoInterface} from "~/classes/interfaces/nuevo-archivo.interface";
 import {<%= nombreMayuscula %>Tabla} from "~/components/<%= nombreGuiones %>/<%= nombreMayuscula %>Tabla";
+import {Permission} from "~/generated/graphql";
+import {verificarSessionFrontend} from "~/functions/auth/verificar-session-frontend";
+import {ErrorHttp} from "~/classes/abstract.http";
+
 // Carga de datos en backend
 export const loader: LoaderFunction = <%= nombreMayuscula %>Loader;
 
@@ -146,7 +150,13 @@ export default function <%= nombreMayuscula %>() {
             if (!tienePermisos) {
                 toast.error('No tiene permisos');
             } else {
-                await DeshabilitarRegistroHttp(<%= nombreMayuscula %>InstanceHttp, registroSeleccionadoRuta);
+                const respuestaDeshabilitar = await DeshabilitarRegistroHttp(<%= nombreMayuscula %>InstanceHttp, registroSeleccionadoRuta);
+                const error = respuestaDeshabilitar as ErrorHttp;
+                if (error.statusCode) {
+                    toast.error('Error cargando archivo');
+                } else {
+                    toast.success('Registro actualizado');
+                }
                 setAbrioOpciones(false);
                 toast.success('Registro actualizado');
                 recargarPaginaConNuevosQueryParams();
@@ -282,6 +292,12 @@ export default function <%= nombreMayuscula %>() {
                     nombreIdentificador: path.replace('/', '')
                 };
                 const resultado = await <%= nombreMayuscula %>InstanceHttp.subirArchivoPrincipal(archivo);
+                const error = resultado as ErrorHttp;
+                if (error.statusCode) {
+                    toast.error('Error cargando archivo');
+                } else {
+                    toast.success('Archivo subido con exito');
+                }
                 setSubirArchivoAbierto(false);
             }
         }
@@ -300,6 +316,12 @@ export default function <%= nombreMayuscula %>() {
                     nombreIdentificador: path.replace('/', '')
                 };
                 const resultado = await <%= nombreMayuscula %>InstanceHttp.subirArchivoPrincipal(archivo);
+                const error = resultado as ErrorHttp;
+                if (error.statusCode) {
+                    toast.error('Error cargando imagen');
+                } else {
+                    toast.success('Imagen subida con exito');
+                }
                 setSubirImagenAbierto(false);
             }
         }

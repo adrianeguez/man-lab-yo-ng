@@ -1,10 +1,12 @@
 import type {<%= nombreMayuscula %>FindDto} from "~/http/<%= nombreGuiones %>/dto/<%= nombreGuiones %>-find.dto";
-import {AbstractHttp} from "~/classes/abstract.http";
+import {AbstractHttp, ErrorHttp} from "~/classes/abstract.http";
 import {<%= nombreMayuscula %>CreateDto} from "~/http/<%= nombreGuiones %>/dto/<%= nombreGuiones %>-create.dto";
 import {<%= nombreMayuscula %>Class} from "~/http/<%= nombreGuiones %>/<%= nombreGuiones %>.class";
 import {<%= nombreMayuscula %>InstanceHttp} from "~/http/<%= nombreGuiones %>/<%= nombreGuiones %>-instance.http";
+import {<%= nombreMayuscula %>UpdateDto} from "~/http/<%= nombreGuiones %>/dto/<%= nombreGuiones %>-update.dto";
+import {<%= nombreMayuscula %>RespuestaBusquedaDto} from "~/generated/api-solo-back";
 
-export class <%= nombreMayuscula %>Http extends AbstractHttp<<%= nombreMayuscula %>FindDto, <%= nombreMayuscula %>CreateDto, <%= nombreMayuscula %>BusquedaDto, <%= nombreMayuscula %>UpdateDto, <%= nombreMayuscula %>Class>{
+export class <%= nombreMayuscula %>Http extends AbstractHttp<<%= nombreMayuscula %>FindDto, <%= nombreMayuscula %>CreateDto, <%= nombreMayuscula %>RespuestaBusquedaDto, <%= nombreMayuscula %>UpdateDto, <%= nombreMayuscula %>Class>{
     constructor(url:string) {
         super(
             url,
@@ -16,14 +18,18 @@ export class <%= nombreMayuscula %>Http extends AbstractHttp<<%= nombreMayuscula
         try {
             let registros: [<%= nombreMayuscula %>Class[], number] = [[], 0];
             setLoading(true);
-            registros = await <%= nombreMayuscula %>InstanceHttp.find({
-                busqueda: texto
-            });
-            registros = respuesta as any;
-            registros[0] = registros[0].map((a) => new AutorLibroClass(a))
-            toast(`${registros[0].length} registros consultados`, {
-                icon: '📑'
-            });
+            const respuestaFind = await <%= nombreMayuscula %>InstanceHttp.find({
+                    busqueda: texto
+                });
+            const error = respuestaFind as ErrorHttp;
+            if (error.statusCode) {
+                toast.error('Error consultando datos');
+            } else {
+                registros = respuestaFind as [<%= nombreMayuscula %>Class[], number];
+                toast(`${registros[0].length} registros consultados`, {
+                    icon: '📑'
+                });
+            }
             setLoading(false);
             return registros;
         } catch (error) {

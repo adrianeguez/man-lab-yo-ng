@@ -8,6 +8,11 @@ import {<%= nombreMayuscula %>Enum} from "~/http/<%= nombreGuiones %>/form/<%= n
 import {<%= nombreMayuscula %>UpdateDto} from "~/http/<%= nombreGuiones %>/dto/<%= nombreGuiones %>-update.dto";
 import {FormularioComunEnum} from "~/enum/formulario-comun.enum";
 import {SisHabilitadoCrearEnum} from "~/enum/sis-habilitado-crear.enum";
+import {Permission} from "~/generated/graphql";
+import {verificarSessionPermisos} from "~/functions/auth/verificar-session-permisos";
+import {CONFIG} from "~/config";
+import {ErrorHttp} from "~/classes/abstract.http";
+import {<%= nombreMayuscula %>Class} from "~/http/<%= nombreGuiones %>/<%= nombreGuiones %>.class";
 
 export const <%= nombreMayuscula %>CrearEditarAction: ActionFunction = async (dataFunctionArgs) => {
     // Cargar Queryparams
@@ -17,7 +22,7 @@ export const <%= nombreMayuscula %>CrearEditarAction: ActionFunction = async (da
     // Generar Body
     const body = await dataFunctionArgs.request.formData();
     try {
-        let respuesta: any;
+        let respuesta!: <%= nombreMayuscula%>Class | ErrorHttp;
         const id = body.get('id');
         if (id) {
             const permisosCrear = [
@@ -30,7 +35,12 @@ export const <%= nombreMayuscula %>CrearEditarAction: ActionFunction = async (da
             const updateDto: <%= nombreMayuscula %>UpdateDto = {
                 // nombre: body.get(<%= nombreMayuscula %>Enum.Nombre) as string,
             };
-            respuesta = await <%= nombreMayuscula %>InstanceHttp.updateById(updateDto, +id);
+            try {
+                respuesta = await <%= nombreMayuscula %>InstanceHttp.updateById(updateDto, +id);
+            } catch (error) {
+                console.error({error, mensaje: 'Error enviando datos'});
+                respuesta = {statusCode: 500, message: 'Error en crear'};
+            }
         } else {
             const permisosEditar = [
                 Permission.<%= nombreMayuscula%>Editar
@@ -43,19 +53,21 @@ export const <%= nombreMayuscula %>CrearEditarAction: ActionFunction = async (da
                 sisHabilitado: body.get(FormularioComunEnum.SisHabilitado) as unknown as SisHabilitadoCrearEnum,
                 // nombre: body.get(<%= nombreMayuscula %>Enum.Nombre) as string,
             };
-            respuesta = await <%= nombreMayuscula %>InstanceHttp.create(createDto);
-        }
-        if (respuesta.statusCode) {
-            if (respuesta.statusCode === 400) {
-                console.error({error: respuesta.message, mensaje: 'Error creando registro'});
-                return new Response(null as any, {status: 400}) as any;
-            } else {
-                console.error({mensaje: 'Error creando registro'});
-                return new Response(null as any, {status: 500}) as any;
+            try {
+                respuesta = await <%= nombreMayuscula %>InstanceHttp.create(createDto);
+            } catch (error) {
+                console.error({error, mensaje: 'Error enviando datos'});
+                respuesta = {statusCode: 500, message: 'Error en crear'};
             }
         }
-        // fetch POST <%= nombreGuiones %> NESTJS
-        return redirect(`/<%= nombreGuiones %>?${convertirQueryParams(eliminarUndNullVacio(findDto))}&mensaje=Registro creado`) as any;
+        const error = respuesta as ErrorHttp;
+        if (error.statusCode) {
+            // fetch POST <%= nombreGuiones %> NESTJS
+            return redirect(`/<%= nombreGuiones %>?${convertirQueryParams(eliminarUndNullVacio(findDto))}&mensaje=Registro creado`) as any;
+        } else {
+            console.error({error: error.message, mensaje: 'Error creando/editando registro'});
+            return new Response(null as any, {status: error.statusCode}) as any;
+        }
     } catch (error) {
         console.error({error, mensaje: 'Error gestionando registro'});
         return new Response(null as any, {status: 500}) as any;

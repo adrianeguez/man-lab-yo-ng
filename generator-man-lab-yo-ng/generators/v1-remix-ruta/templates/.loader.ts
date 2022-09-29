@@ -1,4 +1,4 @@
-import {json, LoaderFunction} from "@remix-run/node";
+import {json, LoaderFunction, redirect} from "@remix-run/node";
 import {<%= nombreMayuscula %>FindDto} from "~/http/<%= nombreGuiones %>/dto/<%= nombreGuiones %>-find.dto";
 import {LoaderSetQueryparams} from "~/functions/http/loader-set-queryparams";
 import {LoaderSettearFindtoComun} from "~/functions/http/loader-settear-findto-comun";
@@ -6,6 +6,11 @@ import type {SisHabilitadoBuscarEnum} from "~/enum/sis-habilitado-buscar.enum";
 import {<%= nombreMayuscula %>InstanceHttp} from "~/http/<%= nombreGuiones %>/<%= nombreGuiones %>-instance.http";
 import {eliminarUndNullVacio} from "~/functions/util/eliminar-und-null-vacio";
 import {<%= nombreMayuscula %>Class} from "~/http/<%= nombreGuiones %>/<%= nombreGuiones %>.class";
+import {ObjetoSesionDto} from "~/urql/auth/dto/objeto-sesion.dto";
+import {Permission} from "~/generated/graphql";
+import {verificarSessionPermisos} from "~/functions/auth/verificar-session-permisos";
+import {getSession} from "~/sessions-redis.server";
+import {ErrorHttp} from "~/classes/abstract.http";
 
 export type <%= nombreMayuscula %>LoaderData = {
     registros?: [<%= nombreMayuscula %>Class[], number],
@@ -36,7 +41,7 @@ export const <%= nombreMayuscula %>Loader: LoaderFunction = async (
     // Busqueda por ID
     if(id){
         if (!Number.isNaN(+id) && +id > 0) {
-            findDto.id = +id;
+            findDto.id = id;
         }
     } else {
         // Busqueda por otros parametros
@@ -51,7 +56,13 @@ export const <%= nombreMayuscula %>Loader: LoaderFunction = async (
     returnData.mensaje = url.searchParams.get("mensaje") as unknown as string;
     returnData.findDto = {...findDto};
     try {
-        returnData.registros = await <%= nombreMayuscula %>InstanceHttp.find(eliminarUndNullVacio(findDto));
+        const respuestaFind = await <%= nombreMayuscula %>InstanceHttp.find(eliminarUndNullVacio(findDto));
+        const error = respuestaFind as ErrorHttp;
+        if (error.statusCode) {
+            returnData.error = 'Error consultando registros';
+        } else {
+            returnData.registros = respuestaFind as [<%= nombreMayuscula %>Class[], number];
+        }
     } catch (error: any) {
         console.error({error, mensaje: 'Error consultando registros'});
         returnData.error = 'Error consultando registros';

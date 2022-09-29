@@ -22,6 +22,8 @@ import toast from "react-hot-toast";
 import {<%= nombreMayuscula %>Enum} from "~/http/<%= nombreGuiones %>/form/<%= nombreGuiones %>.enum";
 import {FormularioComunEnum} from "~/enum/formulario-comun.enum";
 import {<%= nombreMayuscula %>AccordionForm} from "~/http/<%= nombreGuiones %>/form/<%= nombreGuiones %>-accordion.form";
+import {<%= nombreMayuscula %>UpdateDto} from "~/http/<%= nombreGuiones %>/dto/<%= nombreGuiones %>-update.dto";
+import {<%= nombreMayuscula %>CreateDto} from "~/http/<%= nombreGuiones %>/dto/<%= nombreGuiones %>-create.dto";
 
 // Loader
 export const loader: LoaderFunction = <%= nombreMayuscula %>CrearEditarLoader;
@@ -186,16 +188,16 @@ export default function <%= nombreCamel %>Id() {
         // },
     };
 
-    const buscarAutocomplete = async () => {
-        switch (campoFormularioAutocompleteGlobal.formControlName) {
-            // PARA AUTOCOMPLETE DESCOMENTAR ESTO Y COLOCAR EL nombreCampoRelacion y el NombreCampoRelacion
-            // case 'nombreCampoRelacion':
-            //     buscarAutocompleteCampoNombreCampoRelacion();
-            //     break;
-            default:
-                break;
-        }
-    };
+    // const buscarAutocomplete = async () => {
+    //     switch (campoFormularioAutocompleteGlobal.formControlName) {
+    //         // PARA AUTOCOMPLETE DESCOMENTAR ESTO Y COLOCAR EL nombreCampoRelacion y el NombreCampoRelacion
+    //         // case 'nombreCampoRelacion':
+    //         //     buscarAutocompleteCampoNombreCampoRelacion();
+    //         //     break;
+    //         default:
+    //             break;
+    //     }
+    // };
 
     // DESCOMENTAR SI NECESITAN AUTOCOMPLETE:
     // // Metodos REST
