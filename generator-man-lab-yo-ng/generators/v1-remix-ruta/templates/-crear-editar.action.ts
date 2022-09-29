@@ -39,7 +39,7 @@ export const <%= nombreMayuscula %>CrearEditarAction: ActionFunction = async (da
                 respuesta = await <%= nombreMayuscula %>InstanceHttp.updateById(updateDto, +id);
             } catch (error) {
                 console.error({error, mensaje: 'Error enviando datos'});
-                respuesta = {statusCode: 500, message: 'Error en crear'};
+                respuesta = {statusCode: 500, message: 'Error en updateById'};
             }
         } else {
             const permisosEditar = [
