@@ -62,11 +62,11 @@ export const <%= nombreMayuscula %>CrearEditarAction: ActionFunction = async (da
         }
         const error = respuesta as ErrorHttp;
         if (error.statusCode) {
-            // fetch POST <%= nombreGuiones %> NESTJS
-            return redirect(`/<%= nombreGuiones %>?${convertirQueryParams(eliminarUndNullVacio(findDto))}&mensaje=Registro creado`) as any;
-        } else {
             console.error({error: error.message, mensaje: 'Error creando/editando registro'});
             return new Response(null as any, {status: error.statusCode}) as any;
+        } else {
+            // fetch POST <%= nombreGuiones %> NESTJS
+            return redirect(`/<%= nombreGuiones %>?${convertirQueryParams(eliminarUndNullVacio(findDto))}&mensaje=Registro creado`) as any;
         }
     } catch (error) {
         console.error({error, mensaje: 'Error gestionando registro'});
