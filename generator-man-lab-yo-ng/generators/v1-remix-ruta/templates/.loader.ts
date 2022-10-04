@@ -11,6 +11,7 @@ import {Permission} from "~/generated/graphql";
 import {verificarSessionPermisos} from "~/functions/auth/verificar-session-permisos";
 import {getSession} from "~/sessions-redis.server";
 import {ErrorHttp} from "~/classes/abstract.http";
+import {CONFIG} from "~/config";
 
 export type <%= nombreMayuscula %>LoaderData = {
     registros?: [<%= nombreMayuscula %>Class[], number],
