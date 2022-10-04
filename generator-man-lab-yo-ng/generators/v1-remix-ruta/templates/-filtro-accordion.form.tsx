@@ -5,7 +5,7 @@ export function <%= nombreMayuscula %>FiltroAccordionForm(): CampoFormularioAcco
     return [
         ...AccordeonFiltroComunForm(),
         // {
-        //     id: 'comunes',
+        //     id: '<%= nombreGuiones %>-filtro-comunes',
         //     descripcion: 'Busque los registros',
         //     labelJSXElement: <p><SearchIcon className={'mr-2'}/>Comunes</p>,
         //     campos: [FiltrosComunesEnum.Busqueda, FiltrosComunesEnum.SisHabilitado],

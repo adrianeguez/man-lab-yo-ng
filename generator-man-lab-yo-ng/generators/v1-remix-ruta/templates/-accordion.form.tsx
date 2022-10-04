@@ -9,7 +9,7 @@ import {FormularioComunEnum} from "~/enum/formulario-comun.enum";
 export function <%= nombreMayuscula %>AccordionForm(): CampoFormularioAccordeonInterface[] {
     return [
         {
-            id: 'comunes',
+            id: '<%= nombreGuiones %>-comunes',
             descripcion: 'Campos comunes',
             labelJSXElement: <p><SearchIcon className={'mr-2'}/>Comunes</p>,
             campos: [

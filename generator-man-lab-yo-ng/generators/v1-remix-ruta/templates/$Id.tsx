@@ -39,29 +39,7 @@ export default function <%= nombreCamel %>Id() {
     if (data.registro) {
         estaEditando = data.registro;
     }
-    const camposFormulario: CampoFormularioInterface[] = [...<%= nombreMayuscula %>Form()]
-        .map(
-            (campo) => {
-                if (estaEditando) {
-                    // if (campo.formControlName === <%= nombreMayuscula %>Enum.Nombre) {
-                    //     campo.initialValue = estaEditando.nombre
-                    // }
-                    // if (campo.formControlName === FormularioComunEnum.SisHabilitado) {
-                    //     campo.initialValue = estaEditando.sisHabilitado
-                    // }
-                    // if (campo.formControlName === <%= nombreMayuscula %>Enum.CampoRelacion) {
-                    //     if (typeof estaEditando.campoRelacion === 'object') {
-                    //         campo.initialValue = estaEditando.campoRelacion.id;
-                    //
-                    //     }
-                    //     if (typeof estaEditando.campoRelacion === 'number') {
-                    //         campo.initialValue = estaEditando.campoRelacion;
-                    //     }
-                    // }
-                }
-                return campo;
-            }
-        );
+    const camposFormulario: CampoFormularioInterface[] = inicializarCampoFormulario<<%= nombreMayuscula %>Class | undefined>(estaEditando, <%= nombreMayuscula %>Form)
     const {
         // DESCOMENTAR SI NECESITAN AUTOCOMPLETE:
         // campoFormularioAutocompleteGlobal,
@@ -208,7 +186,13 @@ export default function <%= nombreCamel %>Id() {
         //     setLoading,
         //     toast
         // );
-        // setListaAutocomplete(respuesta[0]);
+        // const error = respuesta as ErrorHttp;
+        // if (error.statusCode) {
+        //     toast.error('Error consultando registros');
+        // } else {
+        //     const respuestaOk = respuesta as [LibroBibliotecaClass[], number];
+        //     setListaAutocomplete(respuestaOk);
+        // }
     // }
 
     // Metodos Page

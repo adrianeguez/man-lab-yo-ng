@@ -158,7 +158,6 @@ export default function <%= nombreMayuscula %>() {
                     toast.success('Registro actualizado');
                 }
                 setAbrioOpciones(false);
-                toast.success('Registro actualizado');
                 recargarPaginaConNuevosQueryParams();
             }
         }
