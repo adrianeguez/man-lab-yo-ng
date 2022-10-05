@@ -24,6 +24,7 @@ import {FormularioComunEnum} from "~/enum/formulario-comun.enum";
 import {<%= nombreMayuscula %>AccordionForm} from "~/http/<%= nombreGuiones %>/form/<%= nombreGuiones %>-accordion.form";
 import {<%= nombreMayuscula %>UpdateDto} from "~/http/<%= nombreGuiones %>/dto/<%= nombreGuiones %>-update.dto";
 import {<%= nombreMayuscula %>CreateDto} from "~/http/<%= nombreGuiones %>/dto/<%= nombreGuiones %>-create.dto";
+import {inicializarCampoFormulario} from "~/functions/form/inicializar-campo-formulario";
 
 // Loader
 export const loader: LoaderFunction = <%= nombreMayuscula %>CrearEditarLoader;
