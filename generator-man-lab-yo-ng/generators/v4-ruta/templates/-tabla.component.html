@@ -1,0 +1,51 @@
+<p-table [value]="registrosActuales[0]">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>ID</th>
+            <th>{{nombreModulo + '.camposFormulario.nombre.nombre' | translate}}</th>
+            <th>{{nombreModulo + '.camposFormulario.isbn.nombre' | translate}}</th>
+            <th>{{nombreModulo + '.camposFormulario.generoLibro.nombre' | translate}}</th>
+            <th>{{nombreModulo + '.camposFormulario.descripcion.nombre' | translate}}</th>
+            <th>{{nombreModulo + 'comunes.sisHabilitado' | translate}}</th>
+            <th>{{nombreModulo + 'comunes.acciones' | translate}}</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-registro>
+        <tr>
+            <td>{{registro.id}}</td>
+            <td>{{registro.nombre}}</td>
+            <td>{{registro.isbn}}</td>
+            <td>{{obtenerGeneroLibro(registro.generoLibro) | translate}}</td>
+            <td>{{registro.descripcion}}</td>
+            <td>
+                <span *ngIf="sisHabilitadoEnum.sisHabilitado === registro.sisHabilitado">
+                {{'comunes.habilitado' | translate}}
+                </span>
+                <span *ngIf="sisHabilitadoEnum.sisDeshabilitado === registro.sisHabilitado">
+                {{'comunes.deshabilitado' | translate}}
+                </span>
+            </td>
+            <td>
+                <button class="btn btn-outline btn-block"
+                        (click)="componente.abrirOpciones(true, registro)"
+                >
+
+                    {{'comunes.acciones' |  translate }}
+                    <clr-icon shape="bolt"></clr-icon>
+                </button>
+            </td>
+        </tr>
+        <tr *ngIf="registro.sisArchivo||registro.sisImagen">
+            <td colspan="7">
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="row-span-1 p-3 object-scale-down">
+                        <manti-mostrar-imagen [registro]="registro"></manti-mostrar-imagen>
+                    </div>
+                    <div class="row-span-1 p-3">
+                        <manti-mostrar-archivo [registro]="registro"></manti-mostrar-archivo>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>

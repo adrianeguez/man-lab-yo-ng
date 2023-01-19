@@ -1,0 +1,194 @@
+<manti-contenedor-ruta
+        [titulo]="nombreModulo + '.<%= nombreCamel %>.nombreRuta' | translate"
+        [descripcion]="nombreModulo + '.<%= nombreCamel %>.descripcion' | translate"
+        [colorDot]="colorDot"
+        [colorBorde]="colorBorde"
+>
+  <div class="descripcion">
+    <div class="grid grid-cols-10 gap-2">
+      <div class="col-span-2">
+        <img class="icono-ruta-imagen"
+             src="https://cdn-icons-png.flaticon.com/512/2135/2135050.png"
+             alt="libro biblioteca"
+        >
+      </div>
+      <div class="col-span-8">
+        <p>{{nombreModulo + '.descripcionRuta' | translate}}</p>
+      </div>
+    </div>
+  </div>
+
+  <manti-crud-ruta
+          [identificadorRuta]="identificadorRuta<%= nombreMayuscula %>"
+          [sortFields]="sortFields<%= nombreMayuscula %>"
+          [servicio]="<%= nombreCamel %>HttpService"
+          [MantiTabla]="MantiTabla<%= nombreMayuscula %>"
+          [MantiTablaMovil]="MantiTablaMovil<%= nombreMayuscula %>"
+          [MantiFiltros]="MantiFiltros<%= nombreMayuscula %>"
+          [MantiOpciones]="MantiOpciones<%= nombreMayuscula %>"
+          [findDto]="findDto<%= nombreMayuscula %>"
+          [habilitarArchivo]="true"
+          [habilitarImagen]="true"
+          (crudRutaEvento)="manejarEventos($event)"
+          (crudRutaEventoErrorHttp)="manejarEventosError($event)"
+          (seleccionoCrear)="manejarEventos($event)"
+
+  >
+    <!--        TABLA       -->
+    <ng-template #MantiTabla<%= nombreMayuscula %> let-componenteCrudRuta>
+      <manti-<%= nombreGuiones %>-tabla [registrosActuales]="componenteCrudRuta.registrosActuales"
+                                    [componente]="componenteCrudRuta"
+      >
+      </manti-<%= nombreGuiones %>-tabla>
+    </ng-template>
+    <!--        TABLA MOVIL       -->
+    <ng-template #MantiTablaMovil<%= nombreMayuscula %> let-componenteCrudRuta>
+      <div class="grid grid-cols-12 gap-4">
+        <div class="col-span-12" *ngIf="componenteCrudRuta.registrosActuales">
+          <div *ngFor="let registro of componenteCrudRuta.registrosActuales[0]">
+            <manti-<%= nombreGuiones %>-tabla-movil [registro]="registro"
+                                                [componente]="componenteCrudRuta"
+                                                [mostrarAcciones]="true"
+            >
+            </manti-<%= nombreGuiones %>-tabla-movil>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+    <!--        Formulario BUSQUEDA       -->
+    <ng-template #MantiFiltros<%= nombreMayuscula %> let-componenteCrudRuta>
+      <div *ngIf="componenteCrudRuta<%= nombreMayuscula %>">
+        <div *ngIf="componenteCrudRuta<%= nombreMayuscula %>.mostrarFiltros">
+          <form [formGroup]="form<%= nombreMayuscula %>FindDto.form"
+                (ngSubmit)="buscar<%= nombreMayuscula %>EnComponenteRuta(componenteCrudRuta)">
+            <manti-<%= nombreGuiones %>-find-dto [ruta]="this" [formManti]="form<%= nombreMayuscula %>FindDto">
+            </manti-<%= nombreGuiones %>-find-dto>
+            <br>
+            <button class="btn btn-outline btn-block" type="submit">
+              {{'comunes.buscar' | translate}}
+            </button>
+            <button class="btn btn-outline btn-block" type="button" (click)="resetear<%= nombreMayuscula %>FindDto()">
+              {{'comunes.reset' | translate}}
+            </button>
+          </form>
+        </div>
+      </div>
+    </ng-template>
+
+
+    <!--        Formulario CREAR EDITAR       -->
+    <ng-template #MantiCrearEditarFormulario<%= nombreMayuscula %>>
+      <form [formGroup]="form<%= nombreMayuscula %>CreateDto.form">
+        <manti-<%= nombreGuiones %>-create-dto *ngIf="!registroActual<%= nombreMayuscula %>" [ruta]="this"
+                                           [formManti]="form<%= nombreMayuscula %>CreateDto">
+        </manti-<%= nombreGuiones %>-create-dto>
+        <manti-<%= nombreGuiones %>-update-dto *ngIf="registroActual<%= nombreMayuscula %> && form<%= nombreMayuscula %>UpdateDto"
+                                           [ruta]="this" [formManti]="form<%= nombreMayuscula %>UpdateDto">
+        </manti-<%= nombreGuiones %>-update-dto>
+      </form>
+    </ng-template>
+    <!--        Acciones       -->
+    <ng-template #MantiOpciones<%= nombreMayuscula %> let-componenteCrudRuta>
+      <mat-accordion *ngIf="componenteCrudRuta.mostrarOpciones === true">
+        <mat-expansion-panel expanded="true">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{'comunes.opcionesComunes' |  translate }}
+            </mat-panel-title>
+            <mat-panel-description>
+              {{'comunes.opcionesComunesDescripcion' |  translate }}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="col-span-1">
+              <button class="btn btn-outline btn-block" (click)="editarRegistroAbrirDialogo<%= nombreMayuscula %>(componenteCrudRuta)">
+                {{'comunes.editar' |  translate }}
+              </button>
+            </div>
+            <div class="col-span-1">
+              <button class="btn btn-outline btn-block" (click)="eliminarRegistro<%= nombreMayuscula %>(componenteCrudRuta)"
+              >
+                {{'comunes.eliminar' |  translate }}
+              </button>
+            </div>
+            <div class="col-span-1">
+              <button class="btn btn-outline btn-block" (click)="componenteCrudRuta.descargarPDF()"
+              >
+                PDF <clr-icon shape="download"></clr-icon>
+              </button>
+            </div>
+            <div class="col-span-1">
+              <button class="btn btn-outline btn-block" (click)="componenteCrudRuta.descargarCSV()"
+              >
+                CSV <clr-icon shape="list"></clr-icon>
+              </button>
+            </div>
+            <div class="col-span-2">
+              <button class="btn btn-outline btn-block" (click)="componenteCrudRuta.abrirModalGestionArchivos()"
+              >
+                {{'comunes.gestionarArchivos' |  translate }}
+              </button>
+            </div>
+            <div class="col-span-2">
+              <button class="btn btn-outline btn-block" (click)="visualizarRegistro<%= nombreMayuscula %>(componenteCrudRuta)"
+              >
+                {{'comunes.visualizar' |  translate }}
+              </button>
+            </div>
+
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+      <br>
+    </ng-template>
+
+    <!--        Visualizacion       -->
+    <ng-template #ComponenteDialogoVisualizacion<%= nombreMayuscula %> let-componenteDialogo>
+      <div *ngIf="setearRegistro<%= nombreMayuscula %>(componenteDialogo)">
+        <manti-<%= nombreGuiones %>-tabla-movil [registro]="registroActual<%= nombreMayuscula %>"
+                                            [componente]="componenteCrudRuta<%= nombreMayuscula %>"
+                                            [mostrarAcciones]="false"
+        >
+        </manti-<%= nombreGuiones %>-tabla-movil>
+      </div>
+    </ng-template>
+
+    <!--        Acciones       -->
+    <ng-template #ComponenteDialogoVisualizacionAcciones<%= nombreMayuscula %> let-componenteDialogo>
+      <button class="btn btn-outline btn-block"
+              (click)="cerrarDialogo<%= nombreMayuscula %>(componenteDialogo)">
+        {{translationConstantes.comunes.aceptar | translate}}
+      </button>
+    </ng-template>
+
+    <ng-template #Autocomplete<%= nombreMayuscula %> let-autocompleteManticore>
+
+      <manti-<%= nombreGuiones %>-tabla-movil [registro]="autocompleteManticore.registro"
+                                          [mostrarAcciones]="false"
+                                          (click)="seleccionarAutocomplete(
+                                        autocompleteManticore.componente,
+                                        autocompleteManticore.registro
+                                        )"
+      >
+      </manti-<%= nombreGuiones %>-tabla-movil>
+    </ng-template>
+
+    <ng-template #Mostrar<%= nombreMayuscula %> let-field>
+      <div *ngIf="field ">
+
+      </div>
+      <div *ngIf="obtenerField<%= nombreMayuscula %>(field).type === 'object'">
+        <p>{{obtenerField<%= nombreMayuscula %>(field)?.field.nombre}} - {{obtenerField<%= nombreMayuscula %>(field)?.field.isbn}}</p>
+      </div>
+      <div *ngIf="obtenerField<%= nombreMayuscula %>(field).type === 'number'">
+        <p><strong>ID:</strong> {{obtenerField<%= nombreMayuscula %>(field)?.id}}</p>
+      </div>
+
+    </ng-template>
+  </manti-crud-ruta>
+
+  <div class="footer-contenedor">
+    <!--    CONTENIDO FOOTER    -->
+  </div>
+
+</manti-contenedor-ruta>

@@ -1,0 +1,36 @@
+<p-card [header]="registro.nombre" [subheader]="registro.isbn" styleClass="p-card-shadow">
+    <ng-template pTemplate="header">
+        <manti-mostrar-imagen *ngIf="registro.sisImagen" [registro]="registro"></manti-mostrar-imagen>
+    </ng-template>
+    <p>
+        <strong>{{nombreModulo + '.camposFormulario.descripcion.nombre' | translate}}:</strong>
+        {{registro.descripcion}}</p>
+    <p>
+        <strong>{{nombreModulo + '.camposFormulario.isbn.nombre' | translate}}: </strong>
+        {{registro.isbn}}</p>
+    <p>
+        <strong>{{nombreModulo + '.camposFormulario.generoLibro.nombre' | translate}} :</strong>
+        {{registro.generoLibro}}</p>
+    <p>
+        <strong>{{'comunes.sisHabilitado' | translate}}:</strong>
+        <span *ngIf="sisHabilitadoEnum.sisHabilitado === registro.sisHabilitado">
+            {{'comunes.habilitado' | translate}}
+        </span>
+        <span *ngIf="sisHabilitadoEnum.sisDeshabilitado === registro.sisHabilitado">
+            {{'comunes.deshabilitado' | translate}}
+        </span>
+    </p>
+    <ng-template pTemplate="footer">
+        <div *ngIf="registro.sisArchivo">
+            <manti-mostrar-archivo [registro]="registro"></manti-mostrar-archivo>
+        </div>
+        <div *ngIf="mostrarAcciones">
+            <button class="btn btn-outline btn-block"
+                    (click)="componente.abrirOpciones(true, registro)"
+            >
+                {{'comunes.acciones' |  translate }}
+                <clr-icon shape="bolt"></clr-icon>
+            </button>
+        </div>
+    </ng-template>
+</p-card>
