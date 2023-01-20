@@ -609,7 +609,7 @@ module.exports = class extends Generator {
             destinoServiciosHttpModule,
             variables
         );
-        const templateServiciosHttpService = this.templatePath(TEMPLATES.SRV_FORM_MODULE);
+        const templateServiciosHttpService = this.templatePath(TEMPLATES.SRV_FORM_HTTP_SERVICE);
         const destinoServiciosHttpService = this.destinationPath(`./servicios/${nombreGuiones}/http/${nombreGuiones}.http.service.ts`);
 
 
@@ -625,8 +625,8 @@ module.exports = class extends Generator {
 
 
         this.fs.copyTpl(
-            templateServiciosFormsModule,
-            destinoServiciosFormsModule,
+            templateServiciosSort,
+            destinoServiciosSort,
             variables
         );
 
