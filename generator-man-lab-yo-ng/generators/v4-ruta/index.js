@@ -95,8 +95,7 @@ const TEMPLATES = {
     // HTTP_SERVICE: 'http--service.ts',
     // HTTP_MODULE: 'http--module.ts',
     // ROUTING: '-routing.module.ts',
-    NOMBRE_MODULO: 'nombre-.ts',
-    MODULO: '.module.ts',
+
     SRV_SORT: '.sort.ts',
     SRV_HTTP_MODULE: '.http.module.ts',
     SRV_HTTP_SERVICE: '.http.service.ts',
@@ -303,196 +302,334 @@ module.exports = class extends Generator {
             nombreHabilitado,
 
         };
-        const templateTabsArray = this.templatePath(TEMPLATES.TABS_ARRAY);
-        const destinoTabsArray = this.destinationPath(`./${nombreGuiones}/componentes/${nombreGuiones}-perfil/constantes/${nombreGuiones}-tabs-array.ts`);
+        // componentes tabla 
+        const templateComponenteTablaModulo = this.templatePath(TEMPLATES.TABLA_MODULE);
+        const destinoComponenteTablaModulo = this.destinationPath(`./componentes/${nombreGuiones}/${nombreGuiones}-tabla/${nombreGuiones}-tabla.module.ts`);
 
         this.fs.copyTpl(
-            templateTabsArray,
-            destinoTabsArray,
-            variables
-        );
-        const templatePerfilModule = this.templatePath(TEMPLATES.PERFIL_MODULE);
-        const destinoPerfilModule = this.destinationPath(`./${nombreGuiones}/componentes/${nombreGuiones}-perfil/${nombreGuiones}-perfil.module.ts`);
-        this.fs.copyTpl(
-            templatePerfilModule,
-            destinoPerfilModule,
+            templateComponenteTablaModulo,
+            destinoComponenteTablaModulo,
             variables
         );
 
-        const templatePerfilComponent = this.templatePath(TEMPLATES.PERFIL_C_TS);
-        const destinoPerfilComponent = this.destinationPath(`./${nombreGuiones}/componentes/${nombreGuiones}-perfil/${nombreGuiones}-perfil.component.ts`);
+        const templateComponenteTablaTs = this.templatePath(TEMPLATES.TABLA_COMP_TS);
+        const destinoComponenteTablaTs = this.destinationPath(`./componentes/${nombreGuiones}/${nombreGuiones}-tabla/${nombreGuiones}-tabla.component.ts`);
+
         this.fs.copyTpl(
-            templatePerfilComponent,
-            destinoPerfilComponent,
+            templateComponenteTablaTs,
+            destinoComponenteTablaTs,
             variables
         );
 
-        const templatePerfilComponentHTML = this.templatePath(TEMPLATES.PERFIL_C_HTML);
-        const destinoPerfilComponentHTML = this.destinationPath(`./${nombreGuiones}/componentes/${nombreGuiones}-perfil/${nombreGuiones}-perfil.component.html`);
+        const templateComponenteTablaHTML = this.templatePath(TEMPLATES.TABLA_COMP_HTML);
+        const destinoComponenteTablaHTML = this.destinationPath(`./componentes/${nombreGuiones}/${nombreGuiones}-tabla/${nombreGuiones}-tabla.component.html`);
+
         this.fs.copyTpl(
-            templatePerfilComponentHTML,
-            destinoPerfilComponentHTML,
+            templateComponenteTablaHTML,
+            destinoComponenteTablaHTML,
             variables
         );
 
-        const templatePerfilComponentScss = this.templatePath(TEMPLATES.PERFIL_C_SCSS);
-        const destinoPerfilComponentScss = this.destinationPath(`./${nombreGuiones}/componentes/${nombreGuiones}-perfil/${nombreGuiones}-perfil.component.scss`);
+        const templateComponenteTablaSCSS = this.templatePath(TEMPLATES.TABLA_COMP_SCSS);
+        const destinoComponenteTablaSCSS = this.destinationPath(`./componentes/${nombreGuiones}/${nombreGuiones}-tabla/${nombreGuiones}-tabla.component.scss`);
+
         this.fs.copyTpl(
-            templatePerfilComponentScss,
-            destinoPerfilComponentScss,
+            templateComponenteTablaSCSS,
+            destinoComponenteTablaSCSS,
             variables
         );
-        const templateTablaComponentTs = this.templatePath(TEMPLATES.TABLA_TS);
-        const destinoTablaComponentTs = this.destinationPath(`./${nombreGuiones}/componentes/${nombreGuiones}-tabla/${nombreGuiones}-tabla.component.ts`);
+        
+        // componentes/tabla-movil
+        const templateComponenteTablaMovilModulo = this.templatePath(TEMPLATES.TABLA_MODULE);
+        const destinoComponenteTablaMovilModulo = this.destinationPath(`./componentes/${nombreGuiones}/${nombreGuiones}-tabla-movil/${nombreGuiones}-tabla-movil.module.ts`);
+
         this.fs.copyTpl(
-            templateTablaComponentTs,
-            destinoTablaComponentTs,
-            variables
-        );
-        const templateTablaComponentHTML = this.templatePath(TEMPLATES.TABLA_HTML);
-        const destinoTablaComponentHTML = this.destinationPath(`./${nombreGuiones}/componentes/${nombreGuiones}-tabla/${nombreGuiones}-tabla.component.html`);
-        this.fs.copyTpl(
-            templateTablaComponentHTML,
-            destinoTablaComponentHTML,
-            variables
-        );
-        const templateTablaComponentSCSS = this.templatePath(TEMPLATES.TABLA_SCSS);
-        const destinoTablaComponentSCSS = this.destinationPath(`./${nombreGuiones}/componentes/${nombreGuiones}-tabla/${nombreGuiones}-tabla.component.scss`);
-        this.fs.copyTpl(
-            templateTablaComponentSCSS,
-            destinoTablaComponentSCSS,
+            templateComponenteTablaMovilModulo,
+            destinoComponenteTablaMovilModulo,
             variables
         );
 
-        const templateTablaModule = this.templatePath(TEMPLATES.TABLA_MODULE);
-        const destinoTablaModule = this.destinationPath(`./${nombreGuiones}/componentes/${nombreGuiones}-tabla/${nombreGuiones}-tabla.module.ts`);
+        const templateComponenteTablaMovilTs = this.templatePath(TEMPLATES.TABLA_COMP_TS);
+        const destinoComponenteTablaMovilTs = this.destinationPath(`./componentes/${nombreGuiones}/${nombreGuiones}-tabla-movil/${nombreGuiones}-tabla-movil.component.ts`);
+
         this.fs.copyTpl(
-            templateTablaModule,
-            destinoTablaModule,
+            templateComponenteTablaMovilTs,
+            destinoComponenteTablaMovilTs,
             variables
         );
 
-        const templateDeclaration = this.templatePath(TEMPLATES.DECLARATION);
-        const destinoDeclaration = this.destinationPath(`./${nombreGuiones}/constantes/${nombreGuiones}-declarations.ts`);
+        const templateComponenteTablaMovilHTML = this.templatePath(TEMPLATES.TABLA_COMP_HTML);
+        const destinoComponenteTablaMovilHTML = this.destinationPath(`./componentes/${nombreGuiones}/${nombreGuiones}-tabla-movil/${nombreGuiones}-tabla-movil.component.html`);
+
         this.fs.copyTpl(
-            templateDeclaration,
-            destinoDeclaration,
+            templateComponenteTablaMovilHTML,
+            destinoComponenteTablaMovilHTML,
             variables
         );
 
-        const templateImports = this.templatePath(TEMPLATES.IMPORTS);
-        const destinoImports = this.destinationPath(`./${nombreGuiones}/constantes/${nombreGuiones}-imports.ts`);
+        const templateComponenteTablaMovilSCSS = this.templatePath(TEMPLATES.TABLA_COMP_SCSS);
+        const destinoComponenteTablaMovilSCSS = this.destinationPath(`./componentes/${nombreGuiones}/${nombreGuiones}-tabla-movil/${nombreGuiones}-tabla-movil.component.scss`);
+
         this.fs.copyTpl(
-            templateImports,
-            destinoImports,
+            templateComponenteTablaMovilSCSS,
+            destinoComponenteTablaMovilSCSS,
             variables
         );
-        const templateProviders = this.templatePath(TEMPLATES.PROVIDERS);
-        const destinoProviders = this.destinationPath(`./${nombreGuiones}/constantes/${nombreGuiones}-providers.ts`);
+        
+        //rutas
+        const templateRutaImports = this.templatePath(TEMPLATES.RUTA_IMPORTS);
+        const destinoRutaImports = this.destinationPath(`./rutas/${nombreGuiones}/${nombreGuiones}.imports.ts`);
+
         this.fs.copyTpl(
-            templateProviders,
-            destinoProviders,
+            templateRutaImports,
+            destinoRutaImports,
             variables
         );
 
-        const templateFormEnum = this.templatePath(TEMPLATES.FORM_ENUM);
-        const destinoFormEnum = this.destinationPath(`./${nombreGuiones}/form/form-${nombreGuiones}.enum.ts`);
+        const templateRutaRouter = this.templatePath(TEMPLATES.RUTA_ROUTER);
+        const destinoRutaRouter = this.destinationPath(`./rutas/${nombreGuiones}/${nombreGuiones}.router.ts`);
+
         this.fs.copyTpl(
-            templateFormEnum,
-            destinoFormEnum,
+            templateRutaRouter,
+            destinoRutaRouter,
             variables
         );
-        const templateForm = this.templatePath(TEMPLATES.FORM);
-        const destinoForm = this.destinationPath(`./${nombreGuiones}/form/form-${nombreGuiones}.ts`);
+        const templateRutaComponenteTS = this.templatePath(TEMPLATES.RUTA_COMP_TS);
+        const destinoRutaComponenteTS = this.destinationPath(`./rutas/${nombreGuiones}/${nombreGuiones}.component.ts`);
+
         this.fs.copyTpl(
-            templateForm,
-            destinoForm,
-            variables
-        );
-        const templateRutaTs = this.templatePath(TEMPLATES.RUTA_TS);
-        const destinoRutaTs = this.destinationPath(`./${nombreGuiones}/rutas/ruta-${nombreGuiones}/ruta-${nombreGuiones}.component.ts`);
-        this.fs.copyTpl(
-            templateRutaTs,
-            destinoRutaTs,
+            templateRutaComponenteTS,
+            destinoRutaComponenteTS,
             variables
         );
 
-        const templateRutaHTML = this.templatePath(TEMPLATES.RUTA_HTML);
-        const destinoRutaHTML = this.destinationPath(`./${nombreGuiones}/rutas/ruta-${nombreGuiones}/ruta-${nombreGuiones}.component.html`);
+        const templateRutaComponenteHTML = this.templatePath(TEMPLATES.RUTA_COMP_HTML);
+        const destinoRutaComponenteHTML = this.destinationPath(`./rutas/${nombreGuiones}/${nombreGuiones}.component.html`);
+
         this.fs.copyTpl(
-            templateRutaHTML,
-            destinoRutaHTML,
+            templateRutaComponenteHTML,
+            destinoRutaComponenteHTML,
             variables
         );
 
-        const templateRutaSCSS = this.templatePath(TEMPLATES.RUTA_SCSS);
-        const destinoRutaSCSS = this.destinationPath(`./${nombreGuiones}/rutas/ruta-${nombreGuiones}/ruta-${nombreGuiones}.component.scss`);
+        const templateRutaComponenteScss = this.templatePath(TEMPLATES.RUTA_COMP_SCSS);
+        const destinoRutaComponenteScss = this.destinationPath(`./rutas/${nombreGuiones}/${nombreGuiones}.component.scss`);
+
         this.fs.copyTpl(
-            templateRutaSCSS,
-            destinoRutaSCSS,
+            templateRutaComponenteScss,
+            destinoRutaComponenteScss,
             variables
         );
 
-        const templateCreateDTO = this.templatePath(TEMPLATES.CREATE_DTO);
-        const destinoCreateDTO = this.destinationPath(`./${nombreGuiones}/servicios/dto/${nombreGuiones}.create-dto.ts`);
+        // servicios dto
+        const templateServiciosCreateDTO = this.templatePath(TEMPLATES.SRV_CREATE_DTO);
+        const destinoServiciosCreateDTO = this.destinationPath(`./servicios/${nombreGuiones}/dto/${nombreGuiones}.create.dto.ts`);
+
         this.fs.copyTpl(
-            templateCreateDTO,
-            destinoCreateDTO,
+            templateServiciosCreateDTO,
+            destinoServiciosCreateDTO,
             variables
         );
 
-        const templateFindDTO = this.templatePath(TEMPLATES.FIND_DTO);
-        const destinoFindDTO = this.destinationPath(`./${nombreGuiones}/servicios/dto/${nombreGuiones}.find-dto.ts`);
+        const templateServiciosDTO = this.templatePath(TEMPLATES.SRV_DTO);
+        const destinoServiciosDTO = this.destinationPath(`./servicios/${nombreGuiones}/dto/${nombreGuiones}.dto.ts`);
+
         this.fs.copyTpl(
-            templateFindDTO,
-            destinoFindDTO,
+            templateServiciosDTO,
+            destinoServiciosDTO,
+            variables
+        );
+        const templateServiciosFindDTO = this.templatePath(TEMPLATES.SRV_FIND_DTO);
+        const destinoServiciosFindDTO = this.destinationPath(`./servicios/${nombreGuiones}/dto/${nombreGuiones}.find.dto.ts`);
+
+        this.fs.copyTpl(
+            templateServiciosFindDTO,
+            destinoServiciosFindDTO,
             variables
         );
 
-        const templateResponseDTO = this.templatePath(TEMPLATES.RESPONSE_DTO);
-        const destinoResponseDTO = this.destinationPath(`./${nombreGuiones}/servicios/dto/${nombreGuiones}.response-dto.ts`);
+        const templateServiciosUpdateDTO = this.templatePath(TEMPLATES.SRV_UPDATE_DTO);
+        const destinoServiciosUpdateDTO = this.destinationPath(`./servicios/${nombreGuiones}/dto/${nombreGuiones}.update.dto.ts`);
+
         this.fs.copyTpl(
-            templateResponseDTO,
-            destinoResponseDTO,
+            templateServiciosUpdateDTO,
+            destinoServiciosUpdateDTO,
             variables
         );
 
-        const templateUpdateDTO = this.templatePath(TEMPLATES.UPDATE_DTO);
-        const destinoUpdateDTO = this.destinationPath(`./${nombreGuiones}/servicios/dto/${nombreGuiones}.update-dto.ts`);
+        const templateServiciosUpdateHabilitadoDTO = this.templatePath(TEMPLATES.SRV_UPDATE_HABILITADO_DTO);
+        const destinoServiciosUpdateHabilitadoDTO = this.destinationPath(`./servicios/${nombreGuiones}/dto/${nombreGuiones}.dto.ts`);
+
         this.fs.copyTpl(
-            templateUpdateDTO,
-            destinoUpdateDTO,
+            templateServiciosUpdateHabilitadoDTO,
+            destinoServiciosUpdateHabilitadoDTO,
+            variables
+        );
+        // servicios enums
+
+        const templateServiciosEnum = this.templatePath(TEMPLATES.SRV_ENUM);
+        const destinoServiciosEnum = this.destinationPath(`./servicios/${nombreGuiones}/enum/${nombreGuiones}.dto.ts`);
+
+        this.fs.copyTpl(
+            templateServiciosEnum,
+            destinoServiciosEnum,
             variables
         );
 
-        const templateHttpService = this.templatePath(TEMPLATES.HTTP_SERVICE);
-        const destinoHttpService = this.destinationPath(`./${nombreGuiones}/servicios/http-${nombreGuiones}-service.ts`);
+        // servicios forms
+                // constantes
+        const templateServiciosFormsCreateUpdateComun = this.templatePath(TEMPLATES.SRV_CREA_UP_DTO_COM);
+        const destinoServiciosFormsCreateUpdateComun = this.destinationPath(`./servicios/${nombreGuiones}/forms/constantes/${nombreGuiones}.create-update-comun.dto.ts`);
+
         this.fs.copyTpl(
-            templateHttpService,
-            destinoHttpService,
+            templateServiciosFormsCreateUpdateComun,
+            destinoServiciosFormsCreateUpdateComun,
             variables
         );
-        const templateHttpModule = this.templatePath(TEMPLATES.HTTP_MODULE);
-        const destinoHttpModule = this.destinationPath(`./${nombreGuiones}/servicios/http-${nombreGuiones}-module.ts`);
+
+        const templateServiciosFormsSelect = this.templatePath(TEMPLATES.SRV_FORM_SELECT);
+        const destinoServiciosFormsSelect = this.destinationPath(`./servicios/${nombreGuiones}/forms/constantes/${nombreGuiones}-select.ts`);
+
+
         this.fs.copyTpl(
-            templateHttpModule,
-            destinoHttpModule,
+            templateServiciosFormsSelect,
+            destinoServiciosFormsSelect,
             variables
         );
-        const templateModule = this.templatePath(TEMPLATES.MODULE);
-        const destinoModule = this.destinationPath(`./${nombreGuiones}/${nombreGuiones}.module.ts`);
+
+            // create dto
+        const templateServiciosFormsCreateDtoTS = this.templatePath(TEMPLATES.SRV_FORM_CREATE_COM_TS);
+        const destinoServiciosFormsCreateDtoTS = this.destinationPath(`./servicios/${nombreGuiones}/forms/create-dto/${nombreGuiones}.create.dto.component.ts`);
+
+
         this.fs.copyTpl(
-            templateModule,
-            destinoModule,
+            templateServiciosFormsCreateDtoTS,
+            destinoServiciosFormsCreateDtoTS,
             variables
         );
-        const templateRouting = this.templatePath(TEMPLATES.ROUTING);
-        const destinoRouting = this.destinationPath(`./${nombreGuiones}/${nombreGuiones}-routing.module.ts`);
+
+        const templateServiciosFormsCreateDtoHTML = this.templatePath(TEMPLATES.SRV_FORM_CREATE_COM_HTML);
+        const destinoServiciosFormsCreateDtoHTML = this.destinationPath(`./servicios/${nombreGuiones}/forms/create-dto/${nombreGuiones}.create.dto.component.html`);
+
+
         this.fs.copyTpl(
-            templateRouting,
-            destinoRouting,
+            templateServiciosFormsCreateDtoHTML,
+            destinoServiciosFormsCreateDtoHTML,
             variables
         );
+
+        const templateServiciosFormsCreateDtoSCSS = this.templatePath(TEMPLATES.SRV_FORM_CREATE_COM_SCSS);
+        const destinoServiciosFormsCreateDtoSCSS = this.destinationPath(`./servicios/${nombreGuiones}/forms/create-dto/${nombreGuiones}.create.dto.component.scss`);
+
+
+        this.fs.copyTpl(
+            templateServiciosFormsCreateDtoSCSS,
+            destinoServiciosFormsCreateDtoSCSS,
+            variables
+        );
+            // Find dto
+        const templateServiciosFormsFindDtoTS = this.templatePath(TEMPLATES.SRV_FORM_FIND_COM_TS);
+        const destinoServiciosFormsFindDtoTS = this.destinationPath(`./servicios/${nombreGuiones}/forms/find-dto/${nombreGuiones}.find.dto.component.ts`);
+
+
+        this.fs.copyTpl(
+            templateServiciosFormsFindDtoTS,
+            destinoServiciosFormsFindDtoTS,
+            variables
+        );
+
+        const templateServiciosFormsFindDtoHTML = this.templatePath(TEMPLATES.SRV_FORM_FIND_COM_HTML);
+        const destinoServiciosFormsFindDtoHTML = this.destinationPath(`./servicios/${nombreGuiones}/forms/find-dto/${nombreGuiones}.find.dto.component.html`);
+
+
+        this.fs.copyTpl(
+            templateServiciosFormsFindDtoHTML,
+            destinoServiciosFormsFindDtoHTML,
+            variables
+        );
+
+        const templateServiciosFormsFindDtoSCSS = this.templatePath(TEMPLATES.SRV_FORM_FIND_COM_SCSS);
+        const destinoServiciosFormsFindDtoSCSS = this.destinationPath(`./servicios/${nombreGuiones}/forms/find-dto/${nombreGuiones}.find.dto.component.scss`);
+
+
+        this.fs.copyTpl(
+            templateServiciosFormsFindDtoSCSS,
+            destinoServiciosFormsFindDtoSCSS,
+            variables
+        );
+
+            // update dto
+        const templateServiciosFormsUpdateDtoTS = this.templatePath(TEMPLATES.SRV_FORM_UP_COM_TS);
+        const destinoServiciosFormsUpdateDtoTS = this.destinationPath(`./servicios/${nombreGuiones}/forms/update-dto/${nombreGuiones}.update.dto.component.ts`);
+
+
+        this.fs.copyTpl(
+            templateServiciosFormsUpdateDtoTS,
+            destinoServiciosFormsUpdateDtoTS,
+            variables
+        );
+
+        const templateServiciosFormsUpdateDtoHTML = this.templatePath(TEMPLATES.SRV_FORM_UP_COM_HTML);
+        const destinoServiciosFormsUpdateDtoHTML = this.destinationPath(`./servicios/${nombreGuiones}/forms/update-dto/${nombreGuiones}.update.dto.component.html`);
+
+
+        this.fs.copyTpl(
+            templateServiciosFormsUpdateDtoHTML,
+            destinoServiciosFormsUpdateDtoHTML,
+            variables
+        );
+
+        const templateServiciosFormsUpdateDtoSCSS = this.templatePath(TEMPLATES.SRV_FORM_UP_COM_SCSS);
+        const destinoServiciosFormsUpdateDtoSCSS = this.destinationPath(`./servicios/${nombreGuiones}/forms/update-dto/${nombreGuiones}.update.dto.component.scss`);
+
+
+        this.fs.copyTpl(
+            templateServiciosFormsUpdateDtoSCSS,
+            destinoServiciosFormsUpdateDtoSCSS,
+            variables
+        );
+
+        const templateServiciosFormsModule = this.templatePath(TEMPLATES.SRV_FORM_MODULE);
+        const destinoServiciosFormsModule = this.destinationPath(`./servicios/${nombreGuiones}/forms/${nombreGuiones}.forms.module.ts`);
+
+
+        this.fs.copyTpl(
+            templateServiciosFormsModule,
+            destinoServiciosFormsModule,
+            variables
+        );
+        // servicios http
+
+        const templateServiciosHttpModule = this.templatePath(TEMPLATES.SRV_HTTP_MODULE);
+        const destinoServiciosHttpModule = this.destinationPath(`./servicios/${nombreGuiones}/http/${nombreGuiones}.http.module.ts`);
+
+
+        this.fs.copyTpl(
+            templateServiciosHttpModule,
+            destinoServiciosHttpModule,
+            variables
+        );
+        const templateServiciosHttpService = this.templatePath(TEMPLATES.SRV_FORM_MODULE);
+        const destinoServiciosHttpService = this.destinationPath(`./servicios/${nombreGuiones}/http/${nombreGuiones}.http.service.ts`);
+
+
+        this.fs.copyTpl(
+            templateServiciosHttpService,
+            destinoServiciosHttpService,
+            variables
+        );
+
+        // serivios sort
+        const templateServiciosSort = this.templatePath(TEMPLATES.SRV_SORT);
+        const destinoServiciosSort = this.destinationPath(`./servicios/${nombreGuiones}/sort/${nombreGuiones}.sort.ts`);
+
+
+        this.fs.copyTpl(
+            templateServiciosFormsModule,
+            destinoServiciosFormsModule,
+            variables
+        );
+
     }
 
     conflicts() {
