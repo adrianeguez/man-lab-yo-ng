@@ -340,7 +340,7 @@ module.exports = class extends Generator {
         );
         
         // componentes/tabla-movil
-        const templateComponenteTablaMovilModulo = this.templatePath(TEMPLATES.TABLA_MODULE);
+        const templateComponenteTablaMovilModulo = this.templatePath(TEMPLATES.TABLA_MOV_MODULE);
         const destinoComponenteTablaMovilModulo = this.destinationPath(`./componentes/${nombreGuiones}/${nombreGuiones}-tabla-movil/${nombreGuiones}-tabla-movil.module.ts`);
 
         this.fs.copyTpl(
@@ -349,7 +349,7 @@ module.exports = class extends Generator {
             variables
         );
 
-        const templateComponenteTablaMovilTs = this.templatePath(TEMPLATES.TABLA_COMP_TS);
+        const templateComponenteTablaMovilTs = this.templatePath(TEMPLATES.TABLA_MOV_COMP_TS);
         const destinoComponenteTablaMovilTs = this.destinationPath(`./componentes/${nombreGuiones}/${nombreGuiones}-tabla-movil/${nombreGuiones}-tabla-movil.component.ts`);
 
         this.fs.copyTpl(
@@ -358,7 +358,7 @@ module.exports = class extends Generator {
             variables
         );
 
-        const templateComponenteTablaMovilHTML = this.templatePath(TEMPLATES.TABLA_COMP_HTML);
+        const templateComponenteTablaMovilHTML = this.templatePath(TEMPLATES.TABLA_MOV_COMP_HTML);
         const destinoComponenteTablaMovilHTML = this.destinationPath(`./componentes/${nombreGuiones}/${nombreGuiones}-tabla-movil/${nombreGuiones}-tabla-movil.component.html`);
 
         this.fs.copyTpl(
@@ -367,7 +367,7 @@ module.exports = class extends Generator {
             variables
         );
 
-        const templateComponenteTablaMovilSCSS = this.templatePath(TEMPLATES.TABLA_COMP_SCSS);
+        const templateComponenteTablaMovilSCSS = this.templatePath(TEMPLATES.TABLA_MOV_COMP_SCSS);
         const destinoComponenteTablaMovilSCSS = this.destinationPath(`./componentes/${nombreGuiones}/${nombreGuiones}-tabla-movil/${nombreGuiones}-tabla-movil.component.scss`);
 
         this.fs.copyTpl(
