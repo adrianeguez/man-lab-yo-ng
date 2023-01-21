@@ -6,7 +6,7 @@ import {<%= nombreMayuscula %>CreateDto} from "../dto/<%= nombreGuiones %>.creat
 import {<%= nombreMayuscula %>UpdateDto} from "../dto/<%= nombreGuiones %>.update.dto";
 
 @Injectable()
-export class Http<%= nombreMayuscula %>HttpService extends HttpAbstract<<%= nombreMayuscula %>Dto, <%= nombreMayuscula %>FindDto, ModificarHabilitadoDto, <%= nombreMayuscula %>CreateDto, <%= nombreMayuscula %>UpdateDto> {
+export class Http<%= nombreMayuscula %>Service extends HttpAbstract<<%= nombreMayuscula %>Dto, <%= nombreMayuscula %>FindDto, ModificarHabilitadoDto, <%= nombreMayuscula %>CreateDto, <%= nombreMayuscula %>UpdateDto> {
     constructor(private readonly _httpClient: HttpClient) {
         super(
             _httpClient,
