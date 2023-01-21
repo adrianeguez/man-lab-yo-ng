@@ -1,6 +1,6 @@
 
 
-export const <%= nombreSoloMayusculas %>Sort: SortFieldInterface[] = [
+export const <%= nombreMayuscula %>Sort: SortFieldInterface[] = [
     ...CAMPOS_COMUNES_SORT,
     // Ejemplo sort
     // {

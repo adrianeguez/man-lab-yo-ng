@@ -1,8 +1,8 @@
 import {NgModule} from '@angular/core';
-import {Http<%= nombreMayuscula %>Service} from './http-<%= nombreGuiones %>-service';
+import {<%= nombreMayuscula %>HttpService} from './<%= nombreGuiones %>.http.service';
 
 @NgModule({
-  providers: [Http<%= nombreMayuscula %>Service],
+  providers: [<%= nombreMayuscula %>HttpService],
 })
-export class Http<%= nombreMayuscula %>Module {
+export class <%= nombreMayuscula %>HttpModule {
 }

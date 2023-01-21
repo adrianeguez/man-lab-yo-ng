@@ -1,4 +1,4 @@
-import {<%= nombreMayuscula %>Enum} from "../../enums/<%= nombreMayuscula %>Enum";
+import {<%= nombreMayuscula %>Enum} from "../../enum/<%= nombreGuiones %>Enum";
 import {<%= nombreMayuscula %>Select} from "./<%= nombreGuiones %>-select";
 import {nombreModuloNest} from "../../../../nombre-modulo-nest";
 

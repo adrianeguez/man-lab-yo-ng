@@ -378,7 +378,7 @@ module.exports = class extends Generator {
         
         //rutas
         const templateRutaImports = this.templatePath(TEMPLATES.RUTA_IMPORTS);
-        const destinoRutaImports = this.destinationPath(`./rutas/${nombreGuiones}/${nombreGuiones}.imports.ts`);
+        const destinoRutaImports = this.destinationPath(`./rutas/ruta-${nombreGuiones}/ruta-${nombreGuiones}.imports.ts`);
 
         this.fs.copyTpl(
             templateRutaImports,
@@ -387,7 +387,7 @@ module.exports = class extends Generator {
         );
 
         const templateRutaRouter = this.templatePath(TEMPLATES.RUTA_ROUTER);
-        const destinoRutaRouter = this.destinationPath(`./rutas/${nombreGuiones}/${nombreGuiones}.router.ts`);
+        const destinoRutaRouter = this.destinationPath(`./rutas/ruta-${nombreGuiones}/ruta-${nombreGuiones}.router.ts`);
 
         this.fs.copyTpl(
             templateRutaRouter,
@@ -395,7 +395,7 @@ module.exports = class extends Generator {
             variables
         );
         const templateRutaComponenteTS = this.templatePath(TEMPLATES.RUTA_COMP_TS);
-        const destinoRutaComponenteTS = this.destinationPath(`./rutas/${nombreGuiones}/${nombreGuiones}.component.ts`);
+        const destinoRutaComponenteTS = this.destinationPath(`./rutas/ruta-${nombreGuiones}/ruta-${nombreGuiones}.component.ts`);
 
         this.fs.copyTpl(
             templateRutaComponenteTS,
@@ -404,7 +404,7 @@ module.exports = class extends Generator {
         );
 
         const templateRutaComponenteHTML = this.templatePath(TEMPLATES.RUTA_COMP_HTML);
-        const destinoRutaComponenteHTML = this.destinationPath(`./rutas/${nombreGuiones}/${nombreGuiones}.component.html`);
+        const destinoRutaComponenteHTML = this.destinationPath(`./rutas/ruta-${nombreGuiones}/ruta-${nombreGuiones}.component.html`);
 
         this.fs.copyTpl(
             templateRutaComponenteHTML,
@@ -413,7 +413,7 @@ module.exports = class extends Generator {
         );
 
         const templateRutaComponenteScss = this.templatePath(TEMPLATES.RUTA_COMP_SCSS);
-        const destinoRutaComponenteScss = this.destinationPath(`./rutas/${nombreGuiones}/${nombreGuiones}.component.scss`);
+        const destinoRutaComponenteScss = this.destinationPath(`./rutas/ruta-${nombreGuiones}/ruta-${nombreGuiones}.component.scss`);
 
         this.fs.copyTpl(
             templateRutaComponenteScss,
@@ -458,7 +458,7 @@ module.exports = class extends Generator {
         );
 
         const templateServiciosUpdateHabilitadoDTO = this.templatePath(TEMPLATES.SRV_UPDATE_HABILITADO_DTO);
-        const destinoServiciosUpdateHabilitadoDTO = this.destinationPath(`./servicios/${nombreGuiones}/dto/${nombreGuiones}.dto.ts`);
+        const destinoServiciosUpdateHabilitadoDTO = this.destinationPath(`./servicios/${nombreGuiones}/dto/${nombreGuiones}.update-habilitado.dto.ts`);
 
         this.fs.copyTpl(
             templateServiciosUpdateHabilitadoDTO,
@@ -468,7 +468,7 @@ module.exports = class extends Generator {
         // servicios enums
 
         const templateServiciosEnum = this.templatePath(TEMPLATES.SRV_ENUM);
-        const destinoServiciosEnum = this.destinationPath(`./servicios/${nombreGuiones}/enum/${nombreGuiones}.dto.ts`);
+        const destinoServiciosEnum = this.destinationPath(`./servicios/${nombreGuiones}/enum/${nombreGuiones}Enum.ts`);
 
         this.fs.copyTpl(
             templateServiciosEnum,
