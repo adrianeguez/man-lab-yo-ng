@@ -1,19 +1,7 @@
 import {Component, Input, TemplateRef, ViewChild, AfterViewInit} from '@angular/core';
-import {
-    AngularFormInterface,
-    ArregloFormlyTraducido, FormMantiFormly,
-    FormularioMantiFormly
-} from "../../../../../../interfaces/angular-form.interface";
-import {
-    SisHabilitadoKeysEnum
-} from "../../../../../../enums/sis-habilitado.enum";
-import {FormularioBusquedaComunDto} from "../../../../../../constantes/formularios/formulario-busqueda.comun.dto";
-import {GrupoFormularioManti, TipoCampoSelect} from "../../../../../../constantes/formularios/tipos-campos";
 import {<%= nombreMayuscula %>FindDto} from "../../dto/<%= nombreGuiones %>.find.dto";
 import {TranslateService} from "@ngx-translate/core";
 import {LocaleSettings} from "primeng/calendar";
-import {LocaleSettingsManti} from "../../../../../../constantes/formularios/locale-settings-manti";
-import {SisMantiEnum} from "../../../../../../enums/sis-manti.enum";
 import {PrimeNGConfig} from "primeng/api";
 import {nombreModuloNest} from "../../../../nombre-modulo-nest";
 

@@ -1,6 +1,5 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
-import {HttpAbstract} from "../../../../../clases/http.abstract";
 import {<%= nombreMayuscula %>Dto} from "../dto/<%= nombreGuiones %>.dto";
 import {CONFIG_ANGULAR} from "../../../../../environment/config";
 import {<%= nombreMayuscula %>FindDto} from "../dto/<%= nombreGuiones %>.find.dto";

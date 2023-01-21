@@ -1,14 +1,7 @@
 import {Component, Input, TemplateRef, ViewChild, AfterViewInit} from '@angular/core';
-import {
-    AngularFormInterface,
-    ArregloFormlyTraducido, FormMantiFormly,
-    FormularioMantiFormly
-} from "../../../../../../interfaces/angular-form.interface";
-import {GrupoFormularioManti, TipoCampoSelect} from "../../../../../../constantes/formularios/tipos-campos";
 import {LocaleSettings} from "primeng/calendar";
 import {TranslateService} from "@ngx-translate/core";
 import {PrimeNGConfig} from "primeng/api";
-import {LocaleSettingsManti} from "../../../../../../constantes/formularios/locale-settings-manti";
 import {<%= nombreMayuscula %>CreateUpdateComunDto} from "../constantes/<%= nombreGuiones %>.create-update-comun.dto";
 import {<%= nombreMayuscula %>UpdateDto} from "../../dto/<%= nombreGuiones %>.update.dto";
 

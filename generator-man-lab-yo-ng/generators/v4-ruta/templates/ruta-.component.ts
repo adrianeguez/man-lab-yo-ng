@@ -1,13 +1,8 @@
 import {ChangeDetectionStrategy, Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {SortFieldInterface} from "../../../../interfaces/sort-field.interface";
 import {<%= nombreMayuscula %>Sort} from "../../servicios/<%= nombreGuiones %>/sort/<%= nombreGuiones %>.sort";
-import {CrudRutaEvento} from "../../../../componentes/rutas/contenedor-ruta/interfaces/crud-ruta.evento";
-import {EventosComunesEnum} from "../../../../enums/eventos-comunes.enum";
-import {CrudRutaEnum} from "../../../../componentes/rutas/contenedor-ruta/enums/crud-ruta.enum";
 import {<%= nombreMayuscula %>BusquedaDto} from "../../../../generated/api-solo-back";
 import {<%= nombreMayuscula %>HttpService} from "../../servicios/<%= nombreGuiones %>/http/<%= nombreGuiones %>.http.service";
-import {EventoComunHandlerService} from "../../../../servicios/eventos/evento-comun-handler.service";
-import {CrudRutaComponent} from "../../../../componentes/rutas/contenedor-ruta/crud-ruta/crud-ruta.component";
 import {<%= nombreMayuscula %>FindDto} from "../../servicios/<%= nombreGuiones %>/dto/<%= nombreGuiones %>.find.dto";
 import {MatDialog} from "@angular/material/dialog";
 import {FormGroup} from '@angular/forms';
@@ -15,39 +10,11 @@ import {
   <%= nombreMayuscula %>UpdateHabilitadoDto
 } from "../../servicios/<%= nombreGuiones %>/dto/<%= nombreGuiones %>.update-habilitado.dto";
 import {Subscription} from "rxjs";
-import {COLORES} from "../../../../constantes/ui/colores";
-import {SKIP_TAKE} from "../../../../constantes/ui/skip-take";
-import {DialogoManticoreComponent} from "../../../../componentes/dialogo-manticore/dialogo-manticore.component";
-import {
-  ParametrosDialogoManticore
-} from "../../../../componentes/dialogo-manticore/interfaces/parametros-dialogo-manticore";
-import {
-  RespuestaDialogoConfirmacion
-} from "../../../../componentes/dialogo-manticore/interfaces/respuesta-dialogo-confirmacion";
-import {
-  DialogoConfirmacionTexto
-} from "../../../../componentes/dialogo-manticore/enums/dialogo-confirmacion-texto";
-import {TranslationConstantes} from "../../../../constantes/translation/translation.constantes";
-import {
-  FullDialogAngularMaterialConfiguration
-} from "../../../../constantes/ui/full-dialog-angular-material-configuration";
 import {FieldType, FieldTypeConfig} from "@ngx-formly/core";
-import {
-  FormMantiFormly,
-} from "../../../../interfaces/angular-form.interface";
 import {TranslateService} from "@ngx-translate/core";
 import {MatBottomSheet} from "@angular/material/bottom-sheet";
-import {CargandoService} from "../../../../servicios/cargando/cargando.service";
-import {
-  AutocompleteManticoreComponent
-} from "../../../../componentes/autocomplete-manticore/autocomplete-manticore.component";
-import {
-  AutocompleteManticoreParametros
-} from "../../../../componentes/autocomplete-manticore/interfaces/autocomplete-manticore-parametros";
 import {<%= nombreMayuscula %>Dto} from "../../servicios/<%= nombreGuiones %>/dto/<%= nombreGuiones %>.dto";
 import {<%= nombreMayuscula %>CreateDto} from "../../servicios/<%= nombreGuiones %>/dto/<%= nombreGuiones %>.create.dto";
-import {SisHabilitadoEnum} from "../../../../enums/sis-habilitado.enum";
-import {obtenerValoresModel} from "../../../../constantes/formularios/obtener-valores-model";
 import {
   <%= nombreMayuscula %>UpdateDto,
   <%= nombreMayuscula %>UpdateFormDto

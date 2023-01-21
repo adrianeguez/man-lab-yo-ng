@@ -1,7 +1,5 @@
 import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
 import {<%= nombreMayuscula %>Entity} from "../../../../../generated/api-solo-back";
-import {CrudRutaComponent} from "../../../../../componentes/rutas/contenedor-ruta/crud-ruta/crud-ruta.component";
-import {SisHabilitadoEnumObject} from "../../../../../enums/sis-habilitado.enum";
 import {<%= nombreMayuscula %>Select} from "../../../servicios/<%= nombreGuiones %>/forms/constantes/<%= nombreGuiones %>-select";
 import {nombreModuloNest} from "../../../nombre-modulo-nest";
 

@@ -1,67 +1,69 @@
-import {LibroBibliotecaEnum} from "../../enums/LibroBibliotecaEnum";
-import {LibroBibliotecaSelect} from "./libro-biblioteca-select";
-import {AngularFormInterface} from "../../../../../../interfaces/angular-form.interface";
+import {<%= nombreMayuscula %>Enum} from "../../enums/<%= nombreMayuscula %>Enum";
+import {<%= nombreMayuscula %>Select} from "./<%= nombreGuiones %>-select";
+import {nombreModuloNest} from "../../../../nombre-modulo-nest";
 
-export const LibroBibliotecaCreateUpdateComunDto = (
+const nombreModulo = nombreModuloNest
+export const <%= nombreMayuscula %>CreateUpdateComunDto = (
     componente: AngularFormInterface,
     templates: any
 )=>{
     return [
         {
-            id: LibroBibliotecaEnum.nombre,
-            key: LibroBibliotecaEnum.nombre,
+            id: <%= nombreMayuscula %>Enum.nombre,
+            key: <%= nombreMayuscula %>Enum.nombre,
             type: 'primeng-input-group',
             templateOptions: {
                 required: true,
             },
             expressionProperties: {
-                'templateOptions.label': componente.translateService.stream('modulo-nest.camposFormulario.nombre.nombre'),
-                'templateOptions.placeholder': componente.translateService.stream('modulo-nest.camposFormulario.nombre.placeholder'),
-                'templateOptions.description': componente.translateService.stream('modulo-nest.camposFormulario.nombre.ayuda'),
+                'templateOptions.label': componente.translateService.stream(nombreModulo + '.camposFormulario.nombre.nombre'),
+                'templateOptions.placeholder': componente.translateService.stream(nombreModulo + '.camposFormulario.nombre.placeholder'),
+                'templateOptions.description': componente.translateService.stream(nombreModulo + '.camposFormulario.nombre.ayuda'),
             },
         },
-        {
-            id: LibroBibliotecaEnum.isbn,
-            key: LibroBibliotecaEnum.isbn,
-            type: 'primeng-input-group',
-            templateOptions: {
-                required: true,
-            },
-            expressionProperties: {
-                'templateOptions.label': componente.translateService.stream('modulo-nest.camposFormulario.isbn.nombre'),
-                'templateOptions.placeholder': componente.translateService.stream('modulo-nest.camposFormulario.isbn.placeholder'),
-                'templateOptions.description': componente.translateService.stream('modulo-nest.camposFormulario.isbn.ayuda'),
-            },
-        },
-        {
-            id: LibroBibliotecaEnum.descripcion,
-            key: LibroBibliotecaEnum.descripcion,
-            type: 'primeng-input-group',
-            templateOptions: {
-            },
-            expressionProperties: {
-                'templateOptions.label': componente.translateService.stream('modulo-nest.camposFormulario.descripcion.nombre'),
-                'templateOptions.placeholder': componente.translateService.stream('modulo-nest.camposFormulario.descripcion.placeholder'),
-                'templateOptions.description': componente.translateService.stream('modulo-nest.camposFormulario.descripcion.ayuda'),
-            },
-        },
-        {
-            id: LibroBibliotecaEnum.generoLibro,
-            key: LibroBibliotecaEnum.generoLibro,
-            type: 'primeng-input-select',
-            templateOptions: {
-                required: true,
-            },
-            expressionProperties: {
-                'templateOptions.label': componente.translateService.stream('modulo-nest.camposFormulario.generoLibro.nombre'),
-                'templateOptions.placeholder': componente.translateService.stream('modulo-nest.camposFormulario.generoLibro.placeholder'),
-                'templateOptions.description': componente.translateService.stream('modulo-nest.camposFormulario.generoLibro.ayuda'),
-            },
-            selectOpciones: {
-                opciones: LibroBibliotecaSelect.generoLibro,
-                itemTemplateRef: templates.itemGeneroLibro,
-                selectedItemTemplateRef: templates.selectedItemGeneroLibro,
-            },
-        },
+        // ejemplo campos
+        // {
+        //     id: <%= nombreMayuscula %>Enum.isbn,
+        //     key: <%= nombreMayuscula %>Enum.isbn,
+        //     type: 'primeng-input-group',
+        //     templateOptions: {
+        //         required: true,
+        //     },
+        //     expressionProperties: {
+        //         'templateOptions.label': componente.translateService.stream(nombreModulo + '.camposFormulario.isbn.nombre'),
+        //         'templateOptions.placeholder': componente.translateService.stream(nombreModulo + '.camposFormulario.isbn.placeholder'),
+        //         'templateOptions.description': componente.translateService.stream(nombreModulo + '.camposFormulario.isbn.ayuda'),
+        //     },
+        // },
+        // {
+        //     id: <%= nombreMayuscula %>Enum.descripcion,
+        //     key: <%= nombreMayuscula %>Enum.descripcion,
+        //     type: 'primeng-input-group',
+        //     templateOptions: {
+        //     },
+        //     expressionProperties: {
+        //         'templateOptions.label': componente.translateService.stream(nombreModulo + '.camposFormulario.descripcion.nombre'),
+        //         'templateOptions.placeholder': componente.translateService.stream(nombreModulo + '.camposFormulario.descripcion.placeholder'),
+        //         'templateOptions.description': componente.translateService.stream(nombreModulo + '.camposFormulario.descripcion.ayuda'),
+        //     },
+        // },
+        // {
+        //     id: <%= nombreMayuscula %>Enum.generoLibro,
+        //     key: <%= nombreMayuscula %>Enum.generoLibro,
+        //     type: 'primeng-input-select',
+        //     templateOptions: {
+        //         required: true,
+        //     },
+        //     expressionProperties: {
+        //         'templateOptions.label': componente.translateService.stream(nombreModulo + '.camposFormulario.generoLibro.nombre'),
+        //         'templateOptions.placeholder': componente.translateService.stream(nombreModulo + '.camposFormulario.generoLibro.placeholder'),
+        //         'templateOptions.description': componente.translateService.stream(nombreModulo + '.camposFormulario.generoLibro.ayuda'),
+        //     },
+        //     selectOpciones: {
+        //         opciones: <%= nombreMayuscula %>Select.generoLibro,
+        //         itemTemplateRef: templates.itemGeneroLibro,
+        //         selectedItemTemplateRef: templates.selectedItemGeneroLibro,
+        //     },
+        // },
     ]
 }

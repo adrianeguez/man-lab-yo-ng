@@ -1,6 +1,4 @@
 import {Observable, of} from "rxjs";
-import {BreadcrumbValue, RUTAS_URL_CONSTANTES, URL_INICIAL} from "../../../imports/rutas-url.constantes";
-import {RouterUrl} from "../../../interfaces/router-url";
 
 export const URL_INICIAL_MODULO_NEST = ['<%= nombreGuiones %>'];
 // types de parametros de ruta

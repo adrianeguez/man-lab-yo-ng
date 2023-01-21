@@ -1,5 +1,5 @@
 import {<%= nombreMayuscula %>BusquedaDto} from "../../../../../generated/api-solo-back";
 
-export interface FindDto extends <%= nombreMayuscula %>BusquedaDto{
+export interface <%= nombreMayuscula %>FindDto extends <%= nombreMayuscula %>BusquedaDto{
 
 }

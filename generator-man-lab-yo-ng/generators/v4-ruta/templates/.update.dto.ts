@@ -3,6 +3,6 @@ import {<%= nombreMayuscula %>ActualizarDto} from "../../../../../generated/api-
 // import {PrimengDropdownOption} from "../../../../../types/primeng.dropdown-options";
 
 // export type <%= nombreMayuscula %>UpdateFormDto = Omit<<%= nombreMayuscula %>ActualizarDto, 'generoLibro'> & { generoLibro: PrimengDropdownOption };
-export interface UpdateDto extends <%= nombreMayuscula %>ActualizarDto{
+export interface <%= nombreMayuscula %>UpdateDto extends <%= nombreMayuscula %>ActualizarDto{
 
 }
