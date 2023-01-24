@@ -25,14 +25,15 @@
                  [form]="formularioManti.form"></formly-form>
 </div>
 
+
 <!-- SisHabilitado TEMPLATE -->
 <ng-template #selectedItemSisHabilitado
              [tipoTemplate]="_tipoCampoSelectSelected"
-             let-field="field"
+             let-templateContextoSelect="templateContextoFormlyPrimengInputSelect"
 >
-    <div *ngIf="field.form.controls.sisHabilitado">
-        <div *ngIf="field.form.controls.sisHabilitado.value">
-            {{field.form.controls.sisHabilitado.value.pathTraduccion | translate}}
+    <div *ngIf="templateContextoSelect.form.controls.sisHabilitado">
+        <div *ngIf="templateContextoSelect.form.controls.sisHabilitado.value">
+            {{templateContextoSelect.form.controls.sisHabilitado.value.pathTraduccion | translate}}
         </div>
     </div>
 </ng-template>
