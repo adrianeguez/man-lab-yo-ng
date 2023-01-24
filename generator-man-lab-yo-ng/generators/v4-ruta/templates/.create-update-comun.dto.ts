@@ -1,68 +1,44 @@
-import {<%= nombreMayuscula %>Enum} from "../../enum/<%= nombreGuiones %>Enum";
+import {<%= nombreMayuscula %>Enum} from "../../enum/<%= nombreGuiones %>-enum";
 import {<%= nombreMayuscula %>Select} from "./<%= nombreGuiones %>-select";
-import {nombreModuloNest} from "../../../../nombre-modulo-nest";
 
-const nombreModulo = nombreModuloNest
+const nombreModulo = nombreModulo_LLENAR
 export const <%= nombreMayuscula %>CreateUpdateComunDto = (
     componente: AngularFormInterface,
     templates: any
 )=>{
     return [
-        {
-            id: <%= nombreMayuscula %>Enum.nombre,
-            key: <%= nombreMayuscula %>Enum.nombre,
-            type: 'primeng-input-group',
-            templateOptions: {
-                required: true,
-            },
-            expressionProperties: {
-                'templateOptions.label': componente.translateService.stream(nombreModulo + '.camposFormulario.nombre.nombre'),
-                'templateOptions.placeholder': componente.translateService.stream(nombreModulo + '.camposFormulario.nombre.placeholder'),
-                'templateOptions.description': componente.translateService.stream(nombreModulo + '.camposFormulario.nombre.ayuda'),
-            },
-        },
-        // ejemplo campos
+        // EJEMPLO CAMPOS
+        // INPUT:
         // {
-        //     id: <%= nombreMayuscula %>Enum.isbn,
-        //     key: <%= nombreMayuscula %>Enum.isbn,
+        //     id: <%= nombreMayuscula %>Enum.nombreCampoEjemplo,
+        //     key: <%= nombreMayuscula %>Enum.nombreCampoEjemplo,
         //     type: 'primeng-input-group',
         //     templateOptions: {
         //         required: true,
         //     },
         //     expressionProperties: {
-        //         'templateOptions.label': componente.translateService.stream(nombreModulo + '.camposFormulario.isbn.nombre'),
-        //         'templateOptions.placeholder': componente.translateService.stream(nombreModulo + '.camposFormulario.isbn.placeholder'),
-        //         'templateOptions.description': componente.translateService.stream(nombreModulo + '.camposFormulario.isbn.ayuda'),
+        //         'templateOptions.label': componente.translateService.stream(nombreModulo + '.camposFormulario.nombreCampoEjemplo.nombre'),
+        //         'templateOptions.placeholder': componente.translateService.stream(nombreModulo + '.camposFormulario.nombreCampoEjemplo.placeholder'),
+        //         'templateOptions.description': componente.translateService.stream(nombreModulo + '.camposFormulario.nombreCampoEjemplo.ayuda'),
         //     },
         // },
+        // SELECT:
         // {
-        //     id: <%= nombreMayuscula %>Enum.descripcion,
-        //     key: <%= nombreMayuscula %>Enum.descripcion,
-        //     type: 'primeng-input-group',
-        //     templateOptions: {
-        //     },
-        //     expressionProperties: {
-        //         'templateOptions.label': componente.translateService.stream(nombreModulo + '.camposFormulario.descripcion.nombre'),
-        //         'templateOptions.placeholder': componente.translateService.stream(nombreModulo + '.camposFormulario.descripcion.placeholder'),
-        //         'templateOptions.description': componente.translateService.stream(nombreModulo + '.camposFormulario.descripcion.ayuda'),
-        //     },
-        // },
-        // {
-        //     id: <%= nombreMayuscula %>Enum.generoLibro,
-        //     key: <%= nombreMayuscula %>Enum.generoLibro,
+        //     id: <%= nombreMayuscula %>Enum.nombreCampoLista,
+        //     key: <%= nombreMayuscula %>Enum.nombreCampoLista,
         //     type: 'primeng-input-select',
         //     templateOptions: {
         //         required: true,
         //     },
         //     expressionProperties: {
-        //         'templateOptions.label': componente.translateService.stream(nombreModulo + '.camposFormulario.generoLibro.nombre'),
-        //         'templateOptions.placeholder': componente.translateService.stream(nombreModulo + '.camposFormulario.generoLibro.placeholder'),
-        //         'templateOptions.description': componente.translateService.stream(nombreModulo + '.camposFormulario.generoLibro.ayuda'),
+        //         'templateOptions.label': componente.translateService.stream(nombreModulo + '.camposFormulario.nombreCampoLista.nombre'),
+        //         'templateOptions.placeholder': componente.translateService.stream(nombreModulo + '.camposFormulario.nombreCampoLista.placeholder'),
+        //         'templateOptions.description': componente.translateService.stream(nombreModulo + '.camposFormulario.nombreCampoLista.ayuda'),
         //     },
         //     selectOpciones: {
-        //         opciones: <%= nombreMayuscula %>Select.generoLibro,
-        //         itemTemplateRef: templates.itemGeneroLibro,
-        //         selectedItemTemplateRef: templates.selectedItemGeneroLibro,
+        //         opciones: <%= nombreMayuscula %>Select.nombreCampoLista,
+        //         itemTemplateRef: templates.itemNombreCampoLista,
+        //         selectedItemTemplateRef: templates.selectedItemNombreCampoLista,
         //     },
         // },
     ]

@@ -1,25 +1,18 @@
-<p-card [header]="registro.nombre" [subheader]="registro.isbn" styleClass="p-card-shadow">
+<p-card [header]="registro.nombreCampo" [subheader]="registro.nombreCampoOtro" styleClass="p-card-shadow">
     <ng-template pTemplate="header">
         <manti-mostrar-imagen *ngIf="registro.sisImagen" [registro]="registro"></manti-mostrar-imagen>
     </ng-template>
-    <p>
-        <strong>{{nombreModulo + '.camposFormulario.descripcion.nombre' | translate}}:</strong>
-        {{registro.descripcion}}</p>
-    <p>
-        <strong>{{nombreModulo + '.camposFormulario.isbn.nombre' | translate}}: </strong>
-        {{registro.isbn}}</p>
-    <p>
-        <strong>{{nombreModulo + '.camposFormulario.generoLibro.nombre' | translate}} :</strong>
-        {{registro.generoLibro}}</p>
+<!--    <p>-->
+<!--        <strong>{{nombreModulo + '.camposFormulario.nombreCampo.nombre' | translate}}:</strong>-->
+<!--        {{registro.nombreCampo}}</p>-->
+<!--    <p>-->
+<!--        <strong>{{nombreModulo + '.camposFormulario.nombreCampoLista.nombre' | translate}} :</strong>-->
+<!--        {{obtenerNombreCampoLista(registro.nombreCampoLista) | translate}}</p>-->
+<!--    <p>-->
     <p>
         <strong>{{'comunes.sisHabilitado' | translate}}:</strong>
-        <span *ngIf="sisHabilitadoEnum.sisHabilitado === registro.sisHabilitado">
-            {{'comunes.habilitado' | translate}}
-        </span>
-        <span *ngIf="sisHabilitadoEnum.sisDeshabilitado === registro.sisHabilitado">
-            {{'comunes.deshabilitado' | translate}}
-        </span>
     </p>
+    <manti-habilitado-deshabilitado [registro]="registro"></manti-habilitado-deshabilitado>
     <ng-template pTemplate="footer">
         <div *ngIf="registro.sisArchivo">
             <manti-mostrar-archivo [registro]="registro"></manti-mostrar-archivo>

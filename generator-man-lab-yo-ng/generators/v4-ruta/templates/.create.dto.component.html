@@ -1,6 +1,6 @@
 <div *ngIf="arregloCampos.length > 0">
     <mat-accordion [multi]="true">
-        <mat-expansion-panel *ngFor="let campo of arregloCampos; let i = index" [expanded]="true    " >
+        <mat-expansion-panel *ngFor="let campo of arregloCampos; let i = index" [expanded]="true    ">
             <mat-expansion-panel-header>
                 <mat-panel-title>
                     {{campo.titulo |  translate }}
@@ -24,14 +24,36 @@
                  [options]="formularioManti.options"
                  [form]="formularioManti.form"></formly-form>
 </div>
-<!-- Ejemplo select TEMPLATE -->
-<!--<ng-template #selectedItemGeneroLibro [tipoTemplate]="_tipoSelectSelectedItemGeneroLibro">-->
-<!--    <div *ngIf="formularioManti.form.controls.generoLibro">-->
-<!--        <div *ngIf="formularioManti.form.controls.generoLibro.value">-->
-<!--            {{formularioManti.form.controls.generoLibro.value.name | translate}}-->
+<!-- CAMPO EJEMPLO TEMPLATE SELECCIONADO -->
+<!--<ng-template #selectedItemNombreCampoLista-->
+<!--             [tipoTemplate]="_tipoCampoSelectSelected"-->
+<!--             let-templateContextoSelect="templateContextoFormlyPrimengInputSelect"-->
+<!--&gt;-->
+<!--    <div *ngIf="templateContextoSelect.form.controls.campoEjemplo">-->
+<!--        <div *ngIf="templateContextoSelect.form.controls.campoEjemplo.value">-->
+<!--            {{templateContextoSelect.form.controls.campoEjemplo.value.codigoPrimario}} - {{templateContextoSelect.form.controls.campoEjemplo.value.pathTraduccion | translate}}-->
 <!--        </div>-->
 <!--    </div>-->
 <!--</ng-template>-->
-<!--<ng-template #itemGeneroLibro let-selectPrimeng>-->
-<!--    {{selectPrimeng.item.code}} - {{selectPrimeng.item.name | translate}}-->
+<!-- CAMPO EJEMPLO TEMPLATE LISTA -->
+<!--<ng-template #itemNombreCampoLista-->
+<!--             [tipoTemplate]="_tipoCampoSelectItem"-->
+<!--             let-templateContextoSelect="templateContextoFormlyPrimengInputSelect"-->
+<!--             let-itemIterado="itemIterado"-->
+<!--&gt;-->
+<!--    {{itemIterado.codigoPrimario}} - {{itemIterado.pathTraduccion | translate}}-->
 <!--</ng-template>-->
+
+<!--        AUTOCOMPLETE MOSTRAR CAMPO EJEMPLO (usado en form)       -->
+<ng-template #MostrarCampoEjemplo
+             [tipoTemplate]="_tipoAutocomplete"
+             let-field="field"
+>
+    <!--    <div *ngIf="tipoDato(field.formControl.value) === 'object'">-->
+    <!--        <p>{{field.formControl.value?.nombre}}-->
+    <!--            - {{field.formControl.value?.isbn}}</p>-->
+    <!--    </div>-->
+    <!--    <div *ngIf="tipoDato(field.formControl.value) === 'number'">-->
+    <!--        <p><strong>ID:</strong> {{field.formControl.value}}</p>-->
+    <!--    </div>-->
+</ng-template>

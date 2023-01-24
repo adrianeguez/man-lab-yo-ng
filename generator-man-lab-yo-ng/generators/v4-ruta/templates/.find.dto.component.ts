@@ -1,32 +1,24 @@
-import {Component, Input, TemplateRef, ViewChild, AfterViewInit} from '@angular/core';
+import {Component, TemplateRef, ViewChild, AfterViewInit, Input} from '@angular/core';
 import {<%= nombreMayuscula %>FindDto} from "../../dto/<%= nombreGuiones %>.find.dto";
 import {TranslateService} from "@ngx-translate/core";
-import {LocaleSettings} from "primeng/calendar";
 import {PrimeNGConfig} from "primeng/api";
-import {nombreModuloNest} from "../../../../nombre-modulo-nest";
+import {FormlyFormOptions} from "@ngx-formly/core/lib/components/formly.field.config";
 
 @Component({
     selector: 'manti-<%= nombreGuiones %>-find-dto',
     templateUrl: './<%= nombreGuiones %>.find.dto.component.html',
     styleUrls: ['./<%= nombreGuiones %>.find.dto.component.scss'],
 })
-export class <%= nombreMayuscula %>FindDtoComponent implements AfterViewInit {
+export class <%= nombreMayuscula %>FindDtoComponent extends FormAbstract implements AfterViewInit {
     @Input() ruta!: AngularFormInterface;
     @Input() formManti!: FormMantiFormly<<%= nombreMayuscula %>FindDto>;
     @Input() formularioManti!: FormularioMantiFormly<<%= nombreMayuscula %>FindDto>;
-
-    // Ejemplo select
-    // @ViewChild('itemGeneroLibro') public itemGeneroLibro!: TemplateRef<any>;
-    // @ViewChild('selectedItemGeneroLibro') public selectedItemGeneroLibro!: TemplateRef<any>;
+    @Input() formlyOptions: FormlyFormOptions = {};
+    // @ViewChild('itemNombreCampoLista') public itemNombreCampoLista!: TemplateRef<any>;
+    // @ViewChild('selectedItemNombreCampoLista') public selectedItemNombreCampoLista!: TemplateRef<any>;
     @ViewChild('itemSisHabilitado') public itemSisHabilitado!: TemplateRef<any>;
     @ViewChild('selectedItemSisHabilitado') public selectedItemSisHabilitado!: TemplateRef<any>;
-
-    _tipoSelectSelectedItemGeneroLibro: TipoCampoSelect;
-    sisHabilitado = SisHabilitadoKeysEnum.Habilitado;
-
-    localSettings?: LocaleSettings;
-    nombreModulo = nombreModuloNest;
-
+    nombreModulo = nombreModulo_LLENAR;
     fields: ArregloFormlyTraducido = (
         componente: AngularFormInterface
     ) => {
@@ -42,29 +34,13 @@ export class <%= nombreMayuscula %>FindDtoComponent implements AfterViewInit {
         ]
     };
 
-    arregloCampos: GrupoFormularioManti[] = [];
+
 
     constructor(
         private readonly translateService: TranslateService,
         private readonly config: PrimeNGConfig
     ) {
-        this.setearLocalSettings(this.translateService.currentLang as 'es' | 'en');
-        this.translateService
-            .onLangChange
-            .subscribe(
-                (lenguaje) => {
-                    this.setearLocalSettings(lenguaje.lang as 'es' | 'en');
-                }
-            )
-    }
-
-    setearLocalSettings(lenguaje: 'es' | 'en') {
-        this.localSettings = LocaleSettingsManti[lenguaje];
-        if(this.localSettings){
-            this.config.setTranslation({
-                ...this.localSettings as any
-            });
-        }
+        super(translateService, config);
     }
 
     ngAfterViewInit() {
@@ -75,17 +51,17 @@ export class <%= nombreMayuscula %>FindDtoComponent implements AfterViewInit {
             model: this.formManti.model,
             options: {},
         };
-        const grupoFormularioDos: FormularioMantiFormly<<%= nombreMayuscula %>FindDto> = {
-            fields: campos.filter(a => a.id === SisMantiEnum.SisCreado || a.id === SisMantiEnum.SisModificado || a.id === 'a'),
-            form: this.formManti.form,
-            model: this.formManti.model,
-            options: {},
-        }
         this.arregloCampos.push({
             formularios: grupoFormularioUno,
             titulo: 'comunes.opcionesComunes',
             descripcion: '',
         });
+        const grupoFormularioDos: FormularioMantiFormly<<%= nombreMayuscula %>FindDto> = {
+            fields: campos.filter(a => a.id === SisMantiEnum.SisCreado || a.id === SisMantiEnum.SisModificado),
+            form: this.formManti.form,
+            model: this.formManti.model,
+            options: {},
+        }
         this.arregloCampos.push({
             formularios: grupoFormularioDos,
             titulo: 'comunes.fecha',

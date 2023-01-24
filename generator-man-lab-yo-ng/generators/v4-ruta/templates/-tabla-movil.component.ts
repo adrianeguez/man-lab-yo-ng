@@ -1,6 +1,6 @@
 import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
-import {<%= nombreMayuscula %>Entity} from "../../../../../generated/api-solo-back";
-import {nombreModuloNest} from "../../../nombre-modulo-nest";
+import {<%= nombreMayuscula %>Select} from "../../../servicios/<%= nombreGuiones %>/forms/constantes/<%= nombreGuiones %>-select";
+import {<%= nombreMayuscula %>Dto} from "../../../servicios/<%= nombreGuiones %>/dto/<%= nombreGuiones %>.dto";
 
 @Component({
     selector: 'manti-<%= nombreGuiones %>-tabla-movil',
@@ -10,15 +10,19 @@ import {nombreModuloNest} from "../../../nombre-modulo-nest";
 })
 export class <%= nombreMayuscula %>TablaMovilComponent {
     @Input()
-    registro!: <%= nombreMayuscula %>Entity;
+    registro!: <%= nombreMayuscula %>Dto;
     @Input()
     componente!: CrudRutaComponent;
 
     @Input()
     mostrarAcciones = false;
-    sisHabilitadoEnum = SisHabilitadoEnumObject;
-    nombreModulo = nombreModuloNest;
+    nombreModulo = nombreModulo_LLENAR;
 
-    constructor() {
+    obtenerNombreCampoLista(nombreCampoListaCodigoPrimario: string): string {
+        const campoListaEncontrado = <%= nombreMayuscula %>Select.nombreCampoLista.find((g) => g.codigoPrimario === nombreCampoListaCodigoPrimario);
+        if (campoListaEncontrado) {
+            return campoListaEncontrado.pathTraduccion
+        }
+        return nombreCampoListaCodigoPrimario;
     }
 }

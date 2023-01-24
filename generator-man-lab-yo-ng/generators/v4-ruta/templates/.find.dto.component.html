@@ -24,27 +24,58 @@
                  [options]="formularioManti.options"
                  [form]="formularioManti.form"></formly-form>
 </div>
-<!-- EJEMPLO SELECT TEMPLATE -->
-<!--<ng-template #selectedItemGeneroLibro [tipoTemplate]="_tipoSelectSelectedItemGeneroLibro">-->
-<!--    <div *ngIf="formularioManti.form.controls.generoLibro">-->
-<!--        <div *ngIf="formularioManti.form.controls.generoLibro.value">-->
-<!--            {{formularioManti.form.controls.generoLibro.value.name | translate}}-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</ng-template>-->
-<!--<ng-template #itemGeneroLibro let-selectPrimeng>-->
-<!--    {{selectPrimeng.item.code}} - {{selectPrimeng.item.name | translate}}-->
-<!--</ng-template>-->
 
-<!-- SisHabilitadoTemplate -->
-<ng-template #selectedItemSisHabilitado [tipoTemplate]="_tipoSelectSelectedItemGeneroLibro">
-    <div *ngIf="formularioManti.form.controls.sisHabilitado">
-        <div *ngIf="formularioManti.form.controls.sisHabilitado.value">
-            {{formularioManti.form.controls.sisHabilitado.value.name | translate}}
+<!-- SisHabilitado TEMPLATE -->
+<ng-template #selectedItemSisHabilitado
+             [tipoTemplate]="_tipoCampoSelectSelected"
+             let-field="field"
+>
+    <div *ngIf="field.form.controls.sisHabilitado">
+        <div *ngIf="field.form.controls.sisHabilitado.value">
+            {{field.form.controls.sisHabilitado.value.pathTraduccion | translate}}
         </div>
     </div>
 </ng-template>
-<ng-template #itemSisHabilitado let-selectPrimeng>
-    {{selectPrimeng.item.name | translate}}
+<ng-template #itemSisHabilitado
+             [tipoTemplate]="_tipoCampoSelectItem"
+             let-templateContextoSelect="templateContextoFormlyPrimengInputSelect"
+             let-itemIterado="itemIterado"
+>
+    {{itemIterado.pathTraduccion | translate}}
 </ng-template>
 
+
+<!-- CAMPO EJEMPLO TEMPLATE SELECCIONADO -->
+<!--<ng-template #selectedItemNombreCampoLista-->
+<!--             [tipoTemplate]="_tipoCampoSelectSelected"-->
+<!--             let-templateContextoSelect="templateContextoFormlyPrimengInputSelect"-->
+<!--&gt;-->
+<!--    <div *ngIf="templateContextoSelect.form.controls.campoEjemplo">-->
+<!--        <div *ngIf="templateContextoSelect.form.controls.campoEjemplo.value">-->
+<!--            {{templateContextoSelect.form.controls.campoEjemplo.value.codigoPrimario}} - {{templateContextoSelect.form.controls.campoEjemplo.value.pathTraduccion | translate}}-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</ng-template>-->
+<!-- CAMPO EJEMPLO TEMPLATE LISTA -->
+<!--<ng-template #itemNombreCampoLista-->
+<!--             [tipoTemplate]="_tipoCampoSelectItem"-->
+<!--             let-templateContextoSelect="templateContextoFormlyPrimengInputSelect"-->
+<!--             let-itemIterado="itemIterado"-->
+<!--&gt;-->
+<!--    {{itemIterado.codigoPrimario}} - {{itemIterado.pathTraduccion | translate}}-->
+<!--</ng-template>-->
+
+
+    <!--        AUTOCOMPLETE MOSTRAR CAMPO EJEMPLO (usado en form)       -->
+    <ng-template #MostrarCampoEjemplo
+                 [tipoTemplate]="_tipoAutocomplete"
+                 let-field="field"
+    >
+        <!--    <div *ngIf="tipoDato(field.formControl.value) === 'object'">-->
+        <!--        <p>{{field.formControl.value?.nombre}}-->
+        <!--            - {{field.formControl.value?.isbn}}</p>-->
+        <!--    </div>-->
+        <!--    <div *ngIf="tipoDato(field.formControl.value) === 'number'">-->
+        <!--        <p><strong>ID:</strong> {{field.formControl.value}}</p>-->
+        <!--    </div>-->
+    </ng-template>

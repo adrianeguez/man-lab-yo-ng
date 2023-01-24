@@ -2,30 +2,21 @@
     <ng-template pTemplate="header">
         <tr>
             <th>ID</th>
-            <th>{{nombreModulo + '.camposFormulario.nombre.nombre' | translate}}</th>
-            <th>{{nombreModulo + '.camposFormulario.isbn.nombre' | translate}}</th>
-            <th>{{nombreModulo + '.camposFormulario.generoLibro.nombre' | translate}}</th>
-            <th>{{nombreModulo + '.camposFormulario.descripcion.nombre' | translate}}</th>
-            <th>{{  'comunes.sisHabilitado' | translate}}</th>
-            <th>{{  'comunes.acciones' | translate}}</th>
+<!--            <th>{{nombreModulo + '.camposFormulario.nombreCampo.nombre' | translate}}</th>-->
+<!--            <th>{{nombreModulo + '.camposFormulario.nombreCampoLista.nombre' | translate}}</th>-->
+            <th class="ancho-habilitado-deshabilitado"><cds-icon shape="info-circle"></cds-icon></th>
+            <th class="ancho-acciones">{{'comunes.acciones' | translate}}</th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-registro>
         <tr>
             <td>{{registro.id}}</td>
-            <td>{{registro.nombre}}</td>
-            <td>{{registro.isbn}}</td>
-            <td>{{obtenerGeneroLibro(registro.generoLibro) | translate}}</td>
-            <td>{{registro.descripcion}}</td>
-            <td>
-                <span *ngIf="sisHabilitadoEnum.sisHabilitado === registro.sisHabilitado">
-                {{'comunes.habilitado' | translate}}
-                </span>
-                <span *ngIf="sisHabilitadoEnum.sisDeshabilitado === registro.sisHabilitado">
-                {{'comunes.deshabilitado' | translate}}
-                </span>
+<!--            <td>{{registro.nombreCampo}}</td>-->
+<!--            <td>{{obtenerNombreCampoLista(registro.nombreCampoLista) | translate}}</td>-->
+            <td class="ancho-habilitado-deshabilitado">
+                <manti-habilitado-deshabilitado [registro]="registro"></manti-habilitado-deshabilitado>
             </td>
-            <td>
+            <td class="ancho-acciones">
                 <button class="btn btn-outline btn-block"
                         (click)="componente.abrirOpciones(true, registro)"
                 >

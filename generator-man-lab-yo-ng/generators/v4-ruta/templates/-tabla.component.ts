@@ -1,7 +1,6 @@
 import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
-import {<%= nombreMayuscula %>Entity} from "../../../../../generated/api-solo-back";
 import {<%= nombreMayuscula %>Select} from "../../../servicios/<%= nombreGuiones %>/forms/constantes/<%= nombreGuiones %>-select";
-import {nombreModuloNest} from "../../../nombre-modulo-nest";
+import {<%= nombreMayuscula %>Dto} from "../../../servicios/<%= nombreGuiones %>/dto/<%= nombreGuiones %>.dto";
 
 @Component({
     selector: 'manti-<%= nombreGuiones %>-tabla',
@@ -11,19 +10,17 @@ import {nombreModuloNest} from "../../../nombre-modulo-nest";
 })
 export class <%= nombreMayuscula %>TablaComponent {
     @Input()
-    registrosActuales: [<%= nombreMayuscula %>Entity[], number] = [[], 0];
+    registrosActuales: [<%= nombreMayuscula %>Dto[], number] = [[], 0];
     @Input()
-    componente!: CrudRutaComponent;
-    sisHabilitadoEnum = SisHabilitadoEnumObject;
-    nombreModulo = nombreModuloNest;
-
-    // ejemplo get
-    // obtenerGeneroLibro(generoLibro: string): string {
-    //     const generoLibroEncontrado = <%= nombreMayuscula %>Select.generoLibro.find((g) => g.code === generoLibro);
-    //     if (generoLibroEncontrado) {
-    //         return generoLibroEncontrado.name
-    //     }
-    //     return generoLibro;
-    // }
+    componente!: Ruta<%= nombreMayuscula %>CrudRutaType;
+    nombreModulo = nombreModulo_LLENAR;
+    
+    obtenerNombreCampoLista(nombreCampoListaCodigoPrimario: string): string {
+        const campoListaEncontrado = <%= nombreMayuscula %>Select.nombreCampoLista.find((g) => g.codigoPrimario === nombreCampoListaCodigoPrimario);
+        if (campoListaEncontrado) {
+            return campoListaEncontrado.pathTraduccion
+        }
+        return nombreCampoListaCodigoPrimario;
+    }
 
 }

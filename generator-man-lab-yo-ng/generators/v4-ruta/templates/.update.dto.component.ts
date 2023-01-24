@@ -1,76 +1,53 @@
-import {Component, Input, TemplateRef, ViewChild, AfterViewInit} from '@angular/core';
-import {LocaleSettings} from "primeng/calendar";
+import {Component, TemplateRef, ViewChild, AfterViewInit, Input} from '@angular/core';
 import {TranslateService} from "@ngx-translate/core";
 import {PrimeNGConfig} from "primeng/api";
 import {<%= nombreMayuscula %>CreateUpdateComunDto} from "../constantes/<%= nombreGuiones %>.create-update-comun.dto";
+import {FormlyFormOptions} from "@ngx-formly/core/lib/components/formly.field.config";
 import {<%= nombreMayuscula %>UpdateDto} from "../../dto/<%= nombreGuiones %>.update.dto";
 
 @Component({
     selector: 'manti-<%= nombreGuiones %>-update-dto',
     templateUrl: './<%= nombreGuiones %>.update.dto.component.html',
-    styleUrls: ['./libro-biblioteca.update.dto.component.scss'],
+    styleUrls: ['./<%= nombreGuiones %>.update.dto.component.scss'],
 })
-export class <%= nombreMayuscula %>UpdateDtoComponent implements AfterViewInit {
+export class <%= nombreMayuscula %>UpdateDtoComponent extends FormAbstract implements AfterViewInit {
     @Input() ruta!: AngularFormInterface;
     @Input() formManti!: FormMantiFormly<<%= nombreMayuscula %>UpdateDto>;
     @Input() formularioManti!: FormularioMantiFormly<<%= nombreMayuscula %>UpdateDto>;
-
-    // Ejemplo select
-    // @ViewChild('itemGeneroLibro') public itemGeneroLibro!: TemplateRef<any>;
-    // @ViewChild('selectedItemGeneroLibro') public selectedItemGeneroLibro!: TemplateRef<any>;
-
-    localSettings?: LocaleSettings;
-
-    _tipoSelectSelectedItemGeneroLibro: TipoCampoSelect;
-
-    fields: ArregloFormlyTraducido = (
+    @Input() formlyOptions: FormlyFormOptions = {};
+    // @ViewChild('itemNombreCampoLista') public itemNombreCampoLista!: TemplateRef<any>;
+    // @ViewChild('selectedItemNombreCampoLista') public selectedItemNombreCampoLista!: TemplateRef<any>;
+    fields = (
         componente: AngularFormInterface
     ) => {
         return [
             ...<%= nombreMayuscula %>CreateUpdateComunDto(
                 componente,
                 {
-                    itemGeneroLibro: this.itemGeneroLibro,
-                    selectedItemGeneroLibro: this.selectedItemGeneroLibro,
+                    // itemCampoEjemplo: this.itemNombreCampoLista,
+                    // selectedItemCampoEjemplo: this.selectedItemNombreCampoLista,
                 },
             )
         ]
     };
 
-
-    arregloCampos: GrupoFormularioManti[] = [];
-
     constructor(
         private readonly translateService: TranslateService,
         private readonly config: PrimeNGConfig
     ) {
-        this.setearLocalSettings(this.translateService.currentLang as 'es' | 'en');
-        this.translateService
-            .onLangChange
-            .subscribe(
-                (lenguaje) => {
-                    this.setearLocalSettings(lenguaje.lang as 'es' | 'en');
-                }
-            )
-    }
-
-    setearLocalSettings(lenguaje: 'es' | 'en') {
-        this.localSettings = LocaleSettingsManti[lenguaje];
-        if(this.localSettings){
-            this.config.setTranslation({
-                ...this.localSettings as any
-            });
-        }
+        super(translateService, config);
     }
 
     ngAfterViewInit() {
-        const campos = this.fields(this.ruta);
         this.formularioManti = {
             fields: this.fields(this.ruta),
             form: this.formManti.form,
             model: this.formManti.model,
-            options: {},
+            options: this.formlyOptions,
         };
+    }
+    imprimir(a:any){
+        console.log(a);
     }
 
 }

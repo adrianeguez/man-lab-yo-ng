@@ -34,68 +34,6 @@ const ARGUMENTOS = {
     }
 }
 const TEMPLATES = {
-    // ACTUALIZAR: 'actualizar-.ts',
-    // CREAR: 'crear-.ts',
-    // GRUPOS_FORMULARIO_BUSQUEDA: 'grupos-formulario-busqueda.ts',
-    // GRUPOS_FORMULARIO_CREAR_EDITAR: 'grupos-formulario-crear-editar.ts',
-    // RUTA_HTML: 'ruta-.component.html',
-    // RUTA_SCSS: 'ruta-.component.scss',
-    // RUTA_TS: 'ruta-.component.ts',
-    // S_RUTA_MODULE: 's-ruta-.module.ts',
-    // S_RUTA_SERVICE: 's-ruta-.service.ts',
-    // S_RUTA_PARAMETROS: 's-ruta-parametros.ts',
-    // CAMPO_BUSQUEDA: 'campo-busqueda.ts',
-    // CAMPO_HABILITADO: 'campo-habilitado.ts',
-    // FORMULARIO_BUSQUEDA: 'formulario-busqueda.ts',
-    // INTERFACE: '.interface.ts',
-    // MODULE: '.module.ts',
-    // SERVICE: '.service.ts',
-    // BUSQUEDA_DTO: '-busqueda.dto.ts',
-    // CAMPO_NOMBRE: 'campo--nombre.ts',
-    // FORMULARIO_CREAR_EDITAR: 'formulario-.ts',
-    // MIGAS_PAN: '-migas-pan.ts',
-    // LOADER_TRANSLOCO: 'loader-.ts',
-    // GUARD: '.guard.ts',
-    // PAGE_MODULE: '-page.module.ts',
-    // PAGE_ROUTING_MODULE: '-page-routing.module.ts',
-    // MOSTRAR_LISTA_HTML: 'mostrar--lista.component.html',
-    // MOSTRAR_LISTA_SCSS: 'mostrar--lista.component.scss',
-    // MOSTRAR_LISTA_TS: 'mostrar--lista.component.ts',
-    // MOSTRAR_LISTA_MODULE: 'mostrar--lista.module.ts',
-    //
-    // NOMBRE_MODULO: 'nombre-modulo.ts',
-    // NOMBRE_MODULO_ASSETS: 'nombre-modulo-assets.ts',
-    //
-    // PERFIL_HTML: 'perfil-.component.html',
-    // PERFIL_SCSS: 'perfil-.component.scss',
-    // PERFIL_TS: 'perfil-.component.ts',
-    // PERFIL_MODULE: 'perfil-.module.ts',
-    // TABS_ARRAY: '-tabs-array.ts',
-    // PERFIL_MODULE: '-perfil.module.ts',
-    // PERFIL_C_TS: '-perfil.component.ts',
-    // PERFIL_C_HTML: '-perfil.component.html',
-    // PERFIL_C_SCSS: '-perfil.component.scss',
-    // TABLA_TS: '-tabla.component.ts',
-    // TABLA_MODULE: '-tabla.module.ts',
-    // TABLA_HTML: '-tabla.component.html',
-    // TABLA_SCSS: '-tabla.component.scss',
-    // DECLARATION: '-declarations.ts',
-    // IMPORTS: '-imports.ts',
-    // PROVIDERS: '-providers.ts',
-    // FORM_ENUM: 'form-.enum.ts',
-    // FORM: 'form-.ts',
-    // RUTA_TS: 'ruta-.component.ts',
-    // RUTA_HTML: 'ruta-.component.html',
-    // RUTA_SCSS: 'ruta-.component.scss',
-    // CREATE_DTO: '-create-dto.ts',
-    // FIND_DTO: '-find-dto.ts',
-    // RESPONSE_DTO: '-response-dto.ts',
-    // UPDATE_DTO: '-update-dto.ts',
-    // MODULE: '.module.ts',
-    // HTTP_SERVICE: 'http--service.ts',
-    // HTTP_MODULE: 'http--module.ts',
-    // ROUTING: '-routing.module.ts',
-
     SRV_SORT: '.sort.ts',
     SRV_HTTP_MODULE: '.http.module.ts',
     SRV_HTTP_SERVICE: '.http.service.ts',
@@ -111,7 +49,7 @@ const TEMPLATES = {
     SRV_FORM_CREATE_COM_SCSS: '.create.dto.component.scss',
     SRV_FORM_SELECT: '-select.ts',
     SRV_CREA_UP_DTO_COM: '.create-update-comun.dto.ts',
-    SRV_ENUM: 'Enum.ts',
+    SRV_ENUM: 'enum.ts',
     SRV_CREATE_DTO: '.create.dto.ts',
     SRV_DTO: '.dto.ts',
     SRV_FIND_DTO: '.find.dto.ts',
@@ -122,6 +60,7 @@ const TEMPLATES = {
     RUTA_COMP_TS: 'ruta-.component.ts',
     RUTA_COMP_HTML: 'ruta-.component.html',
     RUTA_COMP_SCSS: 'ruta-.component.scss',
+    RUTA_CRUD_RUTA_TYPE: 'ruta--crud-ruta.type.ts',
     TABLA_MODULE: '-tabla.module.ts',
     TABLA_COMP_TS: '-tabla.component.ts',
     TABLA_COMP_HTML: '-tabla.component.html',
@@ -130,7 +69,6 @@ const TEMPLATES = {
     TABLA_MOV_COMP_TS: '-tabla-movil.component.ts',
     TABLA_MOV_COMP_HTML: '-tabla-movil.component.html',
     TABLA_MOV_COMP_SCSS: '-tabla-movil.component.scss',
-
 }
 const OPCIONES = {
     // ES_FIREBASE: {
@@ -421,6 +359,15 @@ module.exports = class extends Generator {
             variables
         );
 
+        const templateRCRT = this.templatePath(TEMPLATES.RUTA_CRUD_RUTA_TYPE);
+        const destinoRCRT = this.destinationPath(`./rutas/ruta-${nombreGuiones}/ruta-${nombreGuiones}-crud-ruta.type.ts`);
+
+        this.fs.copyTpl(
+            templateRCRT,
+            destinoRCRT,
+            variables
+        );
+
         // servicios dto
         const templateServiciosCreateDTO = this.templatePath(TEMPLATES.SRV_CREATE_DTO);
         const destinoServiciosCreateDTO = this.destinationPath(`./servicios/${nombreGuiones}/dto/${nombreGuiones}.create.dto.ts`);
@@ -468,7 +415,7 @@ module.exports = class extends Generator {
         // servicios enums
 
         const templateServiciosEnum = this.templatePath(TEMPLATES.SRV_ENUM);
-        const destinoServiciosEnum = this.destinationPath(`./servicios/${nombreGuiones}/enum/${nombreGuiones}Enum.ts`);
+        const destinoServiciosEnum = this.destinationPath(`./servicios/${nombreGuiones}/enum/${nombreGuiones}-enum.ts`);
 
         this.fs.copyTpl(
             templateServiciosEnum,
