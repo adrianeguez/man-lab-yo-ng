@@ -19,14 +19,14 @@ export class <%= nombreMayuscula %>FindDtoComponent extends FormAbstract impleme
     @ViewChild('itemSisHabilitado') public itemSisHabilitado!: TemplateRef<any>;
     @ViewChild('selectedItemSisHabilitado') public selectedItemSisHabilitado!: TemplateRef<any>;
     nombreModulo = nombreModulo_LLENAR;
-    fields: ArregloFormlyTraducido = (
+    fields = (
         componente: AngularFormInterface
     ) => {
         return [
             ...FormularioBusquedaComunDto(
                 componente,
-                this.nombreModulo +'.findDto.busqueda.placeholder',
-                this.nombreModulo +'.findDto.busqueda.ayuda',
+                this.nombreModulo +'.<%= nombreCamel %>.findDto.busqueda.placeholder',
+                this.nombreModulo +'.<%= nombreCamel %>.findDto.busqueda.ayuda',
                 this.itemSisHabilitado,
                 this.selectedItemSisHabilitado,
                 this.localSettings

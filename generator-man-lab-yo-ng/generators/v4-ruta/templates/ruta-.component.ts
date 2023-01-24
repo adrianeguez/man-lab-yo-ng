@@ -292,13 +292,13 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
   }
 
   resetearUpdateDtoModel<%= nombreMayuscula %>(): <%= nombreMayuscula %>UpdateFormDto {
-    // if (this.registroActual<%= nombreMayuscula %>) {
+    if (this.registroActual<%= nombreMayuscula %>) {
     //   const nombreCampoLista = <%= nombreMayuscula %>Select.nombreCampoLista.find((g) => g.codigoPrimario === this.registroActual<%= nombreMayuscula %>?.nombreCampoLista)
-    //   return {
+      return {
     //     nombreCampo: this.registroActual<%= nombreMayuscula %>.nombreCampo,
     //     nombreCampoLista: nombreCampoLista ? nombreCampoLista : <%= nombreMayuscula %>Select.nombreCampoLista[0],
-    //   }
-    // }
+      }
+    }
     return {
       // nombreCampo: '',
       // nombreCampoLista: {

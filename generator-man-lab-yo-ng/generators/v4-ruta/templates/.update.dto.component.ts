@@ -46,8 +46,4 @@ export class <%= nombreMayuscula %>UpdateDtoComponent extends FormAbstract imple
             options: this.formlyOptions,
         };
     }
-    imprimir(a:any){
-        console.log(a);
-    }
-
 }

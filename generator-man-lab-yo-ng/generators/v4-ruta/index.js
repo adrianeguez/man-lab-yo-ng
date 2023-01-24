@@ -61,6 +61,8 @@ const TEMPLATES = {
     RUTA_COMP_HTML: 'ruta-.component.html',
     RUTA_COMP_SCSS: 'ruta-.component.scss',
     RUTA_CRUD_RUTA_TYPE: 'ruta--crud-ruta.type.ts',
+    RUTA_TRANSLATION_EN: 'ruta--translation.en.json',
+    RUTA_TRANSLATION_ES: 'ruta--translation.es.json',
     TABLA_MODULE: '-tabla.module.ts',
     TABLA_COMP_TS: '-tabla.component.ts',
     TABLA_COMP_HTML: '-tabla.component.html',
@@ -367,6 +369,26 @@ module.exports = class extends Generator {
             destinoRCRT,
             variables
         );
+
+        const templateRTE = this.templatePath(TEMPLATES.RUTA_TRANSLATION_EN);
+        const destinoRTE = this.destinationPath(`./rutas/ruta-${nombreGuiones}/ruta-${nombreGuiones}-translation.en.json`);
+
+        this.fs.copyTpl(
+            templateRTE,
+            destinoRTE,
+            variables
+        );
+
+        const templateRTS = this.templatePath(TEMPLATES.RUTA_TRANSLATION_ES);
+        const destinoRTS = this.destinationPath(`./rutas/ruta-${nombreGuiones}/ruta-${nombreGuiones}-translation.es.json`);
+
+        this.fs.copyTpl(
+            templateRTS,
+            destinoRTS,
+            variables
+        );
+
+
 
         // servicios dto
         const templateServiciosCreateDTO = this.templatePath(TEMPLATES.SRV_CREATE_DTO);

@@ -41,7 +41,6 @@ export class <%= nombreMayuscula %>CreateDtoComponent extends FormAbstract imple
     }
 
     ngAfterViewInit() {
-        console.log(this);
         this.formularioManti = {
             fields: this.fields(this.ruta),
             form: this.formManti.form,

@@ -19,10 +19,10 @@ export class <%= nombreMayuscula %>TablaMovilComponent {
     nombreModulo = nombreModulo_LLENAR;
 
     obtenerNombreCampoLista(nombreCampoListaCodigoPrimario: string): string {
-        const campoListaEncontrado = <%= nombreMayuscula %>Select.nombreCampoLista.find((g) => g.codigoPrimario === nombreCampoListaCodigoPrimario);
-        if (campoListaEncontrado) {
-            return campoListaEncontrado.pathTraduccion
-        }
+        // const campoListaEncontrado = <%= nombreMayuscula %>Select.nombreCampoLista.find((g) => g.codigoPrimario === nombreCampoListaCodigoPrimario);
+        // if (campoListaEncontrado) {
+        //     return campoListaEncontrado.pathTraduccion
+        // }
         return nombreCampoListaCodigoPrimario;
     }
 }

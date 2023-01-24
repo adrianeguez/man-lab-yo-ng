@@ -1,0 +1,30 @@
+{
+  "listaValoresTipo": {
+    "migaPan": "<%= nombreEspacioMayuscula %>",
+    "nombreRuta": "<%= nombreEspacioMayuscula %> type.",
+    "descripcion": "Manage your <%= nombreEspacioMayuscula %>.",
+    "descripcionRuta": "Create, update, delete and find <%= nombreEspacioMayuscula %>",
+    "camposFormulario": {
+      "nombre": {
+        "nombre": "Name",
+        "ayuda": "Name of ...",
+        "placeholder": "Ex: ..."
+      }
+    },
+    "findDto": {
+      "busqueda": {
+        "ayuda": "Search by ....",
+        "placeholder": "Ex: ..."
+      }
+    }
+  },
+  "lista-valores": {
+    "nombreCampoLista": {
+      "tipo": "...",
+      "detalle": {
+        "A1": "... A",
+        "A2": "... B"
+      }
+    }
+  }
+}
