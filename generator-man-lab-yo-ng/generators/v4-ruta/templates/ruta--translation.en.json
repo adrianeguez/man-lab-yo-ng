@@ -1,5 +1,5 @@
 {
-  "listaValoresTipo": {
+  "<%= nombreCamel %>": {
     "migaPan": "<%= nombreEspacioMayuscula %>",
     "nombreRuta": "<%= nombreEspacioMayuscula %> type.",
     "descripcion": "Manage your <%= nombreEspacioMayuscula %>.",
