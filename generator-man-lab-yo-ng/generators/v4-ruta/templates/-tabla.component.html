@@ -4,6 +4,7 @@
             <th>ID</th>
 <!--            <th>{{nombreModulo + '.<%= nombreCamel %>.camposFormulario.nombreCampo.nombre' | translate}}</th>-->
 <!--            <th>{{nombreModulo + '.<%= nombreCamel %>.camposFormulario.nombreCampoLista.nombre' | translate}}</th>-->
+<!--            <th>{{nombreModulo + '.<%= nombreCamel %>.camposFormulario.campoRelacion.nombre' | translate}}</th>-->
             <th class="ancho-habilitado-deshabilitado"><cds-icon shape="info-circle"></cds-icon></th>
             <th class="ancho-acciones">{{'comunes.acciones' | translate}}</th>
         </tr>
@@ -11,8 +12,9 @@
     <ng-template pTemplate="body" let-registro>
         <tr>
             <td>{{registro.id}}</td>
-<!--            <td>{{registro.nombreCampo}}</td>-->
-<!--            <td>{{obtenerNombreCampoLista(registro.nombreCampoLista) | translate}}</td>-->
+<!--            <td class="break-word">{{registro.nombreCampo}}</td>-->
+<!--            <td class="break-word">{{obtenerNombreCampoLista(registro.nombreCampoLista) | translate}}</td>-->
+<!--            <td class="break-word">{{registro.campoRelacion.nombreCampo}}</td>-->
             <td class="ancho-habilitado-deshabilitado">
                 <manti-habilitado-deshabilitado [registro]="registro"></manti-habilitado-deshabilitado>
             </td>

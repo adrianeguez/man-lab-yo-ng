@@ -1,7 +1,9 @@
 import {ChangeDetectionStrategy, Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {<%= nombreMayuscula %>Sort} from "../../servicios/<%= nombreGuiones %>/sort/<%= nombreGuiones %>.sort";
-import {<%= nombreMayuscula %>HttpService} from "../../servicios/<%= nombreGuiones %>/http/<%= nombreGuiones %>.http.service";
-import {<%= nombreMayuscula %>FindDto} from "../../servicios/<%= nombreGuiones %>/dto/<%= nombreGuiones %>.find.dto";
+import {
+  <%= nombreMayuscula %>HttpService
+} from "../../servicios/<%= nombreGuiones %>/http/<%= nombreGuiones %>.http.service";
+import {<%= nombreMayuscula %>FindDto, <%= nombreMayuscula %>FindFormDto} from "../../servicios/<%= nombreGuiones %>/dto/<%= nombreGuiones %>.find.dto";
 import {MatDialog} from "@angular/material/dialog";
 import {FormGroup} from '@angular/forms';
 import {
@@ -11,17 +13,18 @@ import {Subscription} from "rxjs";
 import {TranslateService} from "@ngx-translate/core";
 import {MatBottomSheet} from "@angular/material/bottom-sheet";
 import {<%= nombreMayuscula %>Dto} from "../../servicios/<%= nombreGuiones %>/dto/<%= nombreGuiones %>.dto";
-import {<%= nombreMayuscula %>CreateDto} from "../../servicios/<%= nombreGuiones %>/dto/<%= nombreGuiones %>.create.dto";
 import {
-  <%= nombreMayuscula %>UpdateDto,
-  <%= nombreMayuscula %>UpdateFormDto
+  <%= nombreMayuscula %>CreateDto,
+  <%= nombreMayuscula %>CreateFormDto
+} from "../../servicios/<%= nombreGuiones %>/dto/<%= nombreGuiones %>.create.dto";
+import {
+  <%= nombreMayuscula %>UpdateDto, <%= nombreMayuscula %>UpdateFormDto,
 } from "../../servicios/<%= nombreGuiones %>/dto/<%= nombreGuiones %>.update.dto";
-import {<%= nombreMayuscula %>Select} from "../../servicios/<%= nombreGuiones %>/forms/constantes/<%= nombreGuiones %>-select";
 import {
-  Ruta<%= nombreMayuscula %>Autocomplete<%= nombreMayuscula %>, 
+  Ruta<%= nombreMayuscula %>Autocomplete<%= nombreMayuscula %>,
   Ruta<%= nombreMayuscula %>AutocompleteMostrar<%= nombreMayuscula %>,
   Ruta<%= nombreMayuscula %>CrudRutaType,
-  Ruta<%= nombreMayuscula %>DialogoSinForm, 
+  Ruta<%= nombreMayuscula %>DialogoSinForm,
   Ruta<%= nombreMayuscula %>DialogoSinFormParametros
 } from "./ruta-<%= nombreGuiones %>-crud-ruta.type";
 
@@ -32,8 +35,8 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Ruta<%= nombreMayuscula %>Component implements OnInit {
-  templateContextoRuta<%= nombreMayuscula %>Component = this;
-  nombreModulo = nombreModuloNest;
+  templateContextoRuta<%= nombreMayuscula %>Component = this; // no eliminar
+  nombreModulo = nombreModulo_LLENAR;
   identificadorRuta<%= nombreMayuscula %> = '<%= nombreGuiones %>';
   colorDot = COLORES.<%= nombreCamel %>;
   colorBorde = COLORES.<%= nombreCamel %>;
@@ -41,38 +44,35 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
   @ViewChild('ComponenteDialogoVisualizacion<%= nombreMayuscula %>') public componenteDialogoVisualizacion<%= nombreMayuscula %>: TemplateRef<any>;
   @ViewChild('ComponenteDialogoVisualizacionAcciones<%= nombreMayuscula %>') public componenteDialogoAcciones<%= nombreMayuscula %>: TemplateRef<any>;
   @ViewChild('Mostrar<%= nombreMayuscula %>') public mostrar<%= nombreMayuscula %>: TemplateRef<any>;
-  @ViewChild('Autocomplete<%= nombreMayuscula %>') public autocomplete<%= nombreMayuscula %>: TemplateRef<any>;
+  @ViewChild('autocompleteListaValoresTipo') public autocomplete<%= nombreMayuscula %>: TemplateRef<any>;
   @ViewChild('MantiCrearEditarFormulario<%= nombreMayuscula %>') public mantiCrearEditarFormulario<%= nombreMayuscula %>: TemplateRef<any>;
   sortFields<%= nombreMayuscula %>: SortFieldInterface[] = [...<%= nombreMayuscula %>Sort];
   registrosActuales<%= nombreMayuscula %>: [<%= nombreMayuscula %>Dto[], number] = [[], 0];
-  findDto<%= nombreMayuscula %>: <%= nombreMayuscula %>FindDto = this.settearFindDTO<%= nombreMayuscula %>();
+  findDto<%= nombreMayuscula %>: <%= nombreMayuscula %>FindFormDto = this.settearFindDTO<%= nombreMayuscula %>();
   registroActual<%= nombreMayuscula %>?: <%= nombreMayuscula %>Dto;
   componenteCrudRuta<%= nombreMayuscula %>!: Ruta<%= nombreMayuscula %>CrudRutaType;
-  form<%= nombreMayuscula %>CreateDto: FormMantiFormly<<%= nombreMayuscula %>CreateDto> = {
+  form<%= nombreMayuscula %>CreateDto: FormMantiFormly<<%= nombreMayuscula %>CreateFormDto> = {
     form: new FormGroup({}),
     model: this.resetear<%= nombreMayuscula %>CreateDtoModel(),
   };
   form<%= nombreMayuscula %>UpdateDto?: FormMantiFormly<<%= nombreMayuscula %>UpdateFormDto>;
-  form<%= nombreMayuscula %>FindDto: FormMantiFormly<<%= nombreMayuscula %>FindDto> = {
+  form<%= nombreMayuscula %>FindDto: FormMantiFormly<<%= nombreMayuscula %>FindFormDto> = {
     form: new FormGroup({}),
     model: this.resetear<%= nombreMayuscula %>FindDtoModel(),
   };
-  datosAutocomplete: any[] = [];
-
   _tiposTemplate<%= nombreMayuscula %>: {
     templateContextoCrudRutaComponent: Ruta<%= nombreMayuscula %>CrudRutaType,
     templateContextoDialogoManticoreComponent: Ruta<%= nombreMayuscula %>DialogoSinForm,
     templateContextoAutocompleteManticoreComponent: Ruta<%= nombreMayuscula %>AutocompleteMostrar<%= nombreMayuscula %>,
   };
 
-  _crudRuta<%= nombreMayuscula %>!: Ruta<%= nombreMayuscula %>CrudRutaType;
   constructor(
       public readonly <%= nombreCamel %>HttpService: <%= nombreMayuscula %>HttpService,
       public readonly eventoComunHandlerService: EventoComunHandlerService,
       public readonly matDialog: MatDialog,
       public readonly translateService: TranslateService, // No eliminar
       private readonly bottomSheet: MatBottomSheet,
-      private readonly cargandoService: CargandoService,
+      public readonly cargandoService: CargandoService,
   ) {
     translateService;
   }
@@ -92,6 +92,7 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
       evento: CrudRutaEvento
   ): void {
     const crudRutaComponente: Ruta<%= nombreMayuscula %>CrudRutaType = evento.contextoThis;
+    this.componenteCrudRuta<%= nombreMayuscula %> = crudRutaComponente;
     if (evento.eventoGeneral === EventosComunesEnum.HTTP) {
       if (evento.eventoEspecifico === CrudRutaEnum.DatosCargados) {
         this.registrosActuales<%= nombreMayuscula %> = evento.objeto;
@@ -99,7 +100,6 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
     }
     if (evento.eventoGeneral === EventosComunesEnum.CRUD) {
       if (evento.eventoEspecifico === CrudRutaEnum.AbrirFiltros) {
-        this.componenteCrudRuta<%= nombreMayuscula %> = evento.contextoThis;
       }
       if (evento.eventoEspecifico === CrudRutaEnum.AbrirCrearEditar) {
         this.abrirCrearEditarDialogo<%= nombreMayuscula %>(crudRutaComponente);
@@ -114,7 +114,7 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
         this.form<%= nombreMayuscula %>CreateDto.form.reset();
       }
     }
-    const respuestaHandlerResponse = this.eventoComunHandlerService.handleResponse(evento, 'modulo-nest.<%= nombreCamel %>.nombreRuta');
+    const respuestaHandlerResponse = this.eventoComunHandlerService.handleResponse(evento, this.nombreModulo + '.<%= nombreCamel %>.nombreRuta');
     if (!respuestaHandlerResponse.completado) {
       // handle custom responses
     }
@@ -165,10 +165,30 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
       crudRutaComponente: Ruta<%= nombreMayuscula %>CrudRutaType,
       editar = false
   ): void {
-    let dto: <%= nombreMayuscula %>CreateDto | <%= nombreMayuscula %>UpdateDto
+    let dto: <%= nombreMayuscula %>CreateDto | <%= nombreMayuscula %>UpdateDto = {};
     if (editar && this.form<%= nombreMayuscula %>UpdateDto) {
+      // if (this.form<%= nombreMayuscula %>UpdateDto.model.campoRelacion) {
+      //   const campoRelacion = this.form<%= nombreMayuscula %>UpdateDto.model.campoRelacion as RelacionDto;
+      //   if (campoRelacion) {
+      //     if (campoRelacion.id) {
+      //       this.form<%= nombreMayuscula %>UpdateDto.model.campoRelacion = campoRelacion.id;
+      //     } else {
+      //       this.form<%= nombreMayuscula %>UpdateDto.model.campoRelacion = campoRelacion;
+      //     }
+      //   }
+      // }
       dto = obtenerValoresModel<<%= nombreMayuscula %>UpdateDto>(this.form<%= nombreMayuscula %>UpdateDto.model, false);
     } else {
+      // if (this.form<%= nombreMayuscula %>CreateDto.model.campoRelacion) {
+      //   const campoRelacion = this.form<%= nombreMayuscula %>CreateDto.model.campoRelacion as RelacionDto;
+      //   if (campoRelacion) {
+      //     if (campoRelacion.id) {
+      //       this.form<%= nombreMayuscula %>CreateDto.model.campoRelacion = campoRelacion.id;
+      //     } else {
+      //       this.form<%= nombreMayuscula %>CreateDto.model.campoRelacion = campoRelacion;
+      //     }
+      //   }
+      // }
       dto = obtenerValoresModel<<%= nombreMayuscula %>CreateDto>(this.form<%= nombreMayuscula %>CreateDto.model);
     }
     crudRutaComponente.crearEditarComponenteRuta(dto, editar);
@@ -215,7 +235,7 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
         );
   }
 
-  settearFindDTO<%= nombreMayuscula %>(): <%= nombreMayuscula %>FindDto {
+  settearFindDTO<%= nombreMayuscula %>(): <%= nombreMayuscula %>FindFormDto {
     this.findDto<%= nombreMayuscula %> = {
       skip: SKIP_TAKE.skip,
       take: SKIP_TAKE.take,
@@ -259,6 +279,16 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
   buscar<%= nombreMayuscula %>EnComponenteRuta(
       componente: Ruta<%= nombreMayuscula %>CrudRutaType
   ): void {
+    // if (this.form<%= nombreMayuscula %>FindDto.model.campoRelacion) {
+    //   const campoRelacion = this.form<%= nombreMayuscula %>FindDto.model.campoRelacion as RelacionDto;
+    //       if (campoRelacion) {
+    //         if (campoRelacion.id) {
+    //           this.form < %= nombreMayuscula % > FindDto.model.campoRelacion = campoRelacion.id;
+    //         } else {
+    //           this.form < %= nombreMayuscula % > FindDto.model.campoRelacion = campoRelacion;
+    //         }
+    //       }
+    // }
     const findDto: <%= nombreMayuscula %>FindDto = {
       ...componente.findDto,
       skip: '0',
@@ -280,23 +310,28 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
       busqueda: null,
       sisCreado: null,
       sisModificado: null,
+      // campoNombre: null,
+      // campoNombreLista: null,
+      // campoRelacion: null,
     };
   }
 
-  resetear<%= nombreMayuscula %>CreateDtoModel(): <%= nombreMayuscula %>CreateDto {
+  resetear<%= nombreMayuscula %>CreateDtoModel(): <%= nombreMayuscula %>CreateFormDto {
     return {
-      // nombreCampo: '',
       sisHabilitado: SisHabilitadoEnum.Habilitado,
+      // nombreCampo: '',
       // nombreCampoLista: '',
+      // campoRelacion: null,
     }
   }
 
   resetearUpdateDtoModel<%= nombreMayuscula %>(): <%= nombreMayuscula %>UpdateFormDto {
     if (this.registroActual<%= nombreMayuscula %>) {
-    //   const nombreCampoLista = <%= nombreMayuscula %>Select.nombreCampoLista.find((g) => g.codigoPrimario === this.registroActual<%= nombreMayuscula %>?.nombreCampoLista)
+      //   const nombreCampoLista = <%= nombreMayuscula %>Select.nombreCampoLista.find((g) => g.codigoPrimario === this.registroActual<%= nombreMayuscula %>?.nombreCampoLista)
       return {
-    //     nombreCampo: this.registroActual<%= nombreMayuscula %>.nombreCampo,
-    //     nombreCampoLista: nombreCampoLista ? nombreCampoLista : <%= nombreMayuscula %>Select.nombreCampoLista[0],
+        //     nombreCampo: this.registroActual<%= nombreMayuscula %>.nombreCampo,
+        //     nombreCampoLista: nombreCampoLista ? nombreCampoLista : <%= nombreMayuscula %>Select.nombreCampoLista[0],
+        //     campoRelacion: this.registroActual<%= nombreMayuscula %>.campoRelacion,
       }
     }
     return {
@@ -305,62 +340,14 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
       //   codigoPrimario: '',
       //   pathTraduccion: ''
       // },
+      // campoRelacion: null,
     }
-  }
-
-  buscarAutocomplete<%= nombreMayuscula %>(
-      busqueda?: string,
-      abrir = false
-  ): void {
-    this.cargandoService.habilitarCargando();
-    const busqueda$ = this.<%= nombreCamel %>HttpService.buscar({busqueda})
-    const busquedaSubs$: Subscription = busqueda$
-        .subscribe({
-          next: (data) => {
-            this.cargandoService.deshabilitarCargando();
-            this.datosAutocomplete = data[0];
-            if (abrir) {
-              this.abrirAutocomplete<%= nombreMayuscula %>();
-            }
-          },
-          error: () => {
-            this.cargandoService.deshabilitarCargando();
-            this.eventoComunHandlerService.emitirError(this.eventoComunHandlerService.errorPorTipo[CrudRutaEnum.ErrorBuscar], 'errores.servidor')
-          },
-          complete: () => busquedaSubs$.unsubscribe()
-        })
-  }
-
-  abrirAutocomplete<%= nombreMayuscula %>():void {
-    // const bottomSheet$ = this.bottomSheet.open<
-    //     AutocompleteManticoreComponent,
-    //     AutocompleteManticoreParametros<Ruta<%= nombreMayuscula %>Component>,
-    //     <%= nombreMayuscula %>Dto
-    // >(
-    //     AutocompleteManticoreComponent,
-    //     {
-    //       data: {
-    //         autocompleteTemplate: this.autocomplete<%= nombreMayuscula %>,
-    //         componente: this,
-    //       }
-    //     })
-    //     .afterDismissed();
-    // const subsBottomSheet$: Subscription = bottomSheet$
-    //     .subscribe({
-    //       next: (registro: <%= nombreMayuscula %>Dto | undefined) => {
-    //         const busqueda = this.form<%= nombreMayuscula %>FindDto.form.get("campoAutocomplete");
-    //         if (busqueda && registro) {
-    //           busqueda.setValue(registro)
-    //         }
-    //       },
-    //       complete: () => subsBottomSheet$.unsubscribe()
-    //     });
   }
 
   seleccionarAutocomplete(
       autocompleteManticore: Ruta<%= nombreMayuscula %>Autocomplete<%= nombreMayuscula %>,
       registro: any
   ): void {
-    // autocompleteManticore.bottomSheetRef.dismiss(registro);
+    autocompleteManticore.bottomSheetRef.dismiss(registro);
   }
 }

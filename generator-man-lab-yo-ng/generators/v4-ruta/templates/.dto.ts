@@ -1,3 +1,3 @@
-export interface <%= nombreMayuscula %>Dto extends <%= nombreMayuscula %>Entity{
+export interface <%= nombreMayuscula %>Dto extends <%= nombreMayuscula %>RespuestaBusquedaDto{
 
 }

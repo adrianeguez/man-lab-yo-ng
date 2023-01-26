@@ -8,7 +8,7 @@
     <div class="grid grid-cols-10 gap-2">
       <div class="col-span-2">
         <img class="icono-ruta-imagen"
-             src="https://cdn-icons-png.flaticon.com/512/2135/2135050.png"
+             src="https://cdn-icons-png.flaticon.com/512/8980/8980097.png"
              alt="<%= nombreEspacioMayuscula %>"
         >
       </div>
@@ -40,7 +40,7 @@
                  let-contextoCrudRuta<%= nombreMayuscula %>="templateContextoCrudRutaComponent"
     >
       <manti-<%= nombreGuiones %>-tabla [registrosActuales]="contextoCrudRuta<%= nombreMayuscula %>.registrosActuales"
-                                    [componente]="contextoCrudRuta<%= nombreMayuscula %>"
+                                         [componente]="contextoCrudRuta<%= nombreMayuscula %>"
       >
       </manti-<%= nombreGuiones %>-tabla>
     </ng-template>
@@ -53,8 +53,8 @@
         <div class="col-span-12" *ngIf="contextoCrudRuta<%= nombreMayuscula %>.registrosActuales">
           <div *ngFor="let registro of contextoCrudRuta<%= nombreMayuscula %>.registrosActuales[0]">
             <manti-<%= nombreGuiones %>-tabla-movil [registro]="registro"
-                                                [componente]="contextoCrudRuta<%= nombreMayuscula %>"
-                                                [mostrarAcciones]="true"
+                                                     [componente]="contextoCrudRuta<%= nombreMayuscula %>"
+                                                     [mostrarAcciones]="true"
             >
             </manti-<%= nombreGuiones %>-tabla-movil>
           </div>
@@ -94,10 +94,10 @@
       <form [formGroup]="form<%= nombreMayuscula %>CreateDto.form">
 
         <manti-<%= nombreGuiones %>-create-dto *ngIf="!registroActual<%= nombreMayuscula %>" [ruta]="this"
-                                           [formManti]="form<%= nombreMayuscula %>CreateDto">
+                                                [formManti]="form<%= nombreMayuscula %>CreateDto">
         </manti-<%= nombreGuiones %>-create-dto>
         <manti-<%= nombreGuiones %>-update-dto *ngIf="registroActual<%= nombreMayuscula %> && form<%= nombreMayuscula %>UpdateDto"
-                                           [ruta]="this" [formManti]="form<%= nombreMayuscula %>UpdateDto">
+                                                [ruta]="this" [formManti]="form<%= nombreMayuscula %>UpdateDto">
         </manti-<%= nombreGuiones %>-update-dto>
       </form>
     </ng-template>
@@ -177,8 +177,8 @@
   >
     <div *ngIf="dialogoManticoreComponent.data.contextoComponente.registroActual<%= nombreMayuscula %>">
       <manti-<%= nombreGuiones %>-tabla-movil [registro]="registroActual<%= nombreMayuscula %>"
-                                          [componente]="componenteCrudRuta<%= nombreMayuscula %>"
-                                          [mostrarAcciones]="false"
+                                               [componente]="componenteCrudRuta<%= nombreMayuscula %>"
+                                               [mostrarAcciones]="false"
       >
       </manti-<%= nombreGuiones %>-tabla-movil>
     </div>
@@ -193,23 +193,6 @@
             (click)="cerrarDialogo<%= nombreMayuscula %>(dialogoManticoreComponent)">
       {{translationConstantes.comunes.aceptar | translate}}
     </button>
-  </ng-template>
-
-  <!--        AUTOCOMPLETE       -->
-  <!--        AUTOCOMPLETE LIBRO BIBLIOTECA      -->
-  <ng-template #Autocomplete<%= nombreMayuscula %>
-               [tipoTemplate]="_tiposTemplate<%= nombreMayuscula %>"
-               let-autocompleteManticore<%= nombreMayuscula %>=templateContextoAutocompleteManticoreComponent
-               let-registro="registro"
-  >
-    <manti-<%= nombreGuiones %>-tabla-movil [registro]="registro"
-                                        [mostrarAcciones]="false"
-                                        (click)="seleccionarAutocomplete(
-                                        autocompleteManticore<%= nombreMayuscula %>,
-                                        registro
-                                        )"
-    >
-    </manti-<%= nombreGuiones %>-tabla-movil>
   </ng-template>
 
 </manti-contenedor-ruta>

@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@angular/core';
 import {<%= nombreMayuscula %>Select} from "../../../servicios/<%= nombreGuiones %>/forms/constantes/<%= nombreGuiones %>-select";
 import {<%= nombreMayuscula %>Dto} from "../../../servicios/<%= nombreGuiones %>/dto/<%= nombreGuiones %>.dto";
 
@@ -10,13 +10,15 @@ import {<%= nombreMayuscula %>Dto} from "../../../servicios/<%= nombreGuiones %>
 })
 export class <%= nombreMayuscula %>TablaMovilComponent {
     @Input()
+    renderizarShort: boolean = false;
+    @Input()
     registro!: <%= nombreMayuscula %>Dto;
     @Input()
     componente!: CrudRutaComponent;
 
     @Input()
     mostrarAcciones = false;
-    nombreModulo = nombreModulo_LLENAR;
+    nombreModulo = nombreModuloNest;
 
     obtenerNombreCampoLista(nombreCampoListaCodigoPrimario: string): string {
         // const campoListaEncontrado = <%= nombreMayuscula %>Select.nombreCampoLista.find((g) => g.codigoPrimario === nombreCampoListaCodigoPrimario);

@@ -1,9 +1,15 @@
 import {Component, TemplateRef, ViewChild, AfterViewInit, Input} from '@angular/core';
 import {TranslateService} from "@ngx-translate/core";
 import {PrimeNGConfig} from "primeng/api";
-import {<%= nombreMayuscula %>CreateUpdateComunDto} from "../constantes/<%= nombreGuiones %>.create-update-comun.dto";
+import {<%= nombreMayuscula %>CreateUpdateComun} from "../constantes/<%= nombreGuiones %>.create-update-comun";
 import {FormlyFormOptions} from "@ngx-formly/core/lib/components/formly.field.config";
-import {<%= nombreMayuscula %>UpdateDto} from "../../dto/<%= nombreGuiones %>.update.dto";
+import {
+    <%= nombreMayuscula %>UpdateFormDto
+} from "../../dto/<%= nombreGuiones %>.update.dto";
+import {
+    Ruta<%= nombreMayuscula %>AutocompleteMostrar<%= nombreMayuscula %>
+} from "../../../../rutas/ruta-<%= nombreGuiones %>/ruta-<%= nombreGuiones %>-crud-ruta.type";
+import {<%= nombreMayuscula %>Autocomplete} from "../constantes/<%= nombreGuiones %>-autocomplete";
 
 @Component({
     selector: 'manti-<%= nombreGuiones %>-update-dto',
@@ -12,35 +18,43 @@ import {<%= nombreMayuscula %>UpdateDto} from "../../dto/<%= nombreGuiones %>.up
 })
 export class <%= nombreMayuscula %>UpdateDtoComponent extends FormAbstract implements AfterViewInit {
     @Input() ruta!: AngularFormInterface;
-    @Input() formManti!: FormMantiFormly<<%= nombreMayuscula %>UpdateDto>;
-    @Input() formularioManti!: FormularioMantiFormly<<%= nombreMayuscula %>UpdateDto>;
+    @Input() formManti!: FormMantiFormly<<%= nombreMayuscula %>UpdateFormDto>;
+    @Input() formularioManti!: FormularioMantiFormly<<%= nombreMayuscula %>UpdateFormDto>;
     @Input() formlyOptions: FormlyFormOptions = {};
     // @ViewChild('itemNombreCampoLista') public itemNombreCampoLista!: TemplateRef<any>;
     // @ViewChild('selectedItemNombreCampoLista') public selectedItemNombreCampoLista!: TemplateRef<any>;
-    fields = (
+    // @ViewChild('autocompleteMostrarNombreRelacion') public autocompleteMostrarNombreRelacion!: TemplateRef<any>;
+    // @ViewChild('autocompleteListarNombreRelacion') public autocompleteListarNombreRelacion!: TemplateRef<any>;
+    _tiposTemplate<%= nombreMayuscula %>: {
+        templateContextoAutocompleteManticoreComponent: Ruta<%= nombreMayuscula %>AutocompleteMostrar<%= nombreMayuscula %>,
+    };
+    nombreModulo = nombreModulo_LLENAR;
+    fields: ArregloCamposMantiDto = (
         componente: AngularFormInterface
     ) => {
         return [
-            ...<%= nombreMayuscula %>CreateUpdateComunDto(
+            ...<%= nombreMayuscula %>CreateUpdateComun(
                 componente,
                 {
                     // itemCampoEjemplo: this.itemNombreCampoLista,
                     // selectedItemCampoEjemplo: this.selectedItemNombreCampoLista,
                 },
-            )
+            ),
+            // <%= nombreMayuscula %>Autocomplete(this).campoRelacion
         ]
     };
 
     constructor(
-        private readonly translateService: TranslateService,
-        private readonly config: PrimeNGConfig
+        public readonly translateService: TranslateService,
+        public readonly config: PrimeNGConfig
     ) {
         super(translateService, config);
     }
 
     ngAfterViewInit() {
+        this.campos = this.fields(this.ruta);
         this.formularioManti = {
-            fields: this.fields(this.ruta),
+            fields: this.campos,
             form: this.formManti.form,
             model: this.formManti.model,
             options: this.formlyOptions,

@@ -1,6 +1,6 @@
 <div *ngIf="arregloCampos.length > 0">
     <mat-accordion [multi]="true">
-        <mat-expansion-panel *ngFor="let campo of arregloCampos; let i = index" [expanded]="true    ">
+        <mat-expansion-panel *ngFor="let campo of arregloCampos; let i = index" [expanded]="i === 0">
             <mat-expansion-panel-header>
                 <mat-panel-title>
                     {{campo.titulo |  translate }}
@@ -24,6 +24,28 @@
                  [options]="formularioManti.options"
                  [form]="formularioManti.form"></formly-form>
 </div>
+
+
+<!-- SisHabilitado TEMPLATE -->
+<ng-template #selectedItemSisHabilitado
+             [tipoTemplate]="_tipoCampoSelectSelected"
+             let-templateContextoSelect="templateContextoFormlyPrimengInputSelect"
+>
+    <div *ngIf="templateContextoSelect.form.controls.sisHabilitado">
+        <div *ngIf="templateContextoSelect.form.controls.sisHabilitado.value">
+            {{templateContextoSelect.form.controls.sisHabilitado.value.pathTraduccion | translate}}
+        </div>
+    </div>
+</ng-template>
+<ng-template #itemSisHabilitado
+             [tipoTemplate]="_tipoCampoSelectItem"
+             let-templateContextoSelect="templateContextoFormlyPrimengInputSelect"
+             let-itemIterado="itemIterado"
+>
+    {{itemIterado.pathTraduccion | translate}}
+</ng-template>
+
+
 <!-- CAMPO EJEMPLO TEMPLATE SELECCIONADO -->
 <!--<ng-template #selectedItemNombreCampoLista-->
 <!--             [tipoTemplate]="_tipoCampoSelectSelected"-->
@@ -44,16 +66,36 @@
 <!--    {{itemIterado.codigoPrimario}} - {{itemIterado.pathTraduccion | translate}}-->
 <!--</ng-template>-->
 
+
 <!--        AUTOCOMPLETE MOSTRAR CAMPO EJEMPLO (usado en form)       -->
-<ng-template #MostrarCampoEjemplo
-             [tipoTemplate]="_tipoAutocomplete"
-             let-field="field"
->
-    <!--    <div *ngIf="tipoDato(field.formControl.value) === 'object'">-->
-    <!--        <p>{{field.formControl.value?.nombre}}-->
-    <!--            - {{field.formControl.value?.isbn}}</p>-->
-    <!--    </div>-->
-    <!--    <div *ngIf="tipoDato(field.formControl.value) === 'number'">-->
-    <!--        <p><strong>ID:</strong> {{field.formControl.value}}</p>-->
-    <!--    </div>-->
-</ng-template>
+<!--<ng-template #autocompleteMostrarNombreRelacion-->
+<!--             [tipoTemplate]="_tipoAutocomplete"-->
+<!--             let-field="field"-->
+<!--&gt;-->
+<!--    <div *ngIf="tipoDato(field.formControl.value) === 'object'">-->
+<!--        <div class="text-center">-->
+<!--            <strong>-->
+<!--                {{field.formControl.value?.campoNombre}}-->
+<!--                - {{field.formControl.value?.campoOtroCampo}}-->
+<!--            </strong>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div *ngIf="tipoDato(field.formControl.value) === 'number'">-->
+<!--        <p><strong>ID:</strong> {{field.formControl.value}}</p>-->
+<!--    </div>-->
+<!--</ng-template>-->
+
+<!--<ng-template #autocompleteListarNombreRelacion-->
+<!--             [tipoTemplate]="_tiposTemplate<%= nombreMayuscula %>"-->
+<!--             let-autocompleteManticore<%= nombreMayuscula %>=templateContextoAutocompleteManticoreComponent-->
+<!--             let-registro="registro"-->
+<!--&gt;-->
+<!--    <manti-nombre-relacion-tabla-movil [registro]="registro"-->
+<!--                                          [mostrarAcciones]="true"-->
+<!--                                          [renderizarShort]="true"-->
+<!--                                          (click)="autocompleteManticore<%= nombreMayuscula %>.data.componente.seleccionarAutocomplete(-->
+<!--                                          autocompleteManticore<%= nombreMayuscula %>,-->
+<!--                                          registro-->
+<!--                                          )"-->
+<!--    ></manti-nombre-relacion-tabla-movil>-->
+<!--</ng-template>-->

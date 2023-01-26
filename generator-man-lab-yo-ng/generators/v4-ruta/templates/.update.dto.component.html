@@ -45,16 +45,36 @@
 <!--    {{itemIterado.codigoPrimario}} - {{itemIterado.pathTraduccion | translate}}-->
 <!--</ng-template>-->
 
+
 <!--        AUTOCOMPLETE MOSTRAR CAMPO EJEMPLO (usado en form)       -->
-<ng-template #MostrarCampoEjemplo
-             [tipoTemplate]="_tipoAutocomplete"
-             let-field="field"
->
-    <!--    <div *ngIf="tipoDato(field.formControl.value) === 'object'">-->
-    <!--        <p>{{field.formControl.value?.nombre}}-->
-    <!--            - {{field.formControl.value?.isbn}}</p>-->
-    <!--    </div>-->
-    <!--    <div *ngIf="tipoDato(field.formControl.value) === 'number'">-->
-    <!--        <p><strong>ID:</strong> {{field.formControl.value}}</p>-->
-    <!--    </div>-->
-</ng-template>
+<!--<ng-template #autocompleteMostrarNombreRelacion-->
+<!--             [tipoTemplate]="_tipoAutocomplete"-->
+<!--             let-field="field"-->
+<!--&gt;-->
+<!--    <div *ngIf="tipoDato(field.formControl.value) === 'object'">-->
+<!--        <div class="text-center">-->
+<!--            <strong>-->
+<!--                {{field.formControl.value?.campoNombre}}-->
+<!--                - {{field.formControl.value?.campoOtroCampo}}-->
+<!--            </strong>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div *ngIf="tipoDato(field.formControl.value) === 'number'">-->
+<!--        <p><strong>ID:</strong> {{field.formControl.value}}</p>-->
+<!--    </div>-->
+<!--</ng-template>-->
+
+<!--<ng-template #autocompleteListarNombreRelacion-->
+<!--             [tipoTemplate]="_tiposTemplate<%= nombreMayuscula %>"-->
+<!--             let-autocompleteManticore<%= nombreMayuscula %>=templateContextoAutocompleteManticoreComponent-->
+<!--             let-registro="registro"-->
+<!--&gt;-->
+<!--    <manti-nombre-relacion-tabla-movil [registro]="registro"-->
+<!--                                          [mostrarAcciones]="true"-->
+<!--                                          [renderizarShort]="true"-->
+<!--                                          (click)="autocompleteManticore<%= nombreMayuscula %>.data.componente.seleccionarAutocomplete(-->
+<!--                                          autocompleteManticore<%= nombreMayuscula %>,-->
+<!--                                          registro-->
+<!--                                          )"-->
+<!--    ></manti-nombre-relacion-tabla-movil>-->
+<!--</ng-template>-->

@@ -1,4 +1,10 @@
-export const <%= nombreMayuscula %>Select: { [key in <%= nombreMayuscula %>SelectEnum]: PrimengDropdownOptions } = {
+export const <%= nombreMayuscula %>Select: {
+//     [
+//     key in ListaValoresDetalleEnum.listaValoresTipo
+//     // | ListaValoresDetalleEnum.listaValoresTipo
+//     ]:
+//     PrimengDropdownOptions
+} = {
     // nombreCampoLista: of([
         // {
         //     code: 'GL1',
@@ -10,7 +16,3 @@ export const <%= nombreMayuscula %>Select: { [key in <%= nombreMayuscula %>Selec
         // },
     // ])
 };
-
-enum <%= nombreMayuscula %>SelectEnum {
-    // generoLibro = 'generoLibro'
-}

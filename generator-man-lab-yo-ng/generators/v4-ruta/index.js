@@ -47,8 +47,9 @@ const TEMPLATES = {
     SRV_FORM_CREATE_COM_TS: '.create.dto.component.ts',
     SRV_FORM_CREATE_COM_HTML: '.create.dto.component.html',
     SRV_FORM_CREATE_COM_SCSS: '.create.dto.component.scss',
+    SRV_AUTOCOMPLETE: '-autocomplete.ts',
     SRV_FORM_SELECT: '-select.ts',
-    SRV_CREA_UP_DTO_COM: '.create-update-comun.dto.ts',
+    SRV_CREA_UP_DTO_COM: '.create-update-comun.ts',
     SRV_ENUM: 'enum.ts',
     SRV_CREATE_DTO: '.create.dto.ts',
     SRV_DTO: '.dto.ts',
@@ -448,11 +449,23 @@ module.exports = class extends Generator {
         // servicios forms
                 // constantes
         const templateServiciosFormsCreateUpdateComun = this.templatePath(TEMPLATES.SRV_CREA_UP_DTO_COM);
-        const destinoServiciosFormsCreateUpdateComun = this.destinationPath(`./servicios/${nombreGuiones}/forms/constantes/${nombreGuiones}.create-update-comun.dto.ts`);
+        const destinoServiciosFormsCreateUpdateComun = this.destinationPath(`./servicios/${nombreGuiones}/forms/constantes/${nombreGuiones}.create-update-comun.ts`);
 
         this.fs.copyTpl(
             templateServiciosFormsCreateUpdateComun,
             destinoServiciosFormsCreateUpdateComun,
+            variables
+        );
+
+
+
+        const templateAutocomplete = this.templatePath(TEMPLATES.SRV_AUTOCOMPLETE);
+        const destinoAutocomplete = this.destinationPath(`./servicios/${nombreGuiones}/forms/constantes/${nombreGuiones}-autocomplete.ts`);
+
+
+        this.fs.copyTpl(
+            templateAutocomplete,
+            destinoAutocomplete,
             variables
         );
 

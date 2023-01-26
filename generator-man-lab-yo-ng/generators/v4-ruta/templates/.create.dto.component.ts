@@ -1,11 +1,15 @@
-import {<%= nombreMayuscula %>CreateDto} from "../../dto/<%= nombreGuiones %>.create.dto";
-import {<%= nombreMayuscula %>CreateUpdateComunDto} from "../constantes/<%= nombreGuiones %>.create-update-comun.dto";
 import {Component, TemplateRef, ViewChild, AfterViewInit, Input} from '@angular/core';
 import {TranslateService} from "@ngx-translate/core";
 import {PrimeNGConfig} from "primeng/api";
-import {<%= nombreMayuscula %>CreateUpdateComunDto} from "../constantes/<%= nombreGuiones %>.create-update-comun.dto";
+import {<%= nombreMayuscula %>CreateUpdateComun} from "../constantes/<%= nombreGuiones %>.create-update-comun";
 import {FormlyFormOptions} from "@ngx-formly/core/lib/components/formly.field.config";
-import {<%= nombreMayuscula %>CreateDto} from "../../dto/<%= nombreGuiones %>.create.dto";
+import {
+    <%= nombreMayuscula %>CreateFormDto
+} from "../../dto/<%= nombreGuiones %>.create.dto";
+import {
+    Ruta<%= nombreMayuscula %>AutocompleteMostrar<%= nombreMayuscula %>
+} from "../../../../rutas/ruta-<%= nombreGuiones %>/ruta-<%= nombreGuiones %>-crud-ruta.type";
+import {<%= nombreMayuscula %>Autocomplete} from "../constantes/<%= nombreGuiones %>-autocomplete";
 
 @Component({
     selector: 'manti-<%= nombreGuiones %>-create-dto',
@@ -14,22 +18,29 @@ import {<%= nombreMayuscula %>CreateDto} from "../../dto/<%= nombreGuiones %>.cr
 })
 export class <%= nombreMayuscula %>CreateDtoComponent extends FormAbstract implements AfterViewInit {
     @Input() ruta!: AngularFormInterface;
-    @Input() formManti!: FormMantiFormly<<%= nombreMayuscula %>CreateDto>;
-    @Input() formularioManti!: FormularioMantiFormly<<%= nombreMayuscula %>CreateDto>;
+    @Input() formManti!: FormMantiFormly<<%= nombreMayuscula %>CreateFormDto>;
+    @Input() formularioManti!: FormularioMantiFormly<<%= nombreMayuscula %>CreateFormDto>;
     @Input() formlyOptions: FormlyFormOptions = {};
     // @ViewChild('itemNombreCampoLista') public itemNombreCampoLista!: TemplateRef<any>;
     // @ViewChild('selectedItemNombreCampoLista') public selectedItemNombreCampoLista!: TemplateRef<any>;
-    fields = (
+    // @ViewChild('autocompleteMostrarNombreRelacion') public autocompleteMostrarNombreRelacion!: TemplateRef<any>;
+    // @ViewChild('autocompleteListarNombreRelacion') public autocompleteListarNombreRelacion!: TemplateRef<any>;
+    _tiposTemplate<%= nombreMayuscula %>: {
+        templateContextoAutocompleteManticoreComponent: Ruta<%= nombreMayuscula %>AutocompleteMostrar<%= nombreMayuscula %>,
+    };
+    nombreModulo = nombreModulo_LLENAR;
+    fields: ArregloCamposMantiDto = (
         componente: AngularFormInterface
     ) => {
         return [
-            ...<%= nombreMayuscula %>CreateUpdateComunDto(
+            ...<%= nombreMayuscula %>CreateUpdateComun(
                 componente,
                 {
                     // itemCampoEjemplo: this.itemNombreCampoLista,
                     // selectedItemCampoEjemplo: this.selectedItemNombreCampoLista,
                 },
-            )
+            ),
+            // <%= nombreMayuscula %>Autocomplete(this).nombreCampoRelacion
         ]
     };
 
@@ -41,8 +52,9 @@ export class <%= nombreMayuscula %>CreateDtoComponent extends FormAbstract imple
     }
 
     ngAfterViewInit() {
+        this.campos = this.fields(this.ruta);
         this.formularioManti = {
-            fields: this.fields(this.ruta),
+            fields: this.campos,
             form: this.formManti.form,
             model: this.formManti.model,
             options: this.formlyOptions,

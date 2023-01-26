@@ -1,8 +1,13 @@
 import {Component, TemplateRef, ViewChild, AfterViewInit, Input} from '@angular/core';
-import {<%= nombreMayuscula %>FindDto} from "../../dto/<%= nombreGuiones %>.find.dto";
+import {<%= nombreMayuscula %>FindFormDto} from "../../dto/<%= nombreGuiones %>.find.dto";
 import {TranslateService} from "@ngx-translate/core";
 import {PrimeNGConfig} from "primeng/api";
 import {FormlyFormOptions} from "@ngx-formly/core/lib/components/formly.field.config";
+import {<%= nombreMayuscula %>Enum} from "../../enum/<%= nombreGuiones %>-enum";
+import {
+    Ruta<%= nombreMayuscula %>AutocompleteMostrar<%= nombreMayuscula %>,
+} from "../../../../rutas/ruta-<%= nombreGuiones %>/ruta-<%= nombreGuiones %>-crud-ruta.type";
+import {<%= nombreMayuscula %>Autocomplete} from "../constantes/<%= nombreGuiones %>-autocomplete";
 
 @Component({
     selector: 'manti-<%= nombreGuiones %>-find-dto',
@@ -11,42 +16,51 @@ import {FormlyFormOptions} from "@ngx-formly/core/lib/components/formly.field.co
 })
 export class <%= nombreMayuscula %>FindDtoComponent extends FormAbstract implements AfterViewInit {
     @Input() ruta!: AngularFormInterface;
-    @Input() formManti!: FormMantiFormly<<%= nombreMayuscula %>FindDto>;
-    @Input() formularioManti!: FormularioMantiFormly<<%= nombreMayuscula %>FindDto>;
+    @Input() formManti!: FormMantiFormly<<%= nombreMayuscula %>FindFormDto>;
+    @Input() formularioManti!: FormularioMantiFormly<<%= nombreMayuscula %>FindFormDto>;
     @Input() formlyOptions: FormlyFormOptions = {};
     // @ViewChild('itemNombreCampoLista') public itemNombreCampoLista!: TemplateRef<any>;
     // @ViewChild('selectedItemNombreCampoLista') public selectedItemNombreCampoLista!: TemplateRef<any>;
+    // @ViewChild('autocompleteMostrarNombreRelacion') public autocompleteMostrarNombreRelacion!: TemplateRef<any>;
+    // @ViewChild('autocompleteListarNombreRelacion') public autocompleteListarNombreRelacion!: TemplateRef<any>;
+
     @ViewChild('itemSisHabilitado') public itemSisHabilitado!: TemplateRef<any>;
     @ViewChild('selectedItemSisHabilitado') public selectedItemSisHabilitado!: TemplateRef<any>;
+    _tiposTemplate<%= nombreMayuscula %>: {
+        templateContextoAutocompleteManticoreComponent: Ruta<%= nombreMayuscula %>AutocompleteMostrar<%= nombreMayuscula %>,
+    };
     nombreModulo = nombreModulo_LLENAR;
-    fields = (
+    fields: ArregloCamposMantiDto = (
         componente: AngularFormInterface
     ) => {
         return [
             ...FormularioBusquedaComunDto(
                 componente,
-                this.nombreModulo +'.<%= nombreCamel %>.findDto.busqueda.placeholder',
-                this.nombreModulo +'.<%= nombreCamel %>.findDto.busqueda.ayuda',
+                this.nombreModulo + '.listaValoresDetalle.findDto.busqueda.placeholder',
+                this.nombreModulo + '.listaValoresDetalle.findDto.busqueda.ayuda',
                 this.itemSisHabilitado,
                 this.selectedItemSisHabilitado,
                 this.localSettings
             ),
+            <%= nombreMayuscula %>Autocomplete(this).listaValoresTipo,
         ]
     };
 
-
-
     constructor(
-        private readonly translateService: TranslateService,
-        private readonly config: PrimeNGConfig
+        public readonly translateService: TranslateService,
+        public readonly config: PrimeNGConfig
     ) {
         super(translateService, config);
     }
 
     ngAfterViewInit() {
-        const campos = this.fields(this.ruta);
-        const grupoFormularioUno: FormularioMantiFormly<<%= nombreMayuscula %>FindDto> = {
-            fields: campos.filter(a => a.id === SisMantiEnum.Busqueda || a.id === SisHabilitadoKeysEnum.Habilitado),
+        this.campos = this.fields(this.ruta);
+        const grupoFormularioUno: FormularioMantiFormly<<%= nombreMayuscula %>FindFormDto> = {
+            fields: this.campos.filter(a => a.id === SisMantiEnum.Busqueda
+            || a.id === SisHabilitadoKeysEnum.Habilitado
+            // || a.id === <%= nombreMayuscula %>Enum.campoRelacion
+            // || a.id === <%= nombreMayuscula %>Enum.nombreCampoLista
+            ),
             form: this.formManti.form,
             model: this.formManti.model,
             options: {},
@@ -56,8 +70,8 @@ export class <%= nombreMayuscula %>FindDtoComponent extends FormAbstract impleme
             titulo: 'comunes.opcionesComunes',
             descripcion: '',
         });
-        const grupoFormularioDos: FormularioMantiFormly<<%= nombreMayuscula %>FindDto> = {
-            fields: campos.filter(a => a.id === SisMantiEnum.SisCreado || a.id === SisMantiEnum.SisModificado),
+        const grupoFormularioDos: FormularioMantiFormly<<%= nombreMayuscula %>FindFormDto> = {
+            fields: this.campos.filter(a => a.id === SisMantiEnum.SisCreado || a.id === SisMantiEnum.SisModificado),
             form: this.formManti.form,
             model: this.formManti.model,
             options: {},
@@ -74,5 +88,4 @@ export class <%= nombreMayuscula %>FindDtoComponent extends FormAbstract impleme
             options: {},
         };
     };
-
 }
