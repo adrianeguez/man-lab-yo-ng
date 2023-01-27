@@ -42,7 +42,7 @@ export class <%= nombreMayuscula %>FindDtoComponent extends FormAbstract impleme
                 this.selectedItemSisHabilitado,
                 this.localSettings
             ),
-            <%= nombreMayuscula %>Autocomplete(this).listaValoresTipo,
+            // <%= nombreMayuscula %>Autocomplete(this).listaValoresTipo,
         ]
     };
 

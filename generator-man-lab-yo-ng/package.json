@@ -1,6 +1,6 @@
 {
   "name": "generator-man-lab-yo-ng",
-  "version": "0.14.12",
+  "version": "0.14.13",
   "description": "Generator Manticore Labs de Angular",
   "main": "index.js",
   "scripts": {

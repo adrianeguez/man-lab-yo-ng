@@ -18,7 +18,7 @@ export class <%= nombreMayuscula %>TablaMovilComponent {
 
     @Input()
     mostrarAcciones = false;
-    nombreModulo = nombreModuloNest;
+    nombreModulo = nombreModulo_LLENAR;
 
     obtenerNombreCampoLista(nombreCampoListaCodigoPrimario: string): string {
         // const campoListaEncontrado = <%= nombreMayuscula %>Select.nombreCampoLista.find((g) => g.codigoPrimario === nombreCampoListaCodigoPrimario);

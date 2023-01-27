@@ -2,7 +2,7 @@ import {<%= nombreMayuscula %>Enum} from "../../enum/<%= nombreGuiones %>-enum";
 import {<%= nombreMayuscula %>Select} from "./<%= nombreGuiones %>-select";
 
 const nombreModulo = nombreModulo_LLENAR
-export const <%= nombreMayuscula %>CreateUpdateComunDto = (
+export const <%= nombreMayuscula %>CreateUpdateComun = (
     componente: AngularFormInterface,
     templates: any
 )=>{
