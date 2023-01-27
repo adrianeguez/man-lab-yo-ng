@@ -1,6 +1,9 @@
 import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
 import {<%= nombreMayuscula %>Select} from "../../../servicios/<%= nombreGuiones %>/forms/constantes/<%= nombreGuiones %>-select";
 import {<%= nombreMayuscula %>Dto} from "../../../servicios/<%= nombreGuiones %>/dto/<%= nombreGuiones %>.dto";
+import {
+    Ruta<%= nombreMayuscula %>TranslationConstante
+} from "../../../rutas/ruta-<%= nombreGuiones %>/ruta-<%= nombreGuiones %>-translation.constante";
 
 @Component({
     selector: 'manti-<%= nombreGuiones %>-tabla',
@@ -14,6 +17,8 @@ export class <%= nombreMayuscula %>TablaComponent {
     @Input()
     componente!: Ruta<%= nombreMayuscula %>CrudRutaType;
     nombreModulo = nombreModulo_LLENAR;
+    translationConstantes = TranslationConstantes;
+    ruta<%= nombreMayuscula %>TranslationConstante = Ruta<%= nombreMayuscula %>TranslationConstante;
     
     obtenerNombreCampoLista(nombreCampoListaCodigoPrimario: string): string {
         // const campoListaEncontrado = <%= nombreMayuscula %>Select.nombreCampoLista.find((g) => g.codigoPrimario === nombreCampoListaCodigoPrimario);

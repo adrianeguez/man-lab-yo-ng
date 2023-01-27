@@ -1,15 +1,18 @@
 <div *ngIf="renderizarShort">
     <div class="grid grid-cols-3 max-w-sm rounded overflow-hidden shadow-lg m-2 hvr-float-shadow">
         <div [class]="mostrarAcciones ? 'col-span-2 p-1' : 'col-span-3 p-1'">
-            <div>
-<!--                <strong>{{nombreModulo + '.<%= nombreCamel %>.camposFormulario.codigoPrimario.nombre' | translate}}:</strong>-->
-<!--                {{registro.codigoPrimario}}-->
-            </div>
-
-            <div>
-<!--                <strong>{{nombreModulo + '.<%= nombreCamel %>.camposFormulario.campoRelacion.nombre' | translate}}:</strong>-->
-<!--                {{registro.campoRelacion.nombreCampo}} - -->
-            </div>
+<!--        <div>-->
+<!--            <strong>{{ruta<%= nombreMayuscula %>TranslationConstante.nombreCampo.nombre  | translate}}:</strong>-->
+<!--            {{registro.nombreCampo}}-->
+<!--        </div>-->
+<!--        <div>-->
+<!--            <strong>{{ruta<%= nombreMayuscula %>TranslationConstante.nombreCampoLista.nombre | translate}} :</strong>-->
+<!--            {{obtenerNombreCampoLista(registro.nombreCampoLista) | translate}}-->
+<!--        </div>-->
+<!--        <div>-->
+<!--            <strong>{{ruta<%= nombreMayuscula %>TranslationConstante.campoRelacion.nombre | translate}}:</strong>-->
+<!--            {{registro.campoRelacion.nombreCampo}} - -->
+<!--        </div>-->
         </div>
         <div *ngIf="mostrarAcciones" class="col-span-1 p-1 inline-block align-middle">
             <button class="btn btn-outline btn-block">
@@ -23,20 +26,20 @@
         <ng-template pTemplate="header">
             <manti-mostrar-imagen *ngIf="registro.sisImagen" [registro]="registro"></manti-mostrar-imagen>
         </ng-template>
-        <!--    <div>-->
-        <!--        <strong>{{nombreModulo + '.<%= nombreCamel %>.camposFormulario.nombreCampo.nombre' | translate}}:</strong>-->
-<!--                {{registro.nombreCampo}}-->
-<!--            </div>-->
-        <!--    <div>-->
-        <!--        <strong>{{nombreModulo + '.<%= nombreCamel %>.camposFormulario.nombreCampoLista.nombre' | translate}} :</strong>-->
-        <!--        {{obtenerNombreCampoLista(registro.nombreCampoLista) | translate}}-->
-<!--            </div>-->
-        <!--    <div>-->
-        <!--        <strong>{{nombreModulo + '.<%= nombreCamel %>.camposFormulario.campoRelacion.nombre' | translate}} :</strong>-->
-        <!--        {{registro.campoRelacion.nombreCampo}}-->
-        <!--            </div>-->
+        <!--        <div>-->
+        <!--            <strong>{{ruta<%= nombreMayuscula %>TranslationConstante.nombreCampo.nombre  | translate}}:</strong>-->
+        <!--            {{registro.nombreCampo}}-->
+        <!--        </div>-->
+        <!--        <div>-->
+        <!--            <strong>{{ruta<%= nombreMayuscula %>TranslationConstante.nombreCampoLista.nombre | translate}} :</strong>-->
+        <!--            {{obtenerNombreCampoLista(registro.nombreCampoLista) | translate}}-->
+        <!--        </div>-->
+        <!--        <div>-->
+        <!--            <strong>{{ruta<%= nombreMayuscula %>TranslationConstante.campoRelacion.nombre | translate}}:</strong>-->
+        <!--            {{registro.campoRelacion.nombreCampo}} - -->
+        <!--        </div>-->
         <div>
-            <strong>{{'comunes.sisHabilitado' | translate}}:</strong>
+            <strong>{{translationConstantes.comunes.sisHabilitado | translate}}:</strong>
         </div>
         <manti-habilitado-deshabilitado [registro]="registro"></manti-habilitado-deshabilitado>
         <ng-template pTemplate="footer" *ngIf="registro.sisArchivo || mostrarAcciones">
@@ -47,7 +50,7 @@
                 <button class="btn btn-outline btn-block"
                         (click)="componente.abrirOpciones(true, registro)"
                 >
-                    {{'comunes.acciones' |  translate }}
+                    {{translationConstantes.comunes.acciones |  translate }}
                     <clr-icon shape="bolt"></clr-icon>
                 </button>
             </div>

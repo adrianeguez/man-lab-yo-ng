@@ -16,7 +16,7 @@ export const <%= nombreMayuscula %>Autocomplete: (
     componente: <%= nombreMayuscula %>CreateDtoComponent | <%= nombreMayuscula %>FindDtoComponent | <%= nombreMayuscula %>UpdateDtoComponent
 )=>{
     return {
-        // listaValoresTipo:
+        // campoRelacion:
         //     {
         //         id: <%= nombreMayuscula %>Enum.nombreCampoRelacion,
         //         key: <%= nombreMayuscula %>Enum.nombreCampoRelacion,
@@ -25,13 +25,13 @@ export const <%= nombreMayuscula %>Autocomplete: (
         //             required: true,
         //         },
         //         expressionProperties: {
-        //             'templateOptions.label': componente.translateService.stream(componente.nombreModulo + '.<%= nombreCamel %>.camposFormulario.nombreCampoRelacion.nombre'),
-        //             'templateOptions.placeholder': componente.translateService.stream(componente.nombreModulo + '.<%= nombreCamel %>.camposFormulario.nombreCampoRelacion.placeholder'),
-        //             'templateOptions.description': componente.translateService.stream(componente.nombreModulo + '.<%= nombreCamel %>.camposFormulario.nombreCampoRelacion.ayuda'),
+        //              'templateOptions.label': componente.translateService.stream(componente.ruta<%= nombreMayuscula %>TranslationConstante.nombreCampoRelacion.nombre),
+        //              'templateOptions.placeholder': componente.translateService.stream(componente.ruta<%= nombreMayuscula %>TranslationConstante.nombreCampoRelacion.placeholder'),
+        //              'templateOptions.description': componente.translateService.stream(componente.ruta<%= nombreMayuscula %>TranslationConstante.nombreCampoRelacion.ayuda'),
         //         },
         //         autocompleteOpciones: {
         //             showButton: true,
-        //             buttonText: componente.nombreModulo + '.<%= nombreCamel %>.camposFormulario.listaValoresTipo.nombre',
+        //             buttonText: componente.nombreModulo + '.<%= nombreCamel %>.camposFormulario.nombreCampoRelacion.nombre',
         //             autocompleteShowTemplate: componente.autocompleteMostrarNombreRelacion,
         //             autocompleteListTemplate: componente.autocompleteListarNombreRelacion,
         //             disabled: false,
@@ -52,7 +52,7 @@ export const <%= nombreMayuscula %>Autocomplete: (
         //                     form: componente.formularioManti.form,
         //                     crudRutaComponent: abrir ? crudRuta : undefined,
         //                     templateRefLista: componente.autocompleteListarNombreRelacion,
-        //                     servicio: ruta.listaValoresTipoHttpService,
+        //                     servicio: ruta.relacionHttpService,
         //                     contexto,
         //                     nombreCampo: <%= nombreMayuscula %>Enum.campoRelacion,
         //                 }

@@ -8,6 +8,9 @@ import {
     Ruta<%= nombreMayuscula %>AutocompleteMostrar<%= nombreMayuscula %>,
 } from "../../../../rutas/ruta-<%= nombreGuiones %>/ruta-<%= nombreGuiones %>-crud-ruta.type";
 import {<%= nombreMayuscula %>Autocomplete} from "../constantes/<%= nombreGuiones %>-autocomplete";
+import {
+    Ruta<%= nombreMayuscula %>TranslationConstante
+} from "../../../../rutas/ruta-<%= nombreGuiones %>/ruta-<%= nombreGuiones %>-translation.constante";
 
 @Component({
     selector: 'manti-<%= nombreGuiones %>-find-dto',
@@ -19,6 +22,7 @@ export class <%= nombreMayuscula %>FindDtoComponent extends FormAbstract impleme
     @Input() formManti!: FormMantiFormly<<%= nombreMayuscula %>FindFormDto>;
     @Input() formularioManti!: FormularioMantiFormly<<%= nombreMayuscula %>FindFormDto>;
     @Input() formlyOptions: FormlyFormOptions = {};
+    ruta<%= nombreMayuscula %>TranslationConstante = Ruta<%= nombreMayuscula %>TranslationConstante;
     // @ViewChild('itemNombreCampoLista') public itemNombreCampoLista!: TemplateRef<any>;
     // @ViewChild('selectedItemNombreCampoLista') public selectedItemNombreCampoLista!: TemplateRef<any>;
     // @ViewChild('autocompleteMostrarNombreRelacion') public autocompleteMostrarNombreRelacion!: TemplateRef<any>;

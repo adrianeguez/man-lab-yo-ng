@@ -1,6 +1,6 @@
 <manti-contenedor-ruta
-        [titulo]="nombreModulo + '.<%= nombreCamel %>.nombreRuta' | translate"
-        [descripcion]="nombreModulo + '.<%= nombreCamel %>.descripcion' | translate"
+        [titulo]="translationConstantes.comunes.nombreRuta | translate"
+        [descripcion]="translationConstantes.comunes.descripcion | translate"
         [colorDot]="colorDot"
         [colorBorde]="colorBorde"
 >
@@ -13,7 +13,7 @@
         >
       </div>
       <div class="col-span-8">
-        <p>{{nombreModulo + '.<%= nombreCamel %>.descripcionRuta' | translate}}</p>
+        <p>{{translationConstantes.comunes.descripcionRuta | translate}}</p>
       </div>
     </div>
   </div>
@@ -74,11 +74,11 @@
             </manti-<%= nombreGuiones %>-find-dto>
             <br>
             <button class="btn btn-outline btn-block" type="submit">
-              {{'comunes.buscar' | translate}}
+              {{translationConstantes.comunes.buscar | translate}}
             </button>
             <button class="btn btn-outline btn-block" type="button"
                     (click)="resetear<%= nombreMayuscula %>FindDto()">
-              {{'comunes.reset' | translate}}
+              {{translationConstantes.comunes.reset | translate}}
             </button>
           </form>
         </div>
@@ -110,24 +110,24 @@
         <mat-expansion-panel expanded="true">
           <mat-expansion-panel-header>
             <mat-panel-title>
-              {{'comunes.opcionesComunes' |  translate }}
+              {{translationConstantes.comunes.opcionesComunes |  translate }}
             </mat-panel-title>
             <mat-panel-description>
-              {{'comunes.opcionesComunesDescripcion' |  translate }}
+              {{translationConstantes.comunes.opcionesComunesDescripcion |  translate }}
             </mat-panel-description>
           </mat-expansion-panel-header>
           <div class="grid grid-cols-2 gap-4">
             <div class="col-span-1">
               <button class="btn btn-outline btn-block"
                       (click)="prepararAbrirCrearEditarDialogo<%= nombreMayuscula %>(contextoCrudRuta<%= nombreMayuscula %>)">
-                {{'comunes.editar' |  translate }}
+                {{translationConstantes.comunes.editar |  translate }}
               </button>
             </div>
             <div class="col-span-1">
               <button class="btn btn-outline btn-block"
                       (click)="eliminarRegistro<%= nombreMayuscula %>(contextoCrudRuta<%= nombreMayuscula %>)"
               >
-                {{'comunes.eliminar' |  translate }}
+                {{translationConstantes.comunes.eliminar |  translate }}
               </button>
             </div>
             <div class="col-span-1">
@@ -148,14 +148,14 @@
               <button class="btn btn-outline btn-block"
                       (click)="contextoCrudRuta<%= nombreMayuscula %>.abrirModalGestionArchivos()"
               >
-                {{'comunes.gestionarArchivos' |  translate }}
+                {{translationConstantes.comunes.gestionarArchivos |  translate }}
               </button>
             </div>
             <div class="col-span-2">
               <button class="btn btn-outline btn-block"
                       (click)="visualizarRegistro<%= nombreMayuscula %>(contextoCrudRuta<%= nombreMayuscula %>)"
               >
-                {{'comunes.visualizar' |  translate }}
+                {{translationConstantes.comunes.visualizar |  translate }}
               </button>
             </div>
 

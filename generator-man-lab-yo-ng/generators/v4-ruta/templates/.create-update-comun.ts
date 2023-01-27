@@ -1,10 +1,10 @@
 import {<%= nombreMayuscula %>Enum} from "../../enum/<%= nombreGuiones %>-enum";
 import {<%= nombreMayuscula %>Select} from "./<%= nombreGuiones %>-select";
 
-const nombreModulo = nombreModulo_LLENAR
 export const <%= nombreMayuscula %>CreateUpdateComun = (
-    componente: AngularFormInterface,
-    templates: any
+    componente: <%= nombreMayuscula %>CreateDtoComponent | <%= nombreMayuscula %>UpdateDtoComponent,
+    templates: { [key in string]: TemplateRef<any> },
+    // esCrear = false, // Puede anadirse para casos mas complejos
 )=>{
     return [
         // EJEMPLO CAMPOS
@@ -17,9 +17,9 @@ export const <%= nombreMayuscula %>CreateUpdateComun = (
         //         required: true,
         //     },
         //     expressionProperties: {
-        //         'templateOptions.label': componente.translateService.stream(nombreModulo + '.camposFormulario.nombreCampoEjemplo.nombre'),
-        //         'templateOptions.placeholder': componente.translateService.stream(nombreModulo + '.camposFormulario.nombreCampoEjemplo.placeholder'),
-        //         'templateOptions.description': componente.translateService.stream(nombreModulo + '.camposFormulario.nombreCampoEjemplo.ayuda'),
+        //         'templateOptions.label': componente.translateService.stream(componente.ruta<%= nombreMayuscula %>TranslationConstante.nombreCampoEjemplo.nombre),
+        //         'templateOptions.placeholder': componente.translateService.stream(componente.ruta<%= nombreMayuscula %>TranslationConstante.nombreCampoEjemplo.placeholder'),
+        //         'templateOptions.description': componente.translateService.stream(componente.ruta<%= nombreMayuscula %>TranslationConstante.nombreCampoEjemplo.ayuda'),
         //     },
         // },
         // SELECT:
@@ -31,9 +31,9 @@ export const <%= nombreMayuscula %>CreateUpdateComun = (
         //         required: true,
         //     },
         //     expressionProperties: {
-        //         'templateOptions.label': componente.translateService.stream(nombreModulo + '.camposFormulario.nombreCampoLista.nombre'),
-        //         'templateOptions.placeholder': componente.translateService.stream(nombreModulo + '.camposFormulario.nombreCampoLista.placeholder'),
-        //         'templateOptions.description': componente.translateService.stream(nombreModulo + '.camposFormulario.nombreCampoLista.ayuda'),
+        //         'templateOptions.label': componente.translateService.stream(componente.ruta<%= nombreMayuscula %>TranslationConstante.nombreCampoLista.nombre),
+        //         'templateOptions.placeholder': componente.translateService.stream(componente.ruta<%= nombreMayuscula %>TranslationConstante.nombreCampoLista.placeholder'),
+        //         'templateOptions.description': componente.translateService.stream(componente.ruta<%= nombreMayuscula %>TranslationConstante.nombreCampoLista.ayuda'),
         //     },
         //     selectOpciones: {
         //         opciones: <%= nombreMayuscula %>Select.nombreCampoLista,

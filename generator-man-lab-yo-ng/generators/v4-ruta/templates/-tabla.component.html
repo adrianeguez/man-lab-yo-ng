@@ -2,9 +2,9 @@
     <ng-template pTemplate="header">
         <tr>
             <th>ID</th>
-<!--            <th>{{nombreModulo + '.<%= nombreCamel %>.camposFormulario.nombreCampo.nombre' | translate}}</th>-->
-<!--            <th>{{nombreModulo + '.<%= nombreCamel %>.camposFormulario.nombreCampoLista.nombre' | translate}}</th>-->
-<!--            <th>{{nombreModulo + '.<%= nombreCamel %>.camposFormulario.campoRelacion.nombre' | translate}}</th>-->
+<!--            <th>{{ruta<%= nombreMayuscula %>TranslationConstante.nombreCampo.nombre | translate}}</th>-->
+<!--            <th>{{ruta<%= nombreMayuscula %>TranslationConstante.nombreCampoLista.nombre | translate}}</th>-->
+<!--            <th>{{ruta<%= nombreMayuscula %>TranslationConstante.campoRelacion.nombre | translate}}</th>-->
             <th class="ancho-habilitado-deshabilitado"><cds-icon shape="info-circle"></cds-icon></th>
             <th class="ancho-acciones">{{'comunes.acciones' | translate}}</th>
         </tr>
@@ -23,12 +23,12 @@
                         (click)="componente.abrirOpciones(true, registro)"
                 >
 
-                    {{'comunes.acciones' |  translate }}
+                    {{translationConstantes.comunes.acciones |  translate }}
                     <clr-icon shape="bolt"></clr-icon>
                 </button>
             </td>
         </tr>
-        <tr *ngIf="registro.sisArchivo||registro.sisImagen">
+        <tr *ngIf="registro.sisArchivo || registro.sisImagen">
             <td colspan="7">
                 <div class="grid grid-cols-2 gap-4">
                     <div class="row-span-1 p-3 object-scale-down">

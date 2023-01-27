@@ -27,6 +27,7 @@ import {
   Ruta<%= nombreMayuscula %>DialogoSinForm,
   Ruta<%= nombreMayuscula %>DialogoSinFormParametros
 } from "./ruta-<%= nombreGuiones %>-crud-ruta.type";
+import {Ruta<%= nombreMayuscula %>TranslationConstante} from "./ruta-<%= nombreGuiones %>-translation.constante";
 
 @Component({
   selector: 'manti-ruta-<%= nombreGuiones %>',
@@ -41,6 +42,7 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
   colorDot = COLORES.<%= nombreCamel %>;
   colorBorde = COLORES.<%= nombreCamel %>;
   translationConstantes = TranslationConstantes;
+  ruta<%= nombreMayuscula %>TranslationConstante = Ruta<%= nombreMayuscula %>TranslationConstante;
   @ViewChild('ComponenteDialogoVisualizacion<%= nombreMayuscula %>') public componenteDialogoVisualizacion<%= nombreMayuscula %>: TemplateRef<any>;
   @ViewChild('ComponenteDialogoVisualizacionAcciones<%= nombreMayuscula %>') public componenteDialogoAcciones<%= nombreMayuscula %>: TemplateRef<any>;
   @ViewChild('Mostrar<%= nombreMayuscula %>') public mostrar<%= nombreMayuscula %>: TemplateRef<any>;
@@ -292,7 +294,7 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
     const findDto: <%= nombreMayuscula %>FindDto = {
       ...componente.findDto,
       skip: '0',
-      ...this.resetear<%= nombreMayuscula %>FindDtoModel(),
+      ...this.resetear<%= nombreMayuscula %>FindDtoModel() as <%= nombreMayuscula %>FindDto,
       ...obtenerValoresModel<<%= nombreMayuscula %>FindDto>(this.form<%= nombreMayuscula %>FindDto.model),
     };
     componente.abrirFiltros(false);
@@ -304,7 +306,7 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
     this.form<%= nombreMayuscula %>FindDto.form.reset();
   }
 
-  resetear<%= nombreMayuscula %>FindDtoModel(): <%= nombreMayuscula %>FindDto {
+  resetear<%= nombreMayuscula %>FindDtoModel(): <%= nombreMayuscula %>FindFormDto {
     return {
       sisHabilitado: null,
       busqueda: null,
