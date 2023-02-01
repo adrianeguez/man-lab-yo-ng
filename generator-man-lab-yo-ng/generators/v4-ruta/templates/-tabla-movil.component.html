@@ -38,6 +38,12 @@
         <!--            <strong>{{ruta<%= nombreMayuscula %>TranslationConstante.campoRelacion.nombre | translate}}:</strong>-->
         <!--            {{registro.campoRelacion.nombreCampo}} - -->
         <!--        </div>-->
+
+
+        <div *ngIf="registro.sisMetadata">
+            <h5>Metadata</h5>
+            <ngx-json-viewer [json]="registro.sisMetadata.metadata"></ngx-json-viewer>
+        </div>
         <div>
             <strong>{{translationConstantes.comunes.sisHabilitado | translate}}:</strong>
         </div>
