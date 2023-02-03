@@ -9,5 +9,5 @@ export type <%= nombreMayuscula %>UpdateFormDto = <%= nombreMayuscula %>UpdateDt
 // nombreCampoLista?: PrimengDropdownOption;
 // }
 export interface <%= nombreMayuscula %>UpdateDto extends <%= nombreMayuscula %>ActualizarDto{
-
+    sisHabilitado: SisHabilitadoEnum;
 }

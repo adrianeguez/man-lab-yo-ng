@@ -138,7 +138,7 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
     this.registroActual<%= nombreMayuscula %> = crudRutaComponente.registroActual;
     this.form<%= nombreMayuscula %>UpdateDto = {
       form: new FormGroup({}),
-      model: this.resetearUpdateDtoModel<%= nombreMayuscula %>(),
+      model: this.resetear<%= nombreMayuscula %>UpdateDtoModel(),
     };
     crudRutaComponente.abrirOpciones(false, crudRutaComponente.registroActual);
     this.abrirCrearEditarDialogo<%= nombreMayuscula %>(crudRutaComponente, true);
@@ -164,37 +164,70 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
   }
 
   crearEditar<%= nombreMayuscula %>(
-      crudRutaComponente: Ruta<%= nombreMayuscula %>CrudRutaType,
-      editar = false
+        crudRutaComponente: Ruta<%= nombreMayuscula %>CrudRutaType,
+        editar = false
   ): void {
-    let dto: <%= nombreMayuscula %>CreateDto | <%= nombreMayuscula %>UpdateDto = {};
+      let dto: <%= nombreMayuscula %>CreateDto | <%= nombreMayuscula %>UpdateDto = {};
     if (editar && this.form<%= nombreMayuscula %>UpdateDto) {
-      // if (this.form<%= nombreMayuscula %>UpdateDto.model.campoRelacion) {
-      //   const campoRelacion = this.form<%= nombreMayuscula %>UpdateDto.model.campoRelacion as RelacionDto;
-      //   if (campoRelacion) {
-      //     if (campoRelacion.id) {
-      //       this.form<%= nombreMayuscula %>UpdateDto.model.campoRelacion = campoRelacion.id;
-      //     } else {
-      //       this.form<%= nombreMayuscula %>UpdateDto.model.campoRelacion = campoRelacion;
-      //     }
-      //   }
-      // }
-      dto = obtenerValoresModel<<%= nombreMayuscula %>UpdateDto>(this.form<%= nombreMayuscula %>UpdateDto.model, false);
+      dto = this.editarSettearDTO<%= nombreMayuscula %>(
+          this.form<%= nombreMayuscula %>UpdateDto.model,
+          crudRutaComponente,
+      );
     } else {
-      // if (this.form<%= nombreMayuscula %>CreateDto.model.campoRelacion) {
-      //   const campoRelacion = this.form<%= nombreMayuscula %>CreateDto.model.campoRelacion as RelacionDto;
-      //   if (campoRelacion) {
-      //     if (campoRelacion.id) {
-      //       this.form<%= nombreMayuscula %>CreateDto.model.campoRelacion = campoRelacion.id;
-      //     } else {
-      //       this.form<%= nombreMayuscula %>CreateDto.model.campoRelacion = campoRelacion;
-      //     }
-      //   }
-      // }
-      dto = obtenerValoresModel<<%= nombreMayuscula %>CreateDto>(this.form<%= nombreMayuscula %>CreateDto.model);
+      dto = this.crearSettearDTO<%= nombreMayuscula %>(
+          this.form<%= nombreMayuscula %>CreateDto.model,
+          crudRutaComponente,
+      );
     }
     crudRutaComponente.crearEditarComponenteRuta(dto, editar);
   }
+
+    crearSettearDTO<%= nombreMayuscula %>(
+        model: <%= nombreMayuscula %>CreateFormDto,
+        crudRutaComponente: Ruta<%= nombreMayuscula %>CrudRutaType,
+  ): <%= nombreMayuscula %>CrearDto {
+      let dto: <%= nombreMayuscula %>CreateDto = {} as any;
+      // model = crudRutaComponente.seleccionarIdONumberEnObjeto(
+      //     model,
+      //     <%= nombreMayuscula %>Enum.campoRelacion,
+      //     'id'
+      // );
+      // LLENAR CUALQUIER OTRO CAMPO QUE SE NECESITE
+      dto = obtenerValoresModel<<%= nombreMayuscula %>CreateDto>(model, false);
+      return dto;
+    }
+
+    editarSettearDTO<%= nombreMayuscula %>(
+        model: <%= nombreMayuscula %>UpdateFormDto,
+        crudRutaComponente: Ruta<%= nombreMayuscula %>CrudRutaType,
+  ): <%= nombreMayuscula %>ActualizarDto {
+      let dto: <%= nombreMayuscula %>ActualizarDto = {} as any;
+      // model = crudRutaComponente.seleccionarIdONumberEnObjeto(
+      //     model,
+      //     <%= nombreMayuscula %>Enum.campoRelacion,
+      //     'id'
+      // );
+      // LLENAR CUALQUIER OTRO CAMPO QUE SE NECESITE
+      dto = obtenerValoresModel<<%= nombreMayuscula %>ActualizarDto>(model, false);
+      return dto;
+    }
+
+
+
+  buscarSettearDTO<%= nombreMayuscula %>(
+        model: <%= nombreMayuscula %>FindFormDto,
+        crudRutaComponente: Ruta<%= nombreMayuscula %>CrudRutaType,
+  ): <%= nombreMayuscula %>FindDto {
+      let dto: <%= nombreMayuscula %>FindDto = {} as any;
+      // model = crudRutaComponente.seleccionarIdONumberEnObjeto(
+      //     model,
+      //     <%= nombreMayuscula %>Enum.campoRelacion,
+      //     'id'
+      // );
+      // LLENAR CUALQUIER OTRO CAMPO QUE SE NECESITE
+      dto = obtenerValoresModel<<%= nombreMayuscula %>FindDto>(model, false);
+      return dto;
+    }
 
 
   eliminarRegistro<%= nombreMayuscula %>(
@@ -279,27 +312,21 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
   }
 
   buscar<%= nombreMayuscula %>EnComponenteRuta(
-      componente: Ruta<%= nombreMayuscula %>CrudRutaType
-  ): void {
-    // if (this.form<%= nombreMayuscula %>FindDto.model.campoRelacion) {
-    //   const campoRelacion = this.form<%= nombreMayuscula %>FindDto.model.campoRelacion as RelacionDto;
-    //       if (campoRelacion) {
-    //         if (campoRelacion.id) {
-    //           this.form < %= nombreMayuscula % > FindDto.model.campoRelacion = campoRelacion.id;
-    //         } else {
-    //           this.form < %= nombreMayuscula % > FindDto.model.campoRelacion = campoRelacion;
-    //         }
-    //       }
-    // }
+      crudRutaComponente: Ruta<%= nombreMayuscula %>CrudRutaType
+): void {
+    const dto = this.buscarSettearDTO<%= nombreMayuscula %>(
+        this.form<%= nombreMayuscula %>FindDto.model,
+        crudRutaComponente
+    );
     const findDto: <%= nombreMayuscula %>FindDto = {
-      ...componente.findDto,
-      skip: '0',
-      ...this.resetear<%= nombreMayuscula %>FindDtoModel() as <%= nombreMayuscula %>FindDto,
-      ...obtenerValoresModel<<%= nombreMayuscula %>FindDto>(this.form<%= nombreMayuscula %>FindDto.model),
-    };
-    componente.abrirFiltros(false);
-    componente.buscarRegistros(findDto);
-  }
+    ...crudRutaComponente.findDto,
+    skip: '0',
+    ...this.resetear<%= nombreMayuscula %>FindDtoModel(),
+    ...dto
+  };
+  crudRutaComponente.abrirFiltros(false);
+  crudRutaComponente.buscarRegistros(findDto);
+}
 
   resetear<%= nombreMayuscula %>FindDto(): void {
     this.settearFindDTO<%= nombreMayuscula %>();
@@ -327,7 +354,7 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
     }
   }
 
-  resetearUpdateDtoModel<%= nombreMayuscula %>(): <%= nombreMayuscula %>UpdateFormDto {
+  resetear<%= nombreMayuscula %>UpdateDtoModel(): <%= nombreMayuscula %>UpdateFormDto {
     if (this.registroActual<%= nombreMayuscula %>) {
       //   const nombreCampoLista = <%= nombreMayuscula %>Select.nombreCampoLista.find((g) => g.codigoPrimario === this.registroActual<%= nombreMayuscula %>?.nombreCampoLista)
       return {
