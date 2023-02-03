@@ -33,8 +33,8 @@ export class <%= nombreMayuscula %>UpdateDtoComponent extends FormAbstract imple
         templateContextoAutocompleteManticoreComponent: Ruta<%= nombreMayuscula %>AutocompleteMostrar<%= nombreMayuscula %>,
     };
     nombreModulo = nombreModulo_LLENAR;
-    fields: ArregloCamposMantiDto = (
-        componente: AngularFormInterface
+    fields: ArregloCamposMantiDto<<%= nombreMayuscula %>UpdateDtoComponent> = (
+        componente
     ) => {
         return [
             ...<%= nombreMayuscula %>CreateUpdateComun(
@@ -56,7 +56,7 @@ export class <%= nombreMayuscula %>UpdateDtoComponent extends FormAbstract imple
     }
 
     ngAfterViewInit() {
-        this.campos = this.fields(this.ruta);
+        this.campos = this.fields(this);
         this.formularioManti = {
             fields: this.campos,
             form: this.formManti.form,

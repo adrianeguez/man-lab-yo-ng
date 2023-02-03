@@ -18,7 +18,7 @@ export const <%= nombreMayuscula %>CreateUpdateComun = (
         //     },
         //     expressionProperties: {
         //         'templateOptions.label': componente.translateService.stream(componente.ruta<%= nombreMayuscula %>TranslationConstante.nombreCampoEjemplo.nombre),
-        //         'templateOptions.placeholder': componente.translateService.stream(componente.ruta<%= nombreMayuscula %>TranslationConstante.nombreCampoEjemplo.placeholder'),
+        //         'templateOptions.placeholder': componente.translateService.stream(componente.ruta<%= nombreMayuscula %>TranslationConstante.nombreCampoEjemplo.placeholder),
         //         'templateOptions.description': componente.translateService.stream(componente.ruta<%= nombreMayuscula %>TranslationConstante.nombreCampoEjemplo.ayuda'),
         //     },
         // },
@@ -32,8 +32,8 @@ export const <%= nombreMayuscula %>CreateUpdateComun = (
         //     },
         //     expressionProperties: {
         //         'templateOptions.label': componente.translateService.stream(componente.ruta<%= nombreMayuscula %>TranslationConstante.nombreCampoLista.nombre),
-        //         'templateOptions.placeholder': componente.translateService.stream(componente.ruta<%= nombreMayuscula %>TranslationConstante.nombreCampoLista.placeholder'),
-        //         'templateOptions.description': componente.translateService.stream(componente.ruta<%= nombreMayuscula %>TranslationConstante.nombreCampoLista.ayuda'),
+        //         'templateOptions.placeholder': componente.translateService.stream(componente.ruta<%= nombreMayuscula %>TranslationConstante.nombreCampoLista.placeholder),
+        //         'templateOptions.description': componente.translateService.stream(componente.ruta<%= nombreMayuscula %>TranslationConstante.nombreCampoLista.ayuda),
         //     },
         //     selectOpciones: {
         //         opciones: <%= nombreMayuscula %>Select.nombreCampoLista,
