@@ -200,15 +200,15 @@ export class Ruta<%= nombreMayuscula %>Component implements OnInit {
     editarSettearDTO<%= nombreMayuscula %>(
         model: <%= nombreMayuscula %>UpdateFormDto,
         crudRutaComponente: Ruta<%= nombreMayuscula %>CrudRutaType,
-  ): <%= nombreMayuscula %>ActualizarDto {
-      let dto: <%= nombreMayuscula %>ActualizarDto = {} as any;
+  ): <%= nombreMayuscula %>UpdateDto {
+      let dto: <%= nombreMayuscula %>UpdateDto = {} as any;
       // model = crudRutaComponente.seleccionarIdONumberEnObjeto(
       //     model,
       //     <%= nombreMayuscula %>Enum.campoRelacion,
       //     'id'
       // );
       // LLENAR CUALQUIER OTRO CAMPO QUE SE NECESITE
-      dto = obtenerValoresModel<<%= nombreMayuscula %>ActualizarDto>(model, false);
+      dto = obtenerValoresModel<<%= nombreMayuscula %>UpdateDto>(model, false);
       return dto;
     }
 
