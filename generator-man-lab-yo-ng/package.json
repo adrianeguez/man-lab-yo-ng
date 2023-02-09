@@ -1,10 +1,11 @@
 {
   "name": "generator-man-lab-yo-ng",
-  "version": "0.14.18",
+  "version": "0.14.9",
   "description": "Generator Manticore Labs de Angular",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "release": "standard-version"
   },
   "repository": {
     "type": "git",
@@ -29,6 +30,7 @@
     "yeoman-generator": "^3.2.0"
   },
   "devDependencies": {
+    "standard-version": "^9.5.0",
     "ts-node": "^7.0.1",
     "typescript": "^3.1.1"
   }
