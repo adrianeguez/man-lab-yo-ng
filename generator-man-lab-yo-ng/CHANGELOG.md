@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.14.10](https://github.com/adrianeguez/man-lab-yo-nest/compare/v0.14.9...v0.14.10) (2023-02-14)
+
+
+### Features
+
+* agregado export file ([66256f3](https://github.com/adrianeguez/man-lab-yo-nest/commit/66256f35702f249937c6f517dd50add9ec1d4145))
+
 ### 0.14.9 (2023-02-09)
 
 
