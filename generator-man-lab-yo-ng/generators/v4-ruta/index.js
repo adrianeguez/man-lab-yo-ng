@@ -464,14 +464,19 @@ module.exports = class extends Generator {
                 // constantes
         const templateServiciosFormsCreateUpdateComun = this.templatePath(TEMPLATES.SRV_CREA_UP_DTO_COM);
         const destinoServiciosFormsCreateUpdateComun = this.destinationPath(`./servicios/${nombreGuiones}/forms/constantes/${nombreGuiones}.create-update-comun.ts`);
-
         this.fs.copyTpl(
             templateServiciosFormsCreateUpdateComun,
             destinoServiciosFormsCreateUpdateComun,
             variables
         );
-
-
+        // shared
+        const templateSharedImport = this.templatePath(TEMPLATES.SRV_CREA_UP_DTO_COM);
+        const destinoSharedImport = this.destinationPath(`./shared/${nombreGuiones}.shared.ts`);
+        this.fs.copyTpl(
+            templateSharedImport,
+            destinoSharedImport,
+            variables
+        );
 
         const templateAutocomplete = this.templatePath(TEMPLATES.SRV_AUTOCOMPLETE);
         const destinoAutocomplete = this.destinationPath(`./servicios/${nombreGuiones}/forms/constantes/${nombreGuiones}-autocomplete.ts`);
