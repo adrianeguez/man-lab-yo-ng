@@ -1,6 +1,6 @@
 # man-lab-yo-ng
 
-## Instalacion
+## Instalación libreria
 
 ```
 $ npm i -g generator-man-lab-yo-ng@0.0.0
