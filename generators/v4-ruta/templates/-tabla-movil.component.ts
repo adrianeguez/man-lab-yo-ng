@@ -21,7 +21,7 @@ export class <%= nombreMayuscula %>TablaMovilComponent {
 
     @Input()
     mostrarAcciones = false;
-    nombreModulo = nombreModulo_LLENAR;
+    nombreModulo = nombreModulo<%= nombreMayusculaModulo %>;
     translationConstantes = TranslationConstantes;
     ruta<%= nombreMayuscula %>TranslationConstante = Ruta<%= nombreMayuscula %>TranslationConstante;
 

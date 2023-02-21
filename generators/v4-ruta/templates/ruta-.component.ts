@@ -37,7 +37,7 @@ import {Ruta<%= nombreMayuscula %>TranslationConstante} from "./ruta-<%= nombreG
 })
 export class Ruta<%= nombreMayuscula %>Component implements OnInit {
   templateContextoRuta<%= nombreMayuscula %>Component = this; // no eliminar
-  nombreModulo = nombreModulo_LLENAR;
+  nombreModulo = nombreModulo<%= nombreMayusculaModulo %>;
   identificadorRuta<%= nombreMayuscula %> = '<%= nombreGuiones %>';
   colorDot = COLORES.<%= nombreCamel %>;
   colorBorde = COLORES.<%= nombreCamel %>;

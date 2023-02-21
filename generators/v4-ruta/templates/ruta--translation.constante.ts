@@ -2,6 +2,6 @@ import {<%= nombreMayuscula %>Enum} from "../../servicios/<%= nombreGuiones %>/e
 
 export const Ruta<%= nombreMayuscula %>TranslationConstante: TraduccionGenerica<<%= nombreMayuscula %>Enum> = TraduccionFuncion(
     <%= nombreMayuscula %>Enum,
-    NombreModulo_LLENAR,
+    nombreModulo<%= nombreMayusculaModulo %>,
     '<%= nombreCamel %>'
 );

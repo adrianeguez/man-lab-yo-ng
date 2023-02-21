@@ -10,7 +10,7 @@ export class <%= nombreMayuscula %>HttpService extends HttpAbstract<<%= nombreMa
     constructor(private readonly _httpClient: HttpClient) {
         super(
             _httpClient,
-            CONFIG_ANGULAR.urlManticoreBackend
+            CONFIG_ANGULAR.urlManticoreBackendModulo<%= nombreMayusculaModulo %>
         );
         this.identificadorRuta = '<%= nombreGuiones %>';
         this.urlSegmento = '/' + this.identificadorRuta;

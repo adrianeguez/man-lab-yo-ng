@@ -16,7 +16,7 @@ export class <%= nombreMayuscula %>TablaComponent {
     registrosActuales: [<%= nombreMayuscula %>Dto[], number] = [[], 0];
     @Input()
     componente!: Ruta<%= nombreMayuscula %>CrudRutaType;
-    nombreModulo = nombreModulo_LLENAR;
+    nombreModulo = nombreModulo<%= nombreMayusculaModulo %>;
     translationConstantes = TranslationConstantes;
     ruta<%= nombreMayuscula %>TranslationConstante = Ruta<%= nombreMayuscula %>TranslationConstante;
     

@@ -32,7 +32,7 @@ export class <%= nombreMayuscula %>CreateDtoComponent extends FormAbstract imple
     _tiposTemplate<%= nombreMayuscula %>: {
         templateContextoAutocompleteManticoreComponent: Ruta<%= nombreMayuscula %>AutocompleteMostrar<%= nombreMayuscula %>,
     };
-    nombreModulo = nombreModulo_LLENAR;
+    nombreModulo = nombreModulo<%= nombreMayusculaModulo %>;
     fields: ArregloCamposMantiDto<<%= nombreMayuscula %>CreateDtoComponent> = (
         componente
     ) => {

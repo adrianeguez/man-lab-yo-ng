@@ -31,6 +31,14 @@ const ARGUMENTOS = {
             required: false,
             desc: 'Nombre del campo habilitado. por defecto es "sisHabilitado". EJ: empresaHabilitado'
         }
+    },
+    MODULO: {
+        nombre: 'modulo',
+        configuracion: {
+            type: String,
+            required: true,
+            desc: 'Nombre del modulo. EJ: FacturacionElectronica (modulo-facturacion-electronica)'
+        }
     }
 }
 const TEMPLATES = {
@@ -153,6 +161,7 @@ module.exports = class extends Generator {
         this.argument(ARGUMENTOS.NOMBRE.nombre, ARGUMENTOS.NOMBRE.configuracion);
         this.argument(ARGUMENTOS.ID.nombre, ARGUMENTOS.ID.configuracion);
         this.argument(ARGUMENTOS.HABILITADO.nombre, ARGUMENTOS.HABILITADO.configuracion);
+        this.argument(ARGUMENTOS.MODULO.nombre, ARGUMENTOS.MODULO.configuracion);
 
         // opciones
         // this.option(OPCIONES.ES_FIREBASE.nombre, OPCIONES.ES_FIREBASE.configuracion);
@@ -215,10 +224,20 @@ module.exports = class extends Generator {
          */
 
         const nombreMayuscula = this.options[ARGUMENTOS.NOMBRE.nombre];
+        const nombreMayusculaModulo = this.options[ARGUMENTOS.MODULO.nombre];
+
         const nombreCamel = aCamel(nombreMayuscula);
+        const nombreCamelModulo = aCamel(nombreMayusculaModulo);
+
         const nombreGuiones = camelADash(nombreCamel);
+        const nombreGuionesModulo = camelADash(nombreCamelModulo);
+
         const nombreSoloMayusculas = aTodoMayuscula(nombreMayuscula);
+        const nombreSoloMayusculasModulo = aTodoMayuscula(nombreMayusculaModulo);
+
         const nombreEspacioMayuscula = aNombreEspacioMayuscula(nombreMayuscula);
+        const nombreEspacioMayusculaModulo = aNombreEspacioMayuscula(nombreMayusculaModulo);
+
         let id = this.options[ARGUMENTOS.ID.nombre];
         let nombreHabilitado = this.options[ARGUMENTOS.HABILITADO.nombre];
 
@@ -242,7 +261,11 @@ module.exports = class extends Generator {
             nombreEspacioMayuscula,
             id,
             nombreHabilitado,
-
+            nombreMayusculaModulo,
+            nombreCamelModulo,
+            nombreGuionesModulo,
+            nombreSoloMayusculasModulo,
+            nombreEspacioMayusculaModulo
         };
         // componentes tabla 
         const templateComponenteTablaModulo = this.templatePath(TEMPLATES.TABLA_MODULE);

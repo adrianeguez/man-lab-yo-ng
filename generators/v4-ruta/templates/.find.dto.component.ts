@@ -33,7 +33,7 @@ export class <%= nombreMayuscula %>FindDtoComponent extends FormAbstract impleme
     _tiposTemplate<%= nombreMayuscula %>: {
         templateContextoAutocompleteManticoreComponent: Ruta<%= nombreMayuscula %>AutocompleteMostrar<%= nombreMayuscula %>,
     };
-    nombreModulo = nombreModulo_LLENAR;
+    nombreModulo = nombreModulo<%= nombreMayusculaModulo %>;
     fields: ArregloCamposMantiDto = (
         componente: AngularFormInterface
     ) => {
