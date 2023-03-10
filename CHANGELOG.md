@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.14.23](https://github.com/adrianeguez/man-lab-yo-nest/compare/v0.14.22...v0.14.23) (2023-03-10)
+
+
+### Features
+
+* guard y permisos ([972de78](https://github.com/adrianeguez/man-lab-yo-nest/commit/972de78d7a14a62b5f852e5d04e9017b653cbf99))
+
 ### 0.14.22 (2023-02-21)
 
 
