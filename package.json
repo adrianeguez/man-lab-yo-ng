@@ -24,9 +24,6 @@
     "yeoman-generator"
   ],
   "dependencies": {
-    "inquirer": "^6.2.0",
-    "require-from-string": "^2.0.2",
-    "typescript-parser": "^2.6.1",
     "yeoman-generator": "^3.2.0"
   },
   "devDependencies": {
