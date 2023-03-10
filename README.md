@@ -23,3 +23,5 @@ $ npm install -g ejs-lint
 ```
 $ ejslint nombre-template.ts
 ```
+
+0.14.23
