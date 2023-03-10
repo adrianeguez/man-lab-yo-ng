@@ -81,6 +81,8 @@ const TEMPLATES = {
     TABLA_MOV_COMP_TS: '-tabla-movil.component.ts',
     TABLA_MOV_COMP_HTML: '-tabla-movil.component.html',
     TABLA_MOV_COMP_SCSS: '-tabla-movil.component.scss',
+    PRM_GUARD: '.guard.ts',
+    PRM_PERMISSIONS: '.permissions.ts',
 }
 const OPCIONES = {
     // ES_FIREBASE: {
@@ -115,6 +117,13 @@ const aCamel = (cadena) => {
 const camelADash = str => str
     .replace(/(^[A-Z])/, ([first]) => first.toLowerCase())
     .replace(/([A-Z])/g, ([letter]) => `-${letter.toLowerCase()}`);
+
+
+const camelAMinusculas = str => str
+    .replace(/(^[A-Z])/, ([first]) => first.toLowerCase())
+    .replace(/([A-Z])/g, ([letter]) => `${letter.toLowerCase()}`);
+
+
 const aTodoMayuscula = (cadena) => {
     let arreglo = [];
     cadena.split("")
@@ -232,6 +241,11 @@ module.exports = class extends Generator {
         const nombreGuiones = camelADash(nombreCamel);
         const nombreGuionesModulo = camelADash(nombreCamelModulo);
 
+
+        const nombreMinusculas = camelAMinusculas(nombreCamel);
+        const nombreMinusculasModulo = camelAMinusculas(nombreCamelModulo);
+
+
         const nombreSoloMayusculas = aTodoMayuscula(nombreMayuscula);
         const nombreSoloMayusculasModulo = aTodoMayuscula(nombreMayusculaModulo);
 
@@ -267,7 +281,8 @@ module.exports = class extends Generator {
             nombreSoloMayusculasModulo,
             nombreEspacioMayusculaModulo
         };
-        // componentes tabla 
+        // componentes tabla
+
         const templateComponenteTablaModulo = this.templatePath(TEMPLATES.TABLA_MODULE);
         const destinoComponenteTablaModulo = this.destinationPath(`./componentes/${nombreGuiones}/${nombreGuiones}-tabla/${nombreGuiones}-tabla.module.ts`);
 
@@ -622,6 +637,27 @@ module.exports = class extends Generator {
             destinoServiciosFormsModule,
             variables
         );
+        // PERMISOS
+
+        const templateGuard = this.templatePath(TEMPLATES.PRM_GUARD);
+        const destinoComponenteGuard = this.destinationPath(`./servicios/${nombreGuiones}/can-activate/${nombreGuiones}.guard.ts`);
+
+        this.fs.copyTpl(
+            templateGuard,
+            destinoComponenteGuard  ,
+            variables
+        );
+
+        const templatePermissions = this.templatePath(TEMPLATES.PRM_PERMISSIONS);
+        const destinoComponentePermissions = this.destinationPath(`./servicios/${nombreGuiones}/can-activate/${nombreGuiones}.permissions.ts`);
+
+        this.fs.copyTpl(
+            templatePermissions,
+            destinoComponentePermissions  ,
+            variables
+        );
+
+
         // servicios http
 
         const templateServiciosHttpModule = this.templatePath(TEMPLATES.SRV_HTTP_MODULE);
