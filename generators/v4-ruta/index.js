@@ -83,6 +83,7 @@ const TEMPLATES = {
     TABLA_MOV_COMP_SCSS: '-tabla-movil.component.scss',
     PRM_GUARD: '.guard.ts',
     PRM_PERMISSIONS: '.permissions.ts',
+    SHR_SHARED: '.shared.ts',
 }
 const OPCIONES = {
     // ES_FIREBASE: {
@@ -511,7 +512,7 @@ module.exports = class extends Generator {
             variables
         );
         // shared
-        const templateSharedImport = this.templatePath(TEMPLATES.SRV_CREA_UP_DTO_COM);
+        const templateSharedImport = this.templatePath(TEMPLATES.SHR_SHARED);
         const destinoSharedImport = this.destinationPath(`./shared/${nombreGuiones}.shared.ts`);
         this.fs.copyTpl(
             templateSharedImport,
