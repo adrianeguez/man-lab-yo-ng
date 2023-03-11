@@ -267,6 +267,7 @@ module.exports = class extends Generator {
             nombreHabilitado = 'sisHabilitado';
         }
 
+
         const variables = {
             nombreMayuscula,
             nombreCamel,
@@ -279,7 +280,9 @@ module.exports = class extends Generator {
             nombreCamelModulo,
             nombreGuionesModulo,
             nombreSoloMayusculasModulo,
-            nombreEspacioMayusculaModulo
+            nombreEspacioMayusculaModulo,
+            nombreMinusculas,
+            nombreMinusculasModulo
         };
         // componentes tabla
 
